@@ -1,0 +1,195 @@
+@import url("../fonts/fonts.css");
+@import url("https://fonts.googleapis.com/css2?family=Rubik+80s+Fade&family=Rubik+Dirt&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: "Cera Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer utilities {
+  @layer responsive {
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    }
+  }
+
+  .investor-relation-slider .slick-dots {
+    position: relative;
+    transform: translate(-21%, 0px);
+  }
+
+  .investor-relation-slider .slick-slider .slick-arrow {
+    display: none;
+  }
+
+  .investor-relation-slider .slick-dots li button {
+    border: 1px solid #31bc2e;
+    border-radius: 99px;
+    position: absolute;
+    left: 0px !important;
+    width: 12px !important;
+    height: 12px !important;
+  }
+
+  .investor-relation-slider .slick-dots li.slick-active button {
+    background-color: #31bc2e;
+  }
+
+  .investor-relation-slider .slick-dots li button::before {
+    content: "";
+  }
+
+  .order-slider .slick-dots {
+    position: absolute !important;
+    bottom: 16px !important;
+  }
+
+  .order-slider .slick-dots li button {
+    height: 8px;
+    width: 8px;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0.6;
+  }
+
+  .order-slider .slick-dots li.slick-active button {
+    background: white;
+    opacity: 1;
+    height: 8px;
+    width: 8px;
+  }
+
+  .order-slider .slick-dots li button::before {
+    background: white;
+    opacity: 1;
+    content: "" !important;
+    border-radius: 50%;
+    height: 8px;
+    width: 8px;
+  }
+
+  .about-us-ceo-clip-path {
+    clip-path: path("M319.434 217.489C319.434 323.664 215.43 409.844 109.395 409.844L0.848948 409.843L0.848938 0.107422H319.434V217.489Z");
+  }
+
+  @media (min-width: 640px) {
+    .about-us-ceo-clip-path {
+      clip-path: path("M267.039 182.24C267.039 271.206 179.891 343.418 91.0425 343.418H0.0897299L0.0897217 0.0917969H267.039V182.24Z");
+    }
+
+    .grower-new-farmer-clip-path {
+      clip-path: path("M218.597 149.617C218.597 222.298 147.387 281.292 74.7872 281.292H0.46778L0.467773 0.810547H218.597V149.617Z");
+    }
+  }
+
+  @media (min-width: 360px) {
+    .investor-relation-slider .slick-dots {
+      transform: translate(-20%, 0px);
+    }
+  }
+
+  @media (min-width: 390px) {
+    .investor-relation-slider .slick-dots {
+      transform: translate(-22%, 0px);
+    }
+  }
+
+  @media (min-width: 412px) {
+    .investor-relation-slider .slick-dots {
+      transform: translate(-24%, 0px);
+    }
+  }
+
+  @media (min-width: 414px) {
+    .investor-relation-slider .slick-dots {
+      transform: translate(-24%, 0px);
+    }
+  }
+
+  @media (min-width: 768px){
+    .investor-relation-slider .slick-dots {
+      transform: translate(-34%, -58px);
+    }
+
+    .investor-relation-news + .investor-element:nth-child(3){
+      border: 0px !important;
+    }
+
+  }
+
+  @media (min-width: 840px) {
+    .investor-relation-slider .slick-dots {
+      display: none !important;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .about-us-ceo-clip-path {
+      clip-path: path("M360 245.763C360 365.74 242.475 463.123 122.656 463.123L1.11369e-05 463.123L0 0.123047H360V245.763Z");
+    }
+    .grower-new-farmer-clip-path {
+      clip-path: path("M280.315 191.68C280.315 285.073 188.813 360.877 95.5242 360.877L0.0263759 360.877L0.0263672 0.469238H280.315V191.68Z");
+    }
+
+    .grower-new-farmer-second-image-clip-path {
+      clip-path: path("M265.089 180.578C265.089 268.752 178.755 340.321 90.7345 340.321H0.629891L0.629883 0.0512695H265.089V180.578Z");
+    }
+  }
+
+  @media (min-width: 1135px) {
+    .smaller-laptop {
+      left: 6px !important;
+    }
+
+    .resources-text {
+      top: 45px !important;
+    }
+
+    .data-text {
+      top: 85px !important;
+    }
+
+    .capital-text {
+      top: 125px !important;
+    }
+
+    .eachother-text {
+      top: 165px !important;
+    }
+  }
+
+  @media (min-width: 1302px) {
+    .smaller-laptop {
+      left: 192px !important;
+    }
+
+    .resources-text {
+      top: 5px !important;
+    }
+
+    .data-text {
+      top: 45px !important;
+    }
+
+    .capital-text {
+      top: 85px !important;
+    }
+
+    .eachother-text {
+      top: 125px !important;
+    }
+  }
+}

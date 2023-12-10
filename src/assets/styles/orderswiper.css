@@ -1,0 +1,35 @@
+/* .swiper-button-prev,
+.swiper-button-next {
+  border-radius: 100%;
+  background: white;
+  background-repeat: no-repeat;
+  width: 48px;
+  height: 48px;
+  top: 48%;
+}
+
+.swiper-button-prev {
+  left: 3%;
+  background-image: url("assets/logos/home/customer-stories-left-arrow.svg") !important;
+  background-position: 14px 14px;
+}
+
+.swiper-button-next {
+  right: 3%;
+  background-image: url("assets/logos/home/customer-stories-right-arrow.svg") !important;
+  background-position: 19px 13px;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  display: none;
+}
+
+@media screen and (max-width: 1080px) {
+  .swiper-button-next {
+    display: none;
+  }
+  .swiper-button-prev {
+    display: none;
+  }
+} */

@@ -1,0 +1,35 @@
+.swiper-button-prev,
+.swiper-button-next {
+  border-radius: 100%;
+  background: white;
+  background-repeat: no-repeat;
+  width: 72px;
+  height: 72px;
+  top: 48%;
+}
+
+.swiper-button-prev {
+  left: 6.5%;
+  background-image: url("assets/logos/home/customer-stories-left-arrow.svg") !important;
+  background-position: 28px 24px;
+}
+
+.swiper-button-next {
+  right: 6.5%;
+  background-image: url("assets/logos/home/customer-stories-right-arrow.svg") !important;
+  background-position: 32px 25px;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  display: none;
+}
+
+@media screen and (max-width: 1080px) {
+  .swiper-button-next {
+    display: none;
+  }
+  .swiper-button-prev {
+    display: none;
+  }
+}

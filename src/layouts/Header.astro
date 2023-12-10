@@ -1,0 +1,22 @@
+---
+import NormalHeader from "./NormalHeader";
+import BuyerGrowerHeader from "./BuyerGrowerHeader";
+
+export interface Props {
+  pathname: string;
+}
+
+const { pathname } = Astro.props;
+---
+
+{
+  pathname.includes("buyer") || pathname.includes("grower") ? (
+    <BuyerGrowerHeader
+      client:load
+      isBuyer={pathname.includes("buyer")}
+      pathname={pathname}
+    />
+  ) : (
+    <NormalHeader client:load />
+  )
+}

@@ -1,0 +1,16 @@
+     <svg
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="flex-grow-0 flex-shrink-0 w-8 h-8 relative"
+                preserveAspectRatio="xMidYMid meet"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M12.3905 7.05654C12.9112 6.53584 13.7554 6.53584 14.2761 7.05654L22.2761 15.0565C22.7968 15.5772 22.7968 16.4215 22.2761 16.9422L14.2761 24.9422C13.7554 25.4629 12.9112 25.4629 12.3905 24.9422C11.8698 24.4215 11.8698 23.5772 12.3905 23.0565L19.4477 15.9993L12.3905 8.94216C11.8698 8.42146 11.8698 7.57724 12.3905 7.05654Z"
+                  fill="#6C6C6C"
+                />
+              </svg>

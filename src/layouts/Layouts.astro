@@ -1,0 +1,30 @@
+---
+import BaseHead from "./BaseHead.astro";
+import Header from "./Header.astro";
+import Footer from "./Footer.tsx";
+
+export interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+
+const pathname = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+  <body>
+    <Header pathname={pathname} />
+    <main class="app-body">
+      <slot />
+    </main>
+    <div class="app-footer">
+      <Footer client:visible pathname={pathname} />
+    </div>
+  </body>
+</html>
