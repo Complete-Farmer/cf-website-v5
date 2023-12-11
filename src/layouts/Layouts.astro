@@ -2,6 +2,7 @@
 import BaseHead from "./BaseHead.astro";
 import Header from "./Header.astro";
 import Footer from "./Footer.tsx";
+import { GOOGLE_TAG_MANAGER_ID, FACEBOOK_PIXEL_ID } from "../utils/constants";
 
 export interface Props {
   title: string;
@@ -19,12 +20,31 @@ const pathname = Astro.url.pathname;
     <BaseHead title={title} description={description} />
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        height="0"
+        width="0"
+        src={`https://www.googletagmanager.com/ns.html?id=${GOOGLE_TAG_MANAGER_ID}`}
+        style="display:none;visibility:hidden"></iframe></noscript
+    >
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- Meta Pixel Code (noscript) -->
+    <noscript
+      ><img
+        height="1"
+        width="1"
+        src={`https://www.facebook.com/tr?id=${FACEBOOK_PIXEL_ID}&ev=PageView&noscript=1`}
+        style="display:none;visibility:hidden"
+      />
+    </noscript>
     <Header pathname={pathname} />
     <main class="app-body">
       <slot />
     </main>
-    <div class="app-footer">
+    <div class="app-footer fixed bottom-0 left-0 right-0">
       <Footer client:visible pathname={pathname} />
     </div>
-  </body>
+  </body><!-- End Meta Pixel Code (noscript) -->
 </html>

@@ -1,7 +1,11 @@
 ---
-// Import the global.css file here so that it is included on
-// all pages through the use of the <BaseHead /> component.
 import "../assets/styles/global.css";
+import {
+  GLOBAL_SITE_TAG_ID,
+  GOOGLE_TAG_MANAGER_ID,
+  FACEBOOK_PIXEL_ID,
+  FACEBOOK_PIXEL_ID_2
+} from "../utils/constants";
 
 export interface Props {
   title: string;
@@ -9,7 +13,11 @@ export interface Props {
   image?: string;
 }
 
-const { title, description, image = "https://i.imgur.com/im4nbOa.png" } = Astro.props;
+const {
+  title,
+  description,
+  image = "https://i.imgur.com/im4nbOa.png",
+} = Astro.props;
 ---
 
 <!-- Global Metadata -->
@@ -34,11 +42,12 @@ const { title, description, image = "https://i.imgur.com/im4nbOa.png" } = Astro.
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
+<meta property="twitter:site" content="@completefarmer" />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
 <script is:inline>
-  const pathname = window.location.pathname
+  const pathname = window.location.pathname;
 
   function useLayoutEffect(callback, dependencies) {
     // Use `requestAnimationFrame` to schedule the callback
@@ -65,3 +74,65 @@ const { title, description, image = "https://i.imgur.com/im4nbOa.png" } = Astro.
     document.documentElement.scrollTo(0, 0);
   }, [pathname]);
 </script>
+
+<!-- Google tag (gtag.js) -->
+<script
+async
+  is:inline
+  type="text/partytown"
+  define:vars={{ GLOBAL_SITE_TAG_ID }}
+  src={`https://www.googletagmanager.com/gtag/js?id=${GLOBAL_SITE_TAG_ID}`}
+></script>
+<script is:inline define:vars={{ GLOBAL_SITE_TAG_ID }} type="text/partytown">
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+
+  gtag("config", GLOBAL_SITE_TAG_ID);
+</script>
+<!-- End Google tag -->
+
+<!-- Google Tag Manager -->
+<script is:inline define:vars={{ GOOGLE_TAG_MANAGER_ID }} type="text/partytown">
+  (function (w, d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+    var f = d.getElementsByTagName(s)[0],
+      j = d.createElement(s),
+      dl = l != "dataLayer" ? "&l=" + l : "";
+    j.async = true;
+    j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+    f.parentNode.insertBefore(j, f);
+  })(window, document, "script", "dataLayer", GOOGLE_TAG_MANAGER_ID);
+</script>
+<!-- End Google Tag Manager -->
+
+<!-- Meta Pixel -->
+<script is:inline define:vars={{ FACEBOOK_PIXEL_ID }} type="text/partytown">
+  !(function (f, b, e, v, n, t, s) {
+    if (f.fbq) return;
+    n = f.fbq = function () {
+      n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+    };
+    if (!f._fbq) f._fbq = n;
+    n.push = n;
+    n.loaded = !0;
+    n.version = "2.0";
+    n.queue = [];
+    t = b.createElement(e);
+    t.async = !0;
+    t.src = v;
+    s = b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t, s);
+  })(
+    window,
+    document,
+    "script",
+    "https://connect.facebook.net/en_US/fbevents.js"
+  );
+  fbq("init", FACEBOOK_PIXEL_ID);
+  fbq("track", "PageView");
+</script>
+<!-- End Meta Pixel -->

@@ -21,3 +21,8 @@ export const legalLinks = [
   { name: " Privacy Policy", href: "/legal/privacy-policy" },
   { name: "Terms & Conditions", href: "/legal/terms-conditions" },
 ];
+
+export const GLOBAL_SITE_TAG_ID = "G-HX9QYEW67D";
+export const GOOGLE_TAG_MANAGER_ID = "GTM-K5KDQCP";
+export const FACEBOOK_PIXEL_ID = "2143795925947401";
+export const FACEBOOK_PIXEL_ID_2 = "2143795925947401";
