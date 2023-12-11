@@ -22,7 +22,6 @@ export const legalLinks = [
   { name: "Terms & Conditions", href: "/legal/terms-conditions" },
 ];
 
-export const GLOBAL_SITE_TAG_ID = "G-HX9QYEW67D";
-export const GOOGLE_TAG_MANAGER_ID = "GTM-K5KDQCP";
-export const FACEBOOK_PIXEL_ID = "2143795925947401";
-export const FACEBOOK_PIXEL_ID_2 = "2143795925947401";
+export const FACEBOOK_PIXEL_ID = import.meta.env.PUBLIC_FACEBOOK_PIXEL_ID;
+export const GLOBAL_SITE_TAG_ID = import.meta.env.PUBLIC_GLOBAL_SITE_TAG_ID;
+export const GOOGLE_TAG_MANAGER_ID = import.meta.env.PUBLIC_GOOGLE_TAG_MANAGER_ID;

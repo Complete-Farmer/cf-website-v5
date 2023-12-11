@@ -8,3 +8,20 @@ import Layouts from "../layouts/Layouts.astro";
 >
   <p>Hello world</p>
 </Layouts>
+
+<script type="text/javascript">
+  window.dataLayer.push({
+    event: "pageview",
+    page: "/",
+  });
+
+//   ga('set', 'page', '/new-page.html');
+// ga('send', 'pageview');
+
+  window.fbq('track', 'PageView');
+
+  // https://www.thyngster.com/google-tag-manager-google-analytics-4-ga4-events-setup-with-a-single-tag
+  // https://www.thyngster.com/tracking-google-analytics-4-events-using-data-attributes
+  // https://developers.facebook.com/docs/meta-pixel/advanced/
+  // https://developers.facebook.com/docs/meta-pixel/implementation/conversion-tracking
+</script>
