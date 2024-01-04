@@ -1,10 +1,5 @@
-/* eslint-disable react/prop-types */
-import React from "react";
 import { Tab } from "@headlessui/react";
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
+import { classNames } from "../../../utils/functions";
 
 export default function BuyerGetInTouchTab(props: {
   categories: { name: string; current: boolean; slug: string }[];

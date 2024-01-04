@@ -1,24 +1,43 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as Prismic from "@prismicio/client";
 
-// Fill in your repository name
-export const repositoryName = "complete-farmer";
-
-export const Client = Prismic.createClient(repositoryName, {
+const Client = Prismic.createClient("completefarmer", {
   // If your repository is private, add an access token
-  accessToken: import.meta.env.PUBLIC_PRISM_ACCESS_TOKEN,
-
-  // This defines how you will structure URL paths in your project.
-  // Update the types to match the custom types in your project, and edit
-  // the paths to match the routing in your project.
-  //
-  // If you are not using a router in your project, you can change this
-  // to an empty array or remove the option entirely.
-  routes: [
-    {
-      type: "blogs",
-      path: "/blogs"
-    }
-  ]
+  accessToken: import.meta.env.PRISM_ACCESS_TOKEN,
 });
 
+const filterAt = (...args: [path: string, value: string]) => [Prismic.filter.at(...args)];
 
+const fetchItems = async (
+  type: string,
+  params: { page?: number; pageSize?: number; filters?: any; fetchLinks?: any }
+) => {
+  const { page = 1, pageSize = 10, filters, fetchLinks } = params;
+
+  const items = await Client.getByType(type, {
+    page,
+    pageSize,
+    orderings: {
+      field: "document.last_publication_date",
+      direction: "desc",
+    },
+    filters,
+    fetchLinks,
+  });
+
+  return items;
+};
+
+const fetchItemById = async (type: string, params: { id: string }) => {
+  const item = await Client.getByUID(type, params.id);
+  return item;
+};
+
+export const renderPrismicDesc = (description: any) => {
+  const firstPageDescriptionAsHTML = Prismic.asHTML(description);
+  return firstPageDescriptionAsHTML;
+};
+
+export const getCxStories = async () => {
+  return fetchItems("customer_stories_v3", {});
+};

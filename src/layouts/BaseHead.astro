@@ -55,15 +55,12 @@ const {
     // Initial call
     update();
 
-    // Update on dependency changes
     if (dependencies) {
-      dependencies.forEach(() => {
-        // Assuming dependencies are variables or state values
-        // You might need to adjust this based on your specific use case
-        // For simplicity, I'm assuming they are global variables here
-        window.addEventListener("resize", update);
-        window.addEventListener("scroll", update);
-        // Add other event listeners as needed
+      dependencies.forEach((d) => {
+        console.log(window.location.pathname)
+        if(window.location.pathname !== d) {
+          window.addEventListener("scroll", update);
+        }
       });
     }
   }

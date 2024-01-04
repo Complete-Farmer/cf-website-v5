@@ -1,21 +1,20 @@
 import React, { Fragment, useState } from "react";
 import { Dialog, Popover, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import BuyerLogo from "../assets/logos/header/cf-buyer";
-import GrowerLogo from "../assets/logos/header/cf-grower";
-import Drawer from "./Drawer";
-import Logo from "../assets/logos/header/cf-main";
+
+import { CFBuyerLogo, CFGrowerLogo, CFMainLogo } from "../assets/logos/header";
 import { ArrowRightGreenIcon, ChevronDownIcon } from "../assets/icons";
+
+import Drawer from "./Drawer";
+
 import { companyLinks } from "../utils/constants";
-// import ReactGA from "react-ga4";
-// import ReactPixel from "react-facebook-pixel";
 
 const initialProducts = [
   {
     name: "CF Grower",
     description: "Speak directly to your customers",
     href: "/product/grower/new-farmer",
-    logo: GrowerLogo,
+    logo: CFGrowerLogo,
     activeColor: "#31BC2E",
     defaultColor: "#6C6C6C",
     isHover: false,
@@ -24,7 +23,7 @@ const initialProducts = [
     name: "CF Buyer",
     description: "Get a better understanding of your traffic",
     href: "/product/buyer",
-    logo: BuyerLogo,
+    logo: CFBuyerLogo,
     activeColor: "#367AFE",
     defaultColor: "#6C6C6C",
     isHover: false,
@@ -55,8 +54,10 @@ export default function NormalHeader() {
     if (value === "SignUp") setDrawerProps(drawerPropsData.signup);
 
     // Blur the background
-    (document.querySelector(".app-body") as HTMLElement).style.filter =  "blur(4px)";
-    (document.querySelector(".app-footer") as HTMLElement).style.filter =  "blur(4px)";
+    (document.querySelector(".app-body") as HTMLElement).style.filter =
+      "blur(4px)";
+    (document.querySelector(".app-footer") as HTMLElement).style.filter =
+      "blur(4px)";
 
     setDrawerOpen(true);
   };
@@ -64,8 +65,9 @@ export default function NormalHeader() {
   const handleCloseDrawer = () => {
     setDrawerOpen(false);
     // Unblur the background
-    (document.querySelector(".app-body") as HTMLElement).style.filter =  "none";
-    (document.querySelector(".app-footer") as HTMLElement).style.filter =  "none";
+    (document.querySelector(".app-body") as HTMLElement).style.filter = "none";
+    (document.querySelector(".app-footer") as HTMLElement).style.filter =
+      "none";
   };
 
   const handleOnHover = (selectedProduct: { name: string }) => {
@@ -122,7 +124,7 @@ export default function NormalHeader() {
             <div className="flex items-center font-medium text-gray-900 lg:w-auto lg:items-center lg:justify-center md:mb-0">
               <span className="mx-auto text-xl font-black leading-none text-gray-900 select-none">
                 <a href="/" onClick={handleLinkClick} className="-m-1.5 p-1.5">
-                  <Logo color="#004C46" />
+                  <CFMainLogo color="#004C46" />
                 </a>
               </span>
             </div>
@@ -232,23 +234,25 @@ export default function NormalHeader() {
                         >
                           <div className="overflow-hidden rounded-lg shadow-lg w-64">
                             <div className="relative grid  bg-white lg:grid-cols-1 ">
-                              {companyLinks.filter((l) => !l.isMobile).map((item) => (
-                                <a
-                                  key={item.name}
-                                  onClick={handleLinkClick}
-                                  href={item.href}
-                                  className="block group/item relative rounded-lg p-4 hover:bg-gray-50 text-md font-normal leading-6  text-custom_black-900 hover:text-custom_lightgreen-500"
-                                >
-                                  <div className="flex justify-between">
-                                    <span className="flex justify-start items-center">
-                                      {item.name}
-                                    </span>
-                                    <span className="group/edit invisible group-hover/item:visible flex flex-col justify-center">
-                                      <ArrowRightGreenIcon className="group-hover/edit:translate-x-1 flex justify-end" />
-                                    </span>
-                                  </div>
-                                </a>
-                              ))}
+                              {companyLinks
+                                .filter((l) => !l.isMobile)
+                                .map((item) => (
+                                  <a
+                                    key={item.name}
+                                    onClick={handleLinkClick}
+                                    href={item.href}
+                                    className="block group/item relative rounded-lg p-4 hover:bg-gray-50 text-md font-normal leading-6  text-custom_black-900 hover:text-custom_lightgreen-500"
+                                  >
+                                    <div className="flex justify-between">
+                                      <span className="flex justify-start items-center">
+                                        {item.name}
+                                      </span>
+                                      <span className="group/edit invisible group-hover/item:visible flex flex-col justify-center">
+                                        <ArrowRightGreenIcon className="group-hover/edit:translate-x-1 flex justify-end" />
+                                      </span>
+                                    </div>
+                                  </a>
+                                ))}
                             </div>
                           </div>
                         </Popover.Panel>
@@ -338,7 +342,7 @@ export default function NormalHeader() {
             <div className="flex items-center justify-between">
               <a className="-m-1.5 p-1.5">
                 <span className="sr-only">Your Company</span>
-                <Logo color="#004C46" />
+                <CFMainLogo color="#004C46" />
               </a>
               <button
                 type="button"

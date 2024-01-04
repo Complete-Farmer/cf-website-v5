@@ -10,13 +10,13 @@
 
 .swiper-button-prev {
   left: 6.5%;
-  background-image: url("assets/logos/home/customer-stories-left-arrow.svg") !important;
+  background-image: url("../../assets/logos/home/customer-stories-left-arrow.svg") !important;
   background-position: 28px 24px;
 }
 
 .swiper-button-next {
   right: 6.5%;
-  background-image: url("assets/logos/home/customer-stories-right-arrow.svg") !important;
+  background-image: url("../../assets/logos/home/customer-stories-right-arrow.svg") !important;
   background-position: 32px 25px;
 }
 

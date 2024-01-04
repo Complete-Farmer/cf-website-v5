@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const useResolution = () => {
-  const [screenType, setScreenType] = useState(undefined);
+  const [screenType, setScreenType] = useState<string>();
 
   const getScreenType = () => {
     if (window.innerWidth < 768) {

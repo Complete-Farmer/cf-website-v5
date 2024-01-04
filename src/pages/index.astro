@@ -1,12 +1,36 @@
 ---
 import Layouts from "../layouts/Layouts.astro";
+
+import Hero from "../components/home/Hero";
+import Brands from "../components/utils/Brands";
+import Section from "../components/home/Section";
+import HomeImage from "../components/home/HomeImage";
+import NewsLetter from "../components/home/NewsLetter";
+import FasterGrowth from "../components/home/FasterGrowth";
+import CustomerStories from "../components/home/CustomerStories";
+
+import Mest from "../assets/images/brands/Logo_Mest.png";
+import TazaPay from "../assets/images/brands/Logo_TazaPay.png";
+import Ingressive from "../assets/images/brands/Logo_Ingressive.png";
+import FreezeLink from "../assets/images/brands/Logo_FreezeLink.png";
+
+import { getCxStories } from '../utils/prismic';
+
+const customerStories = await getCxStories()
+const assets = [FreezeLink, Ingressive, Mest, TazaPay];
 ---
 
 <Layouts
   title="Complete Farmer"
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
-  <p>Hello world</p>
+  <Hero client:load />
+  <Brands client:load assets={assets} bgColor={"bg-[#FAFAFA]"} />
+  <FasterGrowth client:load  />
+  <HomeImage client:visible />
+  <CustomerStories client:visible data={customerStories} />
+  <Section client:visible />
+  <NewsLetter client:visible />
 </Layouts>
 
 <script type="text/javascript">
@@ -15,10 +39,10 @@ import Layouts from "../layouts/Layouts.astro";
     page: "/",
   });
 
-//   ga('set', 'page', '/new-page.html');
-// ga('send', 'pageview');
+  // ga("set", "page", "/new-page.html");
+  // ga("send", "pageview");
 
-  window.fbq('track', 'PageView');
+  window.fbq("track", "PageView");
 
   // https://www.thyngster.com/google-tag-manager-google-analytics-4-ga4-events-setup-with-a-single-tag
   // https://www.thyngster.com/tracking-google-analytics-4-events-using-data-attributes
