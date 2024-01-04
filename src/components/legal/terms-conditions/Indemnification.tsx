@@ -1,0 +1,17 @@
+import Title from "./Title";
+
+export default function Indemnification() {
+  return (
+    <div>
+      <Title no="12." name="INDEMNIFICATION" />
+      <p className=" text-base text-custom_black-900-900 sm:text-xl text-left">
+        You agree to indemnify, defend, and hold Complete Farmer and our officers, employees, managers, directors, customers, and agents (the
+        “Indemnitees”) harmless from and against any and all costs, liabilities, losses and expenses (including but not limited to reasonable
+        attorneys’ fees) resulting from any claim, suit, action, demand or proceeding brought by any third party against Complete Farmer and our
+        Indemnitees arising from any of the following: (i) a breach of this Agreement; (ii) the negligence, fraud, or willful misconduct of you or
+        your employees, agents, or contractors; (iii) incorrect information provided by you in your account or elsewhere; or (iv) a failure by you or
+        your employees, agents, contractors or invitees to comply with applicable laws and regulations.
+      </p>
+    </div>
+  );
+}

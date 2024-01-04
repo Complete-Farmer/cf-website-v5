@@ -45,32 +45,6 @@ const {
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
-<script is:inline>
-  const pathname = window.location.pathname;
-
-  function useLayoutEffect(callback, dependencies) {
-    // Use `requestAnimationFrame` to schedule the callback
-    const update = () => window.requestAnimationFrame(callback);
-
-    // Initial call
-    update();
-
-    if (dependencies) {
-      dependencies.forEach((d) => {
-        console.log(window.location.pathname)
-        if(window.location.pathname !== d) {
-          window.addEventListener("scroll", update);
-        }
-      });
-    }
-  }
-
-  // Example usage
-  useLayoutEffect(() => {
-    document.documentElement.scrollTo(0, 0);
-  }, [pathname]);
-</script>
-
 <!-- Google tag (gtag.js) -->
 <script
   async

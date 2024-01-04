@@ -1,0 +1,49 @@
+import Title from "./Title";
+
+export default function ProtectionOfPersonalInfo() {
+  return (
+    <div>
+      <Title name="Protection of Personal Information" />
+      <div className=" text-base text-custom_black-900-900 sm:text-xl text-left  space-y-1.5">
+        Complete Farmer collects Personal Information in a transparent way with the cooperation and knowledge of interested parties. Personal
+        Information available to Us are protected in the following manner:
+        <br />
+        <br />
+        Our data is always:
+        <br />
+        <br />
+        <ol className="ml-8 mt-2 mb-2 list-decimal space-y-1.5">
+          <li>Communicated informally</li>
+          <li>Stored for more than a specified amount of time</li>
+          <li>Transferred to organizations, states or countries that do not have adequate data protection policies</li>
+          <li>
+            Distributed to any party other than the ones agreed upon by the data’s owner (exempting legitimate requests from law enforcement
+            authorities) To protect our customers, only employees, agents and contractors who need your information to service your accounts have
+            access to the information you provide Us. We also give you information that can help you keep your Personal Information safe.
+          </li>
+        </ol>
+        <br />
+        <br />
+        Here are some of the ways we protect you:
+        <br />
+        <br />
+        <ol className="ml-8 mt-2 mb-2 list-decimal space-y-1.5">
+          <li>We use anti-virus protection to help Us detect and prevent viruses.</li>
+          <li>Our firewalls help block unauthorized access by individuals or networks</li>
+          <li>
+            We use encryption software to create a secure connection with your browser when you login, or fill out an application, or register in
+            online services
+          </li>
+          <li>We dont and will not share your usernames and passwords with anyone</li>
+          <li>
+            We automatically log you out of your secure session after a period of inactivity to help protect against others seeing or using your
+            online accounts
+          </li>
+          <li>We monitor activities for potential fraud</li>
+        </ol>
+      </div>
+    </div>
+  );
+}
+
+

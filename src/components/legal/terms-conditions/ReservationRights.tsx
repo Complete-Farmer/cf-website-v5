@@ -1,0 +1,17 @@
+import Title from "./Title";
+
+export default function ReservationRights() {
+  return (
+    <div>
+      <Title no="9." name="RESERVATION OF RIGHTS " />
+      <p className=" text-base text-custom_black-900-900 sm:text-xl text-left ">
+        You acknowledge and agree that our Website and App are provided for your use. Except to the extent necessary to access and use our Website or
+        App, nothing in this Agreement grants any title or ownership interest in or to any copyrights, patents, trademarks, trade secrets or other
+        proprietary rights in or relating to our Website or App, whether expressly, by implication, estoppel, or otherwise. Complete Farmer and its
+        licensors and service providers reserve and will retain their entire right, title, and interest in and to our Website and App, including all
+        copyrights, trademarks, and other intellectual property rights therein or relating thereto, except as expressly granted to you in this
+        Agreement.
+      </p>
+    </div>
+  );
+}

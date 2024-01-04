@@ -1,0 +1,35 @@
+---
+import Layouts from "../../layouts/Layouts.astro";
+
+import Header from "../../components/legal/Header";
+import TermsAndConditionsMain from "../../components/legal/TermsAndConditions";
+---
+
+<Layouts
+  title="Terms & Conditions | Complete Farmer"
+  description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
+>
+  <Header
+    client:visible
+    title="Terms & Conditions"
+    modifiedTime="Last modified: 28 January 2022"
+  />
+  <TermsAndConditionsMain client:visible />
+</Layouts>
+
+<script type="text/javascript">
+  window.dataLayer.push({
+    event: "pageview",
+    page: "/legal/terms-and-conditions",
+  });
+
+  // ga("set", "page", "/contact-us");
+  // ga("send", "pageview");
+
+  window.fbq("track", "PageView");
+
+  // https://www.thyngster.com/google-tag-manager-google-analytics-4-ga4-events-setup-with-a-single-tag
+  // https://www.thyngster.com/tracking-google-analytics-4-events-using-data-attributes
+  // https://developers.facebook.com/docs/meta-pixel/advanced/
+  // https://developers.facebook.com/docs/meta-pixel/implementation/conversion-tracking
+</script>

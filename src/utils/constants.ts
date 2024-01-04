@@ -19,7 +19,7 @@ export const supportLinks = [{ name: "Contact us", href: "/contact-us" }];
 
 export const legalLinks = [
   { name: " Privacy Policy", href: "/legal/privacy-policy" },
-  { name: "Terms & Conditions", href: "/legal/terms-conditions" },
+  { name: "Terms & Conditions", href: "/legal/terms-and-conditions" },
 ];
 
 export const FACEBOOK_PIXEL_ID = import.meta.env.PUBLIC_FACEBOOK_PIXEL_ID;
