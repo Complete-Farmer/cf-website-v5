@@ -6,13 +6,19 @@ const Client = Prismic.createClient("completefarmer", {
   accessToken: import.meta.env.PRISM_ACCESS_TOKEN,
 });
 
-const filterAt = (...args: [path: string, value: string]) => [Prismic.filter.at(...args)];
+export const filterAt = (...args: [path: string, value: string]) => [
+  Prismic.filter.at(...args),
+];
 
-const fetchItems = async (
-  type: string,
-  params: { page?: number; pageSize?: number; filters?: any; fetchLinks?: any }
-) => {
-  const { page = 1, pageSize = 10, filters, fetchLinks } = params;
+interface IPramas {
+  page?: number;
+  pageSize?: number;
+  filters?: any;
+  fetchLinks?: any;
+}
+
+const fetchItems = async (type: string, params: IPramas) => {
+  const { page, pageSize, filters, fetchLinks } = params;
 
   const items = await Client.getByType(type, {
     page,
@@ -28,10 +34,10 @@ const fetchItems = async (
   return items;
 };
 
-const fetchItemById = async (type: string, params: { id: string }) => {
-  const item = await Client.getByUID(type, params.id);
-  return item;
-};
+// const fetchItemById = async (type: string, params: { id: string }) => {
+//   const item = await Client.getByUID(type, params.id);
+//   return item;
+// };
 
 export const renderPrismicDesc = (description: any) => {
   const firstPageDescriptionAsHTML = Prismic.asHTML(description);
@@ -40,4 +46,14 @@ export const renderPrismicDesc = (description: any) => {
 
 export const getCxStories = async () => {
   return fetchItems("customer_stories_v3", {});
+};
+
+export const getFAQsCategories = async () => {
+  return fetchItems("categories", {
+    filters: filterAt("my.categories.type", "faqs"),
+  });
+};
+
+export const getContactUsFaqs = async (params: IPramas) => {
+  return fetchItems("faq_v3", params);
 };

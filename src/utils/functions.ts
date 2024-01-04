@@ -24,3 +24,12 @@ export const onMailChimpSubmit = (fields: IFields) => {
     console.log("Data Added in the Mailchimp");
   });
 };
+
+export const formatDateWithCommas = (dateString: string) => {
+  const formattedDate = new Date(dateString).toLocaleDateString(undefined, {
+    year: "numeric",
+    month: "short",
+    day: "numeric"
+  });
+  return formattedDate;
+};
