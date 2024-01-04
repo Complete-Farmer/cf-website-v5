@@ -2,7 +2,33 @@
 import Layouts from "../../layouts/Layouts.astro";
 
 import Header from "../../components/legal/Header";
-import TermsAndConditionsMain from "../../components/legal/TermsAndConditions";
+
+import {
+  Intro,
+  Payment,
+  Conducts,
+  CopyRight,
+  Liability,
+  Assignment,
+  AnitBribery,
+  UseByMinors,
+  Disclaimers,
+  Termination,
+  GeneralTerms,
+  Governinglaw,
+  Miscellaneous,
+  Modifications,
+  PrivacyPolicy,
+  Communications,
+  ServiceLicense,
+  Indemnification,
+  ReservationRights,
+  DisputeResolution,
+  RelationshipParties,
+  ServiceRestrictions,
+  EligiblityRestriction,
+  TerritorialRestriction,
+} from "@components/legal/terms-conditions";
 ---
 
 <Layouts
@@ -14,7 +40,35 @@ import TermsAndConditionsMain from "../../components/legal/TermsAndConditions";
     title="Terms & Conditions"
     modifiedTime="Last modified: 28 January 2022"
   />
-  <TermsAndConditionsMain client:visible />
+
+  <div class="bg-white py-8 sm:py-14 sm:px-6">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <GeneralTerms client:visible />
+      <Intro client:visible />
+      <TerritorialRestriction client:visible />
+      <UseByMinors client:visible />
+      <PrivacyPolicy client:visible />
+      <EligiblityRestriction client:visible />
+      <Payment client:visible />
+      <ServiceLicense client:visible />
+      <ServiceRestrictions client:visible />
+      <ReservationRights client:visible />
+      <Conducts client:visible />
+      <Communications client:visible />
+      <Indemnification client:visible />
+      <Disclaimers client:visible />
+      <Liability client:visible />
+      <Termination client:visible />
+      <CopyRight client:visible />
+      <Assignment client:visible />
+      <AnitBribery client:visible />
+      <Modifications client:visible />
+      <RelationshipParties client:visible />
+      <Governinglaw client:visible />
+      <DisputeResolution client:visible />
+      <Miscellaneous client:visible />
+    </div>
+  </div>
 </Layouts>
 
 <script type="text/javascript">

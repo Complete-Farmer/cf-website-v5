@@ -1,8 +1,19 @@
 ---
-import Layouts from "../../layouts/Layouts.astro";
+import Layouts from "@layouts/Layouts.astro";
 
-import Header from "../../components/legal/Header";
-import PrivacyPolicyMain from "../../components/legal/PrivacyPolicy";
+import Header from "@components/legal/Header";
+import {
+  Intro,
+  SocialSharing,
+  UpdatesToPrivacy,
+  InformationWeCollect,
+  InformationWithOthers,
+  InformationYouProvide,
+  CollectionPrivacyInfo,
+  ProtectionOfPersonalInfo,
+  DisclosureOfPersonalInfo,
+  InformationAboutTransaction,
+} from "@components/legal/privacy-policy";
 ---
 
 <Layouts
@@ -14,7 +25,20 @@ import PrivacyPolicyMain from "../../components/legal/PrivacyPolicy";
     title="Privacy Policy"
     modifiedTime="Last modified: 28 January 2022"
   />
-  <PrivacyPolicyMain client:visible />
+  <div class="bg-white py-8 sm:py-14 sm:px-6">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <Intro client:visible />
+      <CollectionPrivacyInfo client:visible />
+      <InformationYouProvide client:visible />
+      <InformationAboutTransaction client:visible />
+      <InformationWithOthers client:visible />
+      <SocialSharing client:visible />
+      <InformationWeCollect client:visible />
+      <ProtectionOfPersonalInfo client:visible />
+      <DisclosureOfPersonalInfo client:visible />
+      <UpdatesToPrivacy client:visible />
+    </div>
+  </div>
 </Layouts>
 
 <script type="text/javascript">

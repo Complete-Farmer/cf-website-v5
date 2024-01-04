@@ -1,18 +1,18 @@
 ---
-import Layouts from "../layouts/Layouts.astro";
+import Layouts from "@layouts/Layouts.astro";
 
-import Hero from "../components/home/Hero";
-import Brands from "../components/utils/Brands";
-import Section from "../components/home/Section";
-import HomeImage from "../components/home/HomeImage";
-import NewsLetter from "../components/home/NewsLetter";
-import FasterGrowth from "../components/home/FasterGrowth";
-import CustomerStories from "../components/home/CustomerStories";
+import Hero from "@components/home/Hero";
+import Brands from "@components/utils/Brands";
+import Section from "@components/home/Section";
+import HomeImage from "@components/home/HomeImage";
+import NewsLetter from "@components/home/NewsLetter";
+import FasterGrowth from "@components/home/FasterGrowth";
+import CustomerStories from "@components/home/CustomerStories";
 
-import Mest from "../assets/images/brands/Logo_Mest.png";
-import TazaPay from "../assets/images/brands/Logo_TazaPay.png";
-import Ingressive from "../assets/images/brands/Logo_Ingressive.png";
-import FreezeLink from "../assets/images/brands/Logo_FreezeLink.png";
+import Mest from "@assets/images/brands/Logo_Mest.png";
+import TazaPay from "@assets/images/brands/Logo_TazaPay.png";
+import Ingressive from "@assets/images/brands/Logo_Ingressive.png";
+import FreezeLink from "@assets/images/brands/Logo_FreezeLink.png";
 
 import { getCxStories } from '../utils/prismic';
 
@@ -21,7 +21,7 @@ const assets = [FreezeLink, Ingressive, Mest, TazaPay];
 ---
 
 <Layouts
-  title="Complete Farmer"
+  title="Home | Complete Farmer"
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
   <Hero client:load />

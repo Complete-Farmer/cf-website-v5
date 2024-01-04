@@ -1,15 +1,15 @@
 ---
-import Layouts from "../layouts/Layouts.astro";
+import Layouts from "@layouts/Layouts.astro";
 
-import Main from "../components/contact-us/main";
+import Main from "@components/contact-us/main";
 
-import { getFAQsCategories } from '../utils/prismic';
+import { getFAQsCategories } from '@utils/prismic';
 
 const faqsCatApiData = await getFAQsCategories()
 ---
 
 <Layouts
-  title="Complete Farmer"
+  title="Contact Us | Complete Farmer"
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
   <div
