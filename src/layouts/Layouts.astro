@@ -4,7 +4,7 @@ import Header from "./Header.astro";
 import Footer from "./Footer.tsx";
 import CookieScreen from "./CookieScreen";
 
-import { GOOGLE_TAG_MANAGER_ID, FACEBOOK_PIXEL_ID } from "../utils/constants";
+import { GOOGLE_TAG_MANAGER_ID, FACEBOOK_PIXEL_ID } from "@utils/constants";
 
 export interface Props {
   title: string;
@@ -49,6 +49,6 @@ const pathname = Astro.url.pathname;
     <div class="app-footer">
       <Footer client:visible pathname={pathname} />
     </div>
-    <CookieScreen client:load />
+    <CookieScreen client:only="react" />
   </body>
 </html>

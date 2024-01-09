@@ -20,5 +20,5 @@ export { default as AnitBribery } from "./AnitBribery";
 export { default as Modifications } from "./Modifications";
 export { default as RelationshipParties } from "./RelationshipParties";
 export { default as Governinglaw } from "./Governinglaw";
-export { default as DisputeResolution } from "./DisputeResolution";
+export { default as DisputeResolution } from "./DisputeResolution.astro";
 export { default as Miscellaneous } from "./Miscellaneous";

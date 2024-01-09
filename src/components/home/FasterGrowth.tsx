@@ -1,4 +1,4 @@
-import React from "react";
+
 import FasterGrowthContent from "./FasterGrowthContent";
 import Farmer from "../../assets/images/home/farmer.svg";
 import Buyer from "../../assets/images/home/buyer.svg";

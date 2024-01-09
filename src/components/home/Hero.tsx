@@ -9,6 +9,7 @@ import CfGrowerLogoOne from "../../assets/images/grower/team2.png";
 import CfGrowerLogoTwo from "../../assets/images/grower/team1.png";
 import CfBuyerLogoOne from "../../assets/images/buyer/team3.svg";
 import CfBuyerLogoTwo from "../../assets/images/buyer/team4.svg";
+import HeroRight from "@components/utils/HeroRight";
 
 const initialTabs = [
   {
@@ -86,69 +87,60 @@ function HeroOne() {
       <section className="w-full lg:min-h-[95vh] px-6 sm:px-10 bg-white pb-16 sm:pb-40 lg:pb-32 bg-cover bg-hero-pattern">
         <div className="w-full h-auto pt-20 sm:pt-32">
           <div className="max-w-7xl mx-auto sm:px-4 xl:px-0 flex items-center lg:flex-row flex-col h-full">
-            {/* Left Side */}
-            <Fade left duration={1000} delay={500} distance="30px">
-              <div className="w-full lg:w-1/2">
-                <div className="max-w-lg[x] mx-auto[x] text-center lg:text-left">
-                  <h1 className="w-full text-[28px] sm:text-5xl lg:text-[56px] font-bold text-center lg:text-left text-white leading-8 sm:leading-[64px] lg:leading-[70px] sm:px-6 lg:px-0">
+            <div className="w-full lg:w-1/2">
+              <div className="max-w-lg[x] mx-auto[x] text-center lg:text-left">
+                <h1 className="w-full text-[28px] sm:text-5xl lg:text-[56px] font-bold text-center lg:text-left text-white leading-8 sm:leading-[64px] lg:leading-[70px] sm:px-6 lg:px-0">
                     Digitizing <br className="hidden lg:block" /> agriculture
                     &mdash; <br className="hidden sm:block lg:hidden" /> From
                     supply to demand
-                  </h1>
-                  <p className="mt-5 sm:mt-10 w-full text-base font-small sm:text-[32px] text-center lg:text-left text-white lg:pr-5[x] sm:leading-[44px]">
+                </h1>
+                <p className="mt-5 sm:mt-10 w-full text-base font-small sm:text-[32px] text-center lg:text-left text-white lg:pr-5[x] sm:leading-[44px]">
                     Complete Farmer connects food growers and global buyers to{" "}
-                    <Typed
-                      className="font-bold text-green-500"
-                      strings={[
-                        "competitive markets",
-                        "resources",
-                        "data",
-                        "capital",
-                        "each other",
-                      ]}
-                      typeSpeed={40}
-                      backSpeed={50}
-                      loop
-                    />
-                    <br className="" />
+                  <Typed
+                    className="font-bold text-green-500"
+                    strings={[
+                      "competitive markets",
+                      "resources",
+                      "data",
+                      "capital",
+                      "each other",
+                    ]}
+                    typeSpeed={40}
+                    backSpeed={50}
+                    loop
+                  />
+                  <br className="" />
                     on a single platform
-                  </p>
+                </p>
 
-                  <div className="flex flex-col items-start justify-start sm:gap-4 md:flex-row md:gap-8 mt-10 sm:mt-14 sm:justify-center lg:justify-start">
-                    <div className="flex justify-center w-full md:w-auto">
-                      <a
-                        href="/product"
-                        className={
-                          "flex justify-center items-center w-full sm:w-[296px] lg:w-auto lg:h-auto gap-2 px-12 sm:px-[79px] lg:px-8 sm:py-4 py-5 rounded-full z-20 bg-[#31bc2e] font-bold text-white"
-                        }
-                      >
+                <div className="flex flex-col items-start justify-start sm:gap-4 md:flex-row md:gap-8 mt-10 sm:mt-14 sm:justify-center lg:justify-start">
+                  <div className="flex justify-center w-full md:w-auto">
+                    <a
+                      href="/product"
+                      className={
+                        "flex justify-center items-center w-full sm:w-[296px] lg:w-auto lg:h-auto gap-2 px-12 sm:px-[79px] lg:px-8 sm:py-4 py-5 rounded-full z-20 bg-[#31bc2e] font-bold text-white"
+                      }
+                    >
                         View products
-                      </a>
-                    </div>
-                    <div className="flex justify-center w-full mt-4 md:w-auto md:mt-0">
-                      <a
-                        href="/product"
-                        onClick={() => handleButtonClick()}
-                        className="flex justify-center items-center w-full sm:w-[296px] lg:w-auto lg:h-auto[x] gap-2 px-12 sm:px-[79px] sm:py-4 lg:px-16 lg:py-5[x] py-5 rounded-full z-20 text-[#022d2b] bg-white font-bold"
-                      >
+                    </a>
+                  </div>
+                  <div className="flex justify-center w-full mt-4 md:w-auto md:mt-0">
+                    <a
+                      href="/product"
+                      onClick={() => handleButtonClick()}
+                      className="flex justify-center items-center w-full sm:w-[296px] lg:w-auto lg:h-auto[x] gap-2 px-12 sm:px-[79px] sm:py-4 lg:px-16 lg:py-5[x] py-5 rounded-full z-20 text-[#022d2b] bg-white font-bold"
+                    >
                         See demo
-                      </a>
-                    </div>
+                    </a>
                   </div>
                 </div>
               </div>
-            </Fade>
-            {/* Right Side */}
-            <Fade right duration={1000} delay={500} distance="30px">
-              <div className="hidden lg:block w-full lg:w-1/2 lg:mt-0">
-                <div className="relative w-full h-full transform scale-90">
-                  <img
-                    src={Illustration.src}
-                    alt="hereo-image"
-                  />
-                </div>
+            </div>
+            <div className="hidden lg:block w-full lg:w-1/2 lg:mt-0">
+              <div className="relative w-full h-full transform scale-90">
+                <img src={Illustration.src} alt="hereo-image" />
               </div>
-            </Fade>
+            </div>
           </div>
         </div>
       </section>
@@ -163,9 +155,9 @@ const Hero = () => {
   const [isFirstTime, setIsFirstTime] = useState(false);
 
   useEffect(() => {
-    const isFirstTime = localStorage.getItem("isFirstTime") ? true : false;
-    if (!isFirstTime) {
-      localStorage.setItem("isFirstTime", "true");
+    const isFirstTime = JSON.parse(localStorage.getItem("isFirstTime")) ?? true;
+    if (isFirstTime) {
+      localStorage.setItem("isFirstTime", (!isFirstTime).toString());
     }
     setIsFirstTime(isFirstTime);
   }, []);
@@ -179,7 +171,6 @@ const Hero = () => {
     setCurrentTab(selectedTabItem);
     setTabs(newTabs);
   };
-
 
   const handleButtonClick = () => {
     // ReactGA.event({
@@ -198,7 +189,12 @@ const Hero = () => {
       <Fade left duration={1000} delay={500} distance="30px">
         <div className="flex flex-col justify-start items-start gap-11">
           <div className="flex justify-start items-start w-full">
-            <PlainTab tabs={tabs} changeTab={changeTab} color={currentTab.data.color} borderColor={currentTab.data.borderColor} />
+            <PlainTab
+              tabs={tabs}
+              changeTab={changeTab}
+              color={currentTab.data.color}
+              borderColor={currentTab.data.borderColor}
+            />
           </div>
 
           <div className="flex flex-col justify-start items-start gap-8">
@@ -239,77 +235,9 @@ const Hero = () => {
     </div>
   );
 
-  // Right
-  const RightComp1 = () => (
-    <div className="hidden xl:flex lg:w-1/2  h-full lg:pt-0 pt-24 overflow-hidden">
-      <Fade right duration={1000} delay={500} distance="30px">
-        <div className="relative h-full w-full pl-24 lg:pr-0 pr-10 ">
-          <div className="w-32 h-[600.14px]">
-            <div className="w-[287.32px] h-[368.38px] absolute left-20 top-0">
-              <svg
-                width={281}
-                height={361}
-                viewBox="0 0 281 361"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="absolute left-[4.54px] top-[4.98px]"
-                preserveAspectRatio="none"
-              >
-                <path
-                  d="M280.315 191.68C280.315 285.073 188.813 360.877 95.5242 360.877L0.0263759 360.877L0.0263672 0.469238H280.315V191.68Z"
-                  fill={currentTab.data.rightSvgFillColor}
-                />
-              </svg>
-              <div className="absolute left-[-2.49px] top-[-2.4px]" />
-              <div className="w-[281.07px] h-[361.35px]">
-                <div className="absolute left-[-2.13px] top-[-2.03px]" />
-                <img
-                  className="w-[288.88px] h-[361.35px] absolute left-[-0.39px] top-[-0.39px]"
-                  src={currentTab.logoOne.src}
-                  style={{
-                    clipPath:
-                      "path('M280.315 191.68C280.315 285.073 188.813 360.877 95.5242 360.877L0.0263759 360.877L0.0263672 0.469238H280.315V191.68Z')",
-                  }}
-                />
-              </div>
-              <div className="w-[274px] h-[352px] absolute left-[219px] top-[249px]">
-                <svg
-                  width={268}
-                  height={345}
-                  viewBox="0 0 268 345"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="absolute left-[4.22px] top-[4.65px]"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M268 182.847C268 272.088 180.738 344.523 91.7732 344.523L0.70118 344.523L0.701172 0.136475H268V182.847Z"
-                    fill={currentTab.data.rightSvgFillColor}
-                  />
-                </svg>
-                <div className="absolute left-[-2.49px] top-[-2.4px]" />
-                <div className="w-[268.04px] h-[345.29px]">
-                  <div className="absolute left-[-2.13px] top-[-2.03px]" />
-                  <img
-                    className="w-[275.49px] h-[345.29px] absolute left-[-0.39px] top-[-0.39px]"
-                    src={currentTab.logoTwo.src}
-                    style={{
-                      clipPath:
-                        "path('M268 182.847C268 272.088 180.738 344.523 91.7732 344.523L0.70118 344.523L0.701172 0.136475H268V182.847Z')",
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Fade>
-    </div>
-  );
-
   return (
     <>
-      {!isFirstTime ? (
+      {isFirstTime ? (
         <HeroOne />
       ) : (
         <section
@@ -319,7 +247,12 @@ const Hero = () => {
             <div className="max-w-7xl mx-auto sm:px-4 xl:px-0 flex items-center xl:flex-row flex-col h-full">
               <LeftComp />
 
-              <RightComp1 />
+              <HeroRight
+                id="home-hero-right"
+                imageOne={currentTab.logoOne}
+                imageTwo={currentTab.logoTwo}
+                fill={currentTab.data.rightSvgFillColor}
+              />
             </div>
           </div>
         </section>

@@ -36,7 +36,6 @@ export default {
         "hero-pattern": "url('/src/assets/bg/hero-pattern.svg')",
         "hero-pattern-blue": "url('/src/assets/bg/hero-pattern-blue.svg')",
         "home-image": "url('/src/assets/bg/home-image.png')",
-        "career-image": "url('/src/assets/bg/career-image.svg')",
         "customer-stories-pattern": "url('/src/assets/bg/motif.svg')",
         "customer-stories-pattern-blue": "url('/src/assets/bg/motif-blue.svg')",
         "about-us-pattern": "url('/src/assets/bg/motif-orange.svg')",

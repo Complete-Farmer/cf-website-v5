@@ -10,7 +10,7 @@ export default function ServiceRestrictions() {
           are owned by Complete Farmer and/or our licensors, including our customers, brands and agencies, and are protected by applicable
           intellectual property and other laws, including but not limited to copyright. You agree that you will not use such proprietary content,
           information or materials other than for your permitted use of our Website or in any manner that is inconsistent with the terms contained in
-          this Agreement.{" "}
+          this Agreement.
         </p>
         <p>
           You agree not to modify, rent, lease, loan, sell, distribute, or create derivative works based on our Website or App, in any manner, and you

@@ -1,4 +1,4 @@
-import React from "react";
+
 
 const InstagramIcon: React.FC<{
   width: string;

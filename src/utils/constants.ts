@@ -1,6 +1,6 @@
 export const productsLinks = [
-  { name: "Grower", href: "/product/grower" },
-  { name: "Buyer", href: "/product/buyer" },
+  { name: "Grower", href: "/products/grower" },
+  { name: "Buyer", href: "/products/buyer" },
 ];
 
 export const companyLinks = [

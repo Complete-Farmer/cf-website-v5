@@ -1,9 +1,9 @@
-import React, { Fragment, useState } from "react";
+import { Fragment, useState } from "react";
 import { Dialog, Popover, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
-import { CFBuyerLogo, CFGrowerLogo, CFMainLogo } from "../assets/logos/header";
-import { ArrowRightGreenIcon, ChevronDownIcon } from "../assets/icons";
+import { CFBuyerLogo, CFGrowerLogo, CFMainLogo } from "@assets/images/logos/cf";
+import { ArrowIcon, ChevronIcon } from "@assets/icons";
 
 import Drawer from "./Drawer";
 
@@ -13,7 +13,7 @@ const initialProducts = [
   {
     name: "CF Grower",
     description: "Speak directly to your customers",
-    href: "/product/grower/new-farmer",
+    href: "/products/grower/new-farmer",
     logo: CFGrowerLogo,
     activeColor: "#31BC2E",
     defaultColor: "#6C6C6C",
@@ -22,7 +22,7 @@ const initialProducts = [
   {
     name: "CF Buyer",
     description: "Get a better understanding of your traffic",
-    href: "/product/buyer",
+    href: "/products/buyer",
     logo: CFBuyerLogo,
     activeColor: "#367AFE",
     defaultColor: "#6C6C6C",
@@ -143,7 +143,7 @@ export default function NormalHeader() {
                             Products
                           </p>
                         </div>
-                        <ChevronDownIcon
+                        <ChevronIcon
                           className={`w-4 h-4 ${
                             open ? "rotate-180 transform" : ""
                           }`}
@@ -210,7 +210,7 @@ export default function NormalHeader() {
                             Company
                           </p>
                         </div>
-                        <ChevronDownIcon
+                        <ChevronIcon
                           className={`w-4 h-4 ${
                             open ? "rotate-180 transform" : ""
                           }`}
@@ -248,7 +248,8 @@ export default function NormalHeader() {
                                         {item.name}
                                       </span>
                                       <span className="group/edit invisible group-hover/item:visible flex flex-col justify-center">
-                                        <ArrowRightGreenIcon className="group-hover/edit:translate-x-1 flex justify-end" />
+                                        <ArrowIcon className="group-hover/edit:translate-x-1 flex justify-end" /> 
+                                        {/* rotate-180 transform */}
                                       </span>
                                     </div>
                                   </a>

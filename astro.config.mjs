@@ -7,6 +7,10 @@ import partytown from "@astrojs/partytown";
 
 // https://astro.build/config
 export default defineConfig({
+  output: "static",
+  build: {
+    format: "file"
+  },
   site: "https://www.completefarmer.com",
   integrations: [
     react({

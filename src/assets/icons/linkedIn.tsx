@@ -1,4 +1,4 @@
-import React from "react";
+
 
 const LinkedInIcon: React.FC<{
   width: string;
