@@ -3,15 +3,15 @@ import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
-import SubscribeLogo from "../../assets/logos/home/subscribe-news.svg";
-import SubscribeMedium from "../../assets/logos/home/subscribe-news-medium.svg";
-import SubscribeLogoSmall from "../../assets/logos/home/subscribe-news-small.svg";
+import MobileBackground from "@assets/images/home/newsletter-bg-mobile.webp";
+import TabletBackground from "@assets/images/home/newsletter-bg-tablet.webp";
+import DesktopBackground from "@assets/images/home/newsletter-bg-desktop.webp";
 
-import { useResolution } from "../../hooks/useResolution";
-import { onMailChimpSubmit } from "../../utils/functions";
+import { useResolution } from "@hooks/useResolution";
+import { onMailChimpSubmit } from "@utils/functions";
 
 export default function NewsLetter() {
-  const activeBgColor = "bg-custom_lightgreen-500";
+  const activeBgColor = "bg-grower-500";
   const { screenType } = useResolution();
   const [background, setBackground] = useState<string>();
   const [email, setEmail] = useState("");
@@ -19,17 +19,17 @@ export default function NewsLetter() {
 
   useEffect(() => {
     if (screenType === "mobile") {
-      setBackground(SubscribeLogoSmall.src);
+      setBackground(MobileBackground.src);
       return;
     }
 
     if (screenType === "tablet") {
-      setBackground(SubscribeMedium.src);
+      setBackground(TabletBackground.src);
       return;
     }
 
     if (screenType === "desktop") {
-      setBackground(SubscribeLogo.src);
+      setBackground(DesktopBackground.src);
       return;
     }
   }, [screenType]);

@@ -3,37 +3,20 @@ import Layouts from "@layouts/Layouts.astro";
 
 import Main from "@components/contact-us/main";
 
-import { getFAQsCategories } from '@utils/prismic';
+import { getFAQsCategories } from "@utils/prismic";
 
-const faqsCatApiData = await getFAQsCategories()
+const faqsCatApiData = await getFAQsCategories();
 ---
 
 <Layouts
   title="Contact Us | Complete Farmer"
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
-  <div
-    class="pt-24 pb-32 bg-custom_lightgreen-900 bg-contact-us-small-screen-bg lg:bg-contact-us-main-bg bg-cover"
-  >
+  <div class="pt-24 pb-32 bg-contact-us-bg bg-cover">
     <div class="px-4 sm:px-12 mx-auto max-w-5xl lg:px-12 xl:px-16">
       <Main data={faqsCatApiData} client:load />
     </div>
   </div>
 </Layouts>
 
-<script type="text/javascript">
-  window.dataLayer.push({
-    event: "pageview",
-    page: "/contact-us",
-  });
-
-  // ga("set", "page", "/contact-us");
-  // ga("send", "pageview");
-
-  window.fbq("track", "PageView");
-
-  // https://www.thyngster.com/google-tag-manager-google-analytics-4-ga4-events-setup-with-a-single-tag
-  // https://www.thyngster.com/tracking-google-analytics-4-events-using-data-attributes
-  // https://developers.facebook.com/docs/meta-pixel/advanced/
-  // https://developers.facebook.com/docs/meta-pixel/implementation/conversion-tracking
-</script>
+<!-- page: "/contact-us", -->

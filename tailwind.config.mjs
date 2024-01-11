@@ -10,8 +10,21 @@ export default {
       width: { inherit: "inherit" },
       divideOpacity: { 3: "0.03" },
       colors: {
-        custom_lightgreen: {
+        buyer: {
+          100: "#EBF0FF",
+          200: "#",
+          300: "#",
+          400: "#253A66",
+          500: "#367AFE",
+          700: "#253A66",
+          800: "#102352",
+          900: "#00194C"
+        },
+        grower: {
+          100: "#D8F5D7",
           200: "#EBFFEB",
+          300: "#ADE4AB",
+          400: "#004C46",
           500: "#31BC2E",
           800: "#00524B",
           900: "#022D2B",
@@ -23,8 +36,6 @@ export default {
           600: "#1D1D1F",
         },
         custom_black: { 900: "#1D1D1F" },
-        custom_blue: { 500: "#367AFE" },
-        custom_green: { 400: "#ADE4AB", 500: "#31BC2E", 900: "#004C46" },
         custom_orange: { 500: "#E58C00" },
         custom_white: { 900: "#E5E5E5", 300: "#FFF7EB" },
       },
@@ -33,11 +44,13 @@ export default {
         heightscale: "100% cover",
       },
       backgroundImage: {
-        "hero-pattern": "url('/src/assets/bg/hero-pattern.svg')",
-        "hero-pattern-blue": "url('/src/assets/bg/hero-pattern-blue.svg')",
-        "home-image": "url('/src/assets/bg/home-image.png')",
-        "customer-stories-pattern": "url('/src/assets/bg/motif.svg')",
-        "customer-stories-pattern-blue": "url('/src/assets/bg/motif-blue.svg')",
+        "hero-grower": "url('/src/assets/images/products/grower/hero-background.webp')",
+        "hero-buyer": "url('/src/assets/images/products/buyer/hero-background.webp')",
+        "footer-pattern": "url('/src/assets/images/home/footer-bg-patterns.webp')",
+        "customer-stories-grower-bg-pattern": "url('/src/assets/images/products/grower/customer-stories-bg-pattern.webp')",
+        "customer-stories-buyer-bg-pattern": "url('/src/assets/images/products/buyer/customer-stories-bg-pattern.webp')",
+        "contact-us-bg": "url('/src/assets/images/contact-us/background-pattern.webp')",
+
         "about-us-pattern": "url('/src/assets/bg/motif-orange.svg')",
         "about-us-mobile-pattern":
           "url('/src/assets/bg/abous-us-mobile-pattern.svg')",
@@ -45,9 +58,6 @@ export default {
         "about-us-pattern-ceo": "url('/src/assets/bg/motif-green-solid.svg')",
         "cta-illustation": "url('/src/assets/bg/cta-illustation.svg')",
         "product-bg": "url('/src/assets/bg/product-bg.svg')",
-        "contact-us-main-bg": "url('/src/assets/bg/main-bg.svg')",
-        "contact-us-small-screen-bg": "url('/src/assets/bg/tablet-bg.svg')",
-        "footer-pattern": "url('/src/assets/bg/bg-footer.svg')",
         "footer-buyer-pattern": "url('/src/assets/bg/motif-blue.svg')",
         "buyer-sales-pattern": "url('/src/assets/bg/motif-blue.svg')",
         "grower-intrested-in-pattern": "url('/src/assets/bg/grower-intrested.svg')",

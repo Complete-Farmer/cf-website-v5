@@ -1,8 +1,6 @@
 ---
-import Layouts from "../../layouts/Layouts.astro";
-
-import Header from "../../components/legal/Header";
-
+import Layouts from "@layouts/Layouts.astro";
+import Header from "@components/legal/Header.astro";
 import {
   Intro,
   Payment,
@@ -41,7 +39,7 @@ import {
   />
 
   <div class="bg-white py-8 sm:py-14 sm:px-6">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8 text-justify">
       <GeneralTerms />
       <Intro />
       <TerritorialRestriction />
@@ -70,19 +68,4 @@ import {
   </div>
 </Layouts>
 
-<script type="text/javascript">
-  window.dataLayer.push({
-    event: "pageview",
-    page: "/legal/terms-and-conditions",
-  });
-
-  // ga("set", "page", "/contact-us");
-  // ga("send", "pageview");
-
-  window.fbq("track", "PageView");
-
-  // https://www.thyngster.com/google-tag-manager-google-analytics-4-ga4-events-setup-with-a-single-tag
-  // https://www.thyngster.com/tracking-google-analytics-4-events-using-data-attributes
-  // https://developers.facebook.com/docs/meta-pixel/advanced/
-  // https://developers.facebook.com/docs/meta-pixel/implementation/conversion-tracking
-</script>
+<!-- page: "/legal/terms-and-conditions", -->

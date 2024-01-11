@@ -1,5 +1,5 @@
 import { Tab } from "@headlessui/react";
-import { classNames } from "../../utils/functions";
+import { classNames } from "@utils/functions";
 
 interface IProps {
   categories: {

@@ -48,7 +48,7 @@ function NextIcon() {
         return (
           <div
             key={iconItem.name}
-            className="p-5 flex rounded-full bg-[#efefef] hover:bg-custom_lightgreen-500"
+            className="p-5 flex rounded-full bg-[#efefef] hover:bg-grower-500"
             onMouseEnter={() => handleOnHover(iconItem)}
             onMouseLeave={() => {
               clearProducts();

@@ -1,14 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import Fade from "react-reveal/Fade";
-import PlainTab from "../../components/utils/PlainTab";
-import Typed from "react-typed";
 
-import Illustration from "../../assets/images/home/hero-illustration.svg";
-import CfGrowerLogoOne from "../../assets/images/grower/team2.png";
-import CfGrowerLogoTwo from "../../assets/images/grower/team1.png";
-import CfBuyerLogoOne from "../../assets/images/buyer/team3.svg";
-import CfBuyerLogoTwo from "../../assets/images/buyer/team4.svg";
+import BuyerHeroRight from "@assets/images/products/grower/hero-right.webp";
+import GrowerHeroRight from "@assets/images/products/buyer/hero-right.webp";
+
+import InitialHero from "./InitialHero";
+import PlainTab from "@components/utils/PlainTab";
 import HeroRight from "@components/utils/HeroRight";
 
 const initialTabs = [
@@ -25,20 +23,19 @@ const initialTabs = [
       firstButton: {
         text: "Get Started as a grower",
         textColor: "text-white",
-        bgColor: "bg-custom_lightgreen-500",
+        bgColor: "bg-grower-500",
       },
       secondButton: {
         text: "See a demo",
-        textColor: "text-custom_lightgreen-500",
-        bgColor: "border-custom_lightgreen-500",
+        textColor: "text-grower-500",
+        bgColor: "border-grower-500",
       },
-      color: "text-custom_lightgreen-500",
-      borderColor: "border-custom_lightgreen-500",
-      bgPattern: "bg-hero-pattern",
+      color: "text-grower-500",
+      borderColor: "border-grower-500",
+      bgPattern: "bg-hero-grower",
       rightSvgFillColor: "#E58C00",
     },
-    logoOne: CfGrowerLogoOne,
-    logoTwo: CfGrowerLogoTwo,
+    rightImage: BuyerHeroRight,
   },
   {
     name: "CF Buyer",
@@ -53,100 +50,21 @@ const initialTabs = [
       firstButton: {
         text: "Get Started as a buyer",
         textColor: "text-white",
-        bgColor: "bg-[#367AFE]",
+        bgColor: "bg-buyer-500",
       },
       secondButton: {
         text: "See a demo",
-        textColor: "text-[#367AFE]",
-        bgColor: "border-[#367AFE]",
+        textColor: "text-buyer-500",
+        bgColor: "border-buyer-500",
       },
-      color: "text-[#367AFE]",
-      borderColor: "border-[#367AFE]",
-      bgPattern: "bg-hero-pattern-blue",
+      color: "text-buyer-500",
+      borderColor: "border-buyer-500",
+      bgPattern: "bg-hero-buyer",
       rightSvgFillColor: "#00FFE0",
     },
-    logoOne: CfBuyerLogoOne,
-    logoTwo: CfBuyerLogoTwo,
+    rightImage: GrowerHeroRight,
   },
 ];
-
-function HeroOne() {
-  const handleButtonClick = () => {
-    // ReactGA.event({
-    //   category: "Button Click",
-    //   action: "See Demo"
-    // });
-    // window.metapixelfunction("demo", "see_demo", {});
-    // window.dataLayer.push({
-    //   event: "see_demo"
-    // });
-  };
-
-  return (
-    <>
-      <section className="w-full lg:min-h-[95vh] px-6 sm:px-10 bg-white pb-16 sm:pb-40 lg:pb-32 bg-cover bg-hero-pattern">
-        <div className="w-full h-auto pt-20 sm:pt-32">
-          <div className="max-w-7xl mx-auto sm:px-4 xl:px-0 flex items-center lg:flex-row flex-col h-full">
-            <div className="w-full lg:w-1/2">
-              <div className="max-w-lg[x] mx-auto[x] text-center lg:text-left">
-                <h1 className="w-full text-[28px] sm:text-5xl lg:text-[56px] font-bold text-center lg:text-left text-white leading-8 sm:leading-[64px] lg:leading-[70px] sm:px-6 lg:px-0">
-                    Digitizing <br className="hidden lg:block" /> agriculture
-                    &mdash; <br className="hidden sm:block lg:hidden" /> From
-                    supply to demand
-                </h1>
-                <p className="mt-5 sm:mt-10 w-full text-base font-small sm:text-[32px] text-center lg:text-left text-white lg:pr-5[x] sm:leading-[44px]">
-                    Complete Farmer connects food growers and global buyers to{" "}
-                  <Typed
-                    className="font-bold text-green-500"
-                    strings={[
-                      "competitive markets",
-                      "resources",
-                      "data",
-                      "capital",
-                      "each other",
-                    ]}
-                    typeSpeed={40}
-                    backSpeed={50}
-                    loop
-                  />
-                  <br className="" />
-                    on a single platform
-                </p>
-
-                <div className="flex flex-col items-start justify-start sm:gap-4 md:flex-row md:gap-8 mt-10 sm:mt-14 sm:justify-center lg:justify-start">
-                  <div className="flex justify-center w-full md:w-auto">
-                    <a
-                      href="/product"
-                      className={
-                        "flex justify-center items-center w-full sm:w-[296px] lg:w-auto lg:h-auto gap-2 px-12 sm:px-[79px] lg:px-8 sm:py-4 py-5 rounded-full z-20 bg-[#31bc2e] font-bold text-white"
-                      }
-                    >
-                        View products
-                    </a>
-                  </div>
-                  <div className="flex justify-center w-full mt-4 md:w-auto md:mt-0">
-                    <a
-                      href="/product"
-                      onClick={() => handleButtonClick()}
-                      className="flex justify-center items-center w-full sm:w-[296px] lg:w-auto lg:h-auto[x] gap-2 px-12 sm:px-[79px] sm:py-4 lg:px-16 lg:py-5[x] py-5 rounded-full z-20 text-[#022d2b] bg-white font-bold"
-                    >
-                        See demo
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="hidden lg:block w-full lg:w-1/2 lg:mt-0">
-              <div className="relative w-full h-full transform scale-90">
-                <img src={Illustration.src} alt="hereo-image" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
-  );
-}
 
 const Hero = () => {
   const initialData = initialTabs[0];
@@ -238,7 +156,7 @@ const Hero = () => {
   return (
     <>
       {isFirstTime ? (
-        <HeroOne />
+        <InitialHero />
       ) : (
         <section
           className={`w-full px-6 sm:px-10 bg-white pb-20 sm:pb-48 xl:pb-32 bg-cover ${currentTab.data.bgPattern}`}
@@ -248,9 +166,8 @@ const Hero = () => {
               <LeftComp />
 
               <HeroRight
-                id="home-hero-right"
-                imageOne={currentTab.logoOne}
-                imageTwo={currentTab.logoTwo}
+                key={currentTab.name}
+                imageSrc={currentTab.rightImage.src}
                 fill={currentTab.data.rightSvgFillColor}
               />
             </div>

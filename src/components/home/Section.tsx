@@ -1,14 +1,11 @@
-import SectionList from "../../components/utils/SectionList";
+import SectionList from "@components/utils/SectionList";
 
-import Career from "../../assets/logos/sections/Career.svg";
-import NewsRoom from "../../assets/logos/sections/NewsRoom.svg";
-import RightArrowIcon from "../../assets/logos/home/right-arrow.svg";
-import InvestorRelation from "../../assets/logos/sections/InvestorRelation.svg";
+import { PeopleIcon, NewpaperIcon, RelationIcon } from "@assets/icons";
 
 const incentives = [
   {
     name: "About us",
-    imageSrc: Career,
+    icon: <PeopleIcon />,
     description:
       "Find out how we started, what drives us and how we are reimagining how food is grown, sourced and consumed in Africa. ",
     linkText: "Learn more about CF",
@@ -16,7 +13,7 @@ const incentives = [
   },
   {
     name: "Newsroom",
-    imageSrc: NewsRoom,
+    icon: <NewpaperIcon />,
     description:
       "Keep up with the latest about Complete Farmer. From announcements, to press coverage and company updates. ",
     linkText: "Go to Newsroom",
@@ -24,7 +21,7 @@ const incentives = [
   },
   {
     name: "Investor Relations",
-    imageSrc: InvestorRelation,
+    icon: <RelationIcon />,
     description:
       "Learn more about our mission, growth and impact and how you can be part of it.",
     linkText: "Go to Investor relations",
@@ -32,19 +29,10 @@ const incentives = [
   },
 ];
 
-const textColor = "text-green-500";
-const bgColor = "bg-white";
-const linkIcon = RightArrowIcon;
+const Section = () => (
+  <div className="py-4 sm:py-0 sm:px-4 2xl:px-0 sm:pb-8">
+    <SectionList incentives={incentives} />
+  </div>
+);
 
-export default function Section() {
-  return (
-    <div className="py-4 sm:py-0 sm:pb-8">
-      <SectionList
-        bgColor={bgColor}
-        linkIcon={linkIcon}
-        textColor={textColor}
-        incentives={incentives}
-      />
-    </div>
-  );
-}
+export default Section;

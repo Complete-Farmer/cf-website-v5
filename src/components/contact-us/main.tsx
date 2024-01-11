@@ -1,25 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useMemo, useState } from "react";
-import type { Query, PrismicDocument } from "@prismicio/client";
 
-import Title from "./Title";
 import Content from "./Content";
 import SelectInput from "./SelectInput";
-import SpinnerLoader from "../../components/utils/SpinnerLoader";
+import SpinnerLoader from "@components/utils/SpinnerLoader";
 
-import { filterAt, getContactUsFaqs } from "../../utils/prismic";
+import { filterAt, getContactUsFaqs } from "@utils/prismic";
+
+import type { IPrismicData, IPrismicDoc } from "types/app";
 
 const maxRecordsPerPage = 5;
 
-interface IProps{
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data: Query<PrismicDocument<Record<string, any>, string, string>>;
+interface IProps {
+  data: IPrismicData;
 }
 
-export default function Main({
-  data
-}: IProps) {
-  const [selected, setSelected] = useState({ id: "", name: "Select an option" });
+export default function Main({ data }: IProps) {
+  const [selected, setSelected] = useState({
+    id: "",
+    name: "Select an option",
+  });
   const [totalResults, setTotalResults] = useState(0);
   const [loading, setLoading] = useState(false);
   const [toggle, setToggle] = useState(false);
@@ -29,7 +29,7 @@ export default function Main({
   const faqsCategories = useMemo(() => {
     return data.results.map((item) => ({
       id: item.id,
-      name: item.data.name
+      name: item.data.name,
     }));
   }, [data]);
 
@@ -38,11 +38,22 @@ export default function Main({
       try {
         setLoading(true);
         const filters = filterAt("my.faq_v3.category", `${selected.id}`);
-        const contactUsApiData = await getContactUsFaqs({ page: pageNo, pageSize: maxRecordsPerPage, filters });
+        const contactUsApiData = await getContactUsFaqs({
+          page: pageNo,
+          pageSize: maxRecordsPerPage,
+          filters,
+        });
         const transformedData = transformApiData(contactUsApiData.results);
         setFAQs((prevData) =>
           selected.id === prevData[0]?.data?.category.id
-            ? [...new Map([...prevData, ...transformedData].map((item) => [item["id"], item])).values()]
+            ? [
+              ...new Map(
+                [...prevData, ...transformedData].map((item) => [
+                  item["id"],
+                  item,
+                ])
+              ).values(),
+            ]
             : transformedData
         );
         setTotalResults(contactUsApiData.total_results_size);
@@ -56,11 +67,11 @@ export default function Main({
     selected.id && fetchData();
   }, [pageNo, selected]);
 
-  const transformApiData = (apiResults: PrismicDocument<Record<string, any>, string, string>[]) => {
+  const transformApiData = (apiResults: IPrismicDoc) => {
     return apiResults.map((item) => ({
       question: item.data.question[0].text,
       answer: item.data.answer[0].text,
-      id: item.id
+      id: item.id,
     }));
   };
 
@@ -72,13 +83,17 @@ export default function Main({
     setPageNo(pageNo + 1);
   };
 
-  const handleOnSelectorChange = (e: { id: string; name: string;}) => {
+  const handleOnSelectorChange = (e: { id: string; name: string }) => {
     setPageNo(1);
     setSelected(e);
   };
 
   const isLoadMore = () => {
-    const isBool = faqs && totalResults !== 0 && totalResults !== faqs.length && totalResults > maxRecordsPerPage;
+    const isBool =
+      faqs &&
+      totalResults !== 0 &&
+      totalResults !== faqs.length &&
+      totalResults > maxRecordsPerPage;
     return isBool;
   };
 
@@ -86,8 +101,19 @@ export default function Main({
     <div className="bg-white rounded-lg lg:rounded-none">
       <div className="px-6 sm:px-12 py-16 sm:py-24 md:py-32 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <Title />
-          <SelectInput people={faqsCategories} selected={selected} setSelected={handleOnSelectorChange} />
+          <div>
+            <h2 className="text-[28px] sm:text-4xl md:text-[40px] font-bold text-center tracking-tight text-grower-400">
+              Hi, how can we help?
+            </h2>
+            <p className="mx-auto text-base font-bold text-center mt-6 md:my-10 max-w-xl leading-8 text-grower-400">
+              Let us know below!
+            </p>
+          </div>
+          <SelectInput
+            people={faqsCategories}
+            selected={selected}
+            setSelected={handleOnSelectorChange}
+          />
           {loading ? (
             <div className="flex justify-center items-center pt-20">
               <SpinnerLoader loading={loading} color="#36d7b7" />

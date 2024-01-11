@@ -1,6 +1,6 @@
 import { Parallax } from "react-parallax";
 
-import Image from "../../assets/bg/home-image.svg";
+import Image from "@assets/images/home/vast-farming-land.webp";
 
 export default function HomeImage() {
   return (

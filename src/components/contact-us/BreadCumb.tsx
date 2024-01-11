@@ -17,7 +17,7 @@ export default function Example() {
   };
 
   return (
-    <div className="w-full h-14 relative overflow-hidden bg-custom_green-900">
+    <div className="w-full h-14 relative overflow-hidden bg-grower-400">
       <div className="max-w-7xl mx-auto">
         <div className="hidden sm:flex justify-start items-center absolute top-2 gap-2 py-2 rounded-[1900px] px-4 sm:py-18 md:px-6 xl:px-6">
           <a onClick={handleLinkClick} href="/contact-us" className="flex-grow-0 flex-shrink-0 text-base text-left text-white underline">

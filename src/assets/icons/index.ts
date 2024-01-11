@@ -1,7 +1,7 @@
 export { default as ChevronIcon } from "./chevron.tsx";
 export { default as ArrowIcon } from "./arrow";
 export { default as CalenderIcon } from "./calendar";
-// export { default as CaretIcon } from "./caret";
+export { default as CaretIcon } from "./caret";
 export { default as FacebookIcon } from "./facebook";
 export { default as FreeIcon } from "./freeIcon";
 export { default as InstagramIcon } from "./instagram";
@@ -10,3 +10,9 @@ export { default as LocationIcon } from "./location";
 export { default as NextIcon } from "./next";
 export { default as reviousIcon } from "./previous";
 export { default as TwitterIcon } from "./twitter";
+export { default as MenuOpenIcon } from "./menu-open.tsx";
+export { default as MenuCloseIcon } from "./menu-close.tsx";
+export { default as PeopleIcon } from "./people.tsx";
+export { default as NewpaperIcon } from "./newspaper.tsx";
+export { default as RelationIcon } from "./relation.tsx";
+export { default as TwoLeavesIcon } from "./two-leaves.tsx";

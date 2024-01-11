@@ -1,4 +1,4 @@
-import "../../../assets/styles/getintouchinput.css";
+import "@assets/styles/getintouchinput.css";
 import "react-phone-number-input/style.css";
 
 import React, { useState } from "react";
@@ -8,8 +8,8 @@ import { XMarkIcon } from "@heroicons/react/20/solid";
 import BuyerGetInTouchTab from "./BuyerGetInTouchTab";
 import CalendlyIntegration from "./CalendlyIntegration";
 
-import ChevronUpIcon from "../../../assets/icons/chevron-up-icon-blue.svg";
-import FileIcon from "../../../assets/icons/file-alt.svg";
+import {ChevronIcon} from "@assets/icons";
+// import FileIcon from "@assets/icons/file-alt.svg";
 
 // import ReactGA from "react-ga4";
 
@@ -37,8 +37,8 @@ function BuyerGetInTouchModal({ toggleModal }: { toggleModal: () => void }) {
   } | null>(null);
   const [value, setValue] = useState<string>();
   const [email, setEmail] = useState("");
-  // const activeBgColor = activeCategory === "Grower" ? "bg-custom_lightgreen-500" : "bg-[#367afe]";
-  const activeBgColor = "bg-[#367afe]";
+  // const activeBgColor = activeCategory === "Grower" ? "bg-grower-500" : "bg-buyer-500";
+  const activeBgColor = "bg-buyer-500";
 
   const changeCategory = (i: number) => {
     const catIndex = i === 0 ? "Fill in a form" : "Schedule a call";
@@ -213,14 +213,14 @@ function BuyerGetInTouchModal({ toggleModal }: { toggleModal: () => void }) {
                 Add attachment
               </label>
               {filePresent ? (
-                <div className="rounded-lg border border-spacing-10 border-dashed border-[#367AFE] px-3 md:px-6 py-2 mt-1">
+                <div className="rounded-lg border border-spacing-10 border-dashed border-buyer-500 px-3 md:px-6 py-2 mt-1">
                   <div className="bg-zinc-100 rounded w-full h-9 flex justify-between items-center p-2">
                     <div className="flex items-center gap-2">
-                      <img
+                      {/* <img
                         className="h-5 w-5 text-[#6C6C6C]"
                         src={FileIcon.src}
                         alt="File Icon"
-                      />
+                      /> */}
                       {selectedFile && (
                         <>
                           <div className="text-neutral-500 text-xs md:text-sm font-normal leading-tight">{`${selectedFile.name}`}</div>
@@ -232,7 +232,7 @@ function BuyerGetInTouchModal({ toggleModal }: { toggleModal: () => void }) {
                     </div>
                     <div className="flex items-end justify-end cursor-pointer">
                       <XMarkIcon
-                        className="h-5 w-5 sm:h-8 sm:w-8 text-[#367AFE]"
+                        className="h-5 w-5 sm:h-8 sm:w-8 text-buyer-500"
                         aria-hidden="true"
                         onClick={handleCancelUpload}
                       />
@@ -240,7 +240,7 @@ function BuyerGetInTouchModal({ toggleModal }: { toggleModal: () => void }) {
                   </div>
                 </div>
               ) : (
-                <div className="mx-auto text-center mt-1 max-w-2xl w-xl flex justify-center rounded-lg border border-spacing-10 border-dashed border-[#367AFE] px-6 py-2">
+                <div className="mx-auto text-center mt-1 max-w-2xl w-xl flex justify-center rounded-lg border border-spacing-10 border-dashed border-buyer-500 px-6 py-2">
                   <div className="text-center">
                     <div className="mt-4  text-sm leading-6 text-gray-600">
                       <label
@@ -248,8 +248,8 @@ function BuyerGetInTouchModal({ toggleModal }: { toggleModal: () => void }) {
                         className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
                       >
                         <div className="flex items-center justify-center  mx-auto">
-                          <img className="px-2" src={ChevronUpIcon.src} />
-                          <span className="text-[#367AFE] text-center font-bold text-lg">
+                          <ChevronIcon className="px-2" />
+                          <span className="text-buyer-500 text-center font-bold text-lg">
                             Browse or drag & drop file
                           </span>
                         </div>
@@ -278,7 +278,7 @@ function BuyerGetInTouchModal({ toggleModal }: { toggleModal: () => void }) {
               type="submit"
               onClick={handleButtonClick}
               disabled={!isValidEmail}
-              className="disabled:cursor-not-allowed block w-full rounded-md bg-[#367afe] px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="disabled:cursor-not-allowed block w-full rounded-md bg-buyer-500 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Send
             </button>

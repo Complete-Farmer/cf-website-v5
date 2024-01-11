@@ -1,15 +1,22 @@
 import { Fragment, useState } from "react";
 import { Dialog, Popover, Transition } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
-import { CFBuyerLogo, CFGrowerLogo, CFMainLogo } from "@assets/images/logos/cf";
-import { ArrowIcon, ChevronIcon } from "@assets/icons";
+import CFBuyerLogo from "@assets/images/logos/cf/buyer.png";
+import CFGrowerLogo from "@assets/images/logos/cf/grower.png";
+import CFMainLogo from "@assets/images/logos/cf/main.png";
+
+import {
+  ArrowIcon,
+  ChevronIcon,
+  MenuCloseIcon,
+  MenuOpenIcon,
+} from "@assets/icons";
 
 import Drawer from "./Drawer";
 
-import { companyLinks } from "../utils/constants";
+import { companyLinks } from "@utils/constants";
 
-const initialProducts = [
+const products = [
   {
     name: "CF Grower",
     description: "Speak directly to your customers",
@@ -17,7 +24,6 @@ const initialProducts = [
     logo: CFGrowerLogo,
     activeColor: "#31BC2E",
     defaultColor: "#6C6C6C",
-    isHover: false,
   },
   {
     name: "CF Buyer",
@@ -26,27 +32,21 @@ const initialProducts = [
     logo: CFBuyerLogo,
     activeColor: "#367AFE",
     defaultColor: "#6C6C6C",
-    isHover: false,
   },
 ];
 
 const drawerPropsData = {
-  login: {
-    textOneFirst: "Login to CF Grower",
-    textTwoFirst: "Login to CF Buyer",
-  },
-  signup: {
-    textOneFirst: "Create a CF Grower",
-    textOneLast: "account",
-    textTwoFirst: "Create a CF Buyer",
-    textTwoLast: "account",
-  },
+  login: ["Login to CF Grower", "Login to CF Buyer"],
+  signup: ["Create a CF Grower account", "Create a CF Buyer account"],
 };
 
-export default function NormalHeader() {
+export default function NormalHeader({
+  isContactUs,
+}: {
+  isContactUs: boolean;
+}) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [products, setProducts] = useState(initialProducts);
   const [drawerProps, setDrawerProps] = useState(drawerPropsData.login);
 
   const handleDrawer = (value: string) => {
@@ -68,23 +68,6 @@ export default function NormalHeader() {
     (document.querySelector(".app-body") as HTMLElement).style.filter = "none";
     (document.querySelector(".app-footer") as HTMLElement).style.filter =
       "none";
-  };
-
-  const handleOnHover = (selectedProduct: { name: string }) => {
-    const newTabs = products.map((item) => {
-      if (item.name === selectedProduct.name) item.isHover = true;
-      if (item.name !== selectedProduct.name) item.isHover = false;
-      return item;
-    });
-    setProducts(newTabs);
-  };
-
-  const clearProducts = () => {
-    const pr = products.map((item) => {
-      item.isHover = false;
-      return item;
-    });
-    setProducts(pr);
   };
 
   const openMobileMenu = () => {
@@ -124,7 +107,11 @@ export default function NormalHeader() {
             <div className="flex items-center font-medium text-gray-900 lg:w-auto lg:items-center lg:justify-center md:mb-0">
               <span className="mx-auto text-xl font-black leading-none text-gray-900 select-none">
                 <a href="/" onClick={handleLinkClick} className="-m-1.5 p-1.5">
-                  <CFMainLogo color="#004C46" />
+                  <img
+                    src={CFMainLogo.src}
+                    className="h-7 md:h-8"
+                    alt="complete farmer logo"
+                  />
                 </a>
               </span>
             </div>
@@ -133,21 +120,15 @@ export default function NormalHeader() {
               className="hidden mx-auto sm:flex max-w-7xl items-center justify-between gap-1 p-6 lg:px-8"
               aria-label="Global"
             >
-              <Popover.Group className="hidden lg:flex lg:gap-x-9">
+              <Popover.Group className="hidden lg:flex lg:gap-x-9 items-center">
                 <Popover className="relative">
                   {({ open, close }) => (
                     <>
-                      <Popover.Button className="flex items-center gap-x-0 text-sm font-bold leading-6 text-custom_green-900  focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-                        <div className="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1 rounded-[1900px]">
-                          <p className="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-custom_green-900">
-                            Products
-                          </p>
-                        </div>
-                        <ChevronIcon
-                          className={`w-4 h-4 ${
-                            open ? "rotate-180 transform" : ""
-                          }`}
-                        />
+                      <Popover.Button className="flex items-center space-x-1 text-grower-400">
+                        <span className="-mt-1 text-base font-bold text-left">
+                          Products
+                        </span>
+                        <ChevronIcon className={open ? "rotate-180" : ""} />
                       </Popover.Button>
 
                       <Transition
@@ -161,10 +142,7 @@ export default function NormalHeader() {
                       >
                         <Popover.Panel
                           className="absolute left-40 z-10 mt-3 w-screen max-w-xs -translate-x-1/2 transform px-0 sm:px-0 lg:max-w-xs"
-                          onMouseLeave={() => {
-                            clearProducts();
-                            close();
-                          }}
+                          onMouseLeave={() => close()}
                         >
                           <div className="overflow-hidden rounded-lg shadow-lg w-64 ">
                             <div className="relative grid gap-2 bg-white lg:grid-cols-1">
@@ -172,21 +150,17 @@ export default function NormalHeader() {
                                 {products.map((item) => (
                                   <div
                                     key={item.name}
-                                    className="relative rounded-lg p-4 hover:bg-gray-50 "
-                                    onMouseEnter={() => handleOnHover(item)}
+                                    className="relative rounded-lg p-4 hover:bg-gray-50 group"
                                   >
                                     <a
-                                      onClick={handleLinkClick}
                                       href={item.href}
+                                      onClick={handleLinkClick}
                                       className="block text-sm font-semibold leading-6"
                                     >
                                       <div className="flex justify-start">
-                                        <item.logo
-                                          color={
-                                            item.isHover
-                                              ? item.activeColor
-                                              : item.defaultColor
-                                          }
+                                        <img
+                                          src={item.logo.src}
+                                          className="h-6 grayscale group-hover:grayscale-0"
                                         />
                                       </div>
                                     </a>
@@ -204,17 +178,11 @@ export default function NormalHeader() {
                 <Popover className="relative">
                   {({ open, close }) => (
                     <>
-                      <Popover.Button className="flex items-center gap-x-0 text-sm font-bold leading-6 text-custom_green-900  focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-                        <div className="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1 rounded-xl bg-white">
-                          <p className="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-custom_green-900">
-                            Company
-                          </p>
-                        </div>
-                        <ChevronIcon
-                          className={`w-4 h-4 ${
-                            open ? "rotate-180 transform" : ""
-                          }`}
-                        />
+                      <Popover.Button className="flex items-center space-x-1 text-grower-400">
+                        <span className="-mt-1 text-base font-bold text-left h-6">
+                          Company
+                        </span>
+                        <ChevronIcon className={open ? "rotate-180" : ""} />
                       </Popover.Button>
 
                       <Transition
@@ -241,14 +209,14 @@ export default function NormalHeader() {
                                     key={item.name}
                                     onClick={handleLinkClick}
                                     href={item.href}
-                                    className="block group/item relative rounded-lg p-4 hover:bg-gray-50 text-md font-normal leading-6  text-custom_black-900 hover:text-custom_lightgreen-500"
+                                    className="block group/item relative rounded-lg p-4 hover:bg-gray-50 text-md font-normal leading-6  text-custom_black-900 hover:text-grower-500"
                                   >
                                     <div className="flex justify-between">
                                       <span className="flex justify-start items-center">
                                         {item.name}
                                       </span>
                                       <span className="group/edit invisible group-hover/item:visible flex flex-col justify-center">
-                                        <ArrowIcon className="group-hover/edit:translate-x-1 flex justify-end" /> 
+                                        <ArrowIcon className="group-hover/edit:translate-x-1 flex justify-end" />
                                         {/* rotate-180 transform */}
                                       </span>
                                     </div>
@@ -265,12 +233,16 @@ export default function NormalHeader() {
                 <a
                   href="/contact-us"
                   onClick={handleLinkClick}
-                  className="text-sm font-bold leading-6 text-custom_green-900"
+                  className={
+                    isContactUs
+                      ? "rounded-full bg-custom_gray-200 px-3 py-2"
+                      : undefined
+                  }
                 >
-                  <div className="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-x-0 rounded-[1900px] bg-white">
-                    <p className="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-custom_green-900">
+                  <div className="flex items-center space-x-1 text-grower-400">
+                    <span className="text-base font-bold text-left">
                       Contact us
-                    </p>
+                    </span>
                   </div>
                 </a>
               </Popover.Group>
@@ -284,7 +256,7 @@ export default function NormalHeader() {
                   handleDrawer("Login");
                   handleButtonClick();
                 }}
-                className="flex-grow-0 flex-shrink-0 text-base font-bold text-center text-custom_green-900"
+                className="flex-grow-0 flex-shrink-0 text-base font-bold text-center text-grower-400"
               >
                 Login
               </button>
@@ -292,7 +264,7 @@ export default function NormalHeader() {
             <div
               className={`${
                 mobileMenuOpen ? "hidden" : "flex"
-              } justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1 px-3 py-2 rounded-[1900px] bg-custom_lightgreen-500`}
+              } justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1 px-3 py-2 rounded-[1900px] bg-grower-500`}
             >
               <button
                 onClick={() => {
@@ -307,23 +279,11 @@ export default function NormalHeader() {
             <div className="flex lg:hidden">
               <button
                 type="button"
-                className={`-m-2.5 ${
-                  mobileMenuOpen ? "hidden" : "inline-flex"
-                } items-center justify-center rounded-md p-2.5 text-gray-700`}
                 onClick={openMobileMenu}
+                className="text-gray-700"
               >
                 <span className="sr-only">Open main menu</span>
-                <Bars3Icon className="h-6 w-6" aria-hidden="true" />
-              </button>
-              <button
-                type="button"
-                className={`-m-2.5 ${
-                  mobileMenuOpen ? "inline-flex" : "hidden"
-                } items-center justify-center rounded-md p-2.5 text-gray-700`}
-                onClick={openMobileMenu}
-              >
-                <span className="sr-only">Close menu</span>
-                <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                <MenuOpenIcon />
               </button>
             </div>
           </div>
@@ -339,19 +299,18 @@ export default function NormalHeader() {
       >
         <div className="fixed inset-0 z-10" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-[999] flex w-full flex-col justify-between[x] overflow-y-auto bg-white sm:max-w-sm[x]">
-          <div className="p-6 sm:px-12">
+          <div className="p-5 sm:px-12">
             <div className="flex items-center justify-between">
-              <a className="-m-1.5 p-1.5">
-                <span className="sr-only">Your Company</span>
-                <CFMainLogo color="#004C46" />
+              <a href="/">
+                <img
+                  src={CFMainLogo.src}
+                  className="h-7"
+                  alt="complete farmer logo"
+                />
               </a>
-              <button
-                type="button"
-                className="lg:-m-2.5 rounded-md p-2.5 text-gray-700"
-                onClick={() => setMobileMenuOpen(false)}
-              >
+              <button type="button" onClick={() => setMobileMenuOpen(false)}>
                 <span className="sr-only">Close menu</span>
-                <XMarkIcon className="h-6 w-6 sm:h-10" aria-hidden="true" />
+                <MenuCloseIcon />
               </button>
             </div>
             <div className="sm:mt-3 flow-root">
@@ -370,9 +329,11 @@ export default function NormalHeader() {
                         onClick={() => navigateMobileLinks()}
                         className="block text-sm font-semibold leading-6"
                       >
-                        <div className="flex justify-start">
-                          <item.logo color={item.activeColor} />
-                        </div>
+                        <img
+                          src={item.logo.src}
+                          className="h-7"
+                          alt={item.name}
+                        />
                       </a>
                     </div>
                   ))}
@@ -402,7 +363,7 @@ export default function NormalHeader() {
                 handleDrawer("Login");
                 setMobileMenuOpen(false);
               }}
-              className="block w-full order-2 sm:order-1 mx-auto rounded-md border border-custom_green-500 px-3.5 py-3.5 sm:py-5 text-center text-sm font-semibold text-custom_green-500 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+              className="block w-full order-2 sm:order-1 mx-auto rounded-md border border-grower-500 px-3.5 py-3.5 sm:py-5 text-center text-sm font-semibold text-grower-500 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
             >
               Login
             </button>
@@ -411,7 +372,7 @@ export default function NormalHeader() {
                 handleDrawer("SignUp");
                 setMobileMenuOpen(false);
               }}
-              className="block w-full mx-auto order-1 sm:order-2 rounded-md bg-custom_green-500 px-3.5 py-3.5 sm:py-5 text-center text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+              className="block w-full mx-auto order-1 sm:order-2 rounded-md bg-grower-500 px-3.5 py-3.5 sm:py-5 text-center text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
             >
               Sign up
             </button>

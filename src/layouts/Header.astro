@@ -17,6 +17,6 @@ const { pathname } = Astro.props;
       pathname={pathname}
     />
   ) : (
-    <NormalHeader client:load />
+    <NormalHeader client:load isContactUs={pathname.includes("contact-us")} />
   )
 }

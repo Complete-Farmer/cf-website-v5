@@ -43,7 +43,7 @@ export default function BookDemo({ toggleModal, activeCategory }) {
   Sincerely,
   [Your Name]
   `;
-    let mailtoLink = `mailto:${emailTo}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const mailtoLink = `mailto:${emailTo}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
     window.open(mailtoLink, "_blank");
   };
@@ -97,7 +97,7 @@ export default function BookDemo({ toggleModal, activeCategory }) {
         </p>
       </div>
       <div className="mx-auto max-w-2xl mt-5 text-center">
-        <h2 className="text-xl leading-6 md:text-2xl md:leading-[30px] font-bold sm:tracking-tight text-custom_green-900">
+        <h2 className="text-xl leading-6 md:text-2xl md:leading-[30px] font-bold sm:tracking-tight text-grower-400">
           Your demo will begin shortly
         </h2>
         <p className="mt-2 text-xs leading-4 md:text-sm md:leading-5 text-gray-600 px-6 sm:px-2">
@@ -182,7 +182,7 @@ export default function BookDemo({ toggleModal, activeCategory }) {
           <button
             type="submit"
             disabled={!isFormValid()}
-            className="disabled:cursor-not-allowed block w-full rounded-md bg-custom_green-500 py-4 sm:px-3.5 py-2.5 text-center text-base leading-6 font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+            className="disabled:cursor-not-allowed block w-full rounded-md bg-grower-500 py-4 sm:px-3.5 py-2.5 text-center text-base leading-6 font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
           >
             <span className="lg:hidden">Submit</span>
             <span className="hidden lg:block">Submit</span>

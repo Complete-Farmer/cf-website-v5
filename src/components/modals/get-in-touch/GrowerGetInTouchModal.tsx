@@ -5,8 +5,8 @@ import React, { useState } from "react";
 import PhoneInput from "react-phone-number-input";
 import { XMarkIcon } from "@heroicons/react/20/solid";
 
-import ChevronUpIcon from "../../../assets/icons/chevron-up-icon-green.svg";
-import FileIcon from "../../../assets/icons/file-alt.svg";
+import {ChevronIcon} from "@assets/icons";
+// import FileIcon from "../../../assets/icons/file-alt.svg";
 
 // import ReactGA from "react-ga4";
 
@@ -80,7 +80,7 @@ export default function GrowerGetInTouchModal({
           </p>
         </div>
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-xl leading-6 md:text-2xl md:leading-[30px] font-bold sm:tracking-tight text-custom_green-900">
+          <h2 className="text-xl leading-6 md:text-2xl md:leading-[30px] font-bold sm:tracking-tight text-grower-400">
             Get in touch
           </h2>
         </div>
@@ -161,14 +161,14 @@ export default function GrowerGetInTouchModal({
               {/* <span className="ms-1 text-red-500 mr-1">*</span> */}
             </label>
             {filePresent ? (
-              <div className="rounded-lg border border-spacing-10 border-dashed border-custom_lightgreen-500 px-3 md:px-6 py-2 mt-1">
+              <div className="rounded-lg border border-spacing-10 border-dashed border-grower-500 px-3 md:px-6 py-2 mt-1">
                 <div className="bg-zinc-100 rounded w-full h-9 flex justify-between items-center p-2">
                   <div className="flex items-center gap-2">
-                    <img
+                    {/* <img
                       className="h-5 w-5 text-[#6C6C6C]"
                       src={FileIcon.src}
                       alt="File Icon"
-                    />
+                    /> */}
                     {selectedFile && (
                       <>
                         <div className="text-neutral-500 text-xs md:text-sm font-normal leading-tight">{`${selectedFile.name}`}</div>
@@ -180,7 +180,7 @@ export default function GrowerGetInTouchModal({
                   </div>
                   <div className="flex items-end justify-end cursor-pointer">
                     <XMarkIcon
-                      className="h-5 w-5 sm:h-8 sm:w-8 text-custom_lightgreen-500"
+                      className="h-5 w-5 sm:h-8 sm:w-8 text-grower-500"
                       aria-hidden="true"
                       onClick={handleCancelUpload}
                     />
@@ -188,7 +188,7 @@ export default function GrowerGetInTouchModal({
                 </div>
               </div>
             ) : (
-              <div className="mx-auto text-center mt-1 max-w-2xl w-xl flex justify-center rounded-lg border border-spacing-10 border-dashed border-custom_lightgreen-500 px-6 py-2">
+              <div className="mx-auto text-center mt-1 max-w-2xl w-xl flex justify-center rounded-lg border border-spacing-10 border-dashed border-grower-500 px-6 py-2">
                 <div className="text-center">
                   <div className="mt-4  text-sm leading-6 text-gray-600">
                     <label
@@ -196,8 +196,8 @@ export default function GrowerGetInTouchModal({
                       className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
                     >
                       <div className="flex items-center justify-center  mx-auto">
-                        <img className="px-2" src={ChevronUpIcon.src} />
-                        <span className="text-custom_lightgreen-500 text-center font-bold text-sm sm:text-sm">
+                        <ChevronIcon className="px-2" />
+                        <span className="text-grower-500 text-center font-bold text-sm sm:text-sm">
                           Browse or drag & drop file
                         </span>
                       </div>
@@ -226,7 +226,7 @@ export default function GrowerGetInTouchModal({
             type="submit"
             onClick={handleButtonClick}
             disabled={!isValidEmail}
-            className="disabled:cursor-not-allowed block w-full rounded-md bg-custom_green-500 sm:px-3.5 py-2.5 text-center text-base leading-6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="disabled:cursor-not-allowed block w-full rounded-md bg-grower-500 sm:px-3.5 py-2.5 text-center text-base leading-6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             <span className="">Send</span>
           </button>

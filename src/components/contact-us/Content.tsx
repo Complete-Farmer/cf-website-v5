@@ -1,6 +1,6 @@
-import ContactForm from "./ContactForm";
+import { ChevronIcon } from "@assets/icons";
 
-import ChevronRight from "../../assets/icons/chevron-right.svg";
+import ContactForm from "./ContactForm";
 
 interface IProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -45,7 +45,7 @@ export default function Content({
               key={item.id}
               onClick={handleLinkClick}
               href="/contact-us/get-started"
-              className="underline text-sm sm:text-base text-left text-custom_lightgreen-500 hover:font-bold"
+              className="underline text-sm sm:text-base text-left text-grower-500 hover:font-bold"
             >
               {item.question}
             </a>
@@ -59,7 +59,7 @@ export default function Content({
               disabled={loading}
               className="flex justify-start items-start relative gap-2"
             >
-              <p className="text-sm font-bold text-left text-custom_lightgreen-500 hover:underline">
+              <p className="text-sm font-bold text-left text-grower-500 hover:underline">
                 {loading ? "Loading" : "Load more"}
               </p>
             </button>
@@ -78,10 +78,10 @@ export default function Content({
             onClick={changeToggle}
             className="flex justify-start items-start relative gap-2"
           >
-            <p className="text-base font-bold text-left text-custom_lightgreen-500">
+            <p className="text-base font-bold text-left text-grower-500">
               Contact our team
             </p>
-            <img src={ChevronRight.src} />
+            <ChevronIcon />
           </button>
         )}
         {toggle && <ContactForm changeToggle={changeToggle} />}
