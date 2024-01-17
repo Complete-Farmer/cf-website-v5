@@ -156,11 +156,11 @@ export default function EstimateModal({ toggleModal }: { toggleModal: () => void
             <p className="w-full max-w-5xl text-sm text-center text-[#1d1d1f]">
               <span>
                 By clicking on Submit, I agree to Complete Farmer{" "}
-                <a onClick={handleLinkClick} href="/terms-and-conditions" className="text-[#31BC2E] font-semibold">
+                <a onClick={handleLinkClick} href="/terms-and-conditions" className="text-grower-500 font-semibold">
                   Terms & Conditions
                 </a>{" "}
                 and <br className="hidden xl:block" />
-                <a onClick={handleLinkClick} href="/privacy-policy" className="text-[#31BC2E] font-semibold">
+                <a onClick={handleLinkClick} href="/privacy-policy" className="text-grower-500 font-semibold">
                   Privacy Policy
                 </a>
               </span>{" "}
@@ -188,7 +188,7 @@ export default function EstimateModal({ toggleModal }: { toggleModal: () => void
                   fill="#31BC2E"
                 />
               </svg>
-              <p className="text-xl font-bold text-center text-[#31bc2e]">Download</p>
+              <p className="text-xl font-bold text-center text-grower-500">Download</p>
             </div>
           </div>
         </div>

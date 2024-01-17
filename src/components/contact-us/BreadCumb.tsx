@@ -42,7 +42,7 @@ export default function Example() {
           <p className="flex-grow-0 flex-shrink-0 text-base text-left text-white">Get started with Complete Farmer</p>
         </div>
         <div className="flex sm:hidden items-center h-14">
-          <p className="flex pl-5 items-center text-[#31BC2E] font-bold text-base">
+          <p className="flex pl-5 items-center text-grower-500 font-bold text-base">
             <span className="pr-3">
               <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path

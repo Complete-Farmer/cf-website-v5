@@ -179,7 +179,7 @@ export default function ContactForm({ changeToggle }: { changeToggle: () => void
             type="submit"
             disabled={!isValidEmail()}
             onClick={handleButtonClick}
-            className="disabled:cursor-not-allowed block w-full h-10 sm:h-14 rounded-md bg-[#31BC2E] px-3.5 py-3 text-center text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+            className="disabled:cursor-not-allowed block w-full h-10 sm:h-14 rounded-md bg-grower-500 px-3.5 py-3 text-center text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
           >
             Submit
           </button>

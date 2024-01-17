@@ -98,7 +98,7 @@ const GrowerCustomerStoriesBody = ({ stories }: IProps) => {
                         className="w-full h-80 object-cover transition-all duration-300 ease-out sm:h-80 lg:h-96 group-hover:scale-110"
                       />
                     </div>
-                    <div className="flex justify-start items-center absolute left-4 bottom-[20%] gap-1.5 px-3 py-2 rounded-lg bg-white text-[#31BC2E]">
+                    <div className="flex justify-start items-center absolute left-4 bottom-[20%] gap-1.5 px-3 py-2 rounded-lg bg-white text-grower-500">
                       <PlayIcon />
                       <span className="text-sm font-bold">
                         {story.duration?.toFixed(2)}

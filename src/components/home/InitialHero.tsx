@@ -50,7 +50,7 @@ const InitialHero = () => {
                     <a
                       href="/product"
                       className={
-                        "flex justify-center items-center w-full sm:w-[296px] lg:w-auto lg:h-auto gap-2 px-12 sm:px-[79px] lg:px-8 sm:py-4 py-5 rounded-full z-20 bg-[#31bc2e] font-bold text-white"
+                        "flex justify-center items-center w-full sm:w-[296px] lg:w-auto lg:h-auto gap-2 px-12 sm:px-[79px] lg:px-8 sm:py-4 py-5 rounded-full z-20 bg-grower-500 font-bold text-white"
                       }
                     >
                     View products

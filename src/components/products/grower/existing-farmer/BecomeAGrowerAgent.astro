@@ -1,0 +1,71 @@
+---
+import { Image } from "astro:assets";
+
+import BecomeAgent from "@assets/images/products/grower/become-an-agent-2.png";
+
+import { ArrowIcon } from "@assets/icons";
+---
+
+<div
+  class="w-full h-full bg-grower-400 bg-interested-in-agent-mobile md:bg-interested-in-agent-tablet xl:bg-interested-in-agent bg-center bg-cover bg-no-repeat flex flex-col py-10 sm:p-0 lg:p-10"
+>
+  <div
+    class="max-w-7xl mx-auto flex flex-col-reverse md:flex-row justify-between items-center gap-7 md:gap-18 lg:gap-56 px-1 py-10 md:py-3 lg:pb-6"
+  >
+    <div class="flex flex-col justify-center items-start gap-6">
+      <p
+        class="lg:hidden text-[28px] lg:text-[56px] leading-[34px] lg:leading-[74px] font-bold text-center md:text-left text-white"
+      >
+        <span class="font-bold text-left text-white">Become a</span>
+        <span class="font-bold text-left text-[#E58C00]">grower agent</span>
+        <span class="font-bold text-left text-white">
+          with Complete Farmer</span
+        >
+      </p>
+
+      <p
+        class="hidden lg:block text-[28px] lg:text-5xl leading-[34px] lg:leading-[60px] font-bold text-center md:text-left text-white"
+      >
+        <span class="font-bold text-left text-white">Become a</span>
+        <span class="font-bold text-left text-[#E58C00]">grower agent</span>
+        <br />
+        <span class="font-bold text-left text-white">
+          with Complete Farmer</span
+        >
+      </p>
+
+      <p
+        class="block md:hidden text-sm lg:text-xl lg:leading-8 text-center md:text-left text-white"
+      >
+        Work directly with smallholder farmers and earn a commission
+      </p>
+      <p
+        class="hidden md:block lg:hidden text-sm lg:text-xl lg:leading-8 text-center md:text-left text-white"
+      >
+        Work directly with smallholder farmers and earn a <br /> commission
+      </p>
+      <p
+        class="hidden lg:block text-sm lg:text-xl lg:leading-8 text-center md:text-left text-white"
+      >
+        Work directly with smallholder farmers and earn a commission
+      </p>
+
+      <div
+        class="flex justify-center items-center w-full md:w-fit gap-2 px-8 py-4 rounded-full bg-grower-500"
+      >
+        <a
+          href="/products/grower/agent"
+          class="text-base font-bold text-left text-white"
+        >
+          Learn more
+        </a>
+        <ArrowIcon className="text-white" />
+      </div>
+    </div>
+    <Image
+      src={BecomeAgent}
+      alt="Become an Agent"
+      class="sm:h-[220px] lg:h-auto"
+    />
+  </div>
+</div>

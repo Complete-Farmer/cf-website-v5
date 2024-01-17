@@ -8,3 +8,4 @@ export { default as GrowerCustomerStories } from "./GrowerCustomerStories";
 export { default as AllInOneFarmingSolution } from "./AllInOneFarmingSolution.astro";
 export { default as GrowerPlatformOnboarding } from "./GrowerPlatformOnboarding.astro";
 export { default as InterestedInBecomingAgent } from "./InterestedInBecomingAgent.astro";
+export  *  from "./existing-farmer";
