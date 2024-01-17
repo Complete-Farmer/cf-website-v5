@@ -1,6 +1,6 @@
 import type { JSX } from "react/jsx-runtime";
 
-const NewpaperIcon = (
+const NewspaperIcon = (
   props: JSX.IntrinsicAttributes &
     React.SVGProps<SVGSVGElement> & {
       fillOne?: string;
@@ -34,4 +34,4 @@ const NewpaperIcon = (
   );
 };
 
-export default NewpaperIcon;
+export default NewspaperIcon;

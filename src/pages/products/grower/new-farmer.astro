@@ -1,0 +1,83 @@
+---
+import type { IAvailableDemands } from "types/app";
+
+import GrowerIndexLayout from "@layouts/GrowerIndexLayout.astro";
+
+import {
+  Section,
+  Estimate,
+  EverythingYouNeed,
+  HowCFHelpsYouFarm,
+  GrowerCustomerStories,
+  AllInOneFarmingSolution,
+  GrowerPlatformOnboarding,
+  InterestedInBecomingAgent,
+} from "@components/products/grower";
+
+import AvailableOrders from "@components/utils/AvailableOrders";
+
+import { getCxStories, getCategories, filterAt } from "@utils/prismic";
+import { getAvaiableCrops, getCropVarieties } from "@utils/api";
+import { convertToKebabCase } from "@utils/functions";
+
+const { results } = await getCategories("products");
+
+// find grower id
+const growerId = results.find((c) => c.data.name === "Grower").id;
+
+const filters = filterAt("my.customer_stories_v3.category", growerId);
+
+const customerStories = await getCxStories({
+  page: 1,
+  pageSize: 10,
+  filters,
+  fetchLinks: ["categories.name"],
+});
+
+const availableCrops: IAvailableDemands[] = [];
+
+const { statusCode, data } = await getAvaiableCrops();
+
+if (statusCode == 200) {
+  for (const c of data) {
+    const response = await getCropVarieties(c._id);
+    if (response.statusCode == 200 && response.data.length > 0) {
+      availableCrops.push({
+        ...c,
+        varieties: response.data.map((v) => v.name),
+        link: `/products/grower/crops/${convertToKebabCase(c.name)}`,
+      });
+    }
+  }
+}
+---
+
+<GrowerIndexLayout
+  title="New Farmer • Grower | Complete Farmer"
+  description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
+>
+  <AllInOneFarmingSolution />
+  <Estimate client:visible />
+  <EverythingYouNeed />
+  <HowCFHelpsYouFarm client:visible />
+  <GrowerPlatformOnboarding />
+  <InterestedInBecomingAgent />
+  <GrowerCustomerStories client:visible data={customerStories} />
+  {
+    availableCrops.length > 0 && (
+      <AvailableOrders
+        client:visible
+        cardType="grower"
+        data={availableCrops}
+        bgColor="bg-grower-200"
+        titleTextColor="text-grower-400"
+        title="See what other farmers are growing"
+      />
+    )
+  }
+  <Section client:visible />
+</GrowerIndexLayout>
+
+<!-- page: "/products/grower/new-farmer", -->
+<!-- cardComponent={(d: IAvailableCrops) => <AvailableCropCard data={d} client:visible/>} -->
+

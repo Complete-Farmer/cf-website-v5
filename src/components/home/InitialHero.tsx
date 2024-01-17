@@ -15,18 +15,18 @@ const InitialHero = () => {
     // });
   };
   return (
-    <section className="w-full lg:min-h-[95vh] px-6 sm:px-10 bg-white pb-16 sm:pb-40 lg:pb-32 bg-cover bg-hero-grower">
+    <section className="w-full lg:min-h-[95vh] px-6 sm:px-10 text-white pb-16 sm:pb-40 lg:pb-32 bg-cover bg-hero-grower">
       <div className="w-full h-auto pt-20 sm:pt-32">
         <div className="max-w-7xl mx-auto sm:px-4 xl:px-0 flex items-center lg:flex-row flex-col h-full">
           <Fade left duration={1000} delay={500} distance="30px">
             <div className="w-full lg:w-1/2">
               <div className="max-w-lg[x] mx-auto[x] text-center lg:text-left">
-                <h1 className="w-full text-[28px] sm:text-5xl lg:text-[56px] font-bold text-center lg:text-left text-white leading-8 sm:leading-[64px] lg:leading-[70px] sm:px-6 lg:px-0">
+                <h1 className="w-full text-[28px] sm:text-5xl lg:text-[56px] font-bold text-center lg:text-left leading-8 sm:leading-[64px] lg:leading-[70px] sm:px-6 lg:px-0">
                 Digitizing <br className="hidden lg:block" /> agriculture
                 &mdash; <br className="hidden sm:block lg:hidden" /> From supply
                 to demand
                 </h1>
-                <p className="mt-5 sm:mt-10 w-full text-base font-small sm:text-[32px] text-center lg:text-left text-white lg:pr-5[x] sm:leading-[44px]">
+                <p className="mt-5 sm:mt-10 w-full text-base sm:text-[32px] text-center lg:text-left lg:pr-5[x] sm:leading-[44px]">
                 Complete Farmer connects food growers and global buyers to{" "}
                   <Typed
                     className="font-bold text-green-500"
@@ -60,7 +60,7 @@ const InitialHero = () => {
                     <a
                       href="/product"
                       onClick={() => handleButtonClick()}
-                      className="flex justify-center items-center w-full sm:w-[296px] lg:w-auto lg:h-auto[x] gap-2 px-12 sm:px-[79px] sm:py-4 lg:px-16 lg:py-5[x] py-5 rounded-full z-20 text-[#022d2b] bg-white font-bold"
+                      className="flex justify-center items-center w-full sm:w-[296px] lg:w-auto lg:h-auto[x] gap-2 px-12 sm:px-[79px] sm:py-4 lg:px-16 lg:py-5[x] py-5 rounded-full z-20 text-grower-900 bg-white font-bold"
                     >
                     See demo
                     </a>

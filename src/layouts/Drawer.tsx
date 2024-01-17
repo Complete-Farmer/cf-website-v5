@@ -43,7 +43,7 @@ const Drawer: React.FC<{
           <button
             type="button"
             onClick={() => handleCloseDrawer()}
-            className="flex place-content-center items-center lg:bg-[#EFEFEF] text-[#004C46] lg:text-grower-500 lg:w-[52px] lg:h-[52px] rounded-full"
+            className="flex place-content-center items-center lg:bg-[#EFEFEF] text-grower-400 lg:text-grower-500 lg:w-[52px] lg:h-[52px] rounded-full"
           >
             <span className="sr-only">Close panel</span>
             <MenuCloseIcon className="h-8 w-8" aria-hidden="true" />

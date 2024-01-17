@@ -19,19 +19,13 @@ import { companyLinks } from "@utils/constants";
 const products = [
   {
     name: "CF Grower",
-    description: "Speak directly to your customers",
     href: "/products/grower/new-farmer",
     logo: CFGrowerLogo,
-    activeColor: "#31BC2E",
-    defaultColor: "#6C6C6C",
   },
   {
     name: "CF Buyer",
-    description: "Get a better understanding of your traffic",
     href: "/products/buyer",
     logo: CFBuyerLogo,
-    activeColor: "#367AFE",
-    defaultColor: "#6C6C6C",
   },
 ];
 
@@ -41,9 +35,9 @@ const drawerPropsData = {
 };
 
 export default function NormalHeader({
-  isContactUs,
+  pathname,
 }: {
-  isContactUs: boolean;
+  pathname: string;
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -104,7 +98,7 @@ export default function NormalHeader({
       <div className="sticky top-0 z-50 w-full bg-white lg:border-b lg:border-10 lg:border-[#E6E6E6]">
         <div className="container flex flex-row flex-wrap items-center justify-between mx-auto max-w-7xl">
           <div className="relative flex flex-row mx-5">
-            <div className="flex items-center font-medium text-gray-900 lg:w-auto lg:items-center lg:justify-center md:mb-0">
+            <div className="font-medium text-gray-900 lg:w-auto lg:items-center lg:justify-center md:mb-0">
               <span className="mx-auto text-xl font-black leading-none text-gray-900 select-none">
                 <a href="/" onClick={handleLinkClick} className="-m-1.5 p-1.5">
                   <img
@@ -117,15 +111,15 @@ export default function NormalHeader({
             </div>
 
             <nav
-              className="hidden mx-auto sm:flex max-w-7xl items-center justify-between gap-1 p-6 lg:px-8"
+              className="hidden mx-auto sm:flex max-w-7xl items-center justify-between gap-1 p-6 lg:px-8 text-grower-400"
               aria-label="Global"
             >
-              <Popover.Group className="hidden lg:flex lg:gap-x-9 items-center">
+              <Popover.Group className="hidden lg:flex space-x-6 items-baseline">
                 <Popover className="relative">
                   {({ open, close }) => (
                     <>
-                      <Popover.Button className="flex items-center space-x-1 text-grower-400">
-                        <span className="-mt-1 text-base font-bold text-left">
+                      <Popover.Button className="flex items-center space-x-1 focus:outline-none">
+                        <span className="-mt-1 text-base font-bold">
                           Products
                         </span>
                         <ChevronIcon className={open ? "rotate-180" : ""} />
@@ -178,8 +172,8 @@ export default function NormalHeader({
                 <Popover className="relative">
                   {({ open, close }) => (
                     <>
-                      <Popover.Button className="flex items-center space-x-1 text-grower-400">
-                        <span className="-mt-1 text-base font-bold text-left h-6">
+                      <Popover.Button className="flex items-center space-x-1 focus:outline-none">
+                        <span className="-mt-1 text-base font-bold h-6">
                           Company
                         </span>
                         <ChevronIcon className={open ? "rotate-180" : ""} />
@@ -201,15 +195,15 @@ export default function NormalHeader({
                           className="absolute left-40 z-10 mt-3 w-screen max-w-xs -translate-x-1/2 transform px-0 sm:px-0 lg:max-w-xs"
                         >
                           <div className="overflow-hidden rounded-lg shadow-lg w-64">
-                            <div className="relative grid  bg-white lg:grid-cols-1 ">
+                            <div className="relative grid bg-white lg:grid-cols-1 ">
                               {companyLinks
                                 .filter((l) => !l.isMobile)
                                 .map((item) => (
                                   <a
                                     key={item.name}
-                                    onClick={handleLinkClick}
                                     href={item.href}
-                                    className="block group/item relative rounded-lg p-4 hover:bg-gray-50 text-md font-normal leading-6  text-custom_black-900 hover:text-grower-500"
+                                    onClick={handleLinkClick}
+                                    className="block group/item rounded-lg p-4 hover:bg-gray-50 text-md font-normal leading-6  text-custom_black-900 hover:text-grower-500"
                                   >
                                     <div className="flex justify-between">
                                       <span className="flex justify-start items-center">
@@ -217,7 +211,6 @@ export default function NormalHeader({
                                       </span>
                                       <span className="group/edit invisible group-hover/item:visible flex flex-col justify-center">
                                         <ArrowIcon className="group-hover/edit:translate-x-1 flex justify-end" />
-                                        {/* rotate-180 transform */}
                                       </span>
                                     </div>
                                   </a>
@@ -233,17 +226,11 @@ export default function NormalHeader({
                 <a
                   href="/contact-us"
                   onClick={handleLinkClick}
-                  className={
-                    isContactUs
-                      ? "rounded-full bg-custom_gray-200 px-3 py-2"
-                      : undefined
-                  }
+                  className={pathname === "/contact-us" ? "rounded-full bg-custom_gray-200 px-3 py-2" : ""}
                 >
-                  <div className="flex items-center space-x-1 text-grower-400">
-                    <span className="text-base font-bold text-left">
-                      Contact us
-                    </span>
-                  </div>
+                  <span className="text-base font-bold text-grower-400">
+                    Contact us
+                  </span>
                 </a>
               </Popover.Group>
             </nav>

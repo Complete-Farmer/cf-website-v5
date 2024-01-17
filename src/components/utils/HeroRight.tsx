@@ -1,7 +1,6 @@
 import Fade from "react-reveal/Fade";
 
 interface IProps {
-  fill: string;
   imageSrc: string;
 }
 
@@ -10,7 +9,7 @@ const HeroRight = (props: IProps) => {
     <div className="hidden xl:flex lg:w-1/2 h-full lg:pt-0 pt-24 overflow-hidden">
       <Fade right duration={1000} delay={500} distance="30px">
         <div className="relative h-full w-full pl-24 lg:pr-0 pr-10 ">
-          <img className="w-[480px] h-[592px]" src={props.imageSrc} />
+          <img src={props.imageSrc} />
         </div>
       </Fade>
     </div>

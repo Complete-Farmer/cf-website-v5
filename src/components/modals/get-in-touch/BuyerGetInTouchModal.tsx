@@ -103,7 +103,7 @@ function BuyerGetInTouchModal({ toggleModal }: { toggleModal: () => void }) {
         <div className="flex flex-row-reverse">
           <div className="flex flex-row text-center justify-end">
             <p
-              className="text-xl font-bold text-right text-[#6C6C6C] hover:cursor-pointer -mt-6"
+              className="text-xl font-bold text-right text-custom_gray-300 hover:cursor-pointer -mt-6"
               onClick={toggleModal}
             >
               <XMarkIcon className="h-8 w-8" aria-hidden="true" />
@@ -143,7 +143,7 @@ function BuyerGetInTouchModal({ toggleModal }: { toggleModal: () => void }) {
             <div className="sm:col-span-12">
               <label
                 htmlFor="email"
-                className="block text-sm font-semibold leading-6 text-[#6C6C6C]"
+                className="block text-sm font-semibold leading-6 text-custom_gray-300"
               >
                 First Name<span className="text-[#EB2F2F]">*</span>
               </label>
@@ -155,14 +155,14 @@ function BuyerGetInTouchModal({ toggleModal }: { toggleModal: () => void }) {
                   id="email"
                   autoComplete="email"
                   placeholder="Eg. John"
-                  className="block w-full rounded-md bg-[#efefef] border-0 px-3.5 py-2 text-[#6C6C6C] shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md bg-[#efefef] border-0 px-3.5 py-2 text-custom_gray-300 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
             <div className="sm:col-span-12">
               <label
                 htmlFor="email"
-                className="block text-sm font-semibold leading-6 text-[#6C6C6C]"
+                className="block text-sm font-semibold leading-6 text-custom_gray-300"
               >
                 Business email<span className="text-[#EB2F2F]">*</span>
               </label>
@@ -182,7 +182,7 @@ function BuyerGetInTouchModal({ toggleModal }: { toggleModal: () => void }) {
             <div className="sm:col-span-12">
               <label
                 htmlFor="phone-number"
-                className="block text-sm font-semibold leading-6 text-[#6C6C6C]"
+                className="block text-sm font-semibold leading-6 text-custom_gray-300"
               >
                 Phone Number
               </label>
@@ -208,7 +208,7 @@ function BuyerGetInTouchModal({ toggleModal }: { toggleModal: () => void }) {
             <div className="sm:col-span-12">
               <label
                 htmlFor="cover-photo"
-                className="block text-sm font-bold leading-6 text-[#6C6C6C]"
+                className="block text-sm font-bold leading-6 text-custom_gray-300"
               >
                 Add attachment
               </label>
@@ -217,7 +217,7 @@ function BuyerGetInTouchModal({ toggleModal }: { toggleModal: () => void }) {
                   <div className="bg-zinc-100 rounded w-full h-9 flex justify-between items-center p-2">
                     <div className="flex items-center gap-2">
                       {/* <img
-                        className="h-5 w-5 text-[#6C6C6C]"
+                        className="h-5 w-5 text-custom_gray-300"
                         src={FileIcon.src}
                         alt="File Icon"
                       /> */}
@@ -263,7 +263,7 @@ function BuyerGetInTouchModal({ toggleModal }: { toggleModal: () => void }) {
                         />
                       </label>
                     </div>
-                    <p className="text-sm py-2 text-center leading-5 text-[#6C6C6C]">
+                    <p className="text-sm py-2 text-center leading-5 text-custom_gray-300">
                       Be it a rough draft or a detailed brief, as long as you
                       find it relevant. Max size:{" "}
                       <span className="font-bold">10MB</span>

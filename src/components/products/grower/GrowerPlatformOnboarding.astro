@@ -1,0 +1,315 @@
+---
+import { Image } from "astro:assets";
+
+import SignUp from "@assets/images/products/grower/onboarding-flow/signup.png";
+import SellAndGetPaid from "@assets/images/products/grower/onboarding-flow/sell-and-get-paid.png";
+import FarmAndHarvest from "@assets/images/products/grower/onboarding-flow/farm-and-harvest.png";
+import GetMatchedToBuyer from "@assets/images/products/grower/onboarding-flow/get-matched-to-a-buyer.png";
+import AddLandAndFarmManager from "@assets/images/products/grower/onboarding-flow/add-land-and-farm-manager.png";
+
+import { ChevronIcon } from "@assets/icons";
+
+const data = [
+  {
+    id: 1,
+    title: "Sign up",
+    desc: "Get started as a grower by signing up in a few easy steps.",
+    image: SignUp,
+    description: [
+      {
+        title: "Being data driven",
+        description: `Farmers need data to make the best decisions. We live in a data-driven world. As such, we always use data to determine customer and
+        business needs and develop solutions. Data should also be at the core of our reporting for past initiatives and future plans. When
+        unclear on what to do, check the data.`,
+      },
+      {
+        title: "Being curious",
+        description: ` Farmers are always learning about events and happenings on their fields and seek answers to improve their farms. Farmers seek self
+        improvement and learn by doing and experimentation, asking questions to explore new possibilities and solutions. Learning is a life-long
+        endeavor and knowledge is power.`,
+      },
+      {
+        title: "Inventing, Improving and simplifying",
+        description: `Farmers finding new ways to innovate and improve processes and products by insightful observations and drawing inspiration from nature
+        to build new tools and simple solutions to complex problems even when others think it is impossible or irrational.`,
+      },
+    ],
+    isActive: true,
+  },
+  {
+    id: 2,
+    title: "Add land and farm manager",
+    desc: "Add your own land and farm manager or lease from our marketplace.",
+    image: AddLandAndFarmManager,
+    description: [
+      {
+        title: "Get things done",
+        description:
+          "Farmers are only interested in results. They focus on the inputs and means of making sure they have the best yields. They are resourceful in getting results despite challenges and setbacks.",
+      },
+      {
+        title: "Be excellent and hire the best",
+        description:
+          "Farm work can be daunting and farmers rely on experts with proven competence to work with. They mentor, coach and develop talents to become excellent. They grow talents as well as their crops.",
+      },
+      {
+        title: "Set high Standard",
+        description:
+          "Farmers are continually raising the bar and driving their teams to deliver high quality products, services, and processes. Farmers ensure that defects do not get sent down to markets and that quality is maintained at every step of the process. Farmers like to be exceptional and stand out by being pioneers and pacesetters.",
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "Get matched to a buyer",
+    desc: "Get matched with a reliable buyer who perfectly suits your profile.",
+    image: GetMatchedToBuyer,
+    description: [
+      {
+        title: "Think big and bold",
+        description:
+          "As the company continues to grow, teams should prioritize implementing ideas that are scalable and can be easily replicated.Farmers develop and operate with a scale-up mentality. Farmers understand the potential of a seed and make space available for a seed to become a tree.",
+      },
+      {
+        title: "Fail Forward",
+        description:
+          "We aren’t afraid to fail, in fact it is encouraged. With failure we learn to challenge the status quo, and push onward to success.",
+      },
+      {
+        title: "Take a step back",
+        description:
+          "Your first approach does not have to be your final approach. As you discover new findings and more efficient ways to achieve a goal, take a step back, reassess your initial plan, and pivot if necessary.",
+      },
+    ],
+  },
+  {
+    id: 4,
+    title: "Farm and harvest",
+    desc: "Farm and harvest with precision farming tools with support from our agronomists.",
+    image: FarmAndHarvest,
+    description: [
+      {
+        title: "Earning trust",
+        description:
+          "Farmers underpromise and overdeliver. Trust should always be earned, even in the workplace. Always communicate effectively with teammates and customers, set clear expectations on every deliverable, ask for support when needed, and deliver results while meeting deadlines. Trust allows your teammates to depend on you and vice versa.",
+      },
+      {
+        title: "Taking responsibility",
+        description:
+          "Farmers show ownership by taking responsibility for the outcomes of their fields. They are not spectators. They act as champions and ensure excellence to raise the bar for others. Farmers sacrifice short term gains for long term rewards.",
+      },
+      {
+        title: "Disagree and Commit",
+        description:
+          "The well being of a farm is the topmost priority for a farmer. Farmers have a backbone to commit to an action, even if their decisions, ideas and opinions aren’t agreed to. They challenge decisions, and criticize ideas to improve them. Farmers create environments in which the best ideas win, regardless of where or whom they came from.",
+      },
+    ],
+  },
+  {
+    id: 5,
+    title: "Sell and get paid",
+    desc: "Get paid instantly after moving your yields to the nearest fulfilment centre.",
+    image: SellAndGetPaid,
+    description: [
+      {
+        title: "Being customer Focused",
+        description:
+          "We exist to provide our customers with a competitive advantage and it is important to make the customers’ delight our priority. Our entire product and processes start with the customer and work backwards. We want to feed people and people are our biggest assets and impact.",
+      },
+      {
+        title: "Farmers eat last",
+        description:
+          "Farmers strive to ensure that everyone is fed before serving themselves. Think long term and responsibly utilize resources to ensure that these resources will last for future generations. Farmers work to protect the environment and protect its valuable resources.",
+      },
+    ],
+  },
+];
+---
+
+<div class="w-full py-10 md:py-14 lg:py-20 bg-[#FAFAFA]">
+  <div
+    class="max-w-7xl flex flex-col px-6 py-0 my-0 md:pl-14 md:flex-row mx-auto lg:px-10"
+  >
+    <div
+      class="relative sm:mb-10 lg:text-left sm:text-center sm:w-1/2 lg:w-1/2 xl:w-7/12 lg:mb-0 lg:pt-[100px] lg:px-16"
+    >
+      <div class="hidden sm:flex flex-col justify-start items-start gap-3">
+        <p
+          class="text-base sm:text-xl lg:text-2xl font-bold text-left text-grower-500 py-10"
+        >
+          GROWER PLATFORM ONBOARDING
+        </p>
+        <div
+          id="onboarding-flow"
+          data-current-index={0}
+          class="flex flex-col justify-start items-start self-stretch flex-grow-0 flex-shrink-0 relative gap-6"
+        >
+          <p
+            id="title"
+            class="w-96 text-[40px] lg:text-5xl font-bold text-left text-custom_black-900 leading-[30px] md:leading-[50px] lg:leading-[64px]"
+          >
+            {data[0].title}
+          </p>
+          <p
+            id="desc"
+            class={"mt-3 md:mt-0 md:text-base lg:leading-8 text-left lg:text-xl text-custom_black-900 "}
+          >
+            {data[0].desc}
+          </p>
+        </div>
+      </div>
+      <div class="flex sm:hidden flex-col justify-start items-start gap-3">
+        <p class="text-sm font-bold text-left text-grower-500 py-0">
+          GROWER PLATFORM ONBOARDING
+        </p>
+
+        <div class="flex flex-col justify-start sm:items-start gap-10 py-0">
+          {
+            data?.map((item, index) => (
+              <>
+                <div class="flex flex-col space-y-4">
+                  <Image
+                    src={item.image}
+                    class="w-[141px] h-[100px]"
+                    alt={item.title}
+                  />
+                  <div class="flex items-baseline space-x-3">
+                    <span class="text-2xl font-bold text-left text-custom_black-900">
+                      {index + 1}.
+                    </span>
+
+                    <div class="">
+                      <p class="text-2xl font-bold text-left text-custom_black-900 pt-1 py-3 w-60">
+                        {item.title}
+                      </p>
+                      <p class="text-base text-left xl:text-xl text-custom_black-900 break-all">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class={`${index !== data.length - 1 && "border-b border-gray-200"}`} />
+              </>
+            ))
+          }
+        </div>
+      </div>
+      <div class="hidden sm:flex justify-start items-start mt-20 gap-6">
+        <div
+          role="button"
+          id="previous-button"
+          class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 p-3 rounded-full bg-[#e6e6e6] hover:cursor-pointer"
+        >
+          <ChevronIcon className="rotate-90" />
+        </div>
+        <div
+          role="button"
+          id="next-button"
+          class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 p-3 rounded-full bg-[#efefef] hover:cursor-pointer"
+        >
+          <ChevronIcon className="-rotate-90" />
+        </div>
+
+        <div class="hidden sm:flex lg:hidden my-auto ml-6">
+          <p class="text-grower-500 text-[20px] font-bold leading-6">
+            <span id="numbering">{data[0].id}</span>
+            <span>/</span>
+            <span>{data?.length}</span>
+          </p>
+        </div>
+      </div>
+      <div
+        class="hidden xl:flex justify-start items-start gap-10 mt-36 lg:-ml-16"
+      >
+        {
+          data.map((item) => {
+            return (
+              <div class="flex-grow-0 flex-shrink-0 w-52 h-[69px] relative overflow-hidden">
+                <div
+                  class={`title-button flex justify-center items-start w-52 absolute left-0 top-0 gap-4 cursor-pointer ${
+                    item.isActive ? "text-grower-500" : "text-custom_gray-300"
+                  }`}
+                >
+                  <p class="flex-grow-0 flex-shrink-0 text-base font-bold text-left">
+                    0{item.id}
+                  </p>
+                  <p class="flex-grow text-base font-bold text-left">
+                    {item.title}
+                  </p>
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+
+    <div class="hidden sm:flex lg:flex lg:justify-center sm:ml-8 lg:ml-0">
+      {
+        data.map((item) => (
+          <Image
+            src={item.image}
+            class={`onboarding-flow-image sm:w-[325px] lg:w-96 lg:h-96 mt-36 object-contain ${
+              !item.isActive ? "hidden" : ""
+            }`}
+            alt={item.title}
+          />
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" is:inline define:vars={{ data }}>
+  const onboardingFlow = document.querySelector("#onboarding-flow");
+  const prev = document.querySelector("#previous-button");
+  const next = document.querySelector("#next-button");
+
+  const titleButtons = document.querySelectorAll(".title-button");
+
+  let currentIndex = Number(onboardingFlow.getAttribute("data-current-index"));
+
+  prev.addEventListener("click", () => {
+    if (currentIndex === 0) {
+      currentIndex = 4;
+    } else {
+      currentIndex--;
+    }
+    scroll(currentIndex);
+  });
+
+  next.addEventListener("click", () => {
+    if (currentIndex + 1 === data.length) {
+      currentIndex = 0;
+    } else {
+      currentIndex++;
+    }
+    scroll(currentIndex);
+  });
+
+  titleButtons.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      scroll(index);
+    });
+  });
+
+  function scroll(index) {
+    onboardingFlow.dataset.currentIndex = index;
+    document.querySelector("#title").innerHTML = data[index].title;
+    document.querySelector("#desc").innerHTML = data[index].desc;
+    document.querySelector("#numbering").innerHTML = data[index].id;
+
+    const images = document.querySelectorAll(".onboarding-flow-image");
+    images.forEach((image) => {
+      image.classList.remove("hidden");
+      image.classList.add("hidden");
+    });
+    images[index].classList.remove("hidden");
+
+    titleButtons.forEach((button) => {
+      button.classList.remove("text-grower-500");
+    });
+    titleButtons[index].classList.add("text-grower-500");
+    titleButtons[index].classList.remove("text-custom_gray-300");
+  }
+</script>

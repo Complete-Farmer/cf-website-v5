@@ -3,9 +3,9 @@ import Layouts from "@layouts/Layouts.astro";
 
 import Main from "@components/contact-us/main";
 
-import { getFAQsCategories } from "@utils/prismic";
+import { getCategories } from "@utils/prismic";
 
-const faqsCatApiData = await getFAQsCategories();
+const faqsCatApiData = await getCategories("faqs");
 ---
 
 <Layouts

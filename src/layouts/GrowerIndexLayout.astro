@@ -1,0 +1,65 @@
+---
+import Layouts from "@layouts/Layouts.astro";
+
+import { Hero } from "@components/products/grower";
+
+import HeroImageOne from "@assets/images/products/grower/hero-right.webp";
+import HeroImageTwo from "@assets/images/products/grower/hero-right-2.webp";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+
+const initialTabs = [
+  {
+    current: true,
+    name: "New Farmer",
+    href: "new-farmer",
+    rightImage: HeroImageOne,
+    data: {
+      title: "Farm with confidence as a first-time farmer.",
+      description:
+        "Starting a farm can be daunting, especially for new farmers. Complete Farmer Grower makes it easy by providing you with expert support and all the necessary resources to get your farm up and running. ",
+      firstButtonText: "Sign up",
+      secondButtonText: "See a demo",
+    },
+  },
+  {
+    current: false,
+    name: "Existing Farmer",
+    href: "existing-farmer",
+    rightImage: HeroImageTwo,
+    data: {
+      title: "Source crops the smarter way with Complete Farmer Buyer",
+      description:
+        "Source high quality produce directly from our experienced growers and enjoy the option to customize crop orders to meet your needs.",
+      width: "w-6/6",
+      height: "h-24",
+      margintop: "mt-10",
+      firstButtonText: "Get Started as a buyer",
+      secondButtonText: "See a demo",
+    },
+  },
+];
+
+const pathname = Astro.url.pathname;
+
+const activeTabIndex = pathname.includes("new-farmer") ? 0 : 1;
+
+const tabs = initialTabs.map((tab, i) => {
+  tab.current = i === activeTabIndex;
+  return tab;
+});
+
+const currentTab = tabs.find((tab) => tab.current);
+---
+
+<Layouts {title} {description}>
+  <Hero {tabs} {currentTab} client:load />
+  <slot />
+</Layouts>
+
+<!-- page: "/products/grower/", -->

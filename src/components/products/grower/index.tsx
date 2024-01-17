@@ -1,1 +1,10 @@
 export { default as Hero } from "./Hero";
+export { default as Section } from "./Section";
+export { default as Estimate } from "./Estimate";
+export { default as AvailableCropCard } from "./AvailableCropCard";
+export { default as HowCFHelpsYouFarm } from "./HowCFHelpsYouFarm";
+export { default as EverythingYouNeed } from "./EverythingYouNeed.astro";
+export { default as GrowerCustomerStories } from "./GrowerCustomerStories";
+export { default as AllInOneFarmingSolution } from "./AllInOneFarmingSolution.astro";
+export { default as GrowerPlatformOnboarding } from "./GrowerPlatformOnboarding.astro";
+export { default as InterestedInBecomingAgent } from "./InterestedInBecomingAgent.astro";

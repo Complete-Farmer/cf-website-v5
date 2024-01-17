@@ -49,35 +49,10 @@ export default {
         "footer-pattern": "url('/src/assets/images/home/footer-bg-patterns.webp')",
         "customer-stories-grower-bg-pattern": "url('/src/assets/images/products/grower/customer-stories-bg-pattern.webp')",
         "customer-stories-buyer-bg-pattern": "url('/src/assets/images/products/buyer/customer-stories-bg-pattern.webp')",
+        "interested-in-agent-mobile": "url('/src/assets/images/products/grower/interested-in-agent-mobile.webp')",
+        "interested-in-agent-tablet": "url('/src/assets/images/products/grower/interested-in-agent-tablet.webp')",
+        "interested-in-agent": "url('/src/assets/images/products/grower/interested-in-agent.webp')",
         "contact-us-bg": "url('/src/assets/images/contact-us/background-pattern.webp')",
-
-        "about-us-pattern": "url('/src/assets/bg/motif-orange.svg')",
-        "about-us-mobile-pattern":
-          "url('/src/assets/bg/abous-us-mobile-pattern.svg')",
-        "career-pattern": "url('/src/assets/bg/motif-red.svg')",
-        "about-us-pattern-ceo": "url('/src/assets/bg/motif-green-solid.svg')",
-        "cta-illustation": "url('/src/assets/bg/cta-illustation.svg')",
-        "product-bg": "url('/src/assets/bg/product-bg.svg')",
-        "footer-buyer-pattern": "url('/src/assets/bg/motif-blue.svg')",
-        "buyer-sales-pattern": "url('/src/assets/bg/motif-blue.svg')",
-        "grower-intrested-in-pattern": "url('/src/assets/bg/grower-intrested.svg')",
-        "grower-intrested-in-pattern-mobile":
-          "url('/src/assets/bg/grower-intrested-mobile.svg')",
-        "grower-intrested-in-pattern-tab":
-          "url('/src/assets/bg/grower-intrested-tab.svg')",
-        "grower-intrested-agent-pattern":
-          "url('/src/assets/bg/grower-intrested-agent.svg')",
-        "grower-intrested-agent-pattern-mobile":
-          "url('/src/assets/bg/grower-intrested-agent-mobile.svg')",
-        "grower-intrested-agent-pattern-tab":
-          "url('/src/assets/bg/grower-intrested-agent-tab.svg')",
-        "operational-locations":
-          "url('/src/assets/bg/bg-operational-locations.svg')",
-        "grower-thefarmmanager": "url('/src/assets/bg/grower-thefarmmanager.svg')",
-        "grower-thefarmmanager-mobile":
-          "url('/src/assets/bg/grower-thefarmmanager-mobile.svg')",
-        "grower-thefarmmanager-tab":
-          "url('/src/assets/bg/grower-thefarmmanager-tab.svg')",
       },
     },
     fontFamily: { cera: ["Cera Pro", "sans-serif"] },

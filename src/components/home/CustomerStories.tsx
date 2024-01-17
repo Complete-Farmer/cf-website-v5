@@ -4,7 +4,6 @@ import "@assets/styles/swiper.css";
 
 import { useMemo, useState } from "react";
 import { Navigation } from "swiper/modules";
-import type { Query, PrismicDocument } from "@prismicio/client";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { ArrowIcon } from "@assets/icons";
@@ -24,10 +23,7 @@ const mockCateogries = [
   },
 ];
 
-interface IProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data: Query<PrismicDocument<Record<string, any>, string, string>>;
-}
+import type { IPrismicData } from "types/app";
 
 interface IItem {
   id: string;
@@ -38,7 +34,7 @@ interface IItem {
   titleTextColor: string;
 }
 
-export default function CustomerStories({ data }: IProps) {
+export default function CustomerStories({ data }: { data: IPrismicData }) {
   const [categories, setCategories] = useState(mockCateogries);
   const [activeCategory, setActiveCategory] = useState("Grower");
 
@@ -69,9 +65,10 @@ export default function CustomerStories({ data }: IProps) {
           name: item?.data?.name[0]?.text,
           titleFirstName: item?.data?.description[0]?.text,
         };
-        if (item.data.category === "Grower") {
+        if (item.data.category?.data.name === "Grower") {
           growerData.push(transformedItem);
-        } else {
+        }
+        if (item.data.category?.data.name === "Buyer") {
           buyerData.push(transformedItem);
         }
       });

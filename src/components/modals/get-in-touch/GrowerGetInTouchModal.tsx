@@ -1,12 +1,12 @@
 import "react-phone-number-input/style.css";
-import "../../../assets/styles/phonenumberinput.css";
+import "@assets/styles/phonenumberinput.css";
 
 import React, { useState } from "react";
 import PhoneInput from "react-phone-number-input";
 import { XMarkIcon } from "@heroicons/react/20/solid";
 
 import {ChevronIcon} from "@assets/icons";
-// import FileIcon from "../../../assets/icons/file-alt.svg";
+// import FileIcon from "@assets/icons/file-alt.svg";
 
 // import ReactGA from "react-ga4";
 
@@ -73,7 +73,7 @@ export default function GrowerGetInTouchModal({
       <div className="flex flex-row-reverse">
         <div className="flex flex-row text-center justify-end">
           <p
-            className="text-xl font-bold text-right text-[#6C6C6C] hover:cursor-pointer -mt-8"
+            className="text-xl font-bold text-right text-custom_gray-300 hover:cursor-pointer -mt-8"
             onClick={toggleModal}
           >
             <XMarkIcon className="h-8 w-8" aria-hidden="true" />
@@ -90,7 +90,7 @@ export default function GrowerGetInTouchModal({
           <div className="col-span-2">
             <label
               htmlFor="first-name"
-              className="text-[#6c6c6c] block text-sm font-semibold leading-5"
+              className="text-custom_gray-300 block text-sm font-semibold leading-5"
             >
               First Name <span className="text-[#EB2F2F]">*</span>
             </label>
@@ -101,7 +101,7 @@ export default function GrowerGetInTouchModal({
                 id="first-name"
                 placeholder="Eg. John"
                 autoComplete="given-name"
-                className="block w-full h-14  bg-[#EFEFEF]  rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-[#6C6C6C] focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-base leading-6"
+                className="block w-full h-14  bg-[#EFEFEF]  rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-custom_gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-base leading-6"
               />
             </div>
           </div>
@@ -109,7 +109,7 @@ export default function GrowerGetInTouchModal({
           <div className="col-span-2">
             <label
               htmlFor="email"
-              className="text-[#6c6c6c] block text-sm font-semibold leading-5"
+              className="text-custom_gray-300 block text-sm font-semibold leading-5"
             >
               Buisiness email <span className="text-[#EB2F2F]">*</span>
             </label>
@@ -121,7 +121,7 @@ export default function GrowerGetInTouchModal({
                 placeholder="example@company.com"
                 autoComplete="email"
                 onChange={handleEmailChange}
-                className="block w-full h-14 bg-[#EFEFEF] rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-[#6C6C6C] focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-base leading-6"
+                className="block w-full h-14 bg-[#EFEFEF] rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-custom_gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-base leading-6"
               />
             </div>
           </div>
@@ -129,7 +129,7 @@ export default function GrowerGetInTouchModal({
           <div className="col-span-2">
             <label
               htmlFor="phone-number"
-              className="text-[#6c6c6c] block text-sm font-semibold leading-5"
+              className="text-custom_gray-300 block text-sm font-semibold leading-5"
             >
               Phone Number
               {/* <span className="text-[#EB2F2F]">*</span> */}
@@ -155,7 +155,7 @@ export default function GrowerGetInTouchModal({
           <div className="col-span-full">
             <label
               htmlFor="cover-photo"
-              className="block text-sm font-bold leading-6 text-[#6C6C6C]"
+              className="block text-sm font-bold leading-6 text-custom_gray-300"
             >
               Add attachment
               {/* <span className="ms-1 text-red-500 mr-1">*</span> */}
@@ -165,7 +165,7 @@ export default function GrowerGetInTouchModal({
                 <div className="bg-zinc-100 rounded w-full h-9 flex justify-between items-center p-2">
                   <div className="flex items-center gap-2">
                     {/* <img
-                      className="h-5 w-5 text-[#6C6C6C]"
+                      className="h-5 w-5 text-custom_gray-300"
                       src={FileIcon.src}
                       alt="File Icon"
                     /> */}
@@ -211,7 +211,7 @@ export default function GrowerGetInTouchModal({
                       />
                     </label>
                   </div>
-                  <p className="text-xs sm:text-xs py-2 text-center leading-5 text-[#6C6C6C]">
+                  <p className="text-xs sm:text-xs py-2 text-center leading-5 text-custom_gray-300">
                     Be it a rough draft or a detailed brief, as long as you find
                     it relevant. Max size:{" "}
                     <span className="font-bold">10MB</span>

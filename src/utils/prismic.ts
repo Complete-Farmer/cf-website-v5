@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as Prismic from "@prismicio/client";
+import { PRISM_ACCESS_TOKEN } from "./constants";
 
 const Client = Prismic.createClient("completefarmer", {
   // If your repository is private, add an access token
-  accessToken: import.meta.env.PRISM_ACCESS_TOKEN,
+  accessToken: PRISM_ACCESS_TOKEN,
 });
 
 export const filterAt = (...args: [path: string, value: string]) => [
@@ -39,19 +40,17 @@ const fetchItems = async (type: string, params: IPramas) => {
 //   return item;
 // };
 
+export const getCategories = async (type: string) => {
+  return fetchItems("categories", { filters: filterAt("my.categories.type", type) });
+};
+
 export const renderPrismicDesc = (description: any) => {
   const firstPageDescriptionAsHTML = Prismic.asHTML(description);
   return firstPageDescriptionAsHTML;
 };
 
-export const getCxStories = async () => {
-  return fetchItems("customer_stories_v3", {});
-};
-
-export const getFAQsCategories = async () => {
-  return fetchItems("categories", {
-    filters: filterAt("my.categories.type", "faqs"),
-  });
+export const getCxStories = async (params: IPramas = {}) => {
+  return fetchItems("customer_stories_v3", params);
 };
 
 export const getContactUsFaqs = async (params: IPramas) => {

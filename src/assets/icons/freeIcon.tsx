@@ -1,5 +1,3 @@
-
-
 const FreeIcon = () => (
   <svg
     width={20}

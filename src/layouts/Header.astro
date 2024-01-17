@@ -11,12 +11,8 @@ const { pathname } = Astro.props;
 
 {
   pathname.includes("buyer") || pathname.includes("grower") ? (
-    <ProductsHeader
-      client:load
-      isBuyer={pathname.includes("buyer")}
-      pathname={pathname}
-    />
+    <ProductsHeader client:load pathname={pathname} />
   ) : (
-    <NormalHeader client:load isContactUs={pathname.includes("contact-us")} />
+    <NormalHeader client:load pathname={pathname} />
   )
 }

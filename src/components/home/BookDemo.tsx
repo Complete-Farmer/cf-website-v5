@@ -108,7 +108,7 @@ export default function BookDemo({ toggleModal, activeCategory }) {
       <form onSubmit={handleSendEmail} className="mx-auto mt-6 max-w-xl sm:mt-10">
         <div className="grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-2">
           <div>
-            <label htmlFor="firstName" className="text-[#6c6c6c] block text-sm font-semibold leading-5">
+            <label htmlFor="firstName" className="text-custom_gray-300 block text-sm font-semibold leading-5">
               First Name <span className="text-[#EB2F2F]">*</span>
             </label>
             <div>
@@ -119,12 +119,12 @@ export default function BookDemo({ toggleModal, activeCategory }) {
                 placeholder="Eg. John"
                 autoComplete="given-name"
                 onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                className="block w-full h-14  bg-[#EFEFEF]  rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-[#6C6C6C] focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-base leading-6"
+                className="block w-full h-14  bg-[#EFEFEF]  rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-custom_gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-base leading-6"
               />
             </div>
           </div>
           <div>
-            <label htmlFor="lastName" className="text-[#6c6c6c] block text-sm font-semibold leading-5 ">
+            <label htmlFor="lastName" className="text-custom_gray-300 block text-sm font-semibold leading-5 ">
               Last Name <span className="text-[#EB2F2F]">*</span>
             </label>
             <div>
@@ -135,13 +135,13 @@ export default function BookDemo({ toggleModal, activeCategory }) {
                 placeholder="Eg. Doe"
                 autoComplete="family-name"
                 onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                className="block w-full h-14 bg-[#EFEFEF]  rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-[#6C6C6C] focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-base leading-6"
+                className="block w-full h-14 bg-[#EFEFEF]  rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-custom_gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-base leading-6"
               />
             </div>
           </div>
 
           <div className="col-span-2">
-            <label htmlFor="email" className="text-[#6c6c6c] block text-sm font-semibold leading-5">
+            <label htmlFor="email" className="text-custom_gray-300 block text-sm font-semibold leading-5">
               Email <span className="text-[#EB2F2F]">*</span>
             </label>
             <div>
@@ -152,12 +152,12 @@ export default function BookDemo({ toggleModal, activeCategory }) {
                 placeholder="example@company.com"
                 autoComplete="email"
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="block w-full h-14 bg-[#EFEFEF] rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-[#6C6C6C] focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-base leading-6"
+                className="block w-full h-14 bg-[#EFEFEF] rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-custom_gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-base leading-6"
               />
             </div>
           </div>
           <div className="col-span-2">
-            <label htmlFor="phoneNumber" className="text-[#6c6c6c] block text-sm font-semibold leading-5">
+            <label htmlFor="phoneNumber" className="text-custom_gray-300 block text-sm font-semibold leading-5">
               Phone Number <span className="text-[#EB2F2F]">*</span>
             </label>
             <div className="relative ">

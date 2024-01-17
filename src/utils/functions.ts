@@ -33,3 +33,26 @@ export const formatDateWithCommas = (dateString: string) => {
   });
   return formattedDate;
 };
+
+
+export function getYouTubeThumbnailUrl(url: string) {
+  if (url) {
+    // Extract video ID from YouTube URL
+    const videoId = url.match(
+      /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+    );
+
+    if (videoId && videoId[1]) {
+      // If video ID is found, construct and return the thumbnail URL
+      const thumbnailUrl = "https://img.youtube.com/vi/" + videoId[1] + "/maxresdefault.jpg";
+      return thumbnailUrl;
+    } else {
+      // Invalid YouTube URL
+      return "Invalid YouTube URL";
+    }
+  }
+}
+
+export function convertToKebabCase(inputString) {
+  return inputString.toLowerCase().replace(/\s+/g, "-");
+}

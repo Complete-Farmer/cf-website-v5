@@ -2,145 +2,153 @@ import React, { Fragment, useState } from "react";
 import { Dialog, Popover, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
-import Drawer from "./Drawer";
-import { ArrowIcon, ChevronIcon } from "../assets/icons";
-
 // import { useGlobalContext } from "context/GlobalContext";
-import classNames from "classnames";
-import {BuyerGetInTouchModal, GrowerGetInTouchModal} from "../components/modals/get-in-touch";
-import { companyLinks } from "../utils/constants";
+import {
+  BuyerGetInTouchModal,
+  GrowerGetInTouchModal,
+} from "@components/modals/get-in-touch";
 
+import { companyLinks } from "@utils/constants";
+import { classNames } from "@utils/functions";
+
+import { ArrowIcon, ChevronIcon } from "@assets/icons";
 import BuyerLogo from "@assets/images/logos/cf/buyer.png";
-import GrowerLogo  from "@assets/images/logos/cf/grower.png";
-import MainLogo  from "@assets/images/logos/cf/main.png";
+import GrowerLogo from "@assets/images/logos/cf/grower.png";
+import MainLogo from "@assets/images/logos/cf/main.png";
+
+import Drawer from "./Drawer";
 
 const config = [
   {
-    name: "CF Grower",
-    description: "Speak directly to your customers",
-    href: "/products/grower/new-farmer",
     logo: GrowerLogo,
-    popoverArrowIcon: ArrowIcon, //ArrowRightGreenIcon,
-    activeColor: "#31BC2E",
-    defaultColor: "#6C6C6C",
+    name: "CF Grower",
+    popoverArrowIcon: ArrowIcon,
+    textcolor: "text-grower-400",
+    activeBgColor: "bg-grower-500",
+    activeTextColor: "text-grower-500",
+    href: "/products/grower/new-farmer",
+    activeBorderColor: "border-grower-500",
+    description: "Speak directly to your customers",
     firstText: {
       name: "Existing farmer",
-      href: "/products/grower/existing-farmer"
+      href: "/products/grower/existing-farmer",
     },
     secondText: [
       { name: "Resources", href: "/products/grower/resources" },
       { name: "Customer stories", href: "/products/grower/customer-stories" },
-      { name: "Grower agents", href: "/products/grower/agent" },
-      { name: "Farm manager academy", href: "/products/grower/farm-manager-academy" }
+      { name: "Grower Agents", href: "/products/grower/agent" },
+      {
+        name: "Farm Manager Academy",
+        href: "/products/grower/farm-manager-academy",
+      },
+      { name: "Home", href: "/" },
+      { name: "Buyer", href: "/products/buyer" },
     ],
-    isHover: false,
-    textcolor: "text-[#004C46]",
-
     mobileTabs: [
       {
         name: "New Farmer",
-        href: "/products/grower/new-farmer"
+        href: "/products/grower/new-farmer",
       },
       {
         name: "Existing Farmer",
-        href: "/products/grower/existing-farmer"
+        href: "/products/grower/existing-farmer",
       },
       {
         name: "Resources",
-        href: "/products/grower/resources"
+        href: "/products/grower/resources",
       },
       {
         name: "Customer stories",
-        href: "/products/grower/customer-stories"
-      }
-    ]
+        href: "/products/grower/customer-stories",
+      },
+    ],
   },
   {
-    name: "CF Buyer",
-    description: "Get a better understanding of your traffic",
-    href: "/products/buyer",
     logo: BuyerLogo,
-    popoverArrowIcon: ArrowIcon, // ArrowRightBlueIcon,
+    name: "CF Buyer",
+    href: "/products/buyer",
+    popoverArrowIcon: ArrowIcon,
+    textcolor: "text-buyuer-400",
+    activeBgColor: "bg-buyer-500",
+    activeTextColor: "text-buyer-500",
+    activeBorderColor: "border-buyer-500",
+    description: "Get a better understanding of your traffic",
     firstText: {
       name: "Customer stories",
-      href: "/products/buyer/customer-stories"
+      href: "/products/buyer/customer-stories",
     },
     secondText: [
       { name: "Resources", href: "/products/buyer/resources" },
-      { name: "Sales affiliate", href: "/products/buyer/sales" }
+      { name: "Sales affiliate", href: "/products/buyer/sales" },
+      { name: "Home", href: "/" },
+      { name: "Grower", href: "/products/grower" },
     ],
-    activeColor: "#367AFE",
-    defaultColor: "#6C6C6C",
-    isHover: false,
-    textcolor: "text-[#00194C]",
     mobileTabs: [
       {
         name: "Customer stories",
-        href: "/products/buyer/customer-stories"
+        href: "/products/buyer/customer-stories",
       },
       {
         name: "Resources",
-        href: "/products/buyer/resources"
+        href: "/products/buyer/resources",
       },
       {
         name: "Sales affiliate",
-        href: "/products/buyer/sales"
-      }
-    ]
-  }
+        href: "/products/buyer/sales",
+      },
+    ],
+  },
 ];
 
 const initialProducts = [
   {
     name: "CF Grower",
-    description: "Speak directly to your customers",
     href: "/products/grower/new-farmer",
     logo: GrowerLogo,
-    activeColor: "#31BC2E",
-    defaultColor: "#6C6C6C",
-    isHover: false
   },
   {
     name: "CF Buyer",
-    description: "Get a better understanding of your traffic",
     href: "/products/buyer",
     logo: BuyerLogo,
-    activeColor: "#367AFE",
-    defaultColor: "#6C6C6C",
-    isHover: false
-  }
+  },
 ];
 
 const drawerPropsData = {
-  login:["Login to CF Grower", "Login to CF Buyer"],
-  signup:["Create a CF Grower account", "Create a CF Buyer account"],
+  login: ["Login to CF Grower", "Login to CF Buyer"],
+  signup: ["Create a CF Grower account", "Create a CF Buyer account"],
 };
 
-
-const ProductsHeader: React.FC<{ isBuyer: boolean; pathname: string }> = ({ isBuyer, pathname }) => {
+const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
   const [isSignUpModalOpen, setSignUpModal] = useState(false);
-
-  const data = config[isBuyer ? 1 : 0];
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const [drawerProps, setDrawerProps] = useState<string[]>(drawerPropsData.signup);
   const [open, setOpen] = useState(false);
+  const [drawerProps, setDrawerProps] = useState<string[]>(
+    drawerPropsData.signup
+  );
+
+  const isBuyer = pathname.includes("buyer");
+  const isNewFarmer = pathname.includes("new-farmer");
+  const isExistingFarmer = pathname.includes("existing-farmer");
+  const data = config[isBuyer ? 1 : 0];
 
   const handleDrawer = (value: string) => {
     if (value === "Login") setDrawerProps(drawerPropsData.login);
     if (value === "SignUp") setDrawerProps(drawerPropsData.signup);
 
     // Blur the background
-    (document.querySelector(".app-body") as HTMLElement).style.filter =  "blur(4px)";
-    (document.querySelector(".app-footer") as HTMLElement).style.filter =  "blur(4px)";
+    (document.querySelector(".app-body") as HTMLElement).style.filter =
+      "blur(4px)";
+    (document.querySelector(".app-footer") as HTMLElement).style.filter =
+      "blur(4px)";
     setSignUpModal(true);
   };
 
   const handleCloseDrawer = () => {
     setSignUpModal(false);
     // Unblur the background
-    (document.querySelector(".app-body") as HTMLElement).style.filter =  "none";
-    (document.querySelector(".app-footer") as HTMLElement).style.filter =  "none";
+    (document.querySelector(".app-body") as HTMLElement).style.filter = "none";
+    (document.querySelector(".app-footer") as HTMLElement).style.filter =
+      "none";
     setDrawerProps(drawerPropsData.signup); // Reset the drawer props to signup
   };
 
@@ -156,33 +164,26 @@ const ProductsHeader: React.FC<{ isBuyer: boolean; pathname: string }> = ({ isBu
     setOpen(!open);
   };
 
-  const isNewFarmer = pathname.includes("new-farmer");
-  const isExistingFarmer = pathname.includes("existing-farmer");
-
   const handleButtonClick = () => {
     // ReactGA.event({
     //   category: "Button Click",
     //   action: "Signed"
     // });
-
     // window.metapixelfunction("profile", "profile_signed", {});
-
     // window.dataLayer.push({
     //   event: "profile_signed"
     // });
   };
 
-  const handleaClick = () => {
+  const handleClick = () => {
     // ReactGA.event({
     //   category: "a Click",
     //   action: "Page a"
     // });
-
     // window.dataLayer = window.dataLayer || [];
     // window.dataLayer.push({
     //   event: "PageaClick"
     // });
-
     // ReactPixel.track("Page a", {});
   };
 
@@ -191,20 +192,24 @@ const ProductsHeader: React.FC<{ isBuyer: boolean; pathname: string }> = ({ isBu
       <div className="sticky top-0 z-50 w-full bg-white lg:border-b lg:border-10 lg:border-[#E6E6E6]">
         <div className="container flex flex-row items-center justify-between mx-auto max-w-7xl">
           <div className="relative flex flex-row mx-5">
-            <div className="flex items-center font-medium text-gray-900 lg:w-auto lg:items-center lg:justify-center md:mb-0">
+            <div className="font-medium text-gray-900 lg:w-auto lg:items-center lg:justify-center md:mb-0">
               <span className="mx-auto text-xl font-black leading-none text-gray-900 select-none ">
                 <a href="/" className="-m-1.5 p-1.5">
-                  {/* <data.logo color={data.activeColor} /> */}
-                  <img src={data.logo.src} />
+                  <img
+                    src={data.logo.src}
+                    className="h-5 md:h-[30px]"
+                    alt={`complete farmer ${isBuyer ? "buyer" : "grower"} logo`}
+                  />
                 </a>
               </span>
             </div>
 
-            <nav className="hidden mx-auto sm:flex max-w-7xl items-center justify-between gap-1 px-6 lg:px-8" aria-label="Global">
-              <Popover.Group className="hidden lg:flex lg:gap-x-9 lg:items-center">
-                {isBuyer ? (
-                  <></>
-                ) : (
+            <nav
+              className="hidden mx-auto sm:flex max-w-7xl items-center justify-between gap-1 px-6 lg:px-8 text-grower-400"
+              aria-label="Global"
+            >
+              <Popover.Group className="hidden lg:flex space-x-6 items-baseline">
+                {!isBuyer && (
                   <div
                     className={classNames(
                       mobileMenuOpen ? "hidden" : "flex",
@@ -213,9 +218,12 @@ const ProductsHeader: React.FC<{ isBuyer: boolean; pathname: string }> = ({ isBu
                     )}
                   >
                     <a
-                      href={"/products/grower/new-farmer"}
-                      onClick={handleaClick}
-                      className={classNames(isNewFarmer ? "text-white" : "text-grower-400", "text-base font-bold text-center")}
+                      href="/products/grower/new-farmer"
+                      onClick={handleClick}
+                      className={classNames(
+                        isNewFarmer ? "text-white" : "",
+                        "text-base font-bold text-center"
+                      )}
                     >
                       New Farmer
                     </a>
@@ -223,10 +231,14 @@ const ProductsHeader: React.FC<{ isBuyer: boolean; pathname: string }> = ({ isBu
                 )}
 
                 {isBuyer ? (
-                  <a href={data.firstText.href} onClick={handleaClick} className="text-sm font-bold leading-6 text-grower-400">
-                    <div className="flex justify-start items-center relative gap-x-0 rounded-full bg-white">
-                      <p className={classNames("text-base font-bold text-left ", data.textcolor)}>{data.firstText.name}</p>
-                    </div>
+                  <a
+                    onClick={handleClick}
+                    href={data.firstText.href}
+                    className={pathname === data.firstText.href ? "rounded-full bg-custom_gray-200 px-3 py-2" : ""}
+                  >
+                    <span className="text-base font-bold">
+                      {data.firstText.name}
+                    </span>
                   </a>
                 ) : (
                   <div
@@ -238,8 +250,11 @@ const ProductsHeader: React.FC<{ isBuyer: boolean; pathname: string }> = ({ isBu
                   >
                     <a
                       href={"/products/grower/existing-farmer"}
-                      onClick={handleaClick}
-                      className={classNames(isExistingFarmer ? "text-white" : "text-grower-400", "text-base font-bold text-center")}
+                      onClick={handleClick}
+                      className={classNames(
+                        isExistingFarmer ? "text-white" : "",
+                        "text-base font-bold text-center"
+                      )}
                     >
                       Existing Farmer
                     </a>
@@ -249,11 +264,11 @@ const ProductsHeader: React.FC<{ isBuyer: boolean; pathname: string }> = ({ isBu
                 <Popover className="relative">
                   {({ open, close }) => (
                     <>
-                      <Popover.Button className="flex items-center gap-x-0 text-sm font-bold leading-6 text-grower-400  focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-                        <div className="flex justify-start items-center relative gap-1 rounded-xl bg-white">
-                          <p className={classNames("text-base font-bold text-left ", data.textcolor)}>More</p>
-                        </div>
-                        <ChevronIcon className={open ? "rotate-180 transform" : ""} />
+                      <Popover.Button className="flex items-center space-x-1  focus:outline-none">
+                        <span className="-mt-1 text-base font-bold h-6">
+                          More
+                        </span>
+                        <ChevronIcon className={open ? "rotate-180" : ""} />
                       </Popover.Button>
 
                       <Transition
@@ -274,20 +289,21 @@ const ProductsHeader: React.FC<{ isBuyer: boolean; pathname: string }> = ({ isBu
                           <div className="overflow-hidden rounded-lg shadow-lg w-64">
                             <div className="relative grid  bg-white lg:grid-cols-1 ">
                               {data.secondText.map((item) => (
-                                <div key={item.name} className="group/item relative rounded-lg p-4 hover:bg-gray-50">
-                                  <a
-                                    onClick={handleaClick}
-                                    href={item.href}
-                                    className="block text-md font-normal leading-6  text-custom_black-900"
-                                  >
-                                    <div className="flex justify-between">
-                                      <span className="flex justify-start items-center">{item.name}</span>
-                                      <span className="group/edit invisible group-hover/item:visible flex flex-col justify-center">
-                                        <data.popoverArrowIcon className="group-hover/edit:translate-x-1 flex justify-end" />
-                                      </span>
-                                    </div>
-                                  </a>
-                                </div>
+                                <a
+                                  key={item.name}
+                                  href={item.href}
+                                  onClick={handleClick}
+                                  className="block group/item rounded-lg p-4 hover:bg-gray-50 text-md font-normal leading-6  text-custom_black-900 hover:text-grower-500"
+                                >
+                                  <div className="flex justify-between">
+                                    <span className="flex justify-start items-center">
+                                      {item.name}
+                                    </span>
+                                    <span className="group/edit invisible group-hover/item:visible flex flex-col justify-center">
+                                      <data.popoverArrowIcon className="group-hover/edit:translate-x-1 flex justify-end" />
+                                    </span>
+                                  </div>
+                                </a>
                               ))}
                             </div>
                           </div>
@@ -300,9 +316,15 @@ const ProductsHeader: React.FC<{ isBuyer: boolean; pathname: string }> = ({ isBu
             </nav>
           </div>
 
-          <div className="inline-flex items-center mx-5 sm:space-x-2 md:space-x-4 lg:space-x-6 lg:justify-end">
+          <div className="inline-flex items-center mx-5 space-x-2 md:space-x-4 lg:space-x-6 lg:justify-end">
             <div className="hidden sm:flex justify-start items-center relative gap-1 px-4 py-2 rounded-full bg-white">
-              <button onClick={toggleModal} className={classNames("text-base font-bold text-center ", data.textcolor)}>
+              <button
+                onClick={toggleModal}
+                className={classNames(
+                  "text-base font-bold text-center ",
+                  data.textcolor
+                )}
+              >
                 Get in touch
               </button>
             </div>
@@ -331,8 +353,12 @@ const ProductsHeader: React.FC<{ isBuyer: boolean; pathname: string }> = ({ isBu
                       leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                       leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     >
-                      <Dialog.Panel className="flex w-full h-55vh transform text-left text-base transition md:my-20 md:max-w-2xl md:px-4 lg:max-w-3xl">
-                        {isBuyer ? <BuyerGetInTouchModal toggleModal={toggleModal} /> : <GrowerGetInTouchModal toggleModal={toggleModal} />}
+                      <Dialog.Panel className="flex w-full h-55vh transform text-base transition md:my-20 md:max-w-2xl md:px-4 lg:max-w-3xl">
+                        {isBuyer ? (
+                          <BuyerGetInTouchModal toggleModal={toggleModal} />
+                        ) : (
+                          <GrowerGetInTouchModal toggleModal={toggleModal} />
+                        )}
                       </Dialog.Panel>
                     </Transition.Child>
                   </div>
@@ -345,22 +371,25 @@ const ProductsHeader: React.FC<{ isBuyer: boolean; pathname: string }> = ({ isBu
                   handleDrawer("Login");
                   handleButtonClick();
                 }}
-                className={classNames("text-base font-bold text-center ", data.textcolor)}
+                className={classNames(
+                  "text-base font-bold text-center ",
+                  data.textcolor
+                )}
               >
                 Login
               </button>
             </div>
             <div
-              className={`${mobileMenuOpen ? "hidden" : "flex"} justify-start items-center relative gap-1 px-3 py-2 rounded-full bg-[${
-                data.activeColor
-              }]`}
+              className={`${
+                mobileMenuOpen ? "hidden" : "flex"
+              } justify-start items-center relative gap-1 px-3 py-2 rounded-full ${data.activeBgColor}`}
             >
               <button
                 onClick={() => {
                   handleDrawer("SignUp");
                   handleButtonClick();
                 }}
-                className="text-base font-bold text-center text-white"
+                className="text-sm md:text-base font-bold text-center text-white"
               >
                 Sign up
               </button>
@@ -368,7 +397,9 @@ const ProductsHeader: React.FC<{ isBuyer: boolean; pathname: string }> = ({ isBu
             <div className="flex lg:hidden pl-2">
               <button
                 type="button"
-                className={`-m-2.5 ${mobileMenuOpen ? "hidden" : "inline-flex"} items-center justify-center rounded-md p-2.5 text-gray-700`}
+                className={`-m-2.5 ${
+                  mobileMenuOpen ? "hidden" : "inline-flex"
+                } items-center justify-center rounded-md p-2.5 text-gray-700`}
                 onClick={openMobileMenu}
               >
                 <span className="sr-only">Open main menu</span>
@@ -376,7 +407,9 @@ const ProductsHeader: React.FC<{ isBuyer: boolean; pathname: string }> = ({ isBu
               </button>
               <button
                 type="button"
-                className={`-m-2.5 ${mobileMenuOpen ? "inline-flex" : "hidden"} items-center justify-center rounded-md p-2.5 text-gray-700`}
+                className={`-m-2.5 ${
+                  mobileMenuOpen ? "inline-flex" : "hidden"
+                } items-center justify-center rounded-md p-2.5 text-gray-700`}
                 onClick={openMobileMenu}
               >
                 <span className="sr-only">Close menu</span>
@@ -388,17 +421,24 @@ const ProductsHeader: React.FC<{ isBuyer: boolean; pathname: string }> = ({ isBu
       </div>
 
       {/* Moblile Menu */}
-      <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
+      <Dialog
+        as="div"
+        className="lg:hidden"
+        open={mobileMenuOpen}
+        onClose={setMobileMenuOpen}
+      >
         <div className="fixed inset-0 z-10" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-[999] flex w-full flex-col justify-between[x] overflow-y-auto bg-white sm:max-w-sm[x]">
           <div className="p-6 sm:px-12">
             <div className="flex items-center justify-between">
               <a href="/" className="-m-1.5 p-1.5">
-                {/* <Logo color={"#004C46"} /> */}
                 <img src={MainLogo.src} />
-
               </a>
-              <button type="button" className="lg:-m-2.5 rounded-md p-2.5 text-gray-700" onClick={() => setMobileMenuOpen(false)}>
+              <button
+                type="button"
+                className="lg:-m-2.5 rounded-md p-2.5 text-gray-700"
+                onClick={() => setMobileMenuOpen(false)}
+              >
                 <span className="sr-only">Close menu</span>
                 <XMarkIcon className="h-6 w-6 sm:h-10" aria-hidden="true" />
               </button>
@@ -410,10 +450,16 @@ const ProductsHeader: React.FC<{ isBuyer: boolean; pathname: string }> = ({ isBu
                     Products
                   </p>
                   {initialProducts.map((item) => (
-                    <div key={item.name} className="relative rounded-lg py-4 sm:py-6 hover:bg-gray-50 ">
-                      <a href={item.href} onClick={() => navigateMobiles()} className="block text-sm font-semibold leading-6">
+                    <div
+                      key={item.name}
+                      className="relative rounded-lg py-4 sm:py-6 hover:bg-gray-50 "
+                    >
+                      <a
+                        href={item.href}
+                        onClick={() => navigateMobiles()}
+                        className="block text-sm font-semibold leading-6"
+                      >
                         <div className="flex justify-start">
-                          {/* <item.logo color={item.activeColor} /> */}
                           <img src={item.logo.src} />
                         </div>
                       </a>
@@ -427,7 +473,8 @@ const ProductsHeader: React.FC<{ isBuyer: boolean; pathname: string }> = ({ isBu
 
                   {companyLinks.map((item) => (
                     <a
-                      href={item.href} onClick={() => navigateMobiles()}
+                      href={item.href}
+                      onClick={() => navigateMobiles()}
                       key={item.href}
                       className="-mx-3 block rounded-lg px-3 py-2 text-base font-normal leading-7 text-gray-900 hover:bg-gray-50"
                     >
@@ -438,9 +485,14 @@ const ProductsHeader: React.FC<{ isBuyer: boolean; pathname: string }> = ({ isBu
 
                 <div className="w-full flex-col justify-start items-start py-2">
                   {data.mobileTabs.map((item) => (
-                    <div key={item.name} className=" py-2 bg-white justify-start items-center ">
+                    <div
+                      key={item.name}
+                      className=" py-2 bg-white justify-start items-center "
+                    >
                       <a href={item.href}>
-                        <div className="text-zinc-900 text-base  font-bold leading-loose">{item.name}</div>
+                        <div className="text-zinc-900 text-base  font-bold leading-loose">
+                          {item.name}
+                        </div>
                       </a>
                     </div>
                   ))}
@@ -456,7 +508,7 @@ const ProductsHeader: React.FC<{ isBuyer: boolean; pathname: string }> = ({ isBu
                 setMobileMenuOpen(false);
               }}
               className={classNames(
-                `text-[${data.activeColor}] border-[${data.activeColor}]`,
+                [data.activeTextColor, data.activeBorderColor].join(" "),
                 "block w-full order-2 sm:order-1 mx-auto rounded-md border px-3.5 py-3.5 sm:py-5 text-center text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
               )}
             >
@@ -468,7 +520,7 @@ const ProductsHeader: React.FC<{ isBuyer: boolean; pathname: string }> = ({ isBu
                 setMobileMenuOpen(false);
               }}
               className={classNames(
-                `bg-[${data.activeColor}]`,
+                data.activeBgColor,
                 "block w-full mx-auto order-1 sm:order-2 rounded-md px-3.5 py-3.5 sm:py-5 text-center text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
               )}
             >
@@ -478,7 +530,11 @@ const ProductsHeader: React.FC<{ isBuyer: boolean; pathname: string }> = ({ isBu
         </Dialog.Panel>
       </Dialog>
 
-      <Drawer drawerOpen={isSignUpModalOpen} handleCloseDrawer={handleCloseDrawer} drawerProps={drawerProps} />
+      <Drawer
+        drawerOpen={isSignUpModalOpen}
+        handleCloseDrawer={handleCloseDrawer}
+        drawerProps={drawerProps}
+      />
     </>
   );
 };

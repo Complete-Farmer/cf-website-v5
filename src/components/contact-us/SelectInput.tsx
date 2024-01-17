@@ -38,7 +38,7 @@ export default function SelectInput({ people, selected, setSelected }: IProps) {
                   <Listbox.Option key={person.id} value={person}>
                     {() => (
                       <>
-                        <div className=" flex-shrink-0 h-12 relative rounded-lg bg-white hover:bg-[#f6f6f6] hover:cursor-pointer">
+                        <div className=" flex-shrink-0 h-12 relative rounded-lg bg-white hover:bg-custom_gray-400 hover:cursor-pointer">
                           <p className="absolute left-4 top-3 text-base text-left text-custom_black-900">
                             {person.name}&nbsp;
                           </p>

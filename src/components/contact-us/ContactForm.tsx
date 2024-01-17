@@ -76,7 +76,7 @@ export default function ContactForm({ changeToggle }: { changeToggle: () => void
           <div>
             <label
               htmlFor="first-name"
-              className="self-stretch flex-grow-0 flex-shrink-0 block text-sm font-semibold leading-6  w-2/3 text-left text-[#6c6c6c]"
+              className="self-stretch flex-grow-0 flex-shrink-0 block text-sm font-semibold leading-6  w-2/3 text-left text-custom_gray-300"
             >
               First Name <span className="text-[#EB2F2F]">*</span>
             </label>
@@ -95,7 +95,7 @@ export default function ContactForm({ changeToggle }: { changeToggle: () => void
           <div>
             <label
               htmlFor="last-name"
-              className="self-stretch flex-grow-0 flex-shrink-0 block text-sm font-semibold leading-6  w-2/3 text-left text-[#6c6c6c]"
+              className="self-stretch flex-grow-0 flex-shrink-0 block text-sm font-semibold leading-6  w-2/3 text-left text-custom_gray-300"
             >
               Last Name <span className="text-[#EB2F2F]">*</span>
             </label>
@@ -114,7 +114,7 @@ export default function ContactForm({ changeToggle }: { changeToggle: () => void
           <div className="col-span-2">
             <label
               htmlFor="email"
-              className="self-stretch flex-grow-0 flex-shrink-0 block text-sm font-semibold leading-6  w-2/3 text-left text-[#6c6c6c]"
+              className="self-stretch flex-grow-0 flex-shrink-0 block text-sm font-semibold leading-6  w-2/3 text-left text-custom_gray-300"
             >
               Email <span className="text-[#EB2F2F]">*</span>
             </label>
@@ -133,7 +133,7 @@ export default function ContactForm({ changeToggle }: { changeToggle: () => void
           <div className="col-span-2">
             <label
               htmlFor="phone-number"
-              className="self-stretch flex-grow-0 flex-shrink-0 block text-sm font-semibold leading-6 w-2/3 text-left text-[#6c6c6c]"
+              className="self-stretch flex-grow-0 flex-shrink-0 block text-sm font-semibold leading-6 w-2/3 text-left text-custom_gray-300"
             >
               Phone Number <span className="text-[#EB2F2F]">*</span>
             </label>
@@ -158,7 +158,7 @@ export default function ContactForm({ changeToggle }: { changeToggle: () => void
           <div className="col-span-2">
             <label
               htmlFor="message"
-              className="self-stretch flex-grow-0 flex-shrink-0 block text-sm font-semibold leading-6  w-2/3 text-left text-[#6c6c6c]"
+              className="self-stretch flex-grow-0 flex-shrink-0 block text-sm font-semibold leading-6  w-2/3 text-left text-custom_gray-300"
             >
               Leave a message <span className="text-[#EB2F2F]">*</span>
             </label>

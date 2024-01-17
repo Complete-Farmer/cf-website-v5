@@ -8,8 +8,9 @@
   top: 48%;
 }
 
-.swiper-button-prev, .swiper-button-next {
-  background-position: 15px 15px;
+.swiper-button-prev,
+.swiper-button-next {
+  background-position: center;
   background-image: url("../icons/slider-chevron.svg") !important;
 }
 
@@ -22,6 +23,20 @@
   right: 6.5%;
 }
 
+.avalaible-swiper .swiper-button-prev {
+  left: 0px;
+}
+
+.avalaible-swiper .swiper-button-next {
+  right: 0px;
+}
+
+.avalaible-swiper .swiper-button-prev,
+.avalaible-swiper .swiper-button-next {
+  width: 40px;
+  height: 40px;
+  background-size: 24px 24px;
+}
 
 .swiper-button-next::after,
 .swiper-button-prev::after {

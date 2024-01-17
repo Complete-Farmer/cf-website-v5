@@ -7,7 +7,8 @@ interface IProps {
     icon: JSX.Element;
     description: string;
     linkText: string;
-    link: string;
+    link?: string;
+    action?: (i: string) => void;
   }[];
   type?: "grower" | "buyer";
 }
@@ -31,9 +32,9 @@ export default function SectionList({ type = "grower", incentives }: IProps) {
         {incentives.map((i, idx) => (
           <Fade
             bottom
-            delay={500 + (idx*150)}
+            delay={500 + idx * 150}
             key={i.name}
-            duration={1000+ (idx*150)}
+            duration={1000 + idx * 150}
             distance="30px"
           >
             <div className="flex flex-col justify-between">
@@ -50,8 +51,14 @@ export default function SectionList({ type = "grower", incentives }: IProps) {
               </div>
               <div className="mt-2 flex justify-start flex-grow-0 flex-shrink-0 h-6 sm:mt-6 relative opacity-90 space-x-2 lg:space-x-3">
                 <a
-                  href={i.link}
-                  onClick={() => handleLinkClick()}
+                  href={i.link || ""}
+                  onClick={(e) => {
+                    if (i.action) {
+                      e.preventDefault();
+                      i.action(i.name);
+                    }
+                    handleLinkClick();
+                  }}
                   className={`text-base sm:text-[20px] font-bold text-center lg:block text-${type}-500 hover:cursor-pointer`}
                 >
                   {i.linkText}

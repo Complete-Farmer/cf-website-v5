@@ -12,6 +12,9 @@ export default defineConfig({
     format: "file"
   },
   site: "https://www.completefarmer.com",
+  redirects: {
+    "/products/grower": "/products/grower/new-farmer"
+  },
   integrations: [
     react({
       experimentalReactChildren: true,

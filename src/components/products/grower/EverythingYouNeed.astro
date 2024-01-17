@@ -1,0 +1,132 @@
+---
+import { Image } from "astro:assets";
+
+import { classNames } from "@utils/functions";
+import { FlagIcon, HeadphoneIcon, FruitsIcon, MarketIcon } from "@assets/icons";
+
+import GetStartedEasilyImg from "@assets/images/products/grower/everything-you-need/get-started-easily.png";
+import GrowMoreWithLessImg from "@assets/images/products/grower/everything-you-need/grow-more-with-less.png";
+import EnjoyRealTimeImg from "@assets/images/products/grower/everything-you-need/enjoy-real-time-expert-support.png";
+import EnjoyGuaranteedImg from "@assets/images/products/grower/everything-you-need/enjoy-guaranteed-market-access.png";
+import HeadingOneLine from "@components/utils/HeadingOneLine";
+
+const data = [
+  {
+    title: "Get started easily",
+    description:
+      "Our marketplace offers verified farmlands for lease, skilled farm managers for hire and farm inputs and services for purchase at competitive prices",
+    icon: FlagIcon,
+    img: GetStartedEasilyImg,
+    isActive: true,
+  },
+  {
+    title: "Enjoy real-time expert support",
+    description:
+      "Access tailored support from expert agronomists both online and on-site throughout the agricultural season",
+    icon: HeadphoneIcon,
+    img: EnjoyRealTimeImg,
+  },
+  {
+    title: "Grow more with less",
+    description:
+      "Get data-driven crop production guidelines designed to help you achieve consistent high yields and profits across various crop families",
+    icon: FruitsIcon,
+    img: GrowMoreWithLessImg,
+  },
+  {
+    title: "Enjoy guaranteed market access",
+    description:
+      "Connect with reliable local and international buyers who pay immediately after you deliver your crops to the nearest fulfilment centre",
+    icon: MarketIcon,
+    img: EnjoyGuaranteedImg,
+  },
+];
+---
+
+<div
+  class="max-w-7xl h-full mx-auto flex flex-col px-6 py-12 lg:py-20 lg:space-y-12"
+>
+<div class="lg:px-20">
+  <HeadingOneLine
+    titleFontSize="text-[28px] md:text-[40px]"
+    title="Everything you need to ensure farming success all in one place"
+  />
+</div>
+
+  <div class="flex gap-4">
+    <div
+      class="flex flex-col w-full lg:w-1/2 justify-start items-start gap-[15px]"
+    >
+      {
+        data.map((item) => (
+          <div
+            class={classNames(
+              "everything-you-need-to-know flex flex-col md:flex-row justify-start items-start gap-8 p-4 rounded-lg cursor-pointer hover:bg-custom_gray-400 w-full",
+              item.isActive ? "bg-custom_gray-400" : ""
+            )}
+          >
+            <div>
+              <item.icon />
+            </div>
+            <div class="flex flex-col justify-start items-start flex-grow gap-2">
+              <p class="text-xl leading-6 md:text-2xl md:leading-[30px] font-bold text-left text-grower-400">
+                {item.title}
+              </p>
+              <p class="text-sm md:text-base text-left text-[#1d1d1f]">
+                {item.description}
+              </p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div
+      id="display-images"
+      class="hidden lg:flex lg:w-1/2 justify-center items-center"
+    >
+      {
+        data.map((item) => (
+          <Image
+            src={item.img}
+            alt={item.title}
+            class={`display-image ${!item.isActive ? "hidden" : ""}`}
+          />
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" is:inline>
+  let currentIndex = 0;
+  const items = document.querySelectorAll(".everything-you-need-to-know");
+
+  function setItem(index) {
+    items.forEach((item) => {
+      item.classList.remove("bg-custom_gray-400");
+      const images = document.querySelectorAll(".display-image");
+      images.forEach((image) => {
+        image.classList.remove("hidden");
+        image.classList.add("hidden");
+      });
+      images[index].classList.remove("hidden");
+    });
+    items[index].classList.add("bg-custom_gray-400");
+  }
+
+  items.forEach((item, index) => {
+    item.addEventListener("click", () => {
+      clearInterval(intervalId);
+      setItem(index);
+    });
+  });
+
+  const intervalId = setInterval(() => {
+    currentIndex++;
+    if (currentIndex > 3) {
+      currentIndex = 0;
+    }
+    setItem(currentIndex);
+  }, 4000);
+</script>
