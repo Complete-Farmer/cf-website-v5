@@ -329,7 +329,7 @@ export default function Footer({ pathname }: { pathname: string }) {
                         >
                           {mobileNavigationDisclouserTabs[
                             each as keyof typeof mobileNavigationDisclouserTabs
-                          ]?.map((e) => (
+                          ]?.map((e: { href: string; name: string; }) => (
                             <a href={e.href} key={e.name}>
                               {e.name}
                             </a>

@@ -27,7 +27,7 @@ export interface IPlainProps {
   color: string;
   borderColor: string;
   changeTab?: (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    e: IClickEvent,
     t: ITab
   ) => void;
 }
@@ -63,3 +63,14 @@ export interface IAvailableDemands extends ICrop {
   link: string
   varieties: string[];
 }
+
+export type IClickEvent<T = HTMLButtonElement | HTMLAnchorElement> = React.MouseEvent<T, MouseEvent>
+
+export type IChangeEvent = React.ChangeEvent<HTMLInputElement>
+
+export type ISubmitEvent = React.FormEvent<HTMLFormElement>
+
+// declare module "../../src/utils/stores.ts" {
+//   export const $authModal: WritableAtom<boolean>;
+//   export const $getInTouchModal: WritableAtom<boolean>;
+// }

@@ -1,7 +1,7 @@
 ---
 import Layouts from "@layouts/Layouts.astro";
 
-import { Hero } from "@components/products/grower";
+import { Hero, Section } from "@components/products/grower";
 
 import HeroImageOne from "@assets/images/products/grower/hero-right.webp";
 import HeroImageTwo from "@assets/images/products/grower/hero-right-2.webp";
@@ -60,6 +60,7 @@ const currentTab = tabs.find((tab) => tab.current);
 <Layouts {title} {description}>
   <Hero {tabs} {currentTab} client:load />
   <slot />
+  <Section client:visible />
 </Layouts>
 
 <!-- page: "/products/grower/", -->

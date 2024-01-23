@@ -1,18 +1,14 @@
 import { Fragment, useState } from "react";
-import { Dialog, Popover, Transition } from "@headlessui/react";
+import { Popover, Transition } from "@headlessui/react";
 
 import CFBuyerLogo from "@assets/images/logos/cf/buyer.png";
 import CFGrowerLogo from "@assets/images/logos/cf/grower.png";
 import CFMainLogo from "@assets/images/logos/cf/main.png";
 
-import {
-  ArrowIcon,
-  ChevronIcon,
-  MenuCloseIcon,
-  MenuOpenIcon,
-} from "@assets/icons";
+import { ArrowIcon, ChevronIcon, MenuOpenIcon } from "@assets/icons";
 
 import Drawer from "./Drawer";
+import MobileMenu from "./MobileMenu";
 
 import { companyLinks } from "@utils/constants";
 
@@ -29,16 +25,17 @@ const products = [
   },
 ];
 
+const menus = {
+  Products: products,
+  Company: companyLinks,
+};
+
 const drawerPropsData = {
   login: ["Login to CF Grower", "Login to CF Buyer"],
   signup: ["Create a CF Grower account", "Create a CF Buyer account"],
 };
 
-export default function NormalHeader({
-  pathname,
-}: {
-  pathname: string;
-}) {
+export default function NormalHeader({ pathname }: { pathname: string }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerProps, setDrawerProps] = useState(drawerPropsData.login);
@@ -67,8 +64,6 @@ export default function NormalHeader({
   const openMobileMenu = () => {
     setMobileMenuOpen(true);
   };
-
-  const navigateMobileLinks = () => setMobileMenuOpen(false);
 
   const handleButtonClick = () => {
     // ReactGA.event({
@@ -115,118 +110,88 @@ export default function NormalHeader({
               aria-label="Global"
             >
               <Popover.Group className="hidden lg:flex space-x-6 items-baseline">
-                <Popover className="relative">
-                  {({ open, close }) => (
-                    <>
-                      <Popover.Button className="flex items-center space-x-1 focus:outline-none">
-                        <span className="-mt-1 text-base font-bold">
-                          Products
-                        </span>
-                        <ChevronIcon className={open ? "rotate-180" : ""} />
-                      </Popover.Button>
+                {Object.keys(menus).map((key) => (
+                  <Popover key={key} className="relative">
+                    {({ open, close }) => (
+                      <>
+                        <Popover.Button className="flex items-center space-x-1 focus:outline-none">
+                          <span className="-mt-1 text-base font-bold">
+                            {key}
+                          </span>
+                          <ChevronIcon className={open ? "rotate-180" : ""} />
+                        </Popover.Button>
 
-                      <Transition
-                        as={Fragment}
-                        enter="transition ease-out duration-200"
-                        enterFrom="opacity-0 translate-y-1"
-                        enterTo="opacity-100 translate-y-0"
-                        leave="transition ease-in duration-150"
-                        leaveFrom="opacity-100 translate-y-0"
-                        leaveTo="opacity-0 translate-y-1"
-                      >
-                        <Popover.Panel
-                          className="absolute left-40 z-10 mt-3 w-screen max-w-xs -translate-x-1/2 transform px-0 sm:px-0 lg:max-w-xs"
-                          onMouseLeave={() => close()}
+                        <Transition
+                          as={Fragment}
+                          enter="transition ease-out duration-200"
+                          enterFrom="opacity-0 translate-y-1"
+                          enterTo="opacity-100 translate-y-0"
+                          leave="transition ease-in duration-150"
+                          leaveFrom="opacity-100 translate-y-0"
+                          leaveTo="opacity-0 translate-y-1"
                         >
-                          <div className="overflow-hidden rounded-lg shadow-lg w-64 ">
-                            <div className="relative grid gap-2 bg-white lg:grid-cols-1">
-                              <div className="p-4">
-                                {products.map((item) => (
-                                  <div
-                                    key={item.name}
-                                    className="relative rounded-lg p-4 hover:bg-gray-50 group"
-                                  >
-                                    <a
-                                      href={item.href}
-                                      onClick={handleLinkClick}
-                                      className="block text-sm font-semibold leading-6"
+                          <Popover.Panel
+                            className="absolute left-40 z-10 mt-3 w-screen max-w-xs -translate-x-1/2 transform px-0 sm:px-0 lg:max-w-xs"
+                            onMouseLeave={() => close()}
+                          >
+                            <div className="overflow-hidden rounded-lg shadow-lg w-64 ">
+                              <div className="relative bg-white">
+                                {menus[key]
+                                  .filter((item) => !item.isMobile)
+                                  .map((item) => (
+                                    <div
+                                      key={item.name}
+                                      className="relative rounded-lg p-4 hover:bg-gray-50 group"
                                     >
-                                      <div className="flex justify-start">
-                                        <img
-                                          src={item.logo.src}
-                                          className="h-6 grayscale group-hover:grayscale-0"
-                                        />
-                                      </div>
-                                    </a>
-                                  </div>
-                                ))}
+                                      {item.logo ? (
+                                        <a
+                                          href={item.href}
+                                          onClick={handleLinkClick}
+                                          className="block text-sm font-semibold leading-6"
+                                        >
+                                          <div className="flex justify-start">
+                                            <img
+                                              src={item.logo.src}
+                                              className="h-6 grayscale group-hover:grayscale-0"
+                                            />
+                                          </div>
+                                        </a>
+                                      ) : (
+                                        <a
+                                          key={item.name}
+                                          href={item.href}
+                                          onClick={handleLinkClick}
+                                          className="block group/item rounded-lg hover:bg-gray-50 text-md font-normal leading-6 text-custom_black-900 hover:text-grower-500"
+                                        >
+                                          <div className="flex justify-between">
+                                            <span className="flex justify-start items-center">
+                                              {item.name}
+                                            </span>
+                                            <span className="group/edit invisible group-hover/item:visible flex flex-col justify-center">
+                                              <ArrowIcon className="group-hover/edit:translate-x-1 flex justify-end" />
+                                            </span>
+                                          </div>
+                                        </a>
+                                      )}
+                                    </div>
+                                  ))}
                               </div>
                             </div>
-                          </div>
-                        </Popover.Panel>
-                      </Transition>
-                    </>
-                  )}
-                </Popover>
-
-                <Popover className="relative">
-                  {({ open, close }) => (
-                    <>
-                      <Popover.Button className="flex items-center space-x-1 focus:outline-none">
-                        <span className="-mt-1 text-base font-bold h-6">
-                          Company
-                        </span>
-                        <ChevronIcon className={open ? "rotate-180" : ""} />
-                      </Popover.Button>
-
-                      <Transition
-                        as={Fragment}
-                        enter="transition ease-out duration-800"
-                        enterFrom="opacity-0 translate-y-1"
-                        enterTo="opacity-100 translate-y-0"
-                        leave="transition ease-in duration-150"
-                        leaveFrom="opacity-100 translate-y-0"
-                        leaveTo="opacity-0 translate-y-1"
-                      >
-                        <Popover.Panel
-                          onMouseLeave={() => {
-                            close();
-                          }}
-                          className="absolute left-40 z-10 mt-3 w-screen max-w-xs -translate-x-1/2 transform px-0 sm:px-0 lg:max-w-xs"
-                        >
-                          <div className="overflow-hidden rounded-lg shadow-lg w-64">
-                            <div className="relative grid bg-white lg:grid-cols-1 ">
-                              {companyLinks
-                                .filter((l) => !l.isMobile)
-                                .map((item) => (
-                                  <a
-                                    key={item.name}
-                                    href={item.href}
-                                    onClick={handleLinkClick}
-                                    className="block group/item rounded-lg p-4 hover:bg-gray-50 text-md font-normal leading-6  text-custom_black-900 hover:text-grower-500"
-                                  >
-                                    <div className="flex justify-between">
-                                      <span className="flex justify-start items-center">
-                                        {item.name}
-                                      </span>
-                                      <span className="group/edit invisible group-hover/item:visible flex flex-col justify-center">
-                                        <ArrowIcon className="group-hover/edit:translate-x-1 flex justify-end" />
-                                      </span>
-                                    </div>
-                                  </a>
-                                ))}
-                            </div>
-                          </div>
-                        </Popover.Panel>
-                      </Transition>
-                    </>
-                  )}
-                </Popover>
+                          </Popover.Panel>
+                        </Transition>
+                      </>
+                    )}
+                  </Popover>
+                ))}
 
                 <a
                   href="/contact-us"
                   onClick={handleLinkClick}
-                  className={pathname === "/contact-us" ? "rounded-full bg-custom_gray-200 px-3 py-2" : ""}
+                  className={
+                    pathname === "/contact-us"
+                      ? "rounded-full bg-custom_gray-200 px-3 py-2"
+                      : ""
+                  }
                 >
                   <span className="text-base font-bold text-grower-400">
                     Contact us
@@ -277,95 +242,11 @@ export default function NormalHeader({
         </div>
       </div>
 
-      {/* Moblile Menu */}
-      <Dialog
-        as="div"
-        className="lg:hidden"
-        open={mobileMenuOpen}
-        onClose={setMobileMenuOpen}
-      >
-        <div className="fixed inset-0 z-10" />
-        <Dialog.Panel className="fixed inset-y-0 right-0 z-[999] flex w-full flex-col justify-between[x] overflow-y-auto bg-white sm:max-w-sm[x]">
-          <div className="p-5 sm:px-12">
-            <div className="flex items-center justify-between">
-              <a href="/">
-                <img
-                  src={CFMainLogo.src}
-                  className="h-7"
-                  alt="complete farmer logo"
-                />
-              </a>
-              <button type="button" onClick={() => setMobileMenuOpen(false)}>
-                <span className="sr-only">Close menu</span>
-                <MenuCloseIcon />
-              </button>
-            </div>
-            <div className="sm:mt-3 flow-root">
-              <div className="-my-6 divide-y divide-gray-500/10">
-                <div className="space-y-2 py-6">
-                  <p className="-mx-3 block rounded-lg text-xs sm:text-sm px-3 pt-4 sm:pb-4 uppercase font-semibold leading-7 text-gray-600 hover:bg-gray-50">
-                    Products
-                  </p>
-                  {products.map((item) => (
-                    <div
-                      key={item.name}
-                      className="relative rounded-lg py-4 sm:py-6 hover:bg-gray-50 "
-                    >
-                      <a
-                        href={item.href}
-                        onClick={() => navigateMobileLinks()}
-                        className="block text-sm font-semibold leading-6"
-                      >
-                        <img
-                          src={item.logo.src}
-                          className="h-7"
-                          alt={item.name}
-                        />
-                      </a>
-                    </div>
-                  ))}
-                </div>
-                <div className="space-y-2 lg:py-6">
-                  <p className="-mx-3 block rounded-lg text-xs sm:text-sm px-3 py-2 sm:pt-4 uppercase font-semibold leading-7 text-gray-600 hover:bg-gray-50">
-                    Company
-                  </p>
-
-                  {companyLinks.map((item) => (
-                    <a
-                      key={item.href}
-                      href={item.href}
-                      onClick={() => navigateMobileLinks()}
-                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-normal leading-7 text-gray-900 hover:bg-gray-50"
-                    >
-                      {item.name}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="mb-10 flex mx-5 sm:mx-12 mt-5 sm:pt-8 flex-col sm:flex-row gap-4 sm:gap-6 lg:divide-x lg:border border-t pt-6 divide-gray-900/5 bg-white text-center">
-            <button
-              onClick={() => {
-                handleDrawer("Login");
-                setMobileMenuOpen(false);
-              }}
-              className="block w-full order-2 sm:order-1 mx-auto rounded-md border border-grower-500 px-3.5 py-3.5 sm:py-5 text-center text-sm font-semibold text-grower-500 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
-            >
-              Login
-            </button>
-            <button
-              onClick={() => {
-                handleDrawer("SignUp");
-                setMobileMenuOpen(false);
-              }}
-              className="block w-full mx-auto order-1 sm:order-2 rounded-md bg-grower-500 px-3.5 py-3.5 sm:py-5 text-center text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
-            >
-              Sign up
-            </button>
-          </div>
-        </Dialog.Panel>
-      </Dialog>
+      <MobileMenu
+        isOpen={mobileMenuOpen}
+        handleDrawer={handleDrawer}
+        onClose={() => setMobileMenuOpen(false)}
+      />
 
       <Drawer
         drawerOpen={drawerOpen}

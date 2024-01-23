@@ -2,9 +2,10 @@
 /// <reference types="node" />
 
 /**
+ * https://www.react-reveal.com/docs/props/
+ * 
  * @typedef RevealProps
  *
- * https://www.react-reveal.com/docs/props/
  */
 interface RevealProps {
   /**
@@ -211,6 +212,7 @@ declare module "react-reveal/Jello" {
   class Animation extends React.Component<RevealProps> {}
   export default Animation;
 }
+
 declare module "react-reveal/Pulse" {
   import React from "react";
 

@@ -5,6 +5,7 @@ import ReactDrawer from "react-modern-drawer";
 import CFMainLogo from "@assets/images/logos/cf/main.png";
 import { useResolution } from "@hooks/useResolution";
 import { ArrowIcon, MenuCloseIcon } from "@assets/icons";
+import { getLink } from "@utils/functions";
 
 const Drawer: React.FC<{
   drawerOpen: boolean;
@@ -21,6 +22,7 @@ const Drawer: React.FC<{
       setDrawerSize("36rem");
     }
   }, [screenType]);
+
 
   return (
     <ReactDrawer
@@ -49,7 +51,7 @@ const Drawer: React.FC<{
             <MenuCloseIcon className="h-8 w-8" aria-hidden="true" />
           </button>
         </div>
-          
+
         <div className="flex flex-col lg:flex-row justify-center lg:space-x-80 w-full px-2 sm:px-6">
           {drawerProps.map((item) => (
             <div
@@ -57,7 +59,7 @@ const Drawer: React.FC<{
               className="pb-7 mt-7 border-b-2 border-[#E6E6E6] 2xl:border-none"
             >
               <a
-                href="/"
+                href={getLink(item)}
                 className="flex justify-between lg:justify-start items-center relative gap-4  w-full"
               >
                 <p className="text-2xl font-bold py-0 lg:py-12 w-full 2xl:w-72">

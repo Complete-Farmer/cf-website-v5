@@ -5,7 +5,8 @@ import React, { useState } from "react";
 import PhoneInput from "react-phone-number-input";
 import { XMarkIcon } from "@heroicons/react/20/solid";
 
-import {ChevronIcon} from "@assets/icons";
+import { ChevronIcon } from "@assets/icons";
+import type { IClickEvent } from "types/app";
 // import FileIcon from "@assets/icons/file-alt.svg";
 
 // import ReactGA from "react-ga4";
@@ -33,9 +34,7 @@ export default function GrowerGetInTouchModal({
     setEmail(e.target.value);
   };
 
-  const handleButtonClick = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  const handleButtonClick = (e: IClickEvent) => {
     e.preventDefault();
 
     if (!isValidEmail) {

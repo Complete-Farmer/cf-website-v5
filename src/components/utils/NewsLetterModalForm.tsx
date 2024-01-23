@@ -2,6 +2,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+
+import type { IChangeEvent, ISubmitEvent } from "types/app";
 import { onMailChimpSubmit } from "@utils/functions";
 import Button from "./Button";
 
@@ -22,7 +24,7 @@ function NewsLetterModalForm({ data, tag }: IProps) {
 
   const [isValidEmail, setIsValidEmail] = useState(false);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: IChangeEvent) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -34,7 +36,7 @@ function NewsLetterModalForm({ data, tag }: IProps) {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: ISubmitEvent) => {
     e.preventDefault();
 
     if (!isValidEmail) {

@@ -1,6 +1,6 @@
 import Fade from "react-reveal/Fade";
 
-import Image from "@assets/images/products/grower/smallholder-farmer.webp";
+import Image from "@assets/images/products/grower/smallholder-farmer-2.webp";
 import Leaves from "@assets/images/products/grower/exisiting-leaves.webp";
 
 const SmallHolderFarmer = () => {

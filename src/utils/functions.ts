@@ -1,8 +1,28 @@
 import jsonp from "jsonp";
+import { PUBLIC_ENV } from "./constants";
 
 export function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
+
+export const getLink = (text: string) => {
+  let product = "grower";
+  const pathname = text.includes("Login") ? "login" : "signup";
+  
+  if (text.includes("Buyer")) {
+    product = "buyer";
+  }
+
+  if (text.includes("Vendor")) {
+    product = "vendor";
+  }
+
+  const url = `https://${
+    product + (PUBLIC_ENV === "DEV" ? ".test" : "")
+  }.completefarmer.com/`;
+
+  return url + pathname;
+};
 
 interface IFields {
   email: string;
@@ -34,7 +54,6 @@ export const formatDateWithCommas = (dateString: string) => {
   return formattedDate;
 };
 
-
 export function getYouTubeThumbnailUrl(url: string) {
   if (url) {
     // Extract video ID from YouTube URL
@@ -53,6 +72,6 @@ export function getYouTubeThumbnailUrl(url: string) {
   }
 }
 
-export function convertToKebabCase(inputString) {
+export function convertToKebabCase(inputString: string) {
   return inputString.toLowerCase().replace(/\s+/g, "-");
 }

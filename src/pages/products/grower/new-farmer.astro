@@ -4,13 +4,12 @@ import type { IAvailableDemands } from "types/app";
 import GrowerIndexLayout from "@layouts/GrowerIndexLayout.astro";
 
 import {
-  Section,
   Estimate,
+  HowCFHelpsYou,
+  CustomerStories,
   EverythingYouNeed,
-  HowCFHelpsYouFarm,
-  GrowerCustomerStories,
+  PlatformOnboarding,
   AllInOneFarmingSolution,
-  GrowerPlatformOnboarding,
   InterestedInBecomingAgent,
 } from "@components/products/grower";
 
@@ -20,9 +19,43 @@ import { getCxStories, getCategories, filterAt } from "@utils/prismic";
 import { getAvaiableCrops, getCropVarieties } from "@utils/api";
 import { convertToKebabCase } from "@utils/functions";
 
+import BecomeAgent from "@assets/images/products/grower/become-an-agent.png";
+import Tractor from "@assets/images/products/grower/parallax-scroll/tractor.webp";
+import SoyaBeans from "@assets/images/products/grower/parallax-scroll/soya-beans.webp";
+import FarmWorker from "@assets/images/products/grower/parallax-scroll/farm-worker.webp";
+import TwoFarmWorker from "@assets/images/products/grower/parallax-scroll/two-farm-workers.webp";
+import ArgonomicSupport from "@assets/images/products/grower/how-cf-helps-your-farm/agronomic-support.png";
+import PremiumMarketAccess from "@assets/images/products/grower/how-cf-helps-your-farm/premium-market-access.png";
+import ManagementSolution from "@assets/images/products/grower/how-cf-helps-your-farm/farm-management-solution.png";
+import { c } from "vitest/dist/reporters-5f784f42.js";
+
+const cfBenefits = [
+  {
+    id: 0,
+    img: ArgonomicSupport.src,
+    title: "Agronomic support",
+
+    description:
+      "Hire experienced farm managers from our marketplace to oversee the day-to-day operations on your farm while you monitor progress via your dashboard.",
+  },
+  {
+    id: 1,
+    img: PremiumMarketAccess.src,
+    title: "Premium Market Access",
+    description:
+      "Grow to fulfil purchase orders placed by our network of buyers and see in advance the price per tonne you’ll be paid after fulfilment.",
+  },
+  {
+    id: 2,
+    img: ManagementSolution.src,
+    title: "Farm Management Solution",
+    description:
+      "Track progress with easy-to-use farm monitoring tools and tackle pest and disease occurrences quickly with support from expert agronomists who provide you with actionable steps to identify and treat them.",
+  },
+];
+
 const { results } = await getCategories("products");
 
-// find grower id
 const growerId = results.find((c) => c.data.name === "Grower").id;
 
 const filters = filterAt("my.customer_stories_v3.category", growerId);
@@ -56,13 +89,38 @@ if (statusCode == 200) {
   title="New Farmer • Grower | Complete Farmer"
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
-  <AllInOneFarmingSolution />
+  <AllInOneFarmingSolution
+    type="new"
+    image4={Tractor}
+    image3={SoyaBeans}
+    image2={FarmWorker}
+    image1={TwoFarmWorker}
+    description="Own a well equipped farm in as little as 7 days. Get end-to-end support on your farm and tap into income-generating opportunities while contributing to food security."
+  />
   <Estimate client:visible />
   <EverythingYouNeed />
-  <HowCFHelpsYouFarm client:visible />
-  <GrowerPlatformOnboarding />
-  <InterestedInBecomingAgent />
-  <GrowerCustomerStories client:visible data={customerStories} />
+  <HowCFHelpsYou
+    client:visible
+    data={cfBenefits}
+    title="How Complete Farmer Grower helps you get started farming the easy way"
+    description="The platform is equipped with a wide range of features that help reduce barriers to entry for new farmers and provide a rewarding farming experience."
+  />
+  <PlatformOnboarding />
+  <InterestedInBecomingAgent
+    image={BecomeAgent}
+    titleColor="text-white"
+    title="Interested in becoming <br /> a Grower Agent?"
+    button={{
+      href: "/products/grower/agent",
+      textColor: "text-white",
+      bgColor: "bg-grower-500",
+    }}
+  />
+  {
+    customerStories.results.length > 0 && (
+      <CustomerStories client:only="react" data={customerStories} />
+    )
+  }
   {
     availableCrops.length > 0 && (
       <AvailableOrders
@@ -75,9 +133,22 @@ if (statusCode == 200) {
       />
     )
   }
-  <Section client:visible />
 </GrowerIndexLayout>
 
 <!-- page: "/products/grower/new-farmer", -->
-<!-- cardComponent={(d: IAvailableCrops) => <AvailableCropCard data={d} client:visible/>} -->
+<script type="module" is:inline>
+  // @ts-nocheck
+  import { $authModal } from "../../src/utils/stores.ts";
 
+  function toggleAuthModal() {
+    $authModal.set(true);
+
+    // Blur the background
+    document.querySelector(".app-body").style.filter = "blur(4px)";
+    document.querySelector(".app-footer").style.filter = "blur(4px)";
+  }
+
+  const btn = document.getElementById("get-started");
+
+  btn.addEventListener("click", toggleAuthModal);
+</script>

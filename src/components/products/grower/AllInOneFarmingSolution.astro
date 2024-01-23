@@ -1,10 +1,15 @@
 ---
 import { Image } from "astro:assets";
+interface Props {
+  type: string;
+  description: string;
+  image1: ImageMetadata;
+  image2: ImageMetadata;
+  image3: ImageMetadata;
+  image4: ImageMetadata;
+}
 
-import TwoFarmWorker from "@assets/images/products/grower/parallax-scroll/two-farm-workers.webp";
-import FarmWorker from "@assets/images/products/grower/parallax-scroll/farm-worker.webp";
-import SoyaBeans from "@assets/images/products/grower/parallax-scroll/soya-beans.webp";
-import Tractor from "@assets/images/products/grower/parallax-scroll/tractor.webp";
+const { type, image1, image2, image3, image4, description } = Astro.props;
 ---
 
 <div
@@ -12,31 +17,30 @@ import Tractor from "@assets/images/products/grower/parallax-scroll/tractor.webp
 >
   <div class="max-w-7xl mx-auto flex">
     <div class="w-full hidden lg:flex h-[750px] overflow-hidden">
-      <Image src={TwoFarmWorker} alt="Two Farm Worker" />
+      <Image src={image1} alt="Image 1" />
     </div>
 
     <div
       class="flex flex-col justify-center items-start w-full gap-10 px-8 my-10"
     >
       <p
-        class="text-[28px] leading-8 h-16 w-[327px] md:text-[40px] md:leading-10 md:h-20 md:w-10/12 lg:text-5xl lg:leading-[60px] lg:w-[554px] lg:h-28 font-bold text-left text-grower-400"
+        class="text-[28px] leading-8 w-[327px] md:text-[40px] md:leading-10 md:w-10/12 lg:text-5xl lg:leading-[60px] lg:w-[554px] font-bold text-left text-grower-400"
       >
-        The all-in-one farming solution for new farmers
+        The all-in-one farming solution for {type} farmers
       </p>
       <p
-        class="w-[327px] h-28 text-base md:h-12 md:w-10/12 lg:text-xl lg:leading-8 text-left text-[#1d1d1f] lg:h-24 lg:w-[554px]"
+        class="w-[327px] text-base md:w-10/12 lg:text-xl lg:leading-8 text-left text-[#1d1d1f] lg:w-[554px]"
       >
-        Own a well equipped farm in as little as 7 days. Get end-to-end support
-        on your farm and tap into income-generating opportunities while
-        contributing to food security.
+        {description}
       </p>
-      <div
+      <button
+        id="get-started"
         class="flex justify-center items-center h-16 relative gap-2 px-8 py-4 rounded-full bg-grower-500 hover:cursor-pointer"
       >
-        <p class="text-xl leading-6 font-bold text-left text-white">
+        <span class="text-xl leading-6 font-bold text-left text-white">
           Get started
-        </p>
-      </div>
+        </span>
+      </button>
     </div>
   </div>
   <div class="flex justify-end xl:pr-10">
@@ -44,18 +48,18 @@ import Tractor from "@assets/images/products/grower/parallax-scroll/tractor.webp
       class="scroll-parallax flex justify-start items-start w-[120vw] lg:w-[90vw] md:mt-10 lg:mt-0 gap-2 md:gap-8"
     >
       <Image
-        src={FarmWorker}
-        alt="Farm Worker"
+        src={image2}
+        alt="Image 2"
         class="h-60 md:h-80 lg:h-96 w-[40vw] lg:w-[40vw] object-cover"
       />
       <Image
-        src={Tractor}
-        alt="Tractor"
+        src={image3}
+        alt="Image 3"
         class="h-60 md:h-80 lg:h-96 w-[40vw] lg:w-[30vw] object-cover"
       />
       <Image
-        src={SoyaBeans}
-        alt="Soya Beans"
+        src={image4}
+        alt="Image 4"
         class="h-60 md:h-80 lg:h-96 w-[40vw] lg:w-[30vw] object-cover"
       />
     </div>

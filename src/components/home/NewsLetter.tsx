@@ -105,7 +105,7 @@ export default function NewsLetter() {
           <div className="flex items-center justify-center w-full">
             <button
               disabled={!isEmailValid}
-              onChange={(e) => {
+              onClick={(e) => {
                 e.preventDefault();
                 handleButtonClick();
               }}

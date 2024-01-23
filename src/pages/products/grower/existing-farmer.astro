@@ -1,21 +1,113 @@
 ---
+import GrowerIndexLayout from "@layouts/GrowerIndexLayout.astro";
+
 import {
+  HowCFHelpsYou,
   LargeScaleFarmer,
+  SmallFarmerImpact,
   SmallHolderFarmer,
   BecomeAGrowerAgent,
+  PlatformOnboarding,
+  FarmManagerAcademy,
+  AllInOneFarmingSolution,
+  InterestedInBecomingAgent,
 } from "@components/products/grower";
-import GrowerIndexLayout from "@layouts/GrowerIndexLayout.astro";
+
+import Tractor from "@assets/images/products/grower/parallax-scroll/tractor.webp";
+import SoyaBeans from "@assets/images/products/grower/parallax-scroll/soya-beans.webp";
+import HarvestedProduce from "@assets/images/products/grower/sell-harvested-produce.png";
+import FarmWorker from "@assets/images/products/grower/parallax-scroll/farm-worker-2.webp";
+import ThreeFarmWorker from "@assets/images/products/grower/parallax-scroll/three-farm-workers.webp";
+import PrecisionFarming from "@assets/images/products/grower/how-cf-helps-your-farm/precision-farming.png";
+import PostHarvestSupport from "@assets/images/products/grower/how-cf-helps-your-farm/post-harvest-support.png";
+import PremiumMarketAccess from "@assets/images/products/grower/how-cf-helps-your-farm/premium-market-access.png";
+import DemandDrivenProduction from "@assets/images/products/grower/how-cf-helps-your-farm/demand-driven-production.png";
+
+const cfBenefits = [
+  {
+    id: 0,
+    img: DemandDrivenProduction.src,
+    title: "Demand-driven Production",
+    description:
+      "Get easy to implement crop production guidelines developed by our team of expert agronomists to help you increase your yield and deliver quality commodities while staying within budget.",
+  },
+  {
+    id: 1,
+    img: PrecisionFarming.src,
+    title: "Precision Farming",
+    description:
+      "Access precision farming tools powered by Information and satellite technology that allow real-time crop and farm management for optimum crop health and better decision-making.",
+  },
+  {
+    id: 2,
+    img: PostHarvestSupport.src,
+    title: "Post-harvest Support",
+    description:
+      "Access post-harvest handling and storage solutions for your crops and sell to reliable local and international buyers who pay immediately after you deliver your crops to the nearest fulfilment centre.",
+  },
+  {
+    id: 3,
+    img: PremiumMarketAccess.src,
+    title: "Premium Market Access",
+    description:
+      "Grow to fulfil purchase orders placed by our network of buyers and see in advance the price per tonne you’ll be paid after fulfilment.",
+  },
+];
 ---
 
 <GrowerIndexLayout
   title="Existing Farmer • Grower | Complete Farmer"
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
-  <div class="py-16 lg:py-36">
+  <div class="py-16 lg:py-36 overflow-hidden">
     <LargeScaleFarmer client:visible />
     <SmallHolderFarmer client:visible />
   </div>
   <BecomeAGrowerAgent />
+  <AllInOneFarmingSolution
+    type="existing"
+    image4={Tractor}
+    image3={SoyaBeans}
+    image1={FarmWorker}
+    image2={ThreeFarmWorker}
+    description="Take your farm to new heights and achieve the next level of growth in your farming business with the platform that equips you to grow and earn more with less. "
+  />
+  <HowCFHelpsYou
+    showBtn
+    client:visible
+    data={cfBenefits}
+    title="How Complete Farmer Grower helps you scale your farm for more profit"
+    description="The platform is equipped with a wide range of features aimed at helping you scale profitably and sustainably as a small or large-scale farmer."
+  />
+  <FarmManagerAcademy />
+  <SmallFarmerImpact client:visible />
+  <PlatformOnboarding />
+  <InterestedInBecomingAgent
+    image={HarvestedProduce}
+    titleColor="text-grower-500"
+    title="Looking to sell your <br /> harvested produce?"
+    button={{
+      href: "#",
+      bgColor: "bg-white",
+      textColor: "text-grower-500",
+    }}
+  />
 </GrowerIndexLayout>
 
 <!-- page: "/products/grower/existing-farmer", -->
+
+<script type="module" is:inline>
+  // @ts-nocheck
+  import { $getInTouchModal } from "../../src/utils/stores.ts";
+
+
+  const btn = document.getElementById("get-started");
+  const btn1 = document.getElementById("get-started-1");
+
+  btn.addEventListener("click", () => $getInTouchModal.set(true));
+
+  btn1.addEventListener("click", (e) => {
+    e.preventDefault()
+    $getInTouchModal.set(true)
+  });
+</script>

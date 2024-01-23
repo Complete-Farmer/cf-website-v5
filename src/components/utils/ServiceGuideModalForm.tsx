@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from "./Button";
+import type { IChangeEvent } from "types/app";
 
 interface IProps {
   data: {
@@ -16,7 +17,7 @@ function ServiceGuideModalForm({ data }: IProps) {
     email: "",
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: IChangeEvent) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -25,7 +26,7 @@ function ServiceGuideModalForm({ data }: IProps) {
     return formData.email.trim() !== "" && isEmailValid(formData.email);
   };
 
-  const isEmailValid = (email) => {
+  const isEmailValid = (email: string) => {
     return /\S+@\S+\.\S+/.test(email);
   };
 

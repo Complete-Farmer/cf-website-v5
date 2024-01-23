@@ -9,7 +9,7 @@ import InitialHero from "./InitialHero";
 import PlainTab from "@components/utils/PlainTab";
 import HeroRight from "@components/utils/HeroRight";
 
-import type { AsObject, ITab } from "types/app";
+import type { AsObject, IClickEvent, ITab } from "types/app";
 
 const initialTabs = [
   {
@@ -74,7 +74,7 @@ const Hero = () => {
     setIsFirstTime(isFirstTime);
   }, []);
 
-  const changeTab = (e, tab: ITab) => {
+  const changeTab = (e: IClickEvent, tab: ITab) => {
     e.preventDefault();
     const newTabs = tabs.map((item) => {
       if (item.name === tab.name) item.current = true;

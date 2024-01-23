@@ -1,21 +1,24 @@
-/* eslint-disable react/prop-types */
-import React, { useState } from "react";
+import { useState } from "react";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import "assets/styles/phonenumberinput.css";
-import ReactGA from "react-ga4";
 
-export default function BookDemo({ toggleModal, activeCategory }) {
-  const [value, setValue] = useState();
+interface IProps {
+  toggleModal: () => void;
+  activeCategory: string;
+}
+
+export default function BookDemo({ toggleModal, activeCategory }: IProps) {
+  const [value, setValue] = useState<string>();
 
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
-    phoneNumber: ""
+    phoneNumber: "",
   });
 
-  const handleSendEmail = (e) => {
+  const handleSendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!isFormValid()) {
@@ -25,7 +28,10 @@ export default function BookDemo({ toggleModal, activeCategory }) {
 
     handleButtonClick();
 
-    const emailTo = activeCategory === "Buyer" ? "buyer@completefarmer.com" : "grower@completefarmer.com";
+    const emailTo =
+      activeCategory === "Buyer"
+        ? "buyer@completefarmer.com"
+        : "grower@completefarmer.com";
     const subject = `Request for ${activeCategory} Demo`;
     const { firstName, lastName, email, phoneNumber } = formData;
 
@@ -43,43 +49,50 @@ export default function BookDemo({ toggleModal, activeCategory }) {
   Sincerely,
   [Your Name]
   `;
-    const mailtoLink = `mailto:${emailTo}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const mailtoLink = `mailto:${emailTo}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
 
     window.open(mailtoLink, "_blank");
   };
 
-  const handleValueChange = (newValue) => {
+  const handleValueChange = (newValue: string) => {
     setValue(newValue);
     setFormData({ ...formData, phoneNumber: newValue });
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData({ ...formData, [name]: value });
+  // };
 
   const isFormValid = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return formData.email.trim() !== "" && emailRegex.test(formData.email.trim());
+    return (
+      formData.email.trim() !== "" && emailRegex.test(formData.email.trim())
+    );
   };
 
   const handleButtonClick = () => {
-    ReactGA.event({
-      category: "Button Click",
-      action: "Submit"
-    });
+    // ReactGA.event({
+    //   category: "Button Click",
+    //   action: "Submit",
+    // });
 
     // window.metapixelfunction("submit", "book_demo", {});
 
-    window.dataLayer.push({
-      event: "book_demo"
-    });
+    // window.dataLayer.push({
+    //   event: "book_demo",
+    // });
   };
 
   return (
     <div className="w-2xl max-w-5xl isolate sm:w-full bg-white px-5 sm:px-6 py-8 sm:py-18 lg:px-12 sm:rounded-2xl">
       <div className="flex mx-auto text-center justify-end">
-        <p className="text-xl font-bold text-right text-custom_black-900 mt-1 hover:cursor-pointer" onClick={toggleModal}>
+        <p
+          className="text-xl font-bold text-right text-custom_black-900 mt-1 hover:cursor-pointer"
+          onClick={toggleModal}
+        >
           <svg
             width={24}
             height={24}
@@ -105,10 +118,16 @@ export default function BookDemo({ toggleModal, activeCategory }) {
           <br className="hidden lg:block" /> below so we can help you better.
         </p>
       </div>
-      <form onSubmit={handleSendEmail} className="mx-auto mt-6 max-w-xl sm:mt-10">
+      <form
+        onSubmit={handleSendEmail}
+        className="mx-auto mt-6 max-w-xl sm:mt-10"
+      >
         <div className="grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-2">
           <div>
-            <label htmlFor="firstName" className="text-custom_gray-300 block text-sm font-semibold leading-5">
+            <label
+              htmlFor="firstName"
+              className="text-custom_gray-300 block text-sm font-semibold leading-5"
+            >
               First Name <span className="text-[#EB2F2F]">*</span>
             </label>
             <div>
@@ -118,13 +137,18 @@ export default function BookDemo({ toggleModal, activeCategory }) {
                 id="firstName"
                 placeholder="Eg. John"
                 autoComplete="given-name"
-                onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, firstName: e.target.value })
+                }
                 className="block w-full h-14  bg-[#EFEFEF]  rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-custom_gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-base leading-6"
               />
             </div>
           </div>
           <div>
-            <label htmlFor="lastName" className="text-custom_gray-300 block text-sm font-semibold leading-5 ">
+            <label
+              htmlFor="lastName"
+              className="text-custom_gray-300 block text-sm font-semibold leading-5 "
+            >
               Last Name <span className="text-[#EB2F2F]">*</span>
             </label>
             <div>
@@ -134,14 +158,19 @@ export default function BookDemo({ toggleModal, activeCategory }) {
                 id="lastName"
                 placeholder="Eg. Doe"
                 autoComplete="family-name"
-                onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, lastName: e.target.value })
+                }
                 className="block w-full h-14 bg-[#EFEFEF]  rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-custom_gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-base leading-6"
               />
             </div>
           </div>
 
           <div className="col-span-2">
-            <label htmlFor="email" className="text-custom_gray-300 block text-sm font-semibold leading-5">
+            <label
+              htmlFor="email"
+              className="text-custom_gray-300 block text-sm font-semibold leading-5"
+            >
               Email <span className="text-[#EB2F2F]">*</span>
             </label>
             <div>
@@ -151,13 +180,18 @@ export default function BookDemo({ toggleModal, activeCategory }) {
                 id="email"
                 placeholder="example@company.com"
                 autoComplete="email"
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
                 className="block w-full h-14 bg-[#EFEFEF] rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-custom_gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-base leading-6"
               />
             </div>
           </div>
           <div className="col-span-2">
-            <label htmlFor="phoneNumber" className="text-custom_gray-300 block text-sm font-semibold leading-5">
+            <label
+              htmlFor="phoneNumber"
+              className="text-custom_gray-300 block text-sm font-semibold leading-5"
+            >
               Phone Number <span className="text-[#EB2F2F]">*</span>
             </label>
             <div className="relative ">
@@ -182,7 +216,7 @@ export default function BookDemo({ toggleModal, activeCategory }) {
           <button
             type="submit"
             disabled={!isFormValid()}
-            className="disabled:cursor-not-allowed block w-full rounded-md bg-grower-500 py-4 sm:px-3.5 py-2.5 text-center text-base leading-6 font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+            className="disabled:cursor-not-allowed block w-full rounded-md bg-grower-500 sm:px-3.5 py-2.5 text-center text-base leading-6 font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
           >
             <span className="lg:hidden">Submit</span>
             <span className="hidden lg:block">Submit</span>

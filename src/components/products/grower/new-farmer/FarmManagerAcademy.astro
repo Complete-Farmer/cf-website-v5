@@ -1,0 +1,65 @@
+---
+import { Image } from "astro:assets";
+
+import ManagerAcademy from "@assets/images/products/grower/farm-manager-academy.png";
+
+import { ArrowIcon } from "@assets/icons";
+
+---
+
+<div
+  class="w-full h-full bg-custom_orange-200 bg-farm-manager-academy-mobile md:bg-farm-manager-academy-tablet lg:bg-farm-manager-academy bg-center bg-cover bg-no-repeat flex flex-col p-4 md:p-10"
+>
+  <div
+    class="max-w-7xl w-full mx-auto flex flex-col-reverse md:flex-row justify-between items-center px-1 md:px-10 py-10 md:py-3"
+  >
+    <div class="flex flex-col justify-center items-start gap-2">
+      <p
+        class="text-[32px] lg:text-[40px] leading-10 lg:leading-[50px] font-bold text-center md:text-left text-grower-400 pb-6 pt-10 md:pt-0"
+      >
+        The Farm Manager Academy
+      </p>
+      <p class="text-xl text-center md:text-left text-grower-400">
+        <span
+          class="block md:hidden text-sm md:text-base lg:text-xl lg:leading-8 text-center md:text-left text-grower-400"
+        >
+          Build farm management expertise. Manage Farms. Earn with Complete
+          Farmer&nbsp;
+        </span>
+
+        <span
+          class="hidden md:block lg:hidden text-sm md:text-base lg:text-xl lg:leading-8 text-center md:text-left text-grower-400"
+        >
+          Build farm management expertise. Manage <br /> Farms. Earn with
+          Complete Farmer&nbsp;
+        </span>
+
+        <span
+          class="hidden lg:block text-sm md:text-base lg:text-xl lg:leading-8 text-center md:text-left text-grower-400"
+        >
+          Build farm management expertise.
+          <br />
+           Manage Farms. Earn with Complete Farmer&nbsp;
+        </span>
+      </p>
+
+      <div
+        class="flex justify-center items-center w-full md:w-fit gap-2 px-8 mt-4 py-4 rounded-full bg-grower-500"
+      >
+        <a
+          href="/products/grower/farm-manager-academy"
+          class="text-base font-bold text-left text-white"
+        >
+          Learn more
+        </a>
+        <ArrowIcon className="text-white" />
+      </div>
+    </div>
+
+    <Image
+      src={ManagerAcademy}
+      alt="Farm Manager Academy"
+      class="sm:h-[220px] lg:h-auto"
+    />
+  </div>
+</div>

@@ -4,9 +4,10 @@ import "@assets/styles/phonenumberinput.css";
 import { useState, useEffect } from "react";
 import PhoneInput from "react-phone-number-input";
 import { XMarkIcon } from "@heroicons/react/20/solid";
+import type { IChangeEvent, IClickEvent } from "types/app";
 
 export default function EstimateModal({ toggleModal }: { toggleModal: () => void; }) {
-  const [value, setValue] = useState();
+  const [value, setValue] = useState<string>();
   const [isLoading, setIsLoading] = useState(false);
   const [farmPlan, setFarmPlan] = useState(null);
   const [isValidEmail, setIsValidEmail] = useState(false);
@@ -22,16 +23,16 @@ export default function EstimateModal({ toggleModal }: { toggleModal: () => void
     setIsValidEmail(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email));
   }, [form.email]);
 
-  const handleValueChange = (newValue) => {
+  const handleValueChange = (newValue: string) => {
     setValue(newValue);
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: IChangeEvent) => {
     const { name, value } = e.target;
     setForm((prevForm) => ({ ...prevForm, [name]: value }));
   };
 
-  const handleGenerateFarmPlan = (e) => {
+  const handleGenerateFarmPlan = (e: IClickEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setTimeout(() => {

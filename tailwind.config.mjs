@@ -36,7 +36,7 @@ export default {
           600: "#1D1D1F",
         },
         custom_black: { 900: "#1D1D1F" },
-        custom_orange: { 500: "#E58C00" },
+        custom_orange: { 200: "#FFF3E0", 500: "#E58C00" },
         custom_white: { 900: "#E5E5E5", 300: "#FFF7EB" },
       },
       backgroundSize: {
@@ -52,6 +52,9 @@ export default {
         "interested-in-agent-mobile": "url('/src/assets/images/products/grower/interested-in-agent-mobile.webp')",
         "interested-in-agent-tablet": "url('/src/assets/images/products/grower/interested-in-agent-tablet.webp')",
         "interested-in-agent": "url('/src/assets/images/products/grower/interested-in-agent.webp')",
+        "farm-manager-academy-mobile": "url('/src/assets/images/products/grower/farm-manager-academy-mobile.webp')",
+        "farm-manager-academy-tablet": "url('/src/assets/images/products/grower/farm-manager-academy-tablet.webp')",
+        "farm-manager-academy": "url('/src/assets/images/products/grower/farm-manager-academy-desktop.webp')",
         "contact-us-bg": "url('/src/assets/images/contact-us/background-pattern.webp')",
       },
     },

@@ -12,7 +12,7 @@ function HeadingOneLine({
   titleFontSize = "text-2xl md:text-[40px] lg:text-5xl",
 }: IProps) {
   return (
-    <div className="relative mx-auto flex max-w-7xl flex-col items-center px-6 py-4 mt-12 text-center sm:py-2 lg:px-0">
+    <div className="relative mx-auto flex max-w-7xl flex-col items-center px-6 py-4 text-center sm:py-2 lg:px-0">
       <h1
         className={`md:px-16 lg:px-10 leading-[30px] md:leading-[50px] lg:leading-[60px] font-bold tracking-tight ${titleTextColor} ${titleFontSize}`}
       >

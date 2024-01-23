@@ -18,7 +18,7 @@ interface IProps {
   }[];
 }
 
-const GrowerCustomerStoriesBody = ({ stories }: IProps) => {
+const CustomerStoriesBody = ({ stories }: IProps) => {
   const [selectedData, setSelectedData] = useState(null);
   const [open, setOpen] = useState(false);
   const settings = {
@@ -135,4 +135,4 @@ const GrowerCustomerStoriesBody = ({ stories }: IProps) => {
   );
 };
 
-export default GrowerCustomerStoriesBody;
+export default CustomerStoriesBody;

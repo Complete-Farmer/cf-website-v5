@@ -1,22 +1,26 @@
 import React, { Fragment, useState } from "react";
 import { Dialog, Popover, Transition } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { useStore } from "@nanostores/react";
 
-// import { useGlobalContext } from "context/GlobalContext";
 import {
   BuyerGetInTouchModal,
   GrowerGetInTouchModal,
 } from "@components/modals/get-in-touch";
 
-import { companyLinks } from "@utils/constants";
 import { classNames } from "@utils/functions";
+import { $authModal, $getInTouchModal } from "@utils/stores";
 
-import { ArrowIcon, ChevronIcon } from "@assets/icons";
+import {
+  ArrowIcon,
+  ChevronIcon,
+  MenuCloseIcon,
+  MenuOpenIcon,
+} from "@assets/icons";
 import BuyerLogo from "@assets/images/logos/cf/buyer.png";
 import GrowerLogo from "@assets/images/logos/cf/grower.png";
-import MainLogo from "@assets/images/logos/cf/main.png";
 
 import Drawer from "./Drawer";
+import MobileMenu from "./MobileMenu";
 
 const config = [
   {
@@ -100,69 +104,22 @@ const config = [
   },
 ];
 
-const initialProducts = [
-  {
-    name: "CF Grower",
-    href: "/products/grower/new-farmer",
-    logo: GrowerLogo,
-  },
-  {
-    name: "CF Buyer",
-    href: "/products/buyer",
-    logo: BuyerLogo,
-  },
-];
-
 const drawerPropsData = {
   login: ["Login to CF Grower", "Login to CF Buyer"],
   signup: ["Create a CF Grower account", "Create a CF Buyer account"],
 };
 
 const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
-  const [isSignUpModalOpen, setSignUpModal] = useState(false);
+  const authModal = useStore($authModal);
+  const getInTouchModal = useStore($getInTouchModal);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [open, setOpen] = useState(false);
   const [drawerProps, setDrawerProps] = useState<string[]>(
     drawerPropsData.signup
   );
 
-  const isBuyer = pathname.includes("buyer");
-  const isNewFarmer = pathname.includes("new-farmer");
-  const isExistingFarmer = pathname.includes("existing-farmer");
-  const data = config[isBuyer ? 1 : 0];
-
-  const handleDrawer = (value: string) => {
-    if (value === "Login") setDrawerProps(drawerPropsData.login);
-    if (value === "SignUp") setDrawerProps(drawerPropsData.signup);
-
-    // Blur the background
-    (document.querySelector(".app-body") as HTMLElement).style.filter =
-      "blur(4px)";
-    (document.querySelector(".app-footer") as HTMLElement).style.filter =
-      "blur(4px)";
-    setSignUpModal(true);
-  };
-
-  const handleCloseDrawer = () => {
-    setSignUpModal(false);
-    // Unblur the background
-    (document.querySelector(".app-body") as HTMLElement).style.filter = "none";
-    (document.querySelector(".app-footer") as HTMLElement).style.filter =
-      "none";
-    setDrawerProps(drawerPropsData.signup); // Reset the drawer props to signup
-  };
-
-  const openMobileMenu = () => {
-    setMobileMenuOpen(true);
-  };
-
-  const navigateMobiles = () => {
-    setMobileMenuOpen(false);
-  };
-
-  const toggleModal = () => {
-    setOpen(!open);
-  };
+  const openMobileMenu = () => setMobileMenuOpen(true);
+  
+  const toggleModal = () => $getInTouchModal.set(!getInTouchModal);
 
   const handleButtonClick = () => {
     // ReactGA.event({
@@ -187,6 +144,33 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
     // ReactPixel.track("Page a", {});
   };
 
+  const handleDrawer = (value: string) => {
+    setMobileMenuOpen(false);
+    if (value === "Login") setDrawerProps(drawerPropsData.login);
+    if (value === "SignUp") setDrawerProps(drawerPropsData.signup);
+
+    // Blur the background
+    (document.querySelector(".app-body") as HTMLElement).style.filter =
+      "blur(4px)";
+    (document.querySelector(".app-footer") as HTMLElement).style.filter =
+      "blur(4px)";
+    $authModal.set(true);
+  };
+
+  const handleCloseDrawer = () => {
+    $authModal.set(false);
+    // Unblur the background
+    (document.querySelector(".app-body") as HTMLElement).style.filter = "none";
+    (document.querySelector(".app-footer") as HTMLElement).style.filter =
+      "none";
+    setDrawerProps(drawerPropsData.signup); // Reset the drawer props to signup
+  };
+
+  const isBuyer = pathname.includes("buyer");
+  const isNewFarmer = pathname.includes("new-farmer");
+  const isExistingFarmer = pathname.includes("existing-farmer");
+  const data = config[isBuyer ? 1 : 0];
+
   return (
     <>
       <div className="sticky top-0 z-50 w-full bg-white lg:border-b lg:border-10 lg:border-[#E6E6E6]">
@@ -197,8 +181,8 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
                 <a href="/" className="-m-1.5 p-1.5">
                   <img
                     src={data.logo.src}
+                    alt="Complete Farmer"
                     className="h-5 md:h-[30px]"
-                    alt={`complete farmer ${isBuyer ? "buyer" : "grower"} logo`}
                   />
                 </a>
               </span>
@@ -234,7 +218,11 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
                   <a
                     onClick={handleClick}
                     href={data.firstText.href}
-                    className={pathname === data.firstText.href ? "rounded-full bg-custom_gray-200 px-3 py-2" : ""}
+                    className={
+                      pathname === data.firstText.href
+                        ? "rounded-full bg-custom_gray-200 px-3 py-2"
+                        : ""
+                    }
                   >
                     <span className="text-base font-bold">
                       {data.firstText.name}
@@ -328,7 +316,7 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
                 Get in touch
               </button>
             </div>
-            <Transition.Root show={open} as={Fragment}>
+            <Transition.Root show={getInTouchModal} as={Fragment}>
               <Dialog as="div" className="relative z-10" onClose={toggleModal}>
                 <Transition.Child
                   as={Fragment}
@@ -382,7 +370,9 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
             <div
               className={`${
                 mobileMenuOpen ? "hidden" : "flex"
-              } justify-start items-center relative gap-1 px-3 py-2 rounded-full ${data.activeBgColor}`}
+              } justify-start items-center relative gap-1 px-3 py-2 rounded-full ${
+                data.activeBgColor
+              }`}
             >
               <button
                 onClick={() => {
@@ -403,7 +393,7 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
                 onClick={openMobileMenu}
               >
                 <span className="sr-only">Open main menu</span>
-                <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+                <MenuOpenIcon className="h-6 w-6" aria-hidden="true" />
               </button>
               <button
                 type="button"
@@ -413,127 +403,25 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
                 onClick={openMobileMenu}
               >
                 <span className="sr-only">Close menu</span>
-                <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                <MenuCloseIcon className="h-6 w-6" aria-hidden="true" />
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Moblile Menu */}
-      <Dialog
-        as="div"
-        className="lg:hidden"
-        open={mobileMenuOpen}
-        onClose={setMobileMenuOpen}
-      >
-        <div className="fixed inset-0 z-10" />
-        <Dialog.Panel className="fixed inset-y-0 right-0 z-[999] flex w-full flex-col justify-between[x] overflow-y-auto bg-white sm:max-w-sm[x]">
-          <div className="p-6 sm:px-12">
-            <div className="flex items-center justify-between">
-              <a href="/" className="-m-1.5 p-1.5">
-                <img src={MainLogo.src} />
-              </a>
-              <button
-                type="button"
-                className="lg:-m-2.5 rounded-md p-2.5 text-gray-700"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <span className="sr-only">Close menu</span>
-                <XMarkIcon className="h-6 w-6 sm:h-10" aria-hidden="true" />
-              </button>
-            </div>
-            <div className="sm:mt-3 flow-root">
-              <div className="-my-6 divide-y divide-gray-500/10">
-                <div className="space-y-2 py-6">
-                  <p className="-mx-3 block rounded-lg text-xs sm:text-sm px-3 pt-4 sm:pb-4 uppercase font-semibold leading-7 text-gray-600 hover:bg-gray-50">
-                    Products
-                  </p>
-                  {initialProducts.map((item) => (
-                    <div
-                      key={item.name}
-                      className="relative rounded-lg py-4 sm:py-6 hover:bg-gray-50 "
-                    >
-                      <a
-                        href={item.href}
-                        onClick={() => navigateMobiles()}
-                        className="block text-sm font-semibold leading-6"
-                      >
-                        <div className="flex justify-start">
-                          <img src={item.logo.src} />
-                        </div>
-                      </a>
-                    </div>
-                  ))}
-                </div>
-                <div className="space-y-2 py-6">
-                  <p className="-mx-3 block rounded-lg text-xs sm:text-sm px-3 py-2 sm:pt-4 uppercase font-semibold leading-7 text-gray-600 hover:bg-gray-50">
-                    Company
-                  </p>
-
-                  {companyLinks.map((item) => (
-                    <a
-                      href={item.href}
-                      onClick={() => navigateMobiles()}
-                      key={item.href}
-                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-normal leading-7 text-gray-900 hover:bg-gray-50"
-                    >
-                      {item.name}
-                    </a>
-                  ))}
-                </div>
-
-                <div className="w-full flex-col justify-start items-start py-2">
-                  {data.mobileTabs.map((item) => (
-                    <div
-                      key={item.name}
-                      className=" py-2 bg-white justify-start items-center "
-                    >
-                      <a href={item.href}>
-                        <div className="text-zinc-900 text-base  font-bold leading-loose">
-                          {item.name}
-                        </div>
-                      </a>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mb-10 flex mx-5 sm:mx-12 mt-5 sm:pt-8 flex-col sm:flex-row gap-4 sm:gap-6 lg:divide-x lg:border pt-6 divide-gray-900/5 bg-white text-center">
-            <button
-              onClick={() => {
-                handleDrawer("Login");
-                setMobileMenuOpen(false);
-              }}
-              className={classNames(
-                [data.activeTextColor, data.activeBorderColor].join(" "),
-                "block w-full order-2 sm:order-1 mx-auto rounded-md border px-3.5 py-3.5 sm:py-5 text-center text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
-              )}
-            >
-              Login
-            </button>
-            <button
-              onClick={() => {
-                handleDrawer("SignUp");
-                setMobileMenuOpen(false);
-              }}
-              className={classNames(
-                data.activeBgColor,
-                "block w-full mx-auto order-1 sm:order-2 rounded-md px-3.5 py-3.5 sm:py-5 text-center text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
-              )}
-            >
-              Sign up
-            </button>
-          </div>
-        </Dialog.Panel>
-      </Dialog>
+      <MobileMenu
+        isOpen={mobileMenuOpen}
+        handleDrawer={handleDrawer}
+        mobileTabs={data.mobileTabs}
+        type={isBuyer ? "buyer" : "grower"}
+        onClose={() => setMobileMenuOpen(false)}
+      />
 
       <Drawer
-        drawerOpen={isSignUpModalOpen}
-        handleCloseDrawer={handleCloseDrawer}
+        drawerOpen={authModal}
         drawerProps={drawerProps}
+        handleCloseDrawer={handleCloseDrawer}
       />
     </>
   );

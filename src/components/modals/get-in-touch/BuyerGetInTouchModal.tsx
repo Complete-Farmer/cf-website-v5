@@ -8,7 +8,8 @@ import { XMarkIcon } from "@heroicons/react/20/solid";
 import BuyerGetInTouchTab from "./BuyerGetInTouchTab";
 import CalendlyIntegration from "./CalendlyIntegration";
 
-import {ChevronIcon} from "@assets/icons";
+import { ChevronIcon } from "@assets/icons";
+import type { IClickEvent } from "types/app";
 // import FileIcon from "@assets/icons/file-alt.svg";
 
 // import ReactGA from "react-ga4";
@@ -76,9 +77,7 @@ function BuyerGetInTouchModal({ toggleModal }: { toggleModal: () => void }) {
     setEmail(e.target.value);
   };
 
-  const handleButtonClick = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  const handleButtonClick = (e: IClickEvent) => {
     e.preventDefault();
 
     if (!isValidEmail) {
