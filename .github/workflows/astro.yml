@@ -66,8 +66,6 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
         working-directory: ${{ env.BUILD_PATH }}
-      - name: Check Env Loaded
-        run: echo "My FMS_API secret is ${{ env.FMS_API }}"
       - name: Build with Astro
         run: |
           ${{ steps.detect-package-manager.outputs.runner }} astro build
@@ -85,6 +83,7 @@ jobs:
     - uses: actions/checkout@v4
       # - uses: actions/checkout@master
     - uses: jakejarvis/s3-sync-action@master
+      run: echo "My FMS_API secret is ${{ env.FMS_API }}"
       with:
         args: --acl public-read --follow-symlinks --delete
       env:
