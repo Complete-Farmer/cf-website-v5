@@ -26,10 +26,15 @@ concurrency:
 
 env:
   BUILD_PATH: "." # default value when not using subfolders
-  # BUILD_PATH: subfolder
+  FMS_API: ${{ secrets.FMS_API }}
+  BOT_PASS: ${{ secrets.BOT_PASS }}
+  BOT_EMAIL: ${{ secrets.BOT_EMAIL }}
+  PUBLIC_ENV: ${{ secrets.PUBLIC_ENV }}
+  PUBLIC_PRISM_ACCESS_TOKEN: ${{ secrets.PUBLIC_PRISM_ACCESS_TOKEN }}
 
 jobs:
   build:
+    environment: dev
     name: Build
     runs-on: ubuntu-latest
     steps:
