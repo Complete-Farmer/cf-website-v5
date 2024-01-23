@@ -14,9 +14,9 @@ import TazaPay from "@assets/images/logos/partners/tazapay.png";
 import Ingressive from "@assets/images/logos/partners/ingressive.png";
 import FreezeLink from "@assets/images/logos/partners/freezelink.png";
 
-import { getCxStories } from '@utils/prismic';
+import { getCxStories } from "@utils/prismic";
 
-const customerStories = await getCxStories({ fetchLinks: ["categories.name"] })
+const customerStories = await getCxStories({ fetchLinks: ["categories.name"] });
 const assets = [Mest, TazaPay, FreezeLink, Ingressive];
 ---
 
@@ -24,7 +24,7 @@ const assets = [Mest, TazaPay, FreezeLink, Ingressive];
   title="Home | Complete Farmer"
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
-  <Hero client:load/>
+  <Hero client:load />
   <Partners client:only="react" assets={assets} bgColor="bg-nenutral-50" />
   <FasterGrowth client:visible />
   <Parallax />
@@ -32,6 +32,9 @@ const assets = [Mest, TazaPay, FreezeLink, Ingressive];
   <Section client:visible />
   <NewsLetter client:visible />
 </Layouts>
+
+<script async is:inline type="text/javascript" src="/simpleParallax.min.js"
+></script>
 
 <script type="text/javascript">
   window.dataLayer.push({

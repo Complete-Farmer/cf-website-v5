@@ -1,4 +1,6 @@
 ---
+import type { IAvailableDemands } from "types/app";
+
 import GrowerIndexLayout from "@layouts/GrowerIndexLayout.astro";
 
 import {
@@ -12,6 +14,10 @@ import {
   AllInOneFarmingSolution,
   InterestedInBecomingAgent,
 } from "@components/products/grower";
+
+import AvailableOrders from "@components/utils/AvailableOrders";
+import { convertToKebabCase } from "@utils/functions";
+import { getAvaiableCrops, getCropVarieties } from "@utils/api";
 
 import Tractor from "@assets/images/products/grower/parallax-scroll/tractor.webp";
 import SoyaBeans from "@assets/images/products/grower/parallax-scroll/soya-beans.webp";
@@ -53,6 +59,23 @@ const cfBenefits = [
       "Grow to fulfil purchase orders placed by our network of buyers and see in advance the price per tonne you’ll be paid after fulfilment.",
   },
 ];
+
+const availableDemands: IAvailableDemands[] = [];
+
+const { statusCode, data } = await getAvaiableCrops();
+
+if (statusCode == 200) {
+  for (const c of data) {
+    const response = await getCropVarieties(c._id);
+    if (response.statusCode == 200 && response.data.length > 0) {
+      availableDemands.push({
+        ...c,
+        varieties: response.data.map((v) => v.name),
+        link: `/products/grower/crops/${convertToKebabCase(c.name)}`,
+      });
+    }
+  }
+}
 ---
 
 <GrowerIndexLayout
@@ -82,6 +105,18 @@ const cfBenefits = [
   <FarmManagerAcademy />
   <SmallFarmerImpact client:visible />
   <PlatformOnboarding />
+  {
+    availableDemands.length > 0 && (
+      <AvailableOrders
+        client:visible
+        cardType="grower"
+        data={availableDemands}
+        bgColor="bg-grower-200"
+        titleTextColor="text-grower-400"
+        title="See what other farmers are growing"
+      />
+    )
+  }
   <InterestedInBecomingAgent
     image={HarvestedProduce}
     titleColor="text-grower-500"

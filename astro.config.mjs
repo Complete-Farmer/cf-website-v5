@@ -9,7 +9,8 @@ import partytown from "@astrojs/partytown";
 export default defineConfig({
   output: "static",
   build: {
-    format: "file"
+    format: "directory",
+    assets: "cfv5"
   },
   site: "https://www.completefarmer.com",
   redirects: {

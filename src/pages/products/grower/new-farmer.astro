@@ -14,10 +14,9 @@ import {
 } from "@components/products/grower";
 
 import AvailableOrders from "@components/utils/AvailableOrders";
-
-import { getCxStories, getCategories, filterAt } from "@utils/prismic";
-import { getAvaiableCrops, getCropVarieties } from "@utils/api";
 import { convertToKebabCase } from "@utils/functions";
+import { getAvaiableCrops, getCropVarieties } from "@utils/api";
+import { getCxStories, getCategories, filterAt } from "@utils/prismic";
 
 import BecomeAgent from "@assets/images/products/grower/become-an-agent.png";
 import Tractor from "@assets/images/products/grower/parallax-scroll/tractor.webp";
@@ -27,7 +26,6 @@ import TwoFarmWorker from "@assets/images/products/grower/parallax-scroll/two-fa
 import ArgonomicSupport from "@assets/images/products/grower/how-cf-helps-your-farm/agronomic-support.png";
 import PremiumMarketAccess from "@assets/images/products/grower/how-cf-helps-your-farm/premium-market-access.png";
 import ManagementSolution from "@assets/images/products/grower/how-cf-helps-your-farm/farm-management-solution.png";
-import { c } from "vitest/dist/reporters-5f784f42.js";
 
 const cfBenefits = [
   {
@@ -67,7 +65,7 @@ const customerStories = await getCxStories({
   fetchLinks: ["categories.name"],
 });
 
-const availableCrops: IAvailableDemands[] = [];
+const availableDemands: IAvailableDemands[] = [];
 
 const { statusCode, data } = await getAvaiableCrops();
 
@@ -75,7 +73,7 @@ if (statusCode == 200) {
   for (const c of data) {
     const response = await getCropVarieties(c._id);
     if (response.statusCode == 200 && response.data.length > 0) {
-      availableCrops.push({
+      availableDemands.push({
         ...c,
         varieties: response.data.map((v) => v.name),
         link: `/products/grower/crops/${convertToKebabCase(c.name)}`,
@@ -121,18 +119,18 @@ if (statusCode == 200) {
       <CustomerStories client:only="react" data={customerStories} />
     )
   }
-  {
-    availableCrops.length > 0 && (
-      <AvailableOrders
-        client:visible
-        cardType="grower"
-        data={availableCrops}
-        bgColor="bg-grower-200"
-        titleTextColor="text-grower-400"
-        title="See what other farmers are growing"
-      />
-    )
-  }
+    {
+      availableDemands.length > 0 && (
+        <AvailableOrders
+          client:visible
+          cardType="grower"
+          data={availableDemands}
+          bgColor="bg-grower-200"
+          titleTextColor="text-grower-400"
+          title="See what other farmers are growing"
+        />
+      )
+    }
 </GrowerIndexLayout>
 
 <!-- page: "/products/grower/new-farmer", -->
