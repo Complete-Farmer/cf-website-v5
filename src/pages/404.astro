@@ -1,0 +1,48 @@
+---
+import { Image } from "astro:assets";
+
+import Layouts from "@layouts/Layouts.astro";
+
+import Image404 from "@assets/images/404/404.png";
+import ImageDisc from "@assets/images/404/disconneted.png";
+import Button from "@components/utils/Button";
+---
+
+<Layouts
+  title="404 | Complete Farmer"
+  description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
+>
+  <div
+    class="h-screen lg:px-24 md:px-44 px-4 items-center flex justify-center flex-col-reverse lg:flex-row md:gap-28 gap-16"
+  >
+    <div class="w-full xl:w-1/2 relative pb-12 lg:pb-0">
+      <div class="relative">
+        <div class="absolute">
+          <div class="space-y-4">
+            <h1
+              class="my-2 text-gray-800 font-bold text-2xl lg:text-[60px] leading-[60px]"
+            >
+              Looks like you've found the doorway to the great nothing
+            </h1>
+            <p class="my-2 text-gray-800">
+              Sorry about that! Please visit our hompage to get where you need
+              to go.
+            </p>
+            <a href="/" class="w-44 block">
+              <Button
+                title="Take me there!"
+                className="py-4 bg-grower-500 shadow-md"
+              />
+            </a>
+          </div>
+        </div>
+        <div>
+          <Image src={Image404} alt="404" />
+        </div>
+      </div>
+    </div>
+    <div>
+      <Image src={ImageDisc} alt="Disconneted" />
+    </div>
+  </div>
+</Layouts>

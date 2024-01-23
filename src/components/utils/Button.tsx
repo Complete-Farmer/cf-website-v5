@@ -1,16 +1,23 @@
+import { classNames } from "@utils/functions";
+import type { IClickEvent } from "types/app";
 interface IProps {
+  id?: string;
   title: string;
-  bgColor: string;
-  isDisabled: boolean;
+  bgColor?: string;
+  className?: string
+  isDisabled?: boolean;
+  onClick?: (e: IClickEvent) => void;
   type?: "submit" | "reset" | "button";
 }
 
-const Button = ({ type, title, bgColor, isDisabled }: IProps) => {
+const Button = ({ id, type = "button", title, onClick, bgColor, className, isDisabled = false }: IProps) => {
   return (
     <button
+      id={id}
       type={type}
+      onClick={onClick}
       disabled={isDisabled}
-      className={`disabled:cursor-not-allowed w-full px-2 py-2.5 font-medium text-white ${bgColor} rounded-lg `}
+      className={classNames(className, bgColor, "disabled:cursor-not-allowed w-full px-2 py-2.5 font-medium text-white rounded-lg")} 
     >
       {title}
     </button>
