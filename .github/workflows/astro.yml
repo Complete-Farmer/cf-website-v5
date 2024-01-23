@@ -71,8 +71,6 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
         working-directory: ${{ env.BUILD_PATH }}
-      - name: Check Env Loaded
-        run: echo "My AWS_S3_BUCKET {{ env.AWS_S3_BUCKET }} secret is ${{ secrets.AWS_S3_BUCKET }}"
       - name: Build with Astro
         run: |
           ${{ steps.detect-package-manager.outputs.runner }} astro build
@@ -83,14 +81,14 @@ jobs:
           name: Sanctuary Bundle
           path: ${{ env.BUILD_PATH }}/dist
   deploy:
+    environment: dev
     needs: build
     runs-on: ubuntu-latest
     name: Deploy
     steps:
     - name: Check Env Loaded
-      run: echo "My AWS_S3_BUCKET {{ env.AWS_S3_BUCKET }} secret is ${{ secrets.AWS_S3_BUCKET }}"
-    - uses: actions/checkout@v4
-      # - uses: actions/checkout@master
+      run: echo "My AWS_S3_BUCKET ${{ env.AWS_S3_BUCKET }} secret is ${{ secrets.AWS_S3_BUCKET }}"
+    - uses: actions/checkout@master
     - uses: jakejarvis/s3-sync-action@master
       with:
         args: --acl public-read --follow-symlinks --delete
