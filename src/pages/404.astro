@@ -2,10 +2,11 @@
 import { Image } from "astro:assets";
 
 import Layouts from "@layouts/Layouts.astro";
+import { Button } from "@components/utils";
+
 
 import Image404 from "@assets/images/404/404.png";
 import ImageDisc from "@assets/images/404/disconneted.png";
-import Button from "@components/utils/Button";
 ---
 
 <Layouts
@@ -13,14 +14,14 @@ import Button from "@components/utils/Button";
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
   <div
-    class="h-screen lg:px-24 md:px-44 px-4 items-center flex justify-center flex-col-reverse lg:flex-row md:gap-28 gap-16"
+    class="lg:h-[90vh] lg:px-24 md:px-44 px-4 items-center flex justify-center flex-col-reverse lg:flex-row md:gap-28 gap-16"
   >
     <div class="w-full xl:w-1/2 relative pb-12 lg:pb-0">
       <div class="relative">
-        <div class="absolute">
+        <div class="absolute -top-28">
           <div class="space-y-4">
             <h1
-              class="my-2 text-gray-800 font-bold text-2xl lg:text-[60px] leading-[60px]"
+              class="my-2 text-gray-800 font-bold text-2xl lg:text-[60px] lg:leading-[60px]"
             >
               Looks like you've found the doorway to the great nothing
             </h1>
@@ -30,19 +31,19 @@ import Button from "@components/utils/Button";
             </p>
             <a href="/" class="w-44 block">
               <Button
-                title="Take me there!"
-                className="py-4 bg-grower-500 shadow-md"
+                title="Go Home"
+                className="py-4 shadow-md"
               />
             </a>
           </div>
         </div>
         <div>
-          <Image src={Image404} alt="404" />
+          <Image src={Image404} alt="404" class="w-72 lg:w-fit" />
         </div>
       </div>
     </div>
     <div>
-      <Image src={ImageDisc} alt="Disconneted" />
+      <Image src={ImageDisc} alt="Disconneted" class="w-56 pb-14 lg:w-fit lg:pb-0" />
     </div>
   </div>
 </Layouts>

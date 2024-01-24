@@ -12,3 +12,9 @@ interface ImportMetaEnv {
   readonly PUBLIC_GOOGLE_TAG_MANAGER_ID: string;
   // more env variables...
 }
+
+declare module "*.astro" {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function Component (_props: Record<string, any>): any
+  export default Component;
+}

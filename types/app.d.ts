@@ -70,7 +70,4 @@ export type IChangeEvent = React.ChangeEvent<HTMLInputElement>
 
 export type ISubmitEvent = React.FormEvent<HTMLFormElement>
 
-// declare module "../../src/utils/stores.ts" {
-//   export const $authModal: WritableAtom<boolean>;
-//   export const $getInTouchModal: WritableAtom<boolean>;
-// }
+

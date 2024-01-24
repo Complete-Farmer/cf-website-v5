@@ -10,7 +10,7 @@ interface IProps {
   setSelected: (e: IItem) => void;
 }
 
-export default function SelectInputCrop({
+export default function Selector({
   selected,
   setSelected,
   options: items,

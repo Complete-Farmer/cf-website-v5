@@ -1,11 +1,10 @@
 import React, { Fragment, useState } from "react";
-import { Dialog, Popover, Transition } from "@headlessui/react";
+import { Popover, Transition } from "@headlessui/react";
 import { useStore } from "@nanostores/react";
 
-import {
-  BuyerGetInTouchModal,
-  GrowerGetInTouchModal,
-} from "@components/modals/get-in-touch";
+import { Wrapper } from "@components/utils";
+import { BuyerGetInTouch } from "@components/products/buyer";
+import { GrowerGetInTouch } from "@components/products/grower";
 
 import { classNames } from "@utils/functions";
 import { $authModal, $getInTouchModal } from "@utils/stores";
@@ -85,7 +84,7 @@ const config = [
       { name: "Resources", href: "/products/buyer/resources" },
       { name: "Sales affiliate", href: "/products/buyer/sales" },
       { name: "Home", href: "/" },
-      { name: "Grower", href: "/products/grower" },
+      { name: "Grower", href: "/products/grower/new-farmer" },
     ],
     mobileTabs: [
       {
@@ -316,43 +315,18 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
                 Get in touch
               </button>
             </div>
-            <Transition.Root show={getInTouchModal} as={Fragment}>
-              <Dialog as="div" className="relative z-10" onClose={toggleModal}>
-                <Transition.Child
-                  as={Fragment}
-                  enter="ease-out duration-300"
-                  enterFrom="opacity-0"
-                  enterTo="opacity-100"
-                  leave="ease-in duration-200"
-                  leaveFrom="opacity-100"
-                  leaveTo="opacity-0"
-                >
-                  <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-                </Transition.Child>
 
-                <div className="fixed inset-0 z-10 overflow-y-auto">
-                  <div className="flex min-h-full w-xl items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                    <Transition.Child
-                      as={Fragment}
-                      enter="ease-out duration-300"
-                      enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                      enterTo="opacity-100 translate-y-0 sm:scale-100"
-                      leave="ease-in duration-200"
-                      leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-                      leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                    >
-                      <Dialog.Panel className="flex w-full h-55vh transform text-base transition md:my-20 md:max-w-2xl md:px-4 lg:max-w-3xl">
-                        {isBuyer ? (
-                          <BuyerGetInTouchModal toggleModal={toggleModal} />
-                        ) : (
-                          <GrowerGetInTouchModal toggleModal={toggleModal} />
-                        )}
-                      </Dialog.Panel>
-                    </Transition.Child>
-                  </div>
-                </div>
-              </Dialog>
-            </Transition.Root>
+            <Wrapper
+              isOpen={getInTouchModal}
+              onClose={() => $getInTouchModal.set(false)}
+              className="flex w-full h-55vh transform text-base transition md:my-20 md:max-w-2xl md:px-4 lg:max-w-3xl"
+            >
+              {isBuyer ? (
+                <BuyerGetInTouch toggleModal={toggleModal} />
+              ) : (
+                <GrowerGetInTouch toggleModal={toggleModal} />
+              )}
+            </Wrapper>
             <div className="hidden sm:flex justify-start items-center relative gap-1 px-4 py-2 rounded-full bg-white">
               <button
                 onClick={() => {

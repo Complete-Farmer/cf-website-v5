@@ -1,10 +1,9 @@
 import { useState } from "react";
 
-import EstimateModal from "@components/modals/EstimateModal";
-import SelectInput from "@components/utils/SelectInput";
-
 import ComimgSoon from "@assets/images/products/grower/coming-soon.png";
-import ModalWrapper from "@components/modals/Wrapper";
+
+import EstimateModal from "./EstimateModal";
+import { Button, Wrapper, Selector } from "@components/utils";
 
 const items = [
   { id: 1, name: "Soybean" },
@@ -70,7 +69,7 @@ export default function Estimate() {
                         >
                           Select crop to farm
                         </label>
-                        <SelectInput
+                        <Selector
                           options={items}
                           selected={selected}
                           setSelected={setSelected}
@@ -102,20 +101,17 @@ export default function Estimate() {
                         >
                           Select duration
                         </label>
-                        <SelectInput
+                        <Selector
                           options={estimate}
                           selected={estimated}
                           setSelected={setEstimated}
                         />
                       </div>
                       <div className="sm:col-span-12 mt-4">
-                        <button
-                          type="submit"
+                        <Button
                           onClick={toggleModal}
-                          className="w-full px-2 py-4 font-semibold text-white bg-grower-500 rounded-full"
-                        >
-                          Get the farm plan
-                        </button>
+                          title="Get the farm plan"
+                        />
                       </div>
                     </div>
                   </form>
@@ -135,13 +131,13 @@ export default function Estimate() {
         </div>
       </div>
 
-      <ModalWrapper
+      <Wrapper
         isOpen={open}
         onClose={() => toggleModal()}
         className="flex w-full h-full transform text-left text-base transition md:my-20 md:max-w-2xl md:px-4 lg:max-w-2xl"
       >
         <EstimateModal toggleModal={toggleModal} />
-      </ModalWrapper>
+      </Wrapper>
     </section>
   );
 }

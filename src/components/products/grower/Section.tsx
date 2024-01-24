@@ -2,11 +2,12 @@ import { useState } from "react";
 
 import { NewpaperIcon, ContentIcon, ServiceGuideIcon } from "@assets/icons";
 
-import ModalWrapper from "@components/modals/Wrapper";
-
-import SectionList from "@components/utils/SectionList";
-import NewsLetterModalForm from "@components/utils/NewsLetterModalForm";
-import ServiceGuideModalForm from "@components/utils/ServiceGuideModalForm";
+import {
+  Wrapper,
+  SectionList,
+  NewsletterForm,
+  ServiceGuideForm,
+} from "@components/utils";
 
 export default function Section() {
   const [open, setOpen] = useState(false);
@@ -19,22 +20,6 @@ export default function Section() {
   const openModal = (name: string) => {
     toggleModal();
     setActive(name);
-  };
-
-  const propsData = {
-    newsLetter: {
-      title: "Join our newsletter",
-      description: "",
-      buttonText: "Subscribe",
-      buttonBg: "bg-grower-500",
-    },
-    serviceGuide: {
-      title: "CF Grower Service Guide",
-      description:
-        "Provide just a couple of details and you’ll get the CF Grower Guide PDF delivered straight to your inbox",
-      buttonText: "Send me a service guide",
-      buttonBg: "bg-grower-500",
-    },
   };
 
   const incentives = [
@@ -67,16 +52,21 @@ export default function Section() {
   return (
     <div>
       <SectionList incentives={incentives} />
-      <ModalWrapper isOpen={open} onClose={() => toggleModal()}>
+      <Wrapper isOpen={open} onClose={() => toggleModal()}>
         {active === "Newsletter" ? (
-          <NewsLetterModalForm
-            data={propsData.newsLetter}
+          <NewsletterForm
             tag="7931902"
+            buttonBg="bg-grower-500"
+            onClose={() => toggleModal()}
           />
         ) : (
-          <ServiceGuideModalForm data={propsData.serviceGuide} />
+          <ServiceGuideForm
+            product="Buyer"
+            buttonBg="bg-grower-500"
+            onClose={() => toggleModal()}
+          />
         )}
-      </ModalWrapper>
+      </Wrapper>
     </div>
   );
 }

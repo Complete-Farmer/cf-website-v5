@@ -6,7 +6,7 @@ import ReactPlayer from "react-player";
 import Slider from "react-slick";
 
 import { PlayIcon } from "@assets/icons";
-import ModalWrapper from "@components/modals/Wrapper";
+import { Wrapper } from "@components/utils";
 
 interface IProps {
   stories: {
@@ -124,13 +124,13 @@ const CustomerStoriesBody = ({ stories }: IProps) => {
         </Slider>
       </div>
 
-      <ModalWrapper
+      <Wrapper
         isOpen={open}
         onClose={() => setOpen(false)}
-        className="flex w-[426px] h-[240px]  md:w-[640px] md:h-[360px] xl:w-[1280px] xl:h-[720px] relative transform overflow-hidden text-left text-base transition-all mx-auto lg:max-w-7xl"
+        className="flex w-[426px] h-[240px] md:w-[640px] md:h-[360px] xl:w-[1280px] xl:h-[720px] relative transform overflow-hidden text-left text-base transition-all mx-auto lg:max-w-7xl"
       >
         <ReactPlayer url={selectedData} width="100%" height="100%" />
-      </ModalWrapper>
+      </Wrapper>
     </div>
   );
 };

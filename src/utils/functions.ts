@@ -1,5 +1,5 @@
 import jsonp from "jsonp";
-import { PUBLIC_ENV } from "./constants";
+import { ENV } from "./constants";
 
 export function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -8,7 +8,7 @@ export function classNames(...classes: string[]) {
 export const getLink = (text: string) => {
   let product = "grower";
   const pathname = text.includes("Login") ? "login" : "signup";
-  
+
   if (text.includes("Buyer")) {
     product = "buyer";
   }
@@ -18,7 +18,7 @@ export const getLink = (text: string) => {
   }
 
   const url = `https://${
-    product + (PUBLIC_ENV === "DEV" ? ".test" : "")
+    product + (ENV === "DEV" ? ".test" : "")
   }.completefarmer.com/`;
 
   return url + pathname;
@@ -49,7 +49,7 @@ export const formatDateWithCommas = (dateString: string) => {
   const formattedDate = new Date(dateString).toLocaleDateString(undefined, {
     year: "numeric",
     month: "short",
-    day: "numeric"
+    day: "numeric",
   });
   return formattedDate;
 };
@@ -63,7 +63,8 @@ export function getYouTubeThumbnailUrl(url: string) {
 
     if (videoId && videoId[1]) {
       // If video ID is found, construct and return the thumbnail URL
-      const thumbnailUrl = "https://img.youtube.com/vi/" + videoId[1] + "/maxresdefault.jpg";
+      const thumbnailUrl =
+        "https://img.youtube.com/vi/" + videoId[1] + "/maxresdefault.jpg";
       return thumbnailUrl;
     } else {
       // Invalid YouTube URL

@@ -1,8 +1,10 @@
 export { default as NextIcon } from "./next";
+export { default as FileIcon } from "./file";
 export { default as FlagIcon } from "./flag";
 export { default as PlayIcon } from "./play";
 export { default as ArrowIcon } from "./arrow";
 export { default as CaretIcon } from "./caret";
+export { default as UploadIcon } from "./upload";
 export { default as MarketIcon } from "./market";
 export { default as FruitsIcon } from "./fruits";
 export { default as FreeIcon } from "./freeIcon";

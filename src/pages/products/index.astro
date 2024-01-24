@@ -1,14 +1,11 @@
 ---
 import Layouts from "@layouts/Layouts.astro";
-
-import { Hero } from "@components/products/buyer";
+import Main from "@components/products/Main";
 ---
 
 <Layouts
-  title="Buyer | Complete Farmer"
+  title="Products | Complete Farmer"
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
- <Hero client:load />
+  <Main client:load />
 </Layouts>
-
-<!-- page: "/products/buyer", -->

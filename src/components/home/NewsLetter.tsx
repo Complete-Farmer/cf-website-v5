@@ -10,6 +10,8 @@ import DesktopBackground from "@assets/images/home/newsletter-bg-desktop.webp";
 import { useResolution } from "@hooks/useResolution";
 import { onMailChimpSubmit } from "@utils/functions";
 
+import { Button, Input } from "@components/utils";
+
 export default function NewsLetter() {
   const activeBgColor = "bg-grower-500";
   const { screenType } = useResolution();
@@ -85,34 +87,29 @@ export default function NewsLetter() {
         <p className="text-xl font-bold text-center text-custom_black-900 sm:text-[32px] lg:text-5xl">
           Subscribe to our newsletters.
         </p>
-        <div className="flex flex-col lg:flex-row justify-center items-center relative gap-3 md:gap-4">
-          <div className="sm:col-span-2">
-            <div className="">
-              <input
-                required
-                type="email"
-                name="EMAIL"
-                id="mce-EMAIL"
-                value={email}
-                autoComplete="email"
-                onChange={handleEmailChange}
-                placeholder="Enter email address"
-                className="block w-80 sm:w-[608px] rounded-md border-0 px-3.5 sm:h-[56px] lg:w-[500px] py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              />
-            </div>
-          </div>
+        <div className="flex flex-col lg:flex-row justify-between items-center w-full lg:w-1/3 gap-2 sm:gap-4">
+          <Input
+            required
+            id="email"
+            name="email"
+            type="email"
+            value={email}
+            autoComplete="email"
+            onChange={handleEmailChange}
+            placeholder="Enter email address"
+          />
 
-          <div className="flex items-center justify-center w-full">
-            <button
-              disabled={!isEmailValid}
+          <div className="">
+            <Button
+              title="Subscribe"
+              // isLoading={isLoading}
               onClick={(e) => {
                 e.preventDefault();
                 handleButtonClick();
               }}
-              className={`${activeBgColor} disabled:cursor-not-allowed w-full h-14 sm:w-40[x] sm:w-[605px] sm:h-16 lg:w-[139px] lg:h-[56px] sm:text-base sm:font-bold sm:mr-0 inline-flex items-center justify-center px-6 mt-4 lg:mt-0 sm:mr-6[x] font-medium tracking-wide text-white transition duration-200 rounded-lg focus:shadow-outline focus:outline-none`}
-            >
-              Subscribe
-            </button>
+              isDisabled={!isEmailValid}
+              className={`!${activeBgColor} w-full h-14 sm:w-40[x] sm:w-[605px] sm:h-16 lg:w-[139px] lg:h-[56px] sm:text-base`}
+            />
             <ToastContainer hideProgressBar />
           </div>
         </div>

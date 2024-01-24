@@ -1,5 +1,5 @@
 export const productsLinks = [
-  { name: "Grower", href: "/products/grower" },
+  { name: "Grower", href: "/products/grower/new-farmer" },
   { name: "Buyer", href: "/products/buyer" },
 ];
 
@@ -22,10 +22,10 @@ export const legalLinks = [
   { name: "Terms & Conditions", href: "/legal/terms-and-conditions" },
 ];
 
+export const ENV = import.meta.env.PUBLIC_ENV;
 export const FMS_API = import.meta.env.FMS_API;
 export const BOT_PASS = import.meta.env.BOT_PASS;
 export const BOT_EMAIL = import.meta.env.BOT_EMAIL;
-export const PUBLIC_ENV = import.meta.env.PUBLIC_ENV;
 export const FACEBOOK_PIXEL_ID = import.meta.env.PUBLIC_FACEBOOK_PIXEL_ID;
 export const PRISM_ACCESS_TOKEN = import.meta.env.PUBLIC_PRISM_ACCESS_TOKEN;
 export const GLOBAL_SITE_TAG_ID = import.meta.env.PUBLIC_GLOBAL_SITE_TAG_ID;

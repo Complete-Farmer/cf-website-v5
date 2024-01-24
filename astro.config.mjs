@@ -10,11 +10,11 @@ export default defineConfig({
   output: "static",
   build: {
     format: "directory",
-    assets: "cfv5"
+    assets: "cf-v5"
   },
-  site: "https://www.completefarmer.com",
+  site:  "http://cf-astro-test.s3-website.us-east-2.amazonaws.com/", // "https://www.completefarmer.com",
   redirects: {
-    "/products/grower": "/products/grower/new-farmer"
+    "/products/grower/": "/products/grower/new-farmer/"
   },
   integrations: [
     react({

@@ -1,5 +1,5 @@
 import "react-phone-number-input/style.css";
-import "../../assets/styles/phonenumberinput.css";
+import "@assets/styles/phonenumberinput.css";
 
 import { useState } from "react";
 import PhoneInput from "react-phone-number-input";

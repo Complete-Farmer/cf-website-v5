@@ -67,20 +67,20 @@ const customerStories = await getCxStories({
 
 const availableDemands: IAvailableDemands[] = [];
 
-const { statusCode, data } = await getAvaiableCrops();
+// const { statusCode, data } = await getAvaiableCrops();
 
-if (statusCode == 200) {
-  for (const c of data) {
-    const response = await getCropVarieties(c._id);
-    if (response.statusCode == 200 && response.data.length > 0) {
-      availableDemands.push({
-        ...c,
-        varieties: response.data.map((v) => v.name),
-        link: `/products/grower/crops/${convertToKebabCase(c.name)}`,
-      });
-    }
-  }
-}
+// if (statusCode == 200) {
+//   for (const c of data) {
+//     const response = await getCropVarieties(c._id);
+//     if (response.statusCode == 200 && response.data.length > 0) {
+//       availableDemands.push({
+//         ...c,
+//         varieties: response.data.map((v) => v.name),
+//         link: `/products/grower/crops/${convertToKebabCase(c.name)}`,
+//       });
+//     }
+//   }
+// }
 ---
 
 <GrowerIndexLayout
@@ -119,18 +119,18 @@ if (statusCode == 200) {
       <CustomerStories client:only="react" data={customerStories} />
     )
   }
-    {
-      availableDemands.length > 0 && (
-        <AvailableOrders
-          client:visible
-          cardType="grower"
-          data={availableDemands}
-          bgColor="bg-grower-200"
-          titleTextColor="text-grower-400"
-          title="See what other farmers are growing"
-        />
-      )
-    }
+  {
+    availableDemands.length > 0 && (
+      <AvailableOrders
+        client:visible
+        cardType="grower"
+        data={availableDemands}
+        bgColor="bg-grower-200"
+        titleTextColor="text-grower-400"
+        title="See what other farmers are growing"
+      />
+    )
+  }
 </GrowerIndexLayout>
 
 <!-- page: "/products/grower/new-farmer", -->
@@ -140,8 +140,6 @@ if (statusCode == 200) {
 
   function toggleAuthModal() {
     $authModal.set(true);
-
-    // Blur the background
     document.querySelector(".app-body").style.filter = "blur(4px)";
     document.querySelector(".app-footer").style.filter = "blur(4px)";
   }

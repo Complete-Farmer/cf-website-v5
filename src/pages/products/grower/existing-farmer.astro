@@ -62,20 +62,20 @@ const cfBenefits = [
 
 const availableDemands: IAvailableDemands[] = [];
 
-const { statusCode, data } = await getAvaiableCrops();
+// const { statusCode, data } = await getAvaiableCrops();
 
-if (statusCode == 200) {
-  for (const c of data) {
-    const response = await getCropVarieties(c._id);
-    if (response.statusCode == 200 && response.data.length > 0) {
-      availableDemands.push({
-        ...c,
-        varieties: response.data.map((v) => v.name),
-        link: `/products/grower/crops/${convertToKebabCase(c.name)}`,
-      });
-    }
-  }
-}
+// if (statusCode == 200) {
+//   for (const c of data) {
+//     const response = await getCropVarieties(c._id);
+//     if (response.statusCode == 200 && response.data.length > 0) {
+//       availableDemands.push({
+//         ...c,
+//         varieties: response.data.map((v) => v.name),
+//         link: `/products/grower/crops/${convertToKebabCase(c.name)}`,
+//       });
+//     }
+//   }
+// }
 ---
 
 <GrowerIndexLayout
@@ -134,7 +134,6 @@ if (statusCode == 200) {
 <script type="module" is:inline>
   // @ts-nocheck
   import { $getInTouchModal } from "../../src/utils/stores.ts";
-
 
   const btn = document.getElementById("get-started");
   const btn1 = document.getElementById("get-started-1");
