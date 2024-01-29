@@ -9,7 +9,7 @@ const Hero = () => {
   // const { setSignUpModal } = useGlobalContext();
 
   const redirectToDemoScreen = () => {
-    // navigate("/product?tab=" + currentTab.href);
+    // navigate("/products?tab=" + currentTab.href);
   };
 
   const handleButtonClick = () => {

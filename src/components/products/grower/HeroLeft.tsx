@@ -49,7 +49,7 @@ const HeroLeft = ({ tabs, currentTab }: IProps) => {
               </span>
             </button>
             <a
-              href={"/product?tab=" + currentTab.href}
+              href={"/products?tab=" + currentTab.href}
               onClick={() => handleButtonClick()}
               className="flex justify-center items-center w-full xl:w-[230px] h-16  gap-2 px-8 py-4 rounded-full border border-grower-500"
             >

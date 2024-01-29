@@ -88,7 +88,6 @@ jobs:
       with:
         name: SanctuaryBundle
         path: ${{ env.BUILD_PATH }}/dist
-    
     - name: Deploy to S3
       uses: jakejarvis/s3-sync-action@master
       with:
