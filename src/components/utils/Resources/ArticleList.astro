@@ -1,0 +1,68 @@
+---
+import { Image } from "astro:assets";
+import EmptyImage from "@assets/images/products/resources-empty.png";
+
+interface Props {
+  data: {
+    title: string;
+    tags: string[]
+  }[];
+}
+
+const { data } = Astro.props;
+---
+
+<div class="bg-white flex justify-center pt-6">
+  <section class="relative w-full py-2 bg-opacity-95">
+    <div class="max-w-7xl px-4 mx-auto">
+      <div
+        class="flex flex-col max-[767px]:grid-cols-1 max-[1023px]:grid max-[1023px]:grid-cols-2 min-[1024px]:grid min-[1024px]:grid-cols-3 items-center justify-center py-8[x] mx-auto xl:flex-row xl:max-w-full"
+      >
+        {
+          data.map((item) => (
+            <div class="border-b border-gray-200 py-2 pt-6">
+              <div class="flex sm:flex-col-reverse sm:mb-10 items-center justify-between w-full col-span-1 sm:p-4 my-1 md:p-2 lg:p-10 text-center transition-all duration-200 md:flex-row md:text-left ease hover:cursor-pointer hover:bg-[#F6F6F6] overflow-hidden rounded-lg">
+                <div class="flex flex-col pr-2">
+                  <p class="mt-2 text-base md:leading-6 lg:text-base lg:leading-6 font-normal text-black-700 line-clamp-2 text-left  hover:underline">
+                    {item.title}
+                  </p>
+                  <div class="hidden lg:flex mt-3 text-base gap-2 justify-start items-start">
+                    {item.tags.map((tag) => (
+                      <div class="flex justify-start items-start relative overflow-hidden gap-2.5 px-2 py-1 rounded-full bg-[#efefef]">
+                        <p class="text-xs text-left text-custom_black-900">
+                          {tag}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                  <div class="lg:hidden flex flex-row mt-3 text-base gap-2 justify-start items-start">
+                    {item.tags.map((tag) => (
+                      <div class="flex justify-start items-start relative overflow-hidden gap-2.5 px-2 py-1 rounded-full bg-[#efefef]">
+                        <p class="text-xs text-left text-custom_black-900">
+                          {tag}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</div>
+{
+  data.length === 0 && (
+    <div class="mx-auto flex max-w-7xl flex-col items-center px-4 py-20 pt-10 sm:pt-24 sm:py-36 lg:py-52">
+      <Image src={EmptyImage} alt="Empty List" class="md:py-5 lg:py-2" />
+      <div class="flex-col justify-start items-center gap-10 inline-flex">
+        <div class=" " />
+        <div class="text-center text-zinc-900 text-xl md:leading-6 font-normal">
+          There are no resources available at the moment
+        </div>
+      </div>
+    </div>
+  )
+}

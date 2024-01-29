@@ -1,0 +1,20 @@
+---
+import Layouts from "@layouts/Layouts.astro";
+import { Hero, ArticleList } from "@components/utils/Resources";
+
+const content = {
+  bgPattern: "bg-hero-grower",
+  heading: "Free farming resources at your fingertips",
+  subHeading: "Explore our library of downloadable resources for farmers.",
+};
+
+export const article = [];
+---
+
+<Layouts
+  title="Resources • Grower • Products | Complete Farmer"
+  description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
+>
+  <Hero {content} />
+  <ArticleList data={article} />
+</Layouts>

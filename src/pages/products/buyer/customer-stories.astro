@@ -1,0 +1,38 @@
+---
+import Layouts from "@layouts/Layouts.astro";
+import { Hero, StoryList } from "@components/utils/CustomerStories";
+import { getCxStories, getCategories, filterAt } from "@utils/prismic";
+
+const { results } = await getCategories("products");
+const buyerId = results.find((c) => c.data.name === "Buyer").id;
+
+const filters = filterAt("my.customer_stories_v3.category", buyerId);
+
+const customerStories = await getCxStories({
+  page: 1,
+  pageSize: 10,
+  filters,
+  fetchLinks: ["categories.name"],
+});
+---
+
+<Layouts
+  title="Customer Stories • Buyer • Products | Complete Farmer"
+  description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
+>
+  <Hero
+    isBuyer
+    client:visible
+    url="https://www.youtube.com/watch?v=_9HgDUGrjCQ"
+    title="See how we’ve served other buyers like you."
+    thumbnail="https://img.youtube.com/vi/_9HgDUGrjCQ/maxresdefault.jpg"
+    description="Browse through the inspiring success stories of buyers empowered by our solutions."
+  />
+  <StoryList
+    isBuyer
+    client:visible
+    filters={filters}
+    data={customerStories}
+    totalResults={customerStories.total_results_size}
+  />
+</Layouts>

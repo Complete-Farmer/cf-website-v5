@@ -1,0 +1,68 @@
+---
+import { Image } from "astro:assets";
+
+import { classNames } from "@utils/functions";
+
+import HeroImage from "@assets/images/products/resources-hero.png";
+
+interface Props {
+  content: {
+    heading: string;
+    subHeading: string;
+    bgPattern: string;
+  };
+}
+
+const { content } = Astro.props;
+---
+
+<section
+  class={classNames(
+    content.bgPattern,
+    "w-full xl:min-h-[70vh] px-6 sm:px-10 bg-white pb-16 sm:pb-36 xl:pb-32 bg-cover"
+  )}
+>
+  <div class="w-full h-auto pt-14 sm:pt-6 xl:pt-32">
+    <div
+      class="max-w-7xl mx-auto sm:px-4 xl:px-0 flex items-center xl:flex-row flex-col sm:flex-row h-full"
+    >
+      <div
+        class="w-full md:items-start md:w-1/2 h-full flex flex-col xl:pr-0 lg:pr-5 lg:items-start items-center justify-center space-y-10 lg:ml-10"
+      >
+        <Image
+          src={HeroImage}
+          class="h-72 w-full sm:w-80 relative min-[768px]:hidden mb-2 object-contain"
+          alt="Resource Hero Image"
+        />
+        <div
+          class="flex flex-col justify-start items-start gap-6 sm:gap-3 lg:gap-11"
+        >
+          <div
+            class="flex text-white flex-col justify-start items-start gap-3 sm:gap-8"
+          >
+            <p
+              class="text-base w-80 font-bold text-left md:text-left md:text-[32px] md:leading-10 md:w-96 lg:text-5xl lg:leading-[60px] lg:w-[581px] xl:text-left"
+            >
+              {content.heading}
+            </p>
+            <p
+              class="font-normal text-xs w-80 text-left md:text-base md:h-20 md:w-[335px] lg:text-xl lg:leading-7 lg:h-24 lg:w-[581px]"
+            >
+              {content.subHeading}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="hidden md:flex md:w-1/2 h-full lg:pt-0 pt-24 overflow-hidden justify-end"
+      >
+        <Image
+          src={HeroImage}
+          class="w-96 sm:w-[266px] lg:w-96 h-80"
+          alt="Resource Hero Image"
+        />
+      </div>
+    </div>
+  </div>
+</section>
