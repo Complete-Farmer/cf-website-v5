@@ -1,0 +1,108 @@
+---
+import { Image } from "astro:assets";
+
+import { Button } from "@components/utils";
+import { classNames } from "@utils/functions";
+
+import Leaves from "@assets/images/products/grower/farm-manager-academy/leaves.webp";
+import Leaves2 from "@assets/images/products/grower/farm-manager-academy/leaves-2.webp";
+import AboutImg from "@assets/images/products/grower/farm-manager-academy/about.webp";
+import AboutMobileImg from "@assets/images/products/grower/farm-manager-academy/about-mobile.webp";
+
+const data = [
+  "Must be between 20 and 40 years old",
+  "Have relevant background in agriculture formal education, agricultural college or university",
+];
+---
+
+<div class="py-12 space-y-3 lg:py-14 lg:space-y-10">
+  <div class="mx-auto max-w-7xl px-4">
+    <div class="mx-auto max-w-4xl text-center">
+      <h1
+        class="font-bold tracking-tight text-[28px] md:text-[40px] lg:text-5xl leading-[34px] md:leading-[50px] lg:leading-[60px] text-[#004C46]"
+      >
+        About the Academy
+      </h1>
+      <p
+        class="w-full py-6 px-1 md:px-12 lg:px-0 text-xs md:text-sm lg:text-base text-[#6C6C6C] mx-auto"
+      >
+        The Farm Manager Academy provides hands-on training on farm management
+        processes across a diverse range of crop farms. Join the program, learn
+        the concept of farm management, earn a certificate and secure a job as a
+        Farm Manager at Complete Farmer.
+      </p>
+    </div>
+  </div>
+
+  <div
+    class="flex flex-col md:flex-row space-y-20 md:space-y-0 px-4 md:py-8 md:px-12 mx-auto max-w-7xl overflow-hidden md:overflow-visible"
+  >
+    <div class="md:hidden relative m-auto w-full">
+      <Image
+        src={AboutMobileImg}
+        class="mx-auto w-full object-cover bg-gray-500 z-10"
+        alt=""
+      />
+      <Image
+        src={Leaves}
+        alt="farmer"
+        class="absolute top-8 -right-10 z-[-1]"
+      />
+    </div>
+
+    <div class="flex flex-col space-y-2 sm:w-1/2">
+      <div class="flex flex-col justify-start items-start space-y-4">
+        <p
+          class="w-full md:w-5/6 text-2xl md:text-[28px] lg:text-[32px] leading-[30px] md:leading-8 lg:leading-10 font-bold text-left text-grower-400"
+        >
+          Qualifications
+        </p>
+        <p class="text-base leading-6 w-full text-left text-custom_black-900">
+          Applicants will be considered for the farm manager academy based on
+          the following criteria:
+        </p>
+      </div>
+      <ul class="list-disc marker:text-grower-500 marker:text-2xl">
+        {
+          data.map((item, index) => (
+            <li
+              class={classNames(
+                index !== data.length - 1 ? "border-b" : "",
+                "ml-6 py-5 border-gray-200 grow text-base leading-6 text-left text-custom_black-900"
+              )}
+            >
+              {item}
+            </li>
+          ))
+        }
+      </ul>
+
+      <Button
+        hasArrow
+        id="get-academy-form"
+        title="Join the Academy"
+        className="h-14 md:!w-[280px] lg:!w-96 text-base md:text-lg lg:text-xl !rounded-full"
+      />
+    </div>
+
+    <div class="hidden md:flex relative justify-end m-auto w-1/2">
+      <Image
+        src={AboutImg}
+        class="md:w-[278px] md:h-[312px] lg:w-[600px] lg:h-[400px] object-cover bg-gray-500 lg:max-w-[min-content]"
+        alt=""
+      />
+
+      <Image
+        src={Leaves2}
+        alt="farmer"
+        class="absolute hidden xl:block -top-5 -right-[25%] z-[-1]"
+      />
+
+      <Image
+      src={Leaves}
+      alt="farmer"
+      class="absolute xl:hidden top-14 -right-10 z-[-1]"
+    />
+    </div>
+  </div>
+</div>

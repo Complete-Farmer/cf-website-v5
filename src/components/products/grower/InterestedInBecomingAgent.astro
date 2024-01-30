@@ -8,21 +8,30 @@ interface Props {
   title: string;
   titleColor: string;
   button: {
+    id?: string;
     href?: string;
     textColor: string;
     bgColor: string;
   };
   image: ImageMetadata;
+  isAgent?: boolean;
 }
 
-const { image, title, button, titleColor } = Astro.props;
+const { image, title, isAgent, button, titleColor } = Astro.props;
+
+const classes = isAgent
+  ? "bg-grower-200 bg-interested-in-agent-mobile-1 sm:bg-interested-in-agent-tablet-1 lg:bg-interested-in-agent-1 "
+  : "bg-grower-400 bg-interested-in-agent-mobile sm:bg-interested-in-agent-tablet xl:bg-interested-in-agent";
 ---
 
 <div
-  class="w-full h-full bg-grower-400 bg-interested-in-agent-mobile md:bg-interested-in-agent-tablet xl:bg-interested-in-agent bg-center bg-cover bg-no-repeat flex flex-col py-10 sm:p-0 lg:p-10"
+  class={classNames(
+    classes,
+    "w-full h-full bg-center bg-cover bg-no-repeat flex flex-col sm:p-0 lg:p-10"
+  )}
 >
   <div
-    class="max-w-7xl mx-auto w-full flex flex-col-reverse md:flex-row items-center sm:justify-between px-5 sm:p-10"
+    class="max-w-7xl mx-auto w-full flex flex-col-reverse md:flex-row items-center sm:justify-between px-5 sm:p-14"
   >
     <div class="flex flex-col justify-center items-start gap-6">
       <p
@@ -34,7 +43,7 @@ const { image, title, button, titleColor } = Astro.props;
         <Fragment set:html={title} />
       </p>
       <a
-        id={button.href === "#" ? "get-started-1" : undefined}
+        id={button.href === "#" ? (button.id || "get-started-1") : undefined}
         href={button.href}
         class={classNames(
           button.bgColor,
@@ -46,8 +55,6 @@ const { image, title, button, titleColor } = Astro.props;
         <ArrowIcon />
       </a>
     </div>
-    <Image src={image} alt={title} class="sm:h-[220px] lg:h-auto" />
+    <Image src={image} alt={title} class="sm:h-[220px] md:h-[200px] md:w-[155px] lg:h-auto lg:w-auto" />
   </div>
 </div>
-
-<script></script>

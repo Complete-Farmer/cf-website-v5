@@ -1,0 +1,36 @@
+---
+import Layouts from "@layouts/Layouts.astro";
+
+import { ApplicationForm, HeroTwoSideImageFade } from "@components/utils";
+import { AboutTheAcademy } from "@components/products/grower";
+
+import ImageLeft from "@assets/images/products/grower/farm-manager-academy/hero-1.webp";
+import ImageRight from "@assets/images/products/grower/farm-manager-academy/hero-2.webp";
+---
+
+<Layouts
+  title="Farm Manager Academy • Grower • Products | Complete Farmer"
+  description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
+>
+  <HeroTwoSideImageFade
+    client:visible
+    leftImage={ImageLeft.src}
+    rightImage={ImageRight.src}
+    buttonTitle="Join the academy"
+    heading="The Farm Manager Academy"
+    text="Gain skills and experience on farm management principles from Complete Farmer. Get paid to manage grower farms on our platform after successful completion of the program."
+  />
+
+  <AboutTheAcademy />
+
+  <!-- modal -->
+  <ApplicationForm client:load title="Join the academy" />
+</Layouts>
+
+<script type="module" is:inline>
+  // @ts-nocheck
+  import { $applicationFormModal } from "../../src/utils/stores.ts";
+
+  const btn = document.getElementById("get-academy-form");
+  btn.addEventListener("click", () => $applicationFormModal.set(true));
+</script>

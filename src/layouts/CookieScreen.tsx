@@ -35,7 +35,7 @@ export default function CookieScreen() {
       declineButtonClasses="w-40 sm:w-48 xs:w-30 xl:w-48 h-12 gap-2 px-8 py-2"
       buttonClasses="w-40 sm:w-48 xs:w-10 xl:w-48 h-12 gap-2 px-8 py-2 bg-grower-500"
     >
-      <p className="w-full max-w-5xl text-xs text-left text-[#1d1d1f]">
+      <p className="w-full max-w-5xl text-xs text-left text-custom_black-900">
         <span>
           By clicking “Accept Cookies,” I agree to provide cookies for statistical and personalized preference purposes. To learn more about our
           cookies,

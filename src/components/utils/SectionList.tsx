@@ -27,8 +27,8 @@ export default function SectionList({ type = "grower", incentives }: IProps) {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-8 py-4 md:py-5 sm:px-2 lg:py-16 lg:px-4">
-      <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 gap-y-10 gap-x-8 lg:grid-cols-3 mb-20">
+    <div className="mx-auto max-w-7xl px-8 py-4 md:py-5 sm:px-2 xl:py-16 xl:px-4">
+      <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 gap-y-10 gap-x-8 xl:grid-cols-3 mb-20">
         {incentives.map((i, idx) => (
           <Fade
             bottom
@@ -40,16 +40,16 @@ export default function SectionList({ type = "grower", incentives }: IProps) {
             <div className="flex flex-col justify-between">
               <div className="flex flex-col justify-start">
                 <div className="flex-shrink-0">{i.icon}</div>
-                <div className="w-full mt-4 lg:mt-6 lg:w-auto">
+                <div className="w-full mt-4 xl:mt-6 xl:w-auto">
                   <h3 className="text-2xl sm:text-[28px] font-bold text-gray-900">
                     {i.name}
                   </h3>
-                  <p className="mt-4 text-xs sm:text-base lg:w-[373px] lg:h-20 lg:text-base lg:leading-6 text-[#1D1D1F]">
+                  <p className="mt-4 text-xs sm:text-base xl:w-[373px] xl:h-20 xl:text-base xl:leading-6 text-custom_black-900">
                     {i.description}
                   </p>
                 </div>
               </div>
-              <div className="mt-2 flex justify-start flex-grow-0 flex-shrink-0 h-6 sm:mt-6 relative opacity-90 space-x-2 lg:space-x-3">
+              <div className="mt-2 flex justify-start flex-grow-0 flex-shrink-0 h-6 sm:mt-6 relative opacity-90 space-x-2 xl:space-x-3">
                 <a
                   href={i.link || ""}
                   onClick={(e) => {
@@ -59,7 +59,7 @@ export default function SectionList({ type = "grower", incentives }: IProps) {
                     }
                     handleLinkClick();
                   }}
-                  className={`text-base sm:text-[20px] font-bold text-center lg:block text-${type}-500 hover:cursor-pointer`}
+                  className={`text-base sm:text-[20px] font-bold text-center xl:block text-${type}-500 hover:cursor-pointer`}
                 >
                   {i.linkText}
                 </a>

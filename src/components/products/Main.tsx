@@ -123,14 +123,14 @@ function Main() {
                 : data.buyer.titleLast}
             </h1>
 
-            <p className="mt-0 text-base text-[#1D1D1F] sm:text-sm lg:text-2xl lg:hidden">
+            <p className="mt-0 text-base text-custom_black-900 sm:text-sm lg:text-2xl lg:hidden">
               {activeCategory === "Grower"
                 ? data.grower.descriptionFirst
                 : data.buyer.descriptionFirst}
               <br className="hidden sm:block" />
             </p>
 
-            <p className="mt-0 text-[#1D1D1F] lg:text-[24px] hidden lg:block px-48 leading-[36px]">
+            <p className="mt-0 text-custom_black-900 lg:text-[24px] hidden lg:block px-48 leading-[36px]">
               {activeCategory === "Grower"
                 ? data.grower.descriptionLast
                 : data.buyer.descriptionLastDesktop}
@@ -169,7 +169,7 @@ function Main() {
         </Wrapper>
       </section>
 
-      <div className="lg:hidden mt-24 sm:mt-72 text-[#1D1D1F] px-4 text-xs sm:text-base sm:px-28 sm:text-center">
+      <div className="lg:hidden mt-24 sm:mt-72 text-custom_black-900 px-4 text-xs sm:text-base sm:px-28 sm:text-center">
         <p>
           {activeCategory === "Grower"
             ? data.grower.descriptionLast

@@ -50,7 +50,7 @@ export default function Section() {
   ];
 
   return (
-    <div>
+    <div className="px-6">
       <SectionList incentives={incentives} />
       <Wrapper isOpen={open} onClose={() => toggleModal()}>
         {active === "Newsletter" ? (

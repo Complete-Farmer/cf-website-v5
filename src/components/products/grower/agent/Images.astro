@@ -1,0 +1,43 @@
+---
+import { Image } from "astro:assets";
+
+import Leaves from "@assets/images/products/grower/exisiting-leaves.webp";
+import { classNames } from "@utils/functions";
+
+interface Props {
+  right?: boolean;
+  image1: ImageMetadata;
+  image2: ImageMetadata;
+  image3: ImageMetadata;
+}
+
+const { right, image1, image2, image3 } = Astro.props;
+---
+
+<div
+  class="relative items-center justify-center m-auto w-full lg:w-1/2 sm:rounded-none py-4"
+>
+  <Image
+    src={image1}
+    class="hidden lg:block w-full h-full object-cover m-auto"
+    alt=""
+  />
+  <Image
+    src={image2}
+    class="hidden sm:block lg:hidden w-[95vw] h-full object-cover m-auto"
+    alt=""
+  />
+  <Image
+    src={image3}
+    class="sm:hidden w-[90vw] h-full object-cover m-auto"
+    alt=""
+  />
+  <div
+    class={classNames(
+      right ? "-right-1/4 sm:right-0 lg:-right-1/4" : "-left-1/4",
+      "-z-10 absolute top-[60%] sm:top-[75%] -translate-y-1/2 sm:translate-x-[98px] sm:translate-y-[-204px] lg:-translate-y-1/2 lg:-translate-x-0 w-[70vw] sm:w-[40vw] lg:w-[85%]"
+    )}
+  >
+    <Image src={Leaves} alt="farmer" class="m-auto" />
+  </div>
+</div>

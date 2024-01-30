@@ -1,0 +1,78 @@
+---
+import { Image } from "astro:assets";
+
+import ImageQ1 from "@assets/images/products/grower/agent/qualification.webp";
+import ImageQ2 from "@assets/images/products/grower/agent/qualification-tablet.webp";
+import ImageQ3 from "@assets/images/products/grower/agent/qualification-mobile.webp";
+
+import ImageR1 from "@assets/images/products/grower/agent/responsibilities.webp";
+import ImageR2 from "@assets/images/products/grower/agent/responsibilities-tablet.webp";
+import ImageR3 from "@assets/images/products/grower/agent/responsibilities-mobile.webp";
+
+import Leaves from "@assets/images/products/grower/exisiting-leaves.webp";
+// import ListItem from "./ListItem.astro";
+import { classNames } from "@utils/functions";
+import ItemListing from "./ItemListing.astro";
+import Images from "./Images.astro";
+
+const qualification = [
+  "18 years and above with at least 1 year of practical experience in crop production.",
+  "Minimum of SHS certificate or any other relevant certificate from a Ministry of Food and Agriculture accredited institution.",
+  " Must be tech-savvy, a good communicator (verbal and written), and good with people management.",
+  "We recommend that you have adequate fluency in the local language of your preferred operational area. The languages are Twi, Ewe,Bono, Dagbani, Frafra, Talene, and Sisala.",
+  "Should own or have access to the following: A motorbike with a license. A smartphone.",
+];
+const responsibilities = [
+  "Explore, identify, and engage farmers for a long-term business partnership with Complete Farmer.",
+  "Meet operational targets by purchasing products from farmers.",
+  "Liaise with the field supervisor to ensure that farmers are paid on time and receive a good price for their products.",
+  "Undertake monthly reconciliation with the field supervisor.",
+  "Ensure that farm inputs are dispatched to farmers on time.",
+  "Ensure that farmers comply with the input support payback terms and conditions.",
+  "Undertake weekly farm visits to ensure that farmers follow and comply with the farming protocols.",
+  "Report and share crop development and farm management challenges with the field supervisor.",
+];
+---
+
+<div
+  class="max-w-7xl mx-auto px-0 py-8 md:py-16 lg:py-10 sm:overflow-hidden xl:overflow-visible"
+>
+  <div class="flex flex-col justify-center items-center px-1">
+    <p
+      class="w-full mt-4 sm:mt-6 lg:mt-12 text-[28px] md:text-[40px] lg:text-5xl leading-[34px] md:leading-[50px] lg:leading-[60px] font-bold text-center text-grower-400 py-3"
+    >
+      About This Opportunity
+    </p>
+    <p
+      class="w-full px-3 md:px-14 lg:px-44 py-4 text-xs md:text-sm lg:text-base text-center md:text-left lg:text-center text-custom_gray-300"
+    >
+      At Complete Farmer, we empower smallholder farmers with the tools and
+      technology to increase their agricultural productivity while connecting
+      them to global buyers. As one of our grower agents, you will work closely
+      with these farmers by guiding them through implementing the technological
+      solutions we provide on their farms
+    </p>
+  </div>
+
+  <div
+    class="flex justify-center flex-col lg:flex-row-reverse items-center py-5 lg:py-20 gap-10 overflow-hidden xl:overflow-visible"
+  >
+    <Images image1={ImageQ1} image2={ImageQ2} image3={ImageQ3} right />
+    <ItemListing
+      data={qualification}
+      title="Qualifications"
+      description="Applicants will be considered for the grower agent role based on the following criteria:"
+    />
+  </div>
+
+  <div
+    class="flex justify-between flex-col lg:flex-row items-center py-5 lg:py-20 gap-10 overflow-hidden xl:overflow-visible"
+  >
+    <Images image1={ImageR1} image2={ImageR2} image3={ImageR3} />
+    <ItemListing
+      data={responsibilities}
+      title="Responsibilities"
+      description="The Field Agent will be responsible for a range of duties which include, but are not limited to, the following:"
+    />
+  </div>
+</div>

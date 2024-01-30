@@ -172,7 +172,7 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
 
   return (
     <>
-      <div className="sticky top-0 z-50 w-full bg-white lg:border-b lg:border-10 lg:border-[#E6E6E6]">
+      <div className="sticky top-0 z-50 w-full bg-white lg:border-b lg:border-10 lg:border-gray-200">
         <div className="container flex flex-row items-center justify-between mx-auto max-w-7xl">
           <div className="relative flex flex-row mx-5">
             <div className="font-medium text-gray-900 lg:w-auto lg:items-center lg:justify-center md:mb-0">

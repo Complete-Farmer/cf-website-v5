@@ -10,6 +10,8 @@ export { default as SubHeading } from "./SubHeadingShort";
 export { default as SpinnerLoader } from "./SpinnerLoader";
 export { default as HeadingOneLine } from "./HeadingOneLine";
 export { default as NewsletterForm } from "./NewsletterForm";
+export { default as ApplicationForm } from "./ApplicationForm";
 export { default as AvailableOrders } from "./AvailableOrders";
 export { default as ServiceGuideForm } from "./ServiceGuideForm";
 export { default as CustomerStoryCard } from "./CustomerStoryCard";
+export { default as HeroTwoSideImageFade } from "./HeroTwoSideImageFade";

@@ -20,7 +20,7 @@ interface IProps {
 const View = ({ file, onRemove }: { file: File; onRemove: () => void }) => (
   <div className="bg-zinc-100 rounded w-full h-9 flex justify-between items-center p-2">
     <div className="flex items-center gap-2">
-      <FileIcon className="h-5 w-5 text-[#6C6C6C]" />
+      <FileIcon className="h-5 w-5 text-custom_gray-300" />
       <div className="text-neutral-500 text-xs md:text-sm font-normal leading-tight">{`${file.name}`}</div>
       <div className="text-neutral-500 text-xs md:text-sm font-normal leading-tight">{`${Math.round(
         file.size / 1024
@@ -67,7 +67,7 @@ const Uploader = ({
       {title && (
         <label
           htmlFor={name}
-          className="block text-sm font-bold leading-6 text-[#6C6C6C]"
+          className="block text-sm font-bold leading-6 text-custom_gray-300"
         >
           {title}
           {required && <span className="ms-1 text-red-500 mr-1">*</span>}

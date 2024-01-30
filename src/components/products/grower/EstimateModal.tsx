@@ -154,7 +154,7 @@ export default function EstimateModal({ toggleModal }: { toggleModal: () => void
             </button>
           </div>
           <div className="col-span-full mt-8 mb-10">
-            <p className="w-full max-w-5xl text-sm text-center text-[#1d1d1f]">
+            <p className="w-full max-w-5xl text-sm text-center text-custom_black-900">
               <span>
                 By clicking on Submit, I agree to Complete Farmer{" "}
                 <a onClick={handleLinkClick} href="/terms-and-conditions" className="text-grower-500 font-semibold">
@@ -173,7 +173,7 @@ export default function EstimateModal({ toggleModal }: { toggleModal: () => void
       {farmPlan && (
         <div className="w-full max-w-5xl mt-4 mx-0 relative bg-custom_gray-400 py-8">
           <div className="px-6 flex justify-between hover:cursor-pointer">
-            <p className="text-xl font-bold text-left text-[#1d1d1f]">Download generated farm plan</p>
+            <p className="text-xl font-bold text-left text-custom_black-900">Download generated farm plan</p>
             <div className="flex justify-start items-start h-6 opacity-80 gap-2">
               <svg
                 width={24}

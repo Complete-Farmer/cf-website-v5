@@ -39,7 +39,7 @@ const Drawer: React.FC<{
         screenType === "mobile" || screenType === "tablet" ? true : false
       }
     >
-      <div className="lg:flex lg:flex-col bg-white lg:max-w-7xl border-[#E6E6E6] px-4 sm:px-8 w-screen lg:px-0">
+      <div className="lg:flex lg:flex-col bg-white lg:max-w-7xl border-gray-200 px-4 sm:px-8 w-screen lg:px-0">
         <div className="flex justify-between lg:justify-end">
           <img src={CFMainLogo.src} className="lg:hidden h-7" />
           <button
@@ -56,7 +56,7 @@ const Drawer: React.FC<{
           {drawerProps.map((item) => (
             <div
               key={item}
-              className="pb-7 mt-7 border-b-2 border-[#E6E6E6] 2xl:border-none"
+              className="pb-7 mt-7 border-b-2 border-gray-200 2xl:border-none"
             >
               <a
                 href={getLink(item)}

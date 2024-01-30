@@ -23,7 +23,7 @@ const SmallFarmerImpact = () => {
 
           <div className="flex items-center justify-start py-6">
             <a
-              href="/product/grower/customer-stories"
+              href="/products/grower/customer-stories"
               className="bg-grower-500 flex items-center justify-center text-xl h-16 px-8 space-x-3 font-bold tracking-wide text-white transition duration-200 rounded-full focus:shadow-outline focus:outline-none"
             >
               <span>Learn more</span>

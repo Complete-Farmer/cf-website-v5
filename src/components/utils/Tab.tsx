@@ -25,7 +25,7 @@ export default function TabComp(props: IProps) {
   const initialIndex = categories.findIndex((category) => category.current);
 
   return (
-    <div className="lg:max-w-xl w-full sm:mb-12 lg:mb-6 lg:w-3/12 lg:py-6 sm:px-0">
+    <div className="lg:max-w-xl w-full sm:mb-12 lg:mb-6 lg:py-6 sm:px-0">
       <Tab.Group
         key={initialIndex}
         defaultIndex={initialIndex}

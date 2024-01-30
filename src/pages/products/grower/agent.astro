@@ -1,0 +1,61 @@
+---
+import Layouts from "@layouts/Layouts.astro";
+import {
+  Opportunity,
+  OperationalLocations,
+} from "@components/products/grower/agent";
+import { InterestedInBecomingAgent } from "@components/products/grower";
+import { ApplicationForm, HeroTwoSideImageFade } from "@components/utils";
+
+import BecomeAgent from "@assets/images/products/grower/agent/interested.webp";
+import ImageLeft from "@assets/images/products/grower/agent/hero-image-1.webp";
+import ImageRight from "@assets/images/products/grower/agent/hero-image-2.webp";
+---
+
+<Layouts
+  title="Agent • Grower • Products | Complete Farmer"
+  description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
+>
+  <HeroTwoSideImageFade
+    hasButton
+    client:visible
+    leftImage={ImageLeft.src}
+    rightImage={ImageRight.src}
+    buttonTitle="Become a Grower Agent"
+    heading="Become a Grower Agent with Complete Farmer"
+    text="Earn commissions by working together with smallholder farmers to implement Complete Farmer’s technological solutions on their farms to improve their productivity."
+  />
+  <Opportunity />
+
+  <OperationalLocations client:visible />
+
+  <InterestedInBecomingAgent
+    isAgent
+    image={BecomeAgent}
+    titleColor="text-grower-400"
+    title="Interested in becoming <br /> a Grower Agent?"
+    button={{
+      href: "#",
+      id: "get-agent-form",
+      textColor: "text-white",
+      bgColor: "bg-grower-500",
+    }}
+  />
+
+  <!-- modal -->
+  <ApplicationForm client:load title="Become a Grower Agent" />
+</Layouts>
+
+<script type="module" is:inline>
+  // @ts-nocheck
+  import { $applicationFormModal } from "../../src/utils/stores.ts";
+
+  const btns = document.querySelectorAll("#get-agent-form");
+
+  btns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      $applicationFormModal.set(true);
+    });
+  });
+</script>

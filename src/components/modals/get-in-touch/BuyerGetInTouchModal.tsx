@@ -125,7 +125,7 @@ function BuyerGetInTouchModal({ toggleModal }: { toggleModal: () => void }) {
                 activeBgColor={activeBgColor}
                 inActiveBgColor={"bg-[#EFEFEF]"}
                 normalBgColor={"bg-[#EFEFEF]"}
-                inActiveTextColor={"text-[#1D1D1F]"}
+                inActiveTextColor={"text-custom_black-900"}
               />
             </span>
           </div>
