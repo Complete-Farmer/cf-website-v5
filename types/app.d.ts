@@ -26,10 +26,7 @@ export interface IPlainProps {
   tabs: ITab[];
   color: string;
   borderColor: string;
-  changeTab?: (
-    e: IClickEvent,
-    t: ITab
-  ) => void;
+  changeTab?: (e: IClickEvent, t: ITab) => void;
 }
 
 export interface ICropCategory {
@@ -41,6 +38,7 @@ export interface ICropCategory {
 export interface ICropVariety {
   _id: string;
   name: string;
+  imageUrl: string;
 }
 
 export interface ICrop {
@@ -52,22 +50,38 @@ export interface ICrop {
   description: string;
   category: ICropCategory;
   cycle: { min: number; max: number };
+  plantingDates: {
+    [x: string]: string[];
+  };
+  websiteData: {
+    protocol: string;
+    region: string;
+    seasonality: string;
+    variety: string;
+  };
 }
 
 export interface IAvailableCrops extends ICrop {
-  link: string
-  varieties: string[];
+  link: string;
+  varieties: ICropVariety[];
 }
 
+export interface ISeasonality {
+  plantingArea: string;
+  availabilityData: {
+    name: string;
+    availability: boolean;
+  }[];
+}
 export interface IAvailableDemands extends ICrop {
-  link: string
-  varieties: string[];
+  link: string;
+  seasonality: ISeasonality[];
+  varieties: ICropVariety[];
 }
 
-export type IClickEvent<T = HTMLButtonElement | HTMLAnchorElement> = React.MouseEvent<T, MouseEvent>
+export type IClickEvent<T = HTMLButtonElement | HTMLAnchorElement> =
+  React.MouseEvent<T, MouseEvent>;
 
-export type IChangeEvent = React.ChangeEvent<HTMLInputElement>
+export type IChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
-export type ISubmitEvent = React.FormEvent<HTMLFormElement>
-
-
+export type ISubmitEvent = React.FormEvent<HTMLFormElement>;

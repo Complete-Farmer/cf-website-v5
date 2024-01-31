@@ -22,7 +22,7 @@ const AvailableOrders = ({
   data,
   title,
   bgColor,
-  cardType,
+  // cardType,
   titleTextColor,
 }: IProps) => {
   return (
@@ -65,11 +65,8 @@ const AvailableOrders = ({
               {data.map((d) => (
                 <SwiperSlide key={d._id}>
                   <div className="mx-2.5">
-                    {cardType === "grower" ? (
-                      <AvailableCropCard data={d} />
-                    ): (
-                      <AvailableCropCard data={d} />
-                    )}
+                    {/* {cardType === "grower" ? ( */}
+                    <AvailableCropCard data={d} />
                   </div>
                 </SwiperSlide>
               ))}

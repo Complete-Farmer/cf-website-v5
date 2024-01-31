@@ -17,7 +17,7 @@ function AvailableCropCard({ data }: IProps) {
     // ReactPixel.track("Product Link", {});
   };
 
-  const varieties = data.varieties.join(", ");
+  const varieties = data.varieties.map((v) => v.name).join(", ");
 
   return (
     <div className="group">
@@ -53,7 +53,7 @@ function AvailableCropCard({ data }: IProps) {
           onClick={handleLinkClick}
           className="relative flex items-center bg-white justify-center rounded-3xl border border-1 border-buyer-100 px-8 py-2 text-sm font-medium hover:text-white text-grower-500 hover:bg-grower-500"
         >
-          See details<span className="sr-only">, {data.name}</span>
+          See details
         </a>
       </div>
     </div>

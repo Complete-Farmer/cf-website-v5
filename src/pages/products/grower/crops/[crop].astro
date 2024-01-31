@@ -1,0 +1,66 @@
+---
+import type { IAvailableDemands } from "types/app";
+
+import Layouts from "@layouts/Layouts.astro";
+import { TabView, CropDetails } from "@components/products/grower/crops";
+
+import {
+  convertToKebabCase,
+  generateMarketAvailabilityDataDynamic,
+} from "@utils/functions";
+import { getAvaiableCrops, getCropVarieties } from "@utils/api";
+import { ArrowIcon } from "@assets/icons";
+
+export async function getStaticPaths() {
+  const availableDemands: IAvailableDemands[] = [];
+
+  const { statusCode, data } = await getAvaiableCrops();
+
+  if (statusCode == 200) {
+    for (const c of data) {
+      const response = await getCropVarieties(c._id);
+      if (response.statusCode == 200 && response.data.length > 0) {
+        availableDemands.push({
+          ...c,
+          link: convertToKebabCase(c.name),
+          seasonality: generateMarketAvailabilityDataDynamic(c.plantingDates),
+          varieties: response.data.map((v) => ({
+            _id: v._id,
+            name: v.name,
+            imageUrl: v.imageUrl,
+          })),
+        });
+      }
+    }
+  }
+
+  return availableDemands.map((crop) => {
+    return {
+      params: { crop: crop.link },
+      props: { crop },
+    };
+  });
+}
+
+const { crop } = Astro.props;
+---
+
+<Layouts
+  title={`${crop.name} • Grower • Products | Complete Farmer`}
+  description={crop.description}
+>
+  <div
+    class="fixed w-full h-14 overflow-hidden bg-grower-400 text-grower-500 z-10"
+  >
+    <div
+      class="max-w-7xl mx-auto px-4 sm:px-8 py-4 flex justify-start items-center space-x-4"
+    >
+      <ArrowIcon className="rotate-180" />
+      <a href="/products/grower/new-farmer" class="font-bold"> Browse orders</a>
+    </div>
+  </div>
+  <div class="pt-14">
+    <CropDetails {crop} client:visible />
+    <TabView {crop} client:visible />
+  </div>
+</Layouts>
