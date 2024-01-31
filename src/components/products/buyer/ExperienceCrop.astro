@@ -1,0 +1,153 @@
+---
+import { Image } from "astro:assets";
+
+import { Button, HeadingOneLine } from "@components/utils";
+
+import Image1 from "@assets/images/products/buyer/everything-crop/image-1.webp";
+import Image2 from "@assets/images/products/buyer/everything-crop/image-2.webp";
+import Image3 from "@assets/images/products/buyer/everything-crop/image-3.webp";
+import Image4 from "@assets/images/products/buyer/everything-crop/image-4.webp";
+import { classNames } from "@utils/functions";
+
+const data = [
+  {
+    text: "Easy online ordering: Choose to either source readily available crops or customize your order to fit your specific needs",
+    img: Image1,
+    isActive: true,
+  },
+  {
+    text: "Fast grower matching: Get matched with a pre-assessed farmer who will use our data-driven cultivation protocols to grow quality crops",
+    img: Image2,
+  },
+  {
+    text: "Transparent monitoring: Track and monitor each stage of production on your personal dashboard",
+    img: Image3,
+  },
+  {
+    text: "Reliable delivery: Produce is shipped to your desired destination in safe and secure packages",
+    img: Image4,
+  },
+];
+---
+
+<section class="max-w-7xl mx-auto lg:px-8 lg:py-20">
+  <div class="mx-auto max-w-4xl">
+    <HeadingOneLine
+      titleTextColor="text-buyer-900"
+      title="Experience crop sourcing on autopilot from order to fulfilment"
+      desc=" We take care of every step from production to shipment so you can confidently crush your procurement targets. Repeatedly."
+    />
+  </div>
+
+  <div
+    class="flex flex-col sm:flex-row space-x-4 py-10 md:py-14 lg:py-20 mx-auto"
+  >
+    <div class="lg:text-left sm:text-center lg:w-1/2 lg:pr-6 space-y-10">
+      <div class="space-y-5">
+        {
+          data.map((item) => (
+            <div
+              class={classNames(
+                item.isActive ? "!text-buyer-500 !font-semibold" : "",
+                "experience-crop flex justify-start items-center text-custom_black-900 space-x-4 hover:text-buyer-500 hover:font-semibold"
+              )}
+            >
+              <div>
+                <svg
+                  height={94}
+                  fill="none"
+                  viewBox="0 0 6 94"
+                  preserveAspectRatio="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect width="6" height="94" fill="#EFEFEF" />
+                  <rect
+                    id={item.isActive ? "active-rect" : "inactive-rect"}
+                    width="6"
+                    height="0"
+                    fill="#367AFE"
+                  />
+                </svg>
+              </div>
+              <p class="text-base lg:text-xl leading-[30px] text-left">
+                {item.text}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+
+      <Button
+        title="Start sourcing from qualified farmers"
+        className="!bg-buyer-500 text-xl h-14 px-8 !rounded-full !w-auto"
+      />
+    </div>
+
+    <div
+      id="display-images"
+      class="hidden sm:flex items-center justify-center max-h-fit max-w-5xl py-0 rounded-lg lg:w-1/2"
+    >
+      {
+        data.map((item) => (
+          <Image
+            src={item.img}
+            alt={item.text}
+            class={`display-image w-auto h-auto ${
+              !item.isActive ? "hidden" : ""
+            }`}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script type="text/javascript" is:inline>
+  let currentIndex = 0;
+  const items = document.querySelectorAll(".experience-crop");
+
+  function setItem(index) {
+    items.forEach((item) => {
+      item.classList.remove("!text-buyer-500", "!font-semibold");
+      const images = document.querySelectorAll(".display-image");
+      images.forEach((image) => {
+        image.classList.remove("hidden");
+        image.classList.add("hidden");
+      });
+      images[index].classList.remove("hidden");
+    });
+    items[index]
+      .querySelector("#inactive-rect")
+      .setAttribute("id", "active-rect");
+    items[index].classList.add("!text-buyer-500", "!font-semibold");
+  }
+
+  items.forEach((item, index) => {
+    item.addEventListener("click", () => {
+      clearInterval(intervalId);
+      clearInterval(fillInterval);
+      setItem(index);
+    });
+  });
+
+  const intervalId = setInterval(() => {
+    currentIndex++;
+    if (currentIndex > 3) {
+      currentIndex = 0;
+    }
+    setItem(currentIndex);
+  }, 4500);
+
+  const fillInterval = setInterval(() => {
+    const rect = document.getElementById("active-rect");
+    let currentHeight = Number(rect.getAttribute("height"));
+
+    if (currentHeight < 94) {
+      rect.setAttribute("height", currentHeight + 1.2);
+    }
+    if (currentHeight >= 94) {
+      rect.setAttribute("id", "inactive-rect");
+      rect.setAttribute("height", 0);
+    }
+  }, 50);
+</script>

@@ -6,12 +6,13 @@ import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { AvailableCropCard } from "@components/products/grower";
+import { AvailableCropOfferCard } from "@components/products/buyer";
 
 import HeadingOneLine from "./HeadingOneLine";
-import type { IAvailableCrops, IAvailableDemands } from "types/app";
+import type { IAvailableCropOffers, IAvailableDemands } from "types/app";
 
 interface IProps {
-  data: IAvailableCrops[] | IAvailableDemands[];
+  data: IAvailableCropOffers[] | IAvailableDemands[];
   title: string;
   bgColor: string;
   titleTextColor: string;
@@ -22,7 +23,7 @@ const AvailableOrders = ({
   data,
   title,
   bgColor,
-  // cardType,
+  cardType,
   titleTextColor,
 }: IProps) => {
   return (
@@ -65,8 +66,11 @@ const AvailableOrders = ({
               {data.map((d) => (
                 <SwiperSlide key={d._id}>
                   <div className="mx-2.5">
-                    {/* {cardType === "grower" ? ( */}
-                    <AvailableCropCard data={d} />
+                    {cardType === "grower" ? (
+                      <AvailableCropCard data={d} />
+                    ) : (
+                      <AvailableCropOfferCard data={d} />
+                    )}
                   </div>
                 </SwiperSlide>
               ))}

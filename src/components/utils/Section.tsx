@@ -2,14 +2,13 @@ import { useState } from "react";
 
 import { NewpaperIcon, ContentIcon, ServiceGuideIcon } from "@assets/icons";
 
-import {
-  Wrapper,
-  SectionList,
-  NewsletterForm,
-  ServiceGuideForm,
-} from "@components/utils";
+import { Wrapper, SectionList, NewsletterForm, ServiceGuideForm } from ".";
 
-export default function Section() {
+export default function Section({
+  product = "Grower",
+}: {
+  product?: "Buyer" | "Grower";
+}) {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("Newsletter");
 
@@ -22,10 +21,12 @@ export default function Section() {
     setActive(name);
   };
 
+  const fillTwo= product == "Buyer" ? "#367AFE" : undefined;
+
   const incentives = [
     {
       name: "Newsletter",
-      icon: <NewpaperIcon />,
+      icon: <NewpaperIcon fillTwo={fillTwo} />,
       description:
         "Make smarter business decisions backed by data and stay ahead of food production trends with useful insights that cuts through the noise.",
       linkText: "Join the newsletter",
@@ -33,7 +34,7 @@ export default function Section() {
     },
     {
       name: "Service guide",
-      icon: <ServiceGuideIcon />,
+      icon: <ServiceGuideIcon fillTwo={fillTwo} />,
       description:
         "See how we help you maximise your yield, connect you to new markets and increase your profitability. With CF Grower.",
       linkText: "Send me the service guide!",
@@ -41,7 +42,7 @@ export default function Section() {
     },
     {
       name: "Customer stories",
-      icon: <ContentIcon />,
+      icon: <ContentIcon fillTwo={fillTwo} />,
       description:
         "Discover the latest tips and insights on food and agricultural production on our blog.",
       linkText: "Go to customer stories",
@@ -50,8 +51,11 @@ export default function Section() {
   ];
 
   return (
-    <div className="px-6">
-      <SectionList incentives={incentives} />
+    <div className="px-6 bg-[#FAFAFA]">
+      <SectionList
+        incentives={incentives}
+        textColor={product == "Buyer" ? "text-buyer-500": undefined}
+      />
       <Wrapper isOpen={open} onClose={() => toggleModal()}>
         {active === "Newsletter" ? (
           <NewsletterForm
@@ -61,7 +65,7 @@ export default function Section() {
           />
         ) : (
           <ServiceGuideForm
-            product="Buyer"
+            product={product}
             buttonBg="bg-grower-500"
             onClose={() => toggleModal()}
           />

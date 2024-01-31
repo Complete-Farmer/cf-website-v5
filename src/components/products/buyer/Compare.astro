@@ -1,0 +1,41 @@
+---
+import { CompareIcon } from "@assets/icons";
+import { Button } from "@components/utils";
+---
+
+<div
+  class="relative flex flex-col col-span-8 sm:col-span-12 lg:col-span-4 lg:px-6 h-80 py-12 overflow-hidden sm:rounded-xl"
+>
+  <div class="flex flex-col justify-start items-center gap-5">
+    <div class="flex justify-start items-start relative gap-4">
+      <p class="text-xl font-bold text-left text-custom_black-900">COMPARE</p>
+      <CompareIcon />
+    </div>
+    <div class="flex flex-col justify-start items-center gap-6 w-full px-1">
+      <div
+        class="flex flex-col justify-start items-center self-stretch relative gap-1"
+      >
+        <Button
+          id="with-cf"
+          title="With Complete Farmer"
+          className="py-4 !rounded-full uppercase text-sm font-semibold compare-btn !bg-buyer-500"
+        />
+        <span class="self-stretch text-sm font-bold text-center text-custom_gray-300">
+          The better way
+        </span>
+      </div>
+      <div
+        class="flex flex-col justify-start items-center self-stretch relative gap-1"
+      >
+        <Button
+          id="without-cf"
+          title="Before Complete Farmer"
+          className="py-4 !rounded-full uppercase text-sm font-semibold compare-btn !bg-transparent border border-buyer-500 !text-buyer-500"
+        />
+        <span class="self-stretch text-sm font-bold text-center text-custom_gray-300">
+          Traditional processes
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

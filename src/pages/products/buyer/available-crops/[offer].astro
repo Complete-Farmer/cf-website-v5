@@ -1,0 +1,57 @@
+---
+import type { IAvailableCropOffers } from "types/app";
+
+import Layouts from "@layouts/Layouts.astro";
+import { BreadCrumb } from "@components/utils";
+// import { TabView, CropDetails } from "@components/products/grower/crops";
+
+import { convertToKebabCase } from "@utils/functions";
+import { getCropOffers } from "@utils/api";
+
+export async function getStaticPaths() {
+  const availableCropOffers: IAvailableCropOffers[] = [];
+
+  const { statusCode, data } = await getCropOffers();
+
+  if (statusCode == 200) {
+    for (const c of data) {
+      availableCropOffers.push({
+        ...c,
+        link: `/products/buyer/available-crops/${convertToKebabCase(
+          c.crop.name
+        )}`,
+        specs: [
+          c.specification?.cultivationType,
+          c.specification?.condition,
+          c.specification?.grade,
+        ],
+      });
+    }
+  }
+
+  return availableCropOffers.map((offer) => {
+    return {
+      params: { offer: offer.link },
+      props: { offer },
+    };
+  });
+}
+
+const { offer } = Astro.props;
+---
+
+<Layouts
+  title={`${offer.crop.name} • Buyer • Products | Complete Farmer`}
+  description={offer.crop.description}
+>
+  <BreadCrumb
+    bgColor="bg-buyer-400"
+    textColor="text-buyer-500"
+    title="Browse available crops"
+    href="/products/buyer#available-crops"
+  />
+  <div class="pt-14">
+    <!-- <CropDetails {offer.crop} client:visible />
+    <TabView {crop} client:visible /> -->
+  </div>
+</Layouts>

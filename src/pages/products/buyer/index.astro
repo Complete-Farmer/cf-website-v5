@@ -1,14 +1,90 @@
 ---
 import Layouts from "@layouts/Layouts.astro";
 
-import { Hero } from "@components/products/buyer";
+import {
+  Hero,
+  ExperienceCrop,
+  CustomerStories,
+  ProcurementTurnAround,
+} from "@components/products/buyer";
+
+import { getCropOffers } from "@utils/api";
+import { filterAt, getCategories, getCxStories } from "@utils/prismic";
+import type { IAvailableCropOffers } from "types/app";
+import { convertToKebabCase } from "@utils/functions";
+import { AvailableOrders, Section } from "@components/utils";
+
+const { results } = await getCategories("products");
+
+const buyerId = results.find((c) => c.data.name === "Grower").id;
+
+const filters = filterAt("my.customer_stories_v3.category", buyerId);
+
+const customerStories = await getCxStories({
+  page: 1,
+  pageSize: 10,
+  filters,
+  fetchLinks: ["categories.name"],
+});
+
+const availableCropOffers: IAvailableCropOffers[] = [];
+
+const { statusCode, data } = await getCropOffers();
+
+if (statusCode == 200) {
+  for (const c of data) {
+    availableCropOffers.push({
+      ...c,
+      link: `/products/buyer/available-crops/${convertToKebabCase(c.crop.name)}`,
+      specs: [
+        c.specification?.cultivationType,
+        c.specification?.condition,
+        c.specification?.grade,
+      ],
+    });
+  }
+}
 ---
 
 <Layouts
   title="Buyer | Complete Farmer"
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
- <Hero client:load />
+  <Hero client:load />
+  <ProcurementTurnAround />
+  <ExperienceCrop />
+  {
+    customerStories.results.length > 0 && (
+      <CustomerStories client:visible data={customerStories} />
+    )
+  }
+  {
+    availableCropOffers.length > 0 && (
+      <AvailableOrders
+        client:visible
+        cardType="buyer"
+        bgColor="bg-buyer-200"
+        data={availableCropOffers}
+        titleTextColor="text-buyer-400"
+        title="See what other farmers are growing"
+      />
+    )
+  }
+  <Section product="Buyer" client:visible />
 </Layouts>
 
 <!-- page: "/products/buyer", -->
+<!-- <script type="module" is:inline>
+  // @ts-nocheck
+  import { $authModal } from "../../src/utils/stores.ts";
+
+  function toggleAuthModal() {
+    $authModal.set(true);
+    document.querySelector(".app-body").style.filter = "blur(4px)";
+    document.querySelector(".app-footer").style.filter = "blur(4px)";
+  }
+
+  const btn = document.getElementById("get-started");
+
+  btn.addEventListener("click", toggleAuthModal);
+</script> -->

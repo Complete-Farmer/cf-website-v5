@@ -1,7 +1,6 @@
 export  *  from "./new-farmer";
 export  *  from "./existing-farmer";
 export { default as Hero } from "./Hero";
-export { default as Section } from "./Section";
 export { default as Estimate } from "./Estimate";
 export { default as GrowerGetInTouch } from "./GetInTouch";
 export { default as HowCFHelpsYou } from "./HowCFHelpsYou";

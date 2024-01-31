@@ -28,7 +28,7 @@ const CustomerStoryCard = ({ type = "grower", data }: IProps) => {
 
   return (
     <div
-      className={`py-8 px-0 sm:py-8 sm:px-8 lg:py-12 lg:px-20 w-full max-w-7xl[x] flex-col items-center rounded-2xl ${bg}`}
+      className={`py-8 px-0 sm:py-8 sm:px-8 lg:py-20 lg:px-20 w-full max-w-7xl[x] flex-col items-center rounded-2xl ${bg}`}
     >
       <div className="mx-auto max-w-7xl  w-full">
         <div className="flex flex-col items-center md:justify-between">

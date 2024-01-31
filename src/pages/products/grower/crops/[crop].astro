@@ -2,6 +2,7 @@
 import type { IAvailableDemands } from "types/app";
 
 import Layouts from "@layouts/Layouts.astro";
+import { BreadCrumb } from "@components/utils";
 import { TabView, CropDetails } from "@components/products/grower/crops";
 
 import {
@@ -9,7 +10,6 @@ import {
   generateMarketAvailabilityDataDynamic,
 } from "@utils/functions";
 import { getAvaiableCrops, getCropVarieties } from "@utils/api";
-import { ArrowIcon } from "@assets/icons";
 
 export async function getStaticPaths() {
   const availableDemands: IAvailableDemands[] = [];
@@ -49,16 +49,12 @@ const { crop } = Astro.props;
   title={`${crop.name} • Grower • Products | Complete Farmer`}
   description={crop.description}
 >
-  <div
-    class="fixed w-full h-14 overflow-hidden bg-grower-400 text-grower-500 z-10"
-  >
-    <div
-      class="max-w-7xl mx-auto px-4 sm:px-8 py-4 flex justify-start items-center space-x-4"
-    >
-      <ArrowIcon className="rotate-180" />
-      <a href="/products/grower/new-farmer" class="font-bold"> Browse orders</a>
-    </div>
-  </div>
+  <BreadCrumb
+    title="Browse crops"
+    bgColor="bg-grower-400"
+    textColor="text-grower-500"
+    href="/products/grower/new-farmer"
+  />
   <div class="pt-14">
     <CropDetails {crop} client:visible />
     <TabView {crop} client:visible />

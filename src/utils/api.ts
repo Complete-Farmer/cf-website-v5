@@ -1,4 +1,4 @@
-import type { ICrop, ICropVariety } from "types/app";
+import type { ICrop, ICropOffer, ICropVariety } from "types/app";
 import { FMS_API, BOT_EMAIL, BOT_PASS } from "./constants";
 
 const buff = Buffer.from(BOT_EMAIL + ":" + BOT_PASS);
@@ -27,6 +27,17 @@ export const getCropVarieties = async (
   statusCode: number;
   data?: ICropVariety[];
 }> => {
-  const response = await fetch(`${FMS_API}/crop-varieties?status=ACTIVE&crop=${id}`, options);
+  const response = await fetch(
+    `${FMS_API}/crop-varieties?status=ACTIVE&crop=${id}`,
+    options
+  );
+  return response.json();
+};
+
+export const getCropOffers = async (): Promise<{
+  statusCode: number;
+  data?: ICropOffer[];
+}> => {
+  const response = await fetch(`${FMS_API}/crop-offers?status=ACTIVE`, options);
   return response.json();
 };

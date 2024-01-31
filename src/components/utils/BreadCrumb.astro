@@ -1,0 +1,28 @@
+---
+import { ArrowIcon } from "@assets/icons";
+import { classNames } from "@utils/functions";
+
+interface Props {
+  href: string;
+  title: string;
+  bgColor: string;
+  textColor: string;
+}
+
+const { href, title, bgColor, textColor } = Astro.props;
+---
+
+<div
+  class={classNames(
+    bgColor,
+    textColor,
+    "fixed w-full h-14 overflow-hidden z-10"
+  )}
+>
+  <div
+    class="max-w-7xl mx-auto px-4 sm:px-8 py-4 flex justify-start items-center space-x-4"
+  >
+    <ArrowIcon className="rotate-180" />
+    <a href={href} class="font-bold">{title}</a>
+  </div>
+</div>

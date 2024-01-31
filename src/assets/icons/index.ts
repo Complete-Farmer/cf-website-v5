@@ -12,7 +12,8 @@ export { default as ContentIcon } from "./content";
 export { default as PeopleIcon } from "./people";
 export { default as ChevronIcon } from "./chevron";
 export { default as TwitterIcon } from "./twitter";
-export { default as reviousIcon } from "./previous";
+export { default as PreviousIcon } from "./previous";
+export { default as CompareIcon } from "./compare";
 export { default as LinkedInIcon } from "./linkedIn";
 export { default as LocationIcon } from "./location";
 export { default as FacebookIcon } from "./facebook";
@@ -25,3 +26,15 @@ export { default as InstagramIcon } from "./instagram";
 export { default as TwoLeavesIcon } from "./two-leaves";
 export { default as MenuCloseIcon } from "./menu-close";
 export { default as ServiceGuideIcon } from "./service-guide";
+export { default as DirectAccessIcon } from "./direct-access";
+export { default as HighQualityCrop } from "./high-quality-crop";
+export { default as LowQualityCropIcon } from "./low-quality-crop";
+export { default as LongAndFragmentedIcon } from "./long-and-fragmented";
+export { default as InconsistentSupplyIcon } from "./inconsistent-supply";
+export { default as EasyDigitizedProcess } from "./easy-digitized-process";
+export { default as RealTimeVisibilityIcon } from "./real-time-visibility";
+export { default as LackOfTransparencyIcon } from "./lack-of-transparency";
+export { default as MiddlemenInterferenceIcon } from "./middlemen-interference";
+export { default as TransparentMonitoringIcon } from "./transparent-monitoring";
+
+

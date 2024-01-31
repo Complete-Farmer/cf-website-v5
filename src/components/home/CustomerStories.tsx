@@ -6,7 +6,6 @@ import { useMemo, useState } from "react";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { ArrowIcon } from "@assets/icons";
 import Tab from "@components/utils/Tab";
 import CustomerStoryCard from "@components/utils/CustomerStoryCard";
 
@@ -24,6 +23,8 @@ const mockCateogries = [
 ];
 
 import type { IPrismicData } from "types/app";
+import { Button } from "@components/utils";
+import { classNames } from "@utils/functions";
 
 interface IItem {
   id: string;
@@ -86,10 +87,6 @@ export default function CustomerStories({ data }: { data: IPrismicData }) {
     const activeCat = mockCateogries.find((i) => i.name === catIndex);
     setCategories(mockCateogries);
     setActiveCategory(activeCat?.name as string);
-  };
-
-  const handleNavigate = () => {
-    // navigate("/customer-stories");
   };
 
   const handleButtonClick = () => {
@@ -156,21 +153,18 @@ export default function CustomerStories({ data }: { data: IPrismicData }) {
           </Swiper>
         )}
       </>
-      <div
-        onClick={() => {
-          handleButtonClick();
-        }}
-        className="text-[20px] flex items-center justify-center px-6 mt-14 sm:mt-16"
-      >
-        <button
-          type="submit"
-          onClick={handleNavigate}
-          className={`${activeBgColor} space-x-2 w-full flex items-center justify-center h-16 px-6 sm:mx-40 lg:mx-0 lg:w-[250px] lg:text-[20px] font-medium lg:font-bold tracking-wide text-white transition duration-200 rounded-full focus:shadow-outline focus:outline-none`}
-        >
-          <span>See all stories</span>
-          <ArrowIcon className="text-white" />
-        </button>
-      </div>
+
+      <a href="customer-stories">
+        <Button
+          hasArrow
+          title="See all stories"
+          className={classNames(
+            `!${activeBgColor}`,
+            "!w-auto mx-auto !rounded-full px-8 py-4 mt-10 sm:mt-20 text-xl"
+          )}
+          onClick={handleButtonClick}
+        />
+      </a>
     </section>
   );
 }

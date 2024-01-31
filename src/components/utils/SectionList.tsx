@@ -1,5 +1,6 @@
 import Fade from "react-reveal/Fade";
 import { ArrowIcon } from "@assets/icons";
+import { classNames } from "@utils/functions";
 
 interface IProps {
   incentives: {
@@ -10,10 +11,13 @@ interface IProps {
     link?: string;
     action?: (i: string) => void;
   }[];
-  type?: "grower" | "buyer";
+  textColor?: string;
 }
 
-export default function SectionList({ type = "grower", incentives }: IProps) {
+export default function SectionList({
+  textColor = "text-grower-500",
+  incentives,
+}: IProps) {
   const handleLinkClick = () => {
     // ReactGA.event({
     //   category: "Link Click",
@@ -49,7 +53,12 @@ export default function SectionList({ type = "grower", incentives }: IProps) {
                   </p>
                 </div>
               </div>
-              <div className="mt-2 flex justify-start flex-grow-0 flex-shrink-0 h-6 sm:mt-6 relative opacity-90 space-x-2 xl:space-x-3">
+              <div
+                className={classNames(
+                  textColor,
+                  "mt-2 flex justify-start flex-grow-0 flex-shrink-0 h-6 sm:mt-6 relative opacity-90 space-x-2 xl:space-x-3"
+                )}
+              >
                 <a
                   href={i.link || ""}
                   onClick={(e) => {
@@ -59,11 +68,11 @@ export default function SectionList({ type = "grower", incentives }: IProps) {
                     }
                     handleLinkClick();
                   }}
-                  className={`text-base sm:text-[20px] font-bold text-center xl:block text-${type}-500 hover:cursor-pointer`}
+                  className="text-base sm:text-[20px] font-bold text-center xl:block hover:cursor-pointer"
                 >
                   {i.linkText}
                 </a>
-                <ArrowIcon className={`text-${type}-500`} />
+                <ArrowIcon />
               </div>
             </div>
           </Fade>

@@ -1,0 +1,64 @@
+---
+import { HeadingOneLine } from "@components/utils";
+import Compare from "./Compare.astro";
+import CompareCards from "./CompareCards";
+---
+
+<section class="relative h-full py-10 xl:py-12 bg-buyer-100">
+  <div class="container max-w-6xl mx-auto">
+    <HeadingOneLine
+      title="Turn your crop procurement woes into your biggest wins"
+      titleTextColor="text-buyer-900"
+    />
+    <div
+      class="grid gap-4 sm:gap-6 lg:gap-8 sm:gap-8[x] xl:gap-12 md:mt-10 grid-cols-8 sm:grid-cols-12 lg:grid-cols-12 px-4 sm:px-12 lg:px-8 xl:px-0"
+    >
+      <Compare />
+      <CompareCards />
+    </div>
+  </div>
+
+  <div
+    class="container max-w-7xl mx-auto flex flex-col sm:flex-row w-full justify-center items-center py-10 px-5 gap-x-10"
+  >
+    <button
+      id="fullComparison"
+      class="flex justify-center items-center w-full md:w-auto h-16 gap-2 md:px-28 py-4 rounded-full bg-buyer-500"
+    >
+      <span class="text-base sm:text-xl font-bold text-left text-white">
+        Full Comparison
+      </span>
+    </button>
+  </div>
+</section>
+
+<script type="text/javascript" is:inline>
+  const btns = document.querySelectorAll(".compare-btn");
+
+  btns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("id");
+      const otherBtn = document.getElementById(id === "with-cf" ? "without-cf" : "with-cf")
+      
+      btn.classList.remove("!bg-transparent", "border", "border-buyer-500", "!text-buyer-500");
+      btn.classList.add("!bg-buyer-500");
+      otherBtn.classList.add("!bg-transparent", "border", "border-buyer-500", "!text-buyer-500");
+      otherBtn.classList.remove("!bg-buyer-500");
+
+      const cardsToShow = document.querySelectorAll(`.${id}`);
+      const cardsToHide = document.querySelectorAll(
+        `.${id === "with-cf" ? "without-cf" : "with-cf"}`
+      );
+
+      cardsToShow.forEach((card) => {
+        card.classList.remove("hidden");
+        card.classList.add("flex");
+      });
+
+      cardsToHide.forEach((card) => {
+        card.classList.remove("flex");
+        card.classList.add("hidden");
+      });
+    });
+  });
+</script>
