@@ -82,7 +82,7 @@ const config = [
     },
     secondText: [
       { name: "Resources", href: "/products/buyer/resources" },
-      { name: "Sales affiliate", href: "/products/buyer/sales" },
+      { name: "Sales affiliate", href: "/products/buyer/sales-affiliate" },
       { name: "Home", href: "/" },
       { name: "Grower", href: "/products/grower/new-farmer" },
     ],
@@ -97,7 +97,7 @@ const config = [
       },
       {
         name: "Sales affiliate",
-        href: "/products/buyer/sales",
+        href: "/products/buyer/sales-affiliate",
       },
     ],
   },

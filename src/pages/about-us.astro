@@ -1,16 +1,22 @@
 ---
 import Layouts from "@layouts/Layouts.astro";
 
+import { HeroTwoSideImageFade } from "@components/utils";
+
+import ImageLeft from "@assets/images/about-us/hero-1.webp";
+import ImageRight from "@assets/images/products/buyer/sales-affilate/hero-2.webp";
 ---
 
 <Layouts
   title="About Us | Complete Farmer"
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
-  <div class="pt-24 pb-32 bg-about-us-bg bg-cover">
-    <div class="px-4 sm:px-12 mx-auto max-w-5xl lg:px-12 xl:px-16">
-    </div>
-  </div>
+  <HeroTwoSideImageFade
+    client:visible
+    leftImage={ImageLeft.src}
+    rightImage={ImageRight.src}
+    heading="Meet the all-in-one platform digitizing agriculture from supply to demand"
+  />
 </Layouts>
 
 <!-- page: "/about-us", -->

@@ -1,16 +1,10 @@
-// import { useGlobalContext } from "context/GlobalContext";
 import Fade from "react-reveal/Fade";
+
+import { Button, HeroRight } from "@components/utils";
 
 import GrowerHeroRight from "@assets/images/products/buyer/hero-right.webp";
 
-import HeroRight from "@components/utils/HeroRight";
-
 const Hero = () => {
-  // const { setSignUpModal } = useGlobalContext();
-
-  const redirectToDemoScreen = () => {
-    // navigate("/products?tab=" + currentTab.href);
-  };
 
   const handleButtonClick = () => {
     // ReactGA.event({
@@ -38,32 +32,22 @@ const Hero = () => {
             </p>
           </div>
           <div className="flex flex-col w-full justify-between xl:justify-start gap-6">
-            <div className="flex justify-center">
-              <button
-                onClick={() => {
-                  // setSignUpModal(true);
-                  handleButtonClick();
-                }}
-                className="flex justify-center items-center w-full md:w-full lg:w-full h-16 gap-2 px-8 py-4 rounded-full bg-buyer-500"
-              >
-                <p className="text-lg sm:text-xl md:text-xl leading-6 font-bold text-left">
-                  Source crops the better way
-                </p>
-              </button>
-            </div>
-            <div className="flex justify-center">
-              <button
-                onClick={() => {
-                  redirectToDemoScreen();
-                  handleButtonClick();
-                }}
-                className="flex justify-center items-center w-full md:w-full lg:w-full h-16 gap-2 px-8 py-4 rounded-full border-2 border-blue border-buyer-500}"
-              >
-                <p className="text-lg md:text-xl leading-6 font-bold text-left text-buyer-500">
-                  See a demo
-                </p>
-              </button>
-            </div>
+            <Button
+              title="Source crops the better way"
+              onClick={handleButtonClick}
+              className="py-4 text-xl !rounded-full !font-bold !bg-buyer-500"
+            />
+
+            <a
+              href={"/products?tab=buyer"}
+              className="contents"
+            >
+              <Button
+                title="See a demo"
+                onClick={handleButtonClick}
+                className="py-4 text-xl !rounded-full !text-buyer-500 !font-bold !bg-transparent border-2 border-buyer-500"
+              />
+            </a>
           </div>
         </div>
       </Fade>
@@ -71,11 +55,11 @@ const Hero = () => {
   );
 
   return (
-    <section className="overflow-hidden w-full xl:min-h-[95vh] px-2 md:px-10 md:pr-0 lg:px-10 text-white pb-20 sm:pb-48 xl:pb-32 bg-cover bg-hero-buyer">
+    <section className="overflow-hidden w-full xl:min-h-[70vh] 2xl:min-h-[80vh] px-2 md:px-10 md:pr-0 lg:px-10 text-white pb-20 sm:pb-48 xl:pb-32 bg-cover bg-hero-buyer">
       <div className="w-full h-auto pt-14 sm:pt-20 xl:pt-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-0 lg:px-4 xl:px-0 flex items-center md:flex-row flex-col h-full">
           <LeftComp />
-          <HeroRight key="Existing Farmer" imageSrc={GrowerHeroRight.src} />
+          <HeroRight key="Existing Farmer" imageSrc={GrowerHeroRight.src} className="hidden sm:flex" />
         </div>
       </div>
     </section>

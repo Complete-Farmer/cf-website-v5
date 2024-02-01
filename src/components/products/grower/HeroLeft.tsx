@@ -1,6 +1,8 @@
 import Fade from "react-reveal/Fade";
 import PlainTab from "@components/utils/PlainTab";
 import type { ITab } from "types/app";
+import { Button } from "@components/utils";
+import { classNames } from "@utils/functions";
 
 interface IProps {
   tabs: ITab[];
@@ -19,8 +21,10 @@ const HeroLeft = ({ tabs, currentTab }: IProps) => {
     // });
   };
 
+  const firstButtonText = currentTab.data.firstButtonText as string;
+
   return (
-    <div className="w-full xl:w-1/2 h-full flex flex-col xl:pr-0 lg:pr-5 lg:items-start sm:items-center justify-center space-y-10">
+    <div className="w-full sm:w-1/2 h-full flex flex-col xl:pr-0 lg:pr-5 lg:items-start justify-center space-y-10">
       <Fade left duration={1000} delay={500} distance="30px">
         <div className="flex flex-col justify-start items-start gap-11">
           <div className="flex justify-start items-start w-full">
@@ -32,30 +36,34 @@ const HeroLeft = ({ tabs, currentTab }: IProps) => {
           </div>
 
           <div className="flex flex-col justify-start items-start gap-8">
-            <p className="w-full text-[28px] sm:text-[40px] xl:text-5xl font-bold text-center leading-9 xl:text-left">
+            <h1 className="w-full text-[28px] sm:text-[32px] xl:text-5xl font-bold text-center sm:text-left leading-9">
               {currentTab.data.title as string}&nbsp;
-            </p>
-            <p className="w-full text-xl text-center xl:text-left">
+            </h1>
+            <p className="w-full sm:text-base lg:text-xl text-center sm:text-left">
               {currentTab.data.description as string} &nbsp;
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row w-full justify-between xl:justify-start items-start gap-6">
-            <button
+          <div className="flex flex-col sm:flex-row w-full xl:justify-start items-start gap-6">
+            <Button
+              title={firstButtonText}
               onClick={handleButtonClick}
-              className="flex justify-center items-center w-full xl:w-auto h-16 gap-2 px-8 py-4 rounded-full bg-grower-500"
-            >
-              <span className="text-xl font-bold text-left">
-                {currentTab.data.firstButtonText as string}
-              </span>
-            </button>
+              className={classNames(
+                firstButtonText.includes("Started")
+                  ? "xl:!w-[145px]"
+                  : " xl:!w-[130px]",
+                "py-4 sm:!w-[170px] text-xl !rounded-full"
+              )}
+            />
+
             <a
               href={"/products?tab=" + currentTab.href}
-              onClick={() => handleButtonClick()}
-              className="flex justify-center items-center w-full xl:w-[230px] h-16  gap-2 px-8 py-4 rounded-full border border-grower-500"
+              className="contents"
             >
-              <span className="text-xl font-bold text-left text-grower-500">
-                {currentTab.data.secondButtonText as string}
-              </span>
+              <Button
+                onClick={handleButtonClick}
+                title={currentTab.data.secondButtonText as string}
+                className="py-4 sm:!w-[170px] xl:!w-[180px] text-xl !rounded-full !bg-transparent !border-2 !border-grower-500"
+              />
             </a>
           </div>
         </div>

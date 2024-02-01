@@ -16,7 +16,7 @@ import { AvailableOrders, Section } from "@components/utils";
 
 const { results } = await getCategories("products");
 
-const buyerId = results.find((c) => c.data.name === "Grower").id;
+const buyerId = results.find((c) => c.data.name === "Buyer").id;
 
 const filters = filterAt("my.customer_stories_v3.category", buyerId);
 
@@ -29,19 +29,24 @@ const customerStories = await getCxStories({
 
 const availableCropOffers: IAvailableCropOffers[] = [];
 
-const { statusCode, data } = await getCropOffers();
+const response = await getCropOffers();
 
-if (statusCode == 200) {
-  for (const c of data) {
-    availableCropOffers.push({
-      ...c,
-      link: `/products/buyer/available-crops/${convertToKebabCase(c.crop.name)}`,
-      specs: [
-        c.specification?.cultivationType,
-        c.specification?.condition,
-        c.specification?.grade,
-      ],
-    });
+if (response) {
+  const { statusCode, data } = response;
+  if (statusCode == 200) {
+    for (const c of data) {
+      availableCropOffers.push({
+        ...c,
+        link: `/products/buyer/available-crops/${convertToKebabCase(
+          c.crop.name
+        )}`,
+        specs: [
+          c.specification?.cultivationType,
+          c.specification?.condition,
+          c.specification?.grade,
+        ],
+      });
+    }
   }
 }
 ---

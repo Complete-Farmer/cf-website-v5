@@ -1,15 +1,14 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import Fade from "react-reveal/Fade";
+
+import { Button, HeroRight, PlainTab } from "@components/utils";
+import InitialHero from "./InitialHero";
 
 import GrowerHeroRight from "@assets/images/products/grower/hero-right.webp";
 import BuyerHeroRight from "@assets/images/products/buyer/hero-right.webp";
 
-import InitialHero from "./InitialHero";
-import PlainTab from "@components/utils/PlainTab";
-import HeroRight from "@components/utils/HeroRight";
-
 import type { AsObject, IClickEvent, ITab } from "types/app";
+import { classNames } from "@utils/functions";
 
 const initialTabs = [
   {
@@ -96,6 +95,9 @@ const Hero = () => {
     // });
   };
 
+  const firstButton = currentTab.data.firstButton as AsObject<string>;
+  const secondButton = currentTab.data.secondButton as AsObject<string>;
+
   const LeftComp = () => (
     <div className="w-full xl:w-1/2 h-full flex flex-col xl:pr-0 lg:pr-5 lg:items-start sm:items-center justify-center space-y-10">
       <Fade left duration={1000} delay={500} distance="30px">
@@ -110,32 +112,32 @@ const Hero = () => {
           </div>
 
           <div className="flex flex-col justify-start items-start gap-8">
-            <p
-              className="w-full text-[28px] sm:text-5xl font-bold text-center leading-9 xl:text-left"
-            >
+            <p className="w-full text-[28px] sm:text-5xl font-bold text-center leading-9 xl:text-left">
               {currentTab.data.title as string}&nbsp;
             </p>
-            <p className="w-full text-xl text-center xl:text-left">
+            <p className="w-full text-base sm:text-xl text-center xl:text-left">
               {currentTab.data.description as string} &nbsp;
             </p>
           </div>
           <div className="flex flex-col sm:flex-row w-full justify-between xl:justify-start items-start gap-6">
-            <button
+            <Button
+              title={firstButton.text}
               onClick={handleButtonClick}
-              className={`flex justify-center items-center w-full xl:w-auto h-16 gap-2 px-8 py-4 rounded-full ${(currentTab.data.firstButton  as AsObject<string>).bgColor}`}
-            >
-              <span className={"text-xl font-bold text-left"}>
-                {(currentTab.data.firstButton as AsObject<string>).text}
-              </span>
-            </button>
+              className={classNames(
+                `!${firstButton.bgColor}`,
+                "py-4 text-xl !rounded-full sm:!w-1/2 xl:!w-[290px] !font-bold"
+              )}
+            />
+
             <a
               href={"/products?tab=" + currentTab.href}
-              onClick={() => handleButtonClick()}
-              className="flex justify-center items-center w-full xl:w-[230px] h-16  gap-2 px-8 py-4 rounded-full bg-white"
+              className="contents"
             >
-              <span className="text-xl font-bold text-left text-black">
-                {(currentTab.data.secondButton as AsObject<string>).text}
-              </span>
+              <Button
+                onClick={handleButtonClick}
+                title={secondButton.text}
+                className="py-4 sm:!w-1/2 xl:!w-[180px] text-xl !rounded-full !bg-white !text-grower-900 !font-bold"
+              />
             </a>
           </div>
         </div>
@@ -156,6 +158,7 @@ const Hero = () => {
               <LeftComp />
 
               <HeroRight
+                className="hidden"
                 key={currentTab.name}
                 imageSrc={currentTab.rightImage.src}
               />

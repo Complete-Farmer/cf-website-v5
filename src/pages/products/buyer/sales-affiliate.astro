@@ -1,0 +1,26 @@
+---
+import Layouts from "@layouts/Layouts.astro";
+import { HeroTwoSideImageFade } from "@components/utils";
+
+import ImageLeft from "@assets/images/products/buyer/sales-affilate/hero-1.webp";
+import ImageRight from "@assets/images/products/buyer/sales-affilate/hero-2.webp";
+---
+
+<Layouts
+  title="Sales Affiliation • Buyer • Products | Complete Farmer"
+  description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
+>
+  <HeroTwoSideImageFade
+    client:visible
+    buttonTitle="Join now"
+    bgColor="bg-buyer-900"
+    textColor="text-white"
+    leftImage={ImageLeft.src}
+    iconColor="text-[#00FFE0]"
+    rightImage={ImageRight.src}
+    buttonBgColor="!bg-buyer-500 !w-fit px-8"
+    bgImage="bg-customer-stories-buyer-bg-pattern"
+    heading="Become a Complete Farmer sales affiliate"
+    text="Do you have a network of buyers in Europe or Asia? If so, join our lucrative affiliate program and start earning today by promoting our high-quality agricultural commodity offerings to them."
+  />
+</Layouts>
