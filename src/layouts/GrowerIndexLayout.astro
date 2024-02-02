@@ -1,11 +1,15 @@
 ---
 import Layouts from "@layouts/Layouts.astro";
 
+import HeroContainer from "@components/products/HeroContainer.astro";
 import { Hero } from "@components/products/grower";
 import { Section } from "@components/utils";
 
-import HeroImageOne from "@assets/images/products/grower/hero-right.webp";
-import HeroImageTwo from "@assets/images/products/grower/hero-right-2.webp";
+import NFImageDesktop from "@assets/images/products/grower/hero-right.webp";
+import NFImageTablet from "@assets/images/products/grower/hero-right-tablet.webp";
+
+import EFImageDesktop from "@assets/images/products/grower/hero-right-2.webp";
+import EFImageTablet from "@assets/images/products/grower/hero-right-2-tablet.webp";
 
 interface Props {
   title: string;
@@ -19,7 +23,10 @@ const initialTabs = [
     current: true,
     name: "New Farmer",
     href: "/products/grower/new-farmer",
-    rightImage: HeroImageOne,
+    images: {
+      tablet: NFImageTablet.src,
+      desktop: NFImageDesktop.src,
+    },
     data: {
       title: "Farm with confidence as a first-time farmer.",
       description:
@@ -32,7 +39,10 @@ const initialTabs = [
     current: false,
     name: "Existing Farmer",
     href: "/products/grower/existing-farmer",
-    rightImage: HeroImageTwo,
+    images: {
+      tablet: EFImageTablet.src,
+      desktop: EFImageDesktop.src,
+    },
     data: {
       title: "Scale your farm with help from the food production experts",
       description:
@@ -59,7 +69,9 @@ const currentTab = tabs.find((tab) => tab.current);
 ---
 
 <Layouts {title} {description}>
-  <Hero {tabs} {currentTab} client:load />
+  <HeroContainer bgImage="bg-hero-grower">
+    <Hero {tabs} {currentTab} client:load />
+  </HeroContainer>
   <slot />
   <Section client:visible />
 </Layouts>

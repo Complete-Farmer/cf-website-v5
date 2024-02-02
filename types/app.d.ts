@@ -19,7 +19,10 @@ export interface ITab {
   name: string;
   current: boolean;
   data: AsObject<string | AsObject<string>>;
-  rightImage: ImageMetadata;
+  images: {
+    tablet: string;
+    desktop: string;
+  };
 }
 
 export interface IPlainProps {

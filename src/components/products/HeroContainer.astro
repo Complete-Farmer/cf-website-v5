@@ -1,0 +1,25 @@
+---
+import { classNames } from "@utils/functions";
+
+interface Props {
+  bgImage: string;
+}
+
+const { bgImage } = Astro.props;
+---
+
+<section
+  class={classNames(
+    bgImage,
+    "overflow-hidden w-full sm:pl-8 lg:px-10 xl:px-10 pb-20 sm:pb-48 xl:pb-32 text-white bg-cover"
+  )}
+>
+  <div class="w-full h-auto pt-14 sm:pt-20 xl:pt-32">
+    <div
+      class="max-w-7xl h-full mx-auto px-4 sm:px-0 xl:px-0 flex items-center flex-col md:flex-row md:justify-between"
+    >
+      <slot />
+    </div>
+  </div>
+</section>
+

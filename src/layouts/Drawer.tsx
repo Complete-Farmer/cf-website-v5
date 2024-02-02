@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import ReactDrawer from "react-modern-drawer";
 
 import CFMainLogo from "@assets/images/logos/cf/main.png";
-import { useResolution } from "@hooks/useResolution";
 import { ArrowIcon, MenuCloseIcon } from "@assets/icons";
+import { useResolution } from "@utils/useResolution";
 import { getLink } from "@utils/functions";
 
 const Drawer: React.FC<{

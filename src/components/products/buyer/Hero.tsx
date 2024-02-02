@@ -2,10 +2,10 @@ import Fade from "react-reveal/Fade";
 
 import { Button, HeroRight } from "@components/utils";
 
-import GrowerHeroRight from "@assets/images/products/buyer/hero-right.webp";
+import BuyerHeroRight1 from "@assets/images/products/buyer/hero-right.webp";
+import BuyerHeroRight2 from "@assets/images/products/buyer/hero-right-tablet.webp";
 
 const Hero = () => {
-
   const handleButtonClick = () => {
     // ReactGA.event({
     //   category: "Button Click",
@@ -38,10 +38,7 @@ const Hero = () => {
               className="py-4 text-xl !rounded-full !font-bold !bg-buyer-500"
             />
 
-            <a
-              href={"/products?tab=buyer"}
-              className="contents"
-            >
+            <a href={"/products?tab=buyer"} className="contents">
               <Button
                 title="See a demo"
                 onClick={handleButtonClick}
@@ -55,14 +52,17 @@ const Hero = () => {
   );
 
   return (
-    <section className="overflow-hidden w-full xl:min-h-[70vh] 2xl:min-h-[80vh] px-2 md:px-10 md:pr-0 lg:px-10 text-white pb-20 sm:pb-48 xl:pb-32 bg-cover bg-hero-buyer">
-      <div className="w-full h-auto pt-14 sm:pt-20 xl:pt-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-0 lg:px-4 xl:px-0 flex items-center md:flex-row flex-col h-full">
-          <LeftComp />
-          <HeroRight key="Existing Farmer" imageSrc={GrowerHeroRight.src} className="hidden sm:flex" />
-        </div>
-      </div>
-    </section>
+    <>
+      <LeftComp />
+      <HeroRight
+        key="Existing Farmer"
+        images={{
+          tablet: BuyerHeroRight2.src,
+          desktop: BuyerHeroRight1.src,
+        }}
+        className="hidden sm:flex"
+      />
+    </>
   );
 };
 

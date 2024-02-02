@@ -1,5 +1,6 @@
 ---
 import Layouts from "@layouts/Layouts.astro";
+import HeroContainer from "@components/products/HeroContainer.astro";
 
 import {
   Hero,
@@ -55,7 +56,9 @@ if (response) {
   title="Buyer | Complete Farmer"
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
-  <Hero client:load />
+  <HeroContainer bgImage="bg-hero-buyer">
+    <Hero client:load />
+  </HeroContainer>
   <ProcurementTurnAround />
   <ExperienceCrop />
   {
