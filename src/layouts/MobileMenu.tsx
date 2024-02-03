@@ -29,7 +29,7 @@ const menus = {
 
 interface IProps {
   isOpen: boolean;
-  type?: "grower" | "buyer";
+  isBuyer: boolean;
   onClose: () => void;
   handleDrawer: (v: "Login" | "SignUp") => void;
   mobileTabs?: { name: string; href: string }[];
@@ -38,9 +38,9 @@ interface IProps {
 const MobileMenu = ({
   isOpen,
   onClose,
+  isBuyer,
   mobileTabs,
   handleDrawer,
-  type = "grower",
 }: IProps) => {
   return (
     <Dialog as="div" open={isOpen} onClose={onClose} className="lg:hidden">
@@ -124,7 +124,7 @@ const MobileMenu = ({
           <button
             onClick={() => handleDrawer("Login")}
             className={classNames(
-              type === "grower"
+              !isBuyer
                 ? "text-grower-500 border-grower-500"
                 : "text-buyer-500 border-buyer-500",
               "block w-full order-2 sm:order-1 mx-auto rounded-md border px-3.5 py-3.5 sm:py-5 text-center text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
@@ -135,7 +135,7 @@ const MobileMenu = ({
           <button
             onClick={() => handleDrawer("SignUp")}
             className={classNames(
-              type === "grower" ? "bg-grower-500" : "bg-buyer-500",
+              !isBuyer ? "bg-grower-500" : "bg-buyer-500",
               "block w-full mx-auto order-1 sm:order-2 rounded-md px-3.5 py-3.5 sm:py-5 text-center text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
             )}
           >

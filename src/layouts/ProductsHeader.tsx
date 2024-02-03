@@ -7,7 +7,11 @@ import { BuyerGetInTouch, FullComparison } from "@components/products/buyer";
 import { GrowerGetInTouch } from "@components/products/grower";
 
 import { classNames } from "@utils/functions";
-import { $authModal, $getInTouchModal, $fullComparisonDrawer } from "@utils/stores";
+import {
+  $authModal,
+  $getInTouchModal,
+  $fullComparisonDrawer,
+} from "@utils/stores";
 
 import {
   ArrowIcon,
@@ -25,7 +29,6 @@ const config = [
   {
     logo: GrowerLogo,
     name: "CF Grower",
-    popoverArrowIcon: ArrowIcon,
     textcolor: "text-grower-400",
     activeBgColor: "bg-grower-500",
     activeTextColor: "text-grower-500",
@@ -69,7 +72,6 @@ const config = [
   {
     logo: BuyerLogo,
     name: "CF Buyer",
-    href: "/products/buyer",
     popoverArrowIcon: ArrowIcon,
     textcolor: "text-buyuer-400",
     activeBgColor: "bg-buyer-500",
@@ -269,9 +271,7 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
                         leaveTo="opacity-0 translate-y-1"
                       >
                         <Popover.Panel
-                          onMouseLeave={() => {
-                            close();
-                          }}
+                          onMouseLeave={() => close()}
                           className="absolute left-40 z-10 mt-3 w-screen max-w-xs -translate-x-1/2 transform px-0 sm:px-0 lg:max-w-xs"
                         >
                           <div className="overflow-hidden rounded-lg shadow-lg w-64">
@@ -281,14 +281,19 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
                                   key={item.name}
                                   href={item.href}
                                   onClick={handleClick}
-                                  className="block group/item rounded-lg p-4 hover:bg-gray-50 text-md font-normal leading-6  text-custom_black-900 hover:text-grower-500"
+                                  className={classNames(
+                                    isBuyer
+                                      ? "hover:text-buyer-500"
+                                      : "hover:text-grower-500",
+                                    "block group/item rounded-lg p-4 hover:bg-gray-50 text-md font-normal leading-6 text-custom_black-900"
+                                  )}
                                 >
                                   <div className="flex justify-between">
                                     <span className="flex justify-start items-center">
                                       {item.name}
                                     </span>
                                     <span className="group/edit invisible group-hover/item:visible flex flex-col justify-center">
-                                      <data.popoverArrowIcon className="group-hover/edit:translate-x-1 flex justify-end" />
+                                      <ArrowIcon className="group-hover/edit:translate-x-1 flex justify-end" />
                                     </span>
                                   </div>
                                 </a>
@@ -320,7 +325,6 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
             <Wrapper
               isOpen={getInTouchModal}
               onClose={() => $getInTouchModal.set(false)}
-              className="flex w-full h-55vh transform text-base transition md:my-20 md:max-w-2xl md:px-4 lg:max-w-3xl"
             >
               {isBuyer ? (
                 <BuyerGetInTouch toggleModal={toggleModal} />
@@ -386,14 +390,15 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
       </div>
 
       <MobileMenu
+        isBuyer={isBuyer}
         isOpen={mobileMenuOpen}
         handleDrawer={handleDrawer}
         mobileTabs={data.mobileTabs}
-        type={isBuyer ? "buyer" : "grower"}
         onClose={() => setMobileMenuOpen(false)}
       />
 
       <Drawer
+        isBuyer={isBuyer}
         drawerOpen={authModal}
         drawerProps={drawerProps}
         handleCloseDrawer={handleCloseDrawer}

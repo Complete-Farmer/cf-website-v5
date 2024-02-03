@@ -132,9 +132,8 @@ const ApplicationForm = ({ title }: Props) => {
     <Wrapper
       onClose={onClose}
       isOpen={applicationFormModal}
-      className="flex w-full h-55vh transform text-base transition md:my-20 md:max-w-2xl md:px-4 lg:max-w-2xl"
     >
-      <div className="w-2xl max-w-5xl isolate sm:w-full bg-white sm:rounded-2xl px-10 py-12">
+      <div className="w-2xl max-w-5xl isolate sm:w-full bg-white sm:rounded-2xl px-8 py-12">
         <div className="relative flex flex-row-reverse">
           <div className="absolute flex flex-row text-center justify-end -top-8 -right-4">
             <div

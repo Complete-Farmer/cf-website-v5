@@ -52,15 +52,14 @@ const GetInTouchForm = ({
   const phoneNumber = watch("phoneNumber");
 
   return (
-    <div className="w-2xl max-w-5xl isolate sm:w-full bg-white sm:rounded-2xl px-6 py-12">
+    <div className="relative w-2xl max-w-5xl isolate sm:w-full bg-white sm:rounded-md px-4 py-6 sm:p-8">
       <div className="flex flex-row-reverse">
-        <div className="flex flex-row text-center justify-end">
-          <div
-            className="text-custom_gray-300 hover:cursor-pointer -mt-8"
-            onClick={toggleModal}
-          >
-            <MenuCloseIcon className="h-8 w-8" aria-hidden="true" />
-          </div>
+        <div
+          role="button"
+          className="absolute top-4 right-3 sm:top-5 sm:right-6 text-custom_gray-300 hover:cursor-pointer"
+          onClick={toggleModal}
+        >
+          <MenuCloseIcon className="sm:h-7 sm:w-7" aria-hidden="true" />
         </div>
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-xl leading-6 md:text-2xl md:leading-[30px] font-bold sm:tracking-tight text-grower-400">
@@ -70,7 +69,7 @@ const GetInTouchForm = ({
       </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="mx-auto mt-6 max-w-xl sm:mt-10 space-y-8"
+        className="mx-auto mt-6 max-w-xl space-y-8"
       >
         <div className="space-y-4">
           <Input
@@ -115,6 +114,7 @@ const GetInTouchForm = ({
           type="submit"
           isLoading={isLoading}
           isDisabled={!isDirty || !isValid}
+          className="py-4"
         />
       </form>
     </div>

@@ -5,13 +5,14 @@ import ReactDrawer from "react-modern-drawer";
 import CFMainLogo from "@assets/images/logos/cf/main.png";
 import { ArrowIcon, MenuCloseIcon } from "@assets/icons";
 import { useResolution } from "@utils/useResolution";
-import { getAppLink } from "@utils/functions";
+import { classNames, getAppLink } from "@utils/functions";
 
 const Drawer: React.FC<{
+  isBuyer: boolean;
   drawerOpen: boolean;
   handleCloseDrawer: () => void;
   drawerProps: string[];
-}> = ({ drawerOpen, handleCloseDrawer, drawerProps }) => {
+}> = ({ isBuyer, drawerOpen, handleCloseDrawer, drawerProps }) => {
   const { screenType } = useResolution();
   const [drawerSize, setDrawerSize] = useState<string>();
 
@@ -22,7 +23,6 @@ const Drawer: React.FC<{
       setDrawerSize("36rem");
     }
   }, [screenType]);
-
 
   return (
     <ReactDrawer
@@ -45,7 +45,10 @@ const Drawer: React.FC<{
           <button
             type="button"
             onClick={() => handleCloseDrawer()}
-            className="flex place-content-center items-center lg:bg-[#EFEFEF] text-grower-400 lg:text-grower-500 lg:w-[52px] lg:h-[52px] rounded-full"
+            className={classNames(
+              isBuyer ? "text-buyer-500" : "text-grower-500",
+              "flex place-content-center items-center lg:bg-[#EFEFEF] lg:w-[52px] lg:h-[52px] rounded-full"
+            )}
           >
             <span className="sr-only">Close panel</span>
             <MenuCloseIcon className="h-8 w-8" aria-hidden="true" />

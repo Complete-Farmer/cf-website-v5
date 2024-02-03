@@ -19,23 +19,23 @@ const { right, image1, image2, image3 } = Astro.props;
 >
   <Image
     src={image1}
-    class="hidden xl:block w-full h-full object-cover z-20 m-auto relative"
+    class="hidden xl:block w-full h-full object-cover z-[9] m-auto relative"
     alt=""
   />
   <Image
     src={image2}
-    class="hidden sm:block xl:hidden w-[95vw] h-full object-cover z-20 m-auto relative"
+    class="hidden sm:block xl:hidden w-[95vw] h-full object-cover z-[9] m-auto relative"
     alt=""
   />
   <Image
     src={image3}
-    class="sm:hidden w-[90vw] h-full object-cover z-20 m-auto relative"
+    class="sm:hidden w-[90vw] h-full object-cover z-[9] m-auto relative"
     alt=""
   />
   <div
     class={classNames(
       right ? "-right-1/4 sm:right-0 xl:-right-1/4" : "-left-1/4",
-      "z-10 absolute top-[60%] sm:top-[70%] lg:top-[60%] xl:top-[77%] -translate-y-1/2 sm:translate-x-[98px] sm:translate-y-[-204px] xl:-translate-y-1/2 xl:-translate-x-0 w-[70vw] sm:w-[40vw] xl:w-[85%]"
+      "z-[8] absolute top-[60%] sm:top-[70%] lg:top-[60%] xl:top-[77%] -translate-y-1/2 sm:translate-x-[98px] sm:translate-y-[-204px] xl:-translate-y-1/2 xl:-translate-x-0 w-[70vw] sm:w-[40vw] xl:w-[85%]"
     )}
   >
     <Image src={Leaves} alt="farmer" class="m-auto" />

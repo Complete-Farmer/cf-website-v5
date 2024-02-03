@@ -87,22 +87,22 @@ export default function BookDemo({ toggleModal, activeCategory }: IProps) {
   };
 
   return (
-    <div className="w-2xl max-w-5xl isolate sm:w-full bg-white px-4 py-8 lg:px-6 sm:rounded-2xl">
-
+    <div className="relative w-2xl max-w-5xl isolate sm:w-full bg-white sm:rounded-md px-4 py-6 sm:p-8">
       <div className="flex mx-auto text-center justify-end">
         <div
-          className="text-custom_gray-300 hover:cursor-pointer"
+          role="button"
+          className="absolute top-4 right-3 sm:top-5 sm:right-6 text-custom_gray-300 hover:cursor-pointer"
           onClick={toggleModal}
         >
           <MenuCloseIcon className="h-8 w-8" aria-hidden="true" />
         </div>
       </div>
 
-      <div className="mx-auto max-w-2xl -mt-2 text-center">
+      <div className="mx-auto max-w-2xl text-center space-y-2">
         <h2 className="text-xl leading-6 md:text-2xl md:leading-[30px] font-bold sm:tracking-tight text-grower-400">
           Your demo will begin shortly
         </h2>
-        <p className="mt-2 text-xs leading-4 md:text-sm md:leading-5 text-gray-600 px-6 sm:px-2">
+        <p className="text-xs leading-4 md:text-sm md:leading-5 text-gray-600">
           But first, we need some info. Share a few details in the form
           <br className="hidden lg:block" /> below so we can help you better.
         </p>

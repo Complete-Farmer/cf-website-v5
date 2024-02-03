@@ -70,6 +70,7 @@ const RegistrationForm = () => {
       <div className="relative w-2xl max-w-5xl isolate sm:w-full bg-white sm:rounded-md px-4 py-6 sm:p-8">
         <div className="flex flex-row-reverse">
           <div
+            role="button"
             className="absolute top-4 right-3 sm:top-5 sm:right-6 text-custom_gray-300 hover:cursor-pointer"
             onClick={() => $joinSalesAffiliateModal.set(false)}
           >

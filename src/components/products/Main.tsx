@@ -197,7 +197,6 @@ function Main() {
       <Wrapper
         isOpen={open}
         onClose={() => setOpen(false)}
-        className="flex w-full h-full transform text-left text-base transition md:my-4 md:max-w-3xl md:px-4 lg:max-w-xl"
       >
         <BookDemo toggleModal={toggleModal} activeCategory={activeCategory} />
       </Wrapper>

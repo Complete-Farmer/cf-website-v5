@@ -1,4 +1,5 @@
 import { classNames } from "@utils/functions";
+import { Fragment } from "react";
 import Fade from "react-reveal/Fade";
 
 interface IProps {
@@ -18,14 +19,16 @@ const HeroRight = ({ images, className }: IProps) => {
       )}
     >
       <Fade right duration={1000} delay={500} distance="30px">
-        {images.tablet && (
-          <div className="lg:hidden relative h-full w-full">
-            <img src={images.tablet} />
+        <Fragment>
+          {images.tablet && (
+            <div className="lg:hidden relative h-full w-full">
+              <img src={images.tablet} />
+            </div>
+          )}
+          <div className="hidden lg:block relative h-full w-full pl-24">
+            <img src={images.desktop} />
           </div>
-        )}
-        <div className="hidden lg:block relative h-full w-full pl-24">
-          <img src={images.desktop} />
-        </div>
+        </Fragment>
       </Fade>
     </div>
   );
