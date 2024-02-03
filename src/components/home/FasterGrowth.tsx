@@ -2,22 +2,28 @@ import FasterGrowthContent from "./FasterGrowthContent";
 import ForFarmers from "@assets/images/home/for-farmers.webp";
 import ForBuyers from "@assets/images/home/for-buyers.webp";
 
-const farmerData = {
-  img: ForFarmers,
-  title: "For Farmers",
-  buttonText: "Farm the better way!",
-  description:
-    "Earn more by growing cash crops to meet market demand and our buyer specifications. Get expert agronomic and managerial support, access inputs and farm services and receive reliable data to help you farm better.",
-};
-
-const buyerData = {
-  img: ForBuyers,
-  type: "buyer",
-  title: "For Buyers",
-  buttonText: "Source quality crops - easily!",
-  description:
-    "Get everything you need for seamless crop procurement from order to fulfilment all in one place. Gain access to a network of qualified farmers, uncovering new business opportunities.",
-};
+const data = [
+  {
+    img: ForFarmers,
+    title: "For Farmers",
+    text1: "text-grower-100",
+    text2: "text-grower-500",
+    buttonBgColor: "!bg-grower-500",
+    buttonText: "Farm the better way!",
+    description:
+      "Earn more by growing cash crops to meet market demand and our buyer specifications. Get expert agronomic and managerial support, access inputs and farm services and receive reliable data to help you farm better.",
+  },
+  {
+    img: ForBuyers,
+    title: "For Buyers",
+    text1: "text-buyer-100",
+    text2: "text-buyer-500",
+    buttonBgColor: "!bg-buyer-500",
+    buttonText: "Source quality crops - easily!",
+    description:
+      "Get everything you need for seamless crop procurement from order to fulfilment all in one place. Gain access to a network of qualified farmers, uncovering new business opportunities.",
+  },
+];
 
 export default function FasterGrowth() {
   return (
@@ -29,8 +35,9 @@ export default function FasterGrowth() {
       </div>
 
       <div className="space-y-10 lg:space-y-20">
-        <FasterGrowthContent {...farmerData} />
-        <FasterGrowthContent {...buyerData} />
+        {data.map((item) => (
+          <FasterGrowthContent key={item.title} {...item} />
+        ))}
       </div>
     </div>
   );

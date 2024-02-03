@@ -325,6 +325,7 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
             <Wrapper
               isOpen={getInTouchModal}
               onClose={() => $getInTouchModal.set(false)}
+              className={isBuyer ? "md:!max-w-2xl lg:!max-w-3xl": ""}
             >
               {isBuyer ? (
                 <BuyerGetInTouch toggleModal={toggleModal} />

@@ -2,8 +2,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 import Content from "./Content";
-import SelectInput from "./SelectInput";
-import SpinnerLoader from "@components/utils/SpinnerLoader";
+import {SpinnerLoader, Selector } from "@components/utils";
 
 import { filterAt, getContactUsFaqs } from "@utils/prismic";
 
@@ -29,7 +28,7 @@ export default function Main({ data }: IProps) {
   const faqsCategories = useMemo(() => {
     return data.results.map((item) => ({
       id: item.id,
-      name: item.data.name,
+      name: item.data.name as string,
     }));
   }, [data]);
 
@@ -109,9 +108,9 @@ export default function Main({ data }: IProps) {
               Let us know below!
             </p>
           </div>
-          <SelectInput
-            people={faqsCategories}
+          <Selector
             selected={selected}
+            options={faqsCategories}
             setSelected={handleOnSelectorChange}
           />
           {loading ? (

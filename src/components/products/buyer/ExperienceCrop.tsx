@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { classNames } from "@utils/functions";
+import { classNames, getAppLink } from "@utils/functions";
 import { Button, HeadingOneLine } from "@components/utils";
 
 import Image1 from "@assets/images/products/buyer/everything-crop/image-1.webp";
@@ -85,8 +85,8 @@ const HowAffiliateWorks = () => {
       </div>
 
       <div className="flex flex-col sm:flex-row space-x-4 py-10 md:py-14 lg:py-20 mx-auto">
-        <div className="lg:text-left sm:text-center lg:w-1/2 lg:pr-6 space-y-10">
-          <div className="space-y-5">
+        <div className="lg:text-left sm:text-center lg:w-1/2 lg:pr-6">
+          <div className="space-y-5 mb-10">
             {data.map((item, index) => (
               <div
                 key={index + "div"}
@@ -124,14 +124,16 @@ const HowAffiliateWorks = () => {
             ))}
           </div>
 
-          <Button
-            title="Start sourcing from qualified farmers"
-            className="!bg-buyer-500 text-xl h-14 px-8 !rounded-full !w-auto"
-            onClick={() => {
+          <a target="_blank" href={getAppLink("Signup Buyer")} className="contents relative" rel="noreferrer">
+            <Button
+              title="Start sourcing from qualified farmers"
+              className="!bg-buyer-500 text-xl h-14 px-8 !rounded-full !w-auto"
+              onClick={() => {
               // toggleModal();
-              handleButtonClick();
-            }}
-          />
+                handleButtonClick();
+              }}
+            />
+          </a>
         </div>
 
         <div className="hidden sm:flex items-center justify-center max-h-fit max-w-5xl py-0 rounded-lg lg:w-1/2">

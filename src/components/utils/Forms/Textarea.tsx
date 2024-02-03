@@ -1,5 +1,7 @@
-import { classNames } from "@utils/functions";
 import React from "react";
+
+import useWindow from "@utils/useWindow";
+import { classNames } from "@utils/functions";
 
 interface IProps
   extends React.DetailedHTMLProps<
@@ -11,6 +13,8 @@ interface IProps
 }
 
 const Textarea = ({ title, className, labelClassName, ...rest }: IProps) => {
+  const isBuyer = useWindow<boolean>(() => window?.location?.pathname?.includes("buyer"), false);
+
   return (
     <div className="space-y-2">
       {title && (
@@ -28,7 +32,8 @@ const Textarea = ({ title, className, labelClassName, ...rest }: IProps) => {
         {...rest}
         className={classNames(
           className,
-          "block w-full h-10 sm:h-14 bg-[#EFEFEF] rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
+          isBuyer ? "focus:ring-buyer-500": "focus:ring-grower-500",
+          "block w-full h-10 sm:h-14 bg-[#EFEFEF] rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
         )}
       />
     </div>

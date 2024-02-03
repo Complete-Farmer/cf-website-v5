@@ -6,6 +6,7 @@ interface IProps {
     name: string;
     current: boolean;
   }[];
+  className?: string;
   changeCategory: (i: number) => void;
   activeBgColor: string;
   inActiveBgColor: string;
@@ -15,6 +16,7 @@ interface IProps {
 
 export default function TabComp(props: IProps) {
   const {
+    className,
     categories,
     changeCategory,
     activeBgColor,
@@ -25,7 +27,12 @@ export default function TabComp(props: IProps) {
   const initialIndex = categories.findIndex((category) => category.current);
 
   return (
-    <div className="lg:max-w-xl w-full sm:mb-12 lg:mb-6 lg:py-6 sm:px-0">
+    <div
+      className={classNames(
+        className,
+        "w-full lg:max-w-xl sm:mb-12 lg:mb-6 lg:py-6 sm:px-0"
+      )}
+    >
       <Tab.Group
         key={initialIndex}
         defaultIndex={initialIndex}

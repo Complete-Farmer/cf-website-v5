@@ -8,7 +8,7 @@ import GrowerImage from "@assets/images/products/grower/hero-right.webp";
 import BuyerImage from "@assets/images/products/buyer/hero-right.webp";
 
 import type { AsObject, IClickEvent, ITab } from "types/app";
-import { classNames } from "@utils/functions";
+import { classNames, getAppLink } from "@utils/functions";
 
 const initialTabs = [
   {
@@ -33,8 +33,8 @@ const initialTabs = [
       bgPattern: "bg-hero-grower",
     },
     images: {
-      desktop: GrowerImage.src
-    }
+      desktop: GrowerImage.src,
+    },
   },
   {
     href: "buyer",
@@ -58,8 +58,8 @@ const initialTabs = [
       borderColor: "border-buyer-500",
     },
     images: {
-      desktop: BuyerImage.src
-    }
+      desktop: BuyerImage.src,
+    },
   },
 ];
 
@@ -124,19 +124,23 @@ const Hero = () => {
             </p>
           </div>
           <div className="flex flex-col sm:flex-row w-full justify-between xl:justify-start items-start gap-6">
-            <Button
-              title={firstButton.text}
-              onClick={handleButtonClick}
-              className={classNames(
-                `!${firstButton.bgColor}`,
-                "py-4 text-xl !rounded-full sm:!w-1/2 xl:!w-[290px] !font-bold"
-              )}
-            />
-
             <a
-              href={"/products?tab=" + currentTab.href}
+              target="_blank"
+              href={getAppLink("Signup " + currentTab.name)}
               className="contents"
+              rel="noreferrer"
             >
+              <Button
+                title={firstButton.text}
+                onClick={handleButtonClick}
+                className={classNames(
+                  `!${firstButton.bgColor}`,
+                  "py-4 text-xl !rounded-full sm:!w-1/2 xl:!w-[290px] !font-bold"
+                )}
+              />
+            </a>
+
+            <a href={"/products?tab=" + currentTab.href} className="contents">
               <Button
                 onClick={handleButtonClick}
                 title={secondButton.text}
@@ -155,7 +159,10 @@ const Hero = () => {
         <InitialHero />
       ) : (
         <section
-          className={classNames(currentTab.data.bgPattern as string, "w-full px-6 sm:px-10 pb-20 sm:pb-48 xl:pb-32 text-white bg-cover")}
+          className={classNames(
+            currentTab.data.bgPattern as string,
+            "w-full px-6 sm:px-10 pb-20 sm:pb-48 xl:pb-32 text-white bg-cover"
+          )}
         >
           <div className="w-full h-auto pt-14 sm:pt-20 xl:pt-32">
             <div className="max-w-7xl mx-auto sm:px-4 xl:px-0 flex items-center xl:flex-row flex-col h-full">

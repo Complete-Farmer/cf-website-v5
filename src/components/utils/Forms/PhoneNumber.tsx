@@ -3,6 +3,7 @@ import "@assets/styles/phonenumberinput.css";
 
 import ReactPhoneNumberInput from "react-phone-number-input";
 
+import useWindow from "@utils/useWindow";
 import { classNames } from "@utils/functions";
 
 interface IProps {
@@ -22,8 +23,10 @@ const PhoneNumber = ({
   labelClassName,
   required = false,
 }: IProps) => {
+  const isBuyer = useWindow<boolean>(() => window?.location?.pathname?.includes("buyer"), false);
+
   return (
-    <div className={classNames(outerClassName, "w-full space-y-2")}>
+    <div className={classNames(outerClassName, isBuyer ? "buyer": "grower", "w-full space-y-2")}>
       {title && (
         <label
           className={classNames(

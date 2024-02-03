@@ -7,6 +7,7 @@ interface IProps {
   hasArrow?: boolean;
   className?: string;
   isLoading?: boolean;
+  arrowClass?: string;
   isDisabled?: boolean;
   onClick?: (e: IClickEvent) => void;
   type?: "submit" | "reset" | "button";
@@ -17,6 +18,7 @@ const Button = ({
   title,
   onClick,
   className,
+  arrowClass,
   type = "button",
   hasArrow = false,
   isLoading = false,
@@ -35,7 +37,7 @@ const Button = ({
     >
       {isLoading && <div>loading</div>}
       <span>{title}</span>
-      {hasArrow && <ArrowIcon />}
+      {hasArrow && <ArrowIcon className={arrowClass}/>}
     </button>
   );
 };

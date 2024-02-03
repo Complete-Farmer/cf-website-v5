@@ -1,8 +1,8 @@
 import { Fragment } from "react";
-import { Listbox, Transition } from "@headlessui/react";
 import { ChevronIcon } from "@assets/icons";
+import { Listbox, Transition } from "@headlessui/react";
 
-type IItem = { name: string; id: number };
+type IItem = { id: number | string; name: string;  };
 
 interface IProps {
   options: IItem[];
@@ -20,7 +20,7 @@ export default function Selector({
       <Listbox value={selected} onChange={setSelected}>
         {({ open }) => (
           <div className="relative mt-2">
-            <Listbox.Button className="h-14 relative rounded-lg bg-[#efefef]  w-full cursor-default  py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            <Listbox.Button className="h-14 relative rounded-lg bg-[#efefef]  w-full cursor-default  py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-grower-500 sm:text-sm sm:leading-6">
               <span className="block truncate">{selected.name}</span>
               <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                 <ChevronIcon className={open ? "rotate-180" : ""} />

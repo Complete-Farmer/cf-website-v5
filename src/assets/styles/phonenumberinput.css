@@ -7,6 +7,14 @@
 }
 
 .reactphone.PhoneInput--focus {
-  @apply ring-2 ring-inset ring-green-600;
+  @apply ring-2 ring-inset;
+}
+
+.grower .reactphone.PhoneInput--focus {
+  @apply ring-grower-500;
+}
+
+.buyer .reactphone.PhoneInput--focus {
+  @apply ring-buyer-500;
 }
 
