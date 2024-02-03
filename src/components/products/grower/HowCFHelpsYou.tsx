@@ -1,6 +1,6 @@
 import { Tab } from "@headlessui/react";
 
-import { classNames, getLink } from "@utils/functions";
+import { classNames, getAppLink } from "@utils/functions";
 import HeadingOneLine from "@components/utils/HeadingOneLine";
 
 interface IProps {
@@ -75,8 +75,9 @@ const HowCFHelpsYou = ({
 
                         {showBtn && (
                           <a
-                            href={getLink("Signup Grower")}
-                            className="hidden lg:flex w-fit justify-center items-center h-16 relative gap-2 px-8 py-4 rounded-full bg-grower-500 hover:cursor-pointer"
+                            target="_blank"
+                            href={getAppLink("Signup Grower")}
+                            className="hidden lg:flex w-fit justify-center items-center h-16 relative gap-2 px-8 py-4 rounded-full bg-grower-500 hover:cursor-pointer" rel="noreferrer"
                           >
                             <span className="text-xl leading-6 font-bold text-left text-white">
                               Get started

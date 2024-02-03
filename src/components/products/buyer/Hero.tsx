@@ -4,6 +4,7 @@ import { Button, HeroRight } from "@components/utils";
 
 import BuyerHeroRight1 from "@assets/images/products/buyer/hero-right.webp";
 import BuyerHeroRight2 from "@assets/images/products/buyer/hero-right-tablet.webp";
+import { getAppLink } from "@utils/functions";
 
 const Hero = () => {
   const handleButtonClick = () => {
@@ -32,13 +33,15 @@ const Hero = () => {
             </p>
           </div>
           <div className="flex flex-col w-full justify-between xl:justify-start gap-6">
-            <Button
-              title="Source crops the better way"
-              onClick={handleButtonClick}
-              className="py-4 text-xl !rounded-full !font-bold !bg-buyer-500"
-            />
+            <a target="_blank" href={getAppLink("Signup Buyer")} className="contents" rel="noreferrer">
+              <Button
+                title="Source crops the better way"
+                onClick={handleButtonClick}
+                className="py-4 text-xl !rounded-full !font-bold !bg-buyer-500"
+              />
+            </a>
 
-            <a href={"/products?tab=buyer"} className="contents">
+            <a href="/products?tab=buyer" className="contents">
               <Button
                 title="See a demo"
                 onClick={handleButtonClick}

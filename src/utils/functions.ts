@@ -6,7 +6,7 @@ export function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export const getLink = (text: string) => {
+export const getAppLink = (text: string) => {
   let product = "grower";
   const pathname = text.includes("Login") ? "login" : "signup";
 
@@ -19,7 +19,7 @@ export const getLink = (text: string) => {
   }
 
   const url = `https://${
-    product + (ENV === "DEV" ? ".test" : "")
+    product + (ENV === "DEV" ? "-test" : "")
   }.completefarmer.com/`;
 
   return url + pathname;

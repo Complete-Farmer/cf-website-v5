@@ -5,7 +5,7 @@ import ReactDrawer from "react-modern-drawer";
 import CFMainLogo from "@assets/images/logos/cf/main.png";
 import { ArrowIcon, MenuCloseIcon } from "@assets/icons";
 import { useResolution } from "@utils/useResolution";
-import { getLink } from "@utils/functions";
+import { getAppLink } from "@utils/functions";
 
 const Drawer: React.FC<{
   drawerOpen: boolean;
@@ -59,7 +59,7 @@ const Drawer: React.FC<{
               className="pb-7 mt-7 border-b-2 border-gray-200 2xl:border-none"
             >
               <a
-                href={getLink(item)}
+                href={getAppLink(item)}
                 className="flex justify-between lg:justify-start items-center relative gap-4  w-full"
               >
                 <p className="text-2xl font-bold py-0 lg:py-12 w-full 2xl:w-72">

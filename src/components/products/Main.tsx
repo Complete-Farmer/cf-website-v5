@@ -4,7 +4,7 @@ import ReactPlayer from "react-player";
 import { PlayIcon } from "@assets/icons";
 import { classNames } from "@utils/functions";
 import BookDemo from "@components/home/BookDemo";
-import { Tab, Button, Wrapper } from "@components/utils";
+import { Tab, Button, Wrapper, LoadingPage } from "@components/utils";
 
 const cateogries = [
   {
@@ -52,7 +52,7 @@ function Main() {
   const [open, setOpen] = useState(false);
   const [videoOpen, setVideoOpen] = useState(false);
   const [categories, setCategories] = useState(cateogries);
-  const [activeCategory, setActiveCategory] = useState("Grower");
+  const [activeCategory, setActiveCategory] = useState(null);
 
   useEffect(() => {
     const search = window.location.search;
@@ -87,6 +87,11 @@ function Main() {
     activeCategory === "Grower" ? data.grower.demoUrl : data.buyer.demoUrl;
   const dImgUrl =
     activeCategory === "Grower" ? data.grower.demoImg : data.buyer.demoImg;
+
+
+  if(!activeCategory) {
+    return <LoadingPage />;
+  }
 
   return (
     <div className="flex flex-col justify-between pb-12">
