@@ -104,7 +104,7 @@ const Uploader = ({
             <input {...getInputProps({ id: name, className: "h-full" })} />
           </label>
           <p
-            className="text-xs sm:text-xs py-2 text-center leading-5 text-custom_gray-300"
+            className="text-xs sm:text-xs py-2 px-4 text-center leading-5 text-custom_gray-300"
             dangerouslySetInnerHTML={{ __html: description }}
           />
         </div>

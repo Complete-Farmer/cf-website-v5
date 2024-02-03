@@ -28,7 +28,7 @@ function HeadingOneLine({
         <p
           className={classNames(
             titleTextColor,
-            "text-xs h-16 w-[345px] md:text-base md:h-[72px] md:w-10/12 lg:text-xl lg:leading-8 lg:w-10/12 lg:h-16 py-5"
+            "text-xs w-[345px] md:text-base md:w-10/12 lg:text-xl lg:leading-8 lg:w-10/12 py-5"
           )}
         >
           {desc}

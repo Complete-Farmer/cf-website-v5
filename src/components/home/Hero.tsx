@@ -4,8 +4,8 @@ import Fade from "react-reveal/Fade";
 import { Button, HeroRight, PlainTab } from "@components/utils";
 import InitialHero from "./InitialHero";
 
-import GrowerHeroRight from "@assets/images/products/grower/hero-right.webp";
-import BuyerHeroRight from "@assets/images/products/buyer/hero-right.webp";
+import GrowerImage from "@assets/images/products/grower/hero-right.webp";
+import BuyerImage from "@assets/images/products/buyer/hero-right.webp";
 
 import type { AsObject, IClickEvent, ITab } from "types/app";
 import { classNames } from "@utils/functions";
@@ -15,7 +15,6 @@ const initialTabs = [
     href: "grower",
     current: true,
     name: "CF Grower",
-    rightImage: GrowerHeroRight,
     data: {
       title: "Farming success starts with Complete Farmer Grower",
       description:
@@ -33,12 +32,14 @@ const initialTabs = [
       borderColor: "border-grower-500",
       bgPattern: "bg-hero-grower",
     },
+    images: {
+      desktop: GrowerImage.src
+    }
   },
   {
     href: "buyer",
     current: false,
     name: "CF Buyer",
-    rightImage: BuyerHeroRight,
     data: {
       title: "Source crops the smarter way with Complete Farmer Buyer",
       description:
@@ -56,6 +57,9 @@ const initialTabs = [
       bgPattern: "bg-hero-buyer",
       borderColor: "border-buyer-500",
     },
+    images: {
+      desktop: BuyerImage.src
+    }
   },
 ];
 
@@ -160,7 +164,7 @@ const Hero = () => {
               <HeroRight
                 className="hidden"
                 key={currentTab.name}
-                imageSrc={currentTab.rightImage.src}
+                images={currentTab.images}
               />
             </div>
           </div>

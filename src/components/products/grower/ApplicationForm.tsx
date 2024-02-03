@@ -4,8 +4,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import { MenuCloseIcon } from "@assets/icons";
-import { Button, Input, PhoneNumber, Uploader } from "@components/utils/Forms";
-import { Wrapper } from "@components/utils";
+
+import {
+  Button,
+  Input,
+  PhoneNumber,
+  Uploader,
+  Wrapper,
+} from "@components/utils";
 
 import { $applicationFormModal } from "@utils/stores";
 

@@ -1,0 +1,68 @@
+---
+import { Image } from "astro:assets";
+
+import Image1 from "@assets/images/products/buyer/sales-affiliate/our-buyers/image-1.webp"
+import Image2 from "@assets/images/products/buyer/sales-affiliate/our-buyers/image-2.webp"
+import Image3 from "@assets/images/products/buyer/sales-affiliate/our-buyers/image-3.webp"
+import Image4 from "@assets/images/products/buyer/sales-affiliate/our-buyers/image-4.webp"
+---
+
+<div
+  class="w-full mx-auto relative my-8 sm:my-8 md:my-16 mb-16 sm:mb-16 md:mb-20 overflow-hidden"
+>
+  <div class="max-w-7xl mx-auto flex">
+    <div class="w-full hidden lg:flex h-[750px] overflow-hidden">
+      <Image src={Image1} alt="Image 1" />
+    </div>
+
+    <div
+      class="flex flex-col justify-center items-start w-full gap-10 px-8 my-10"
+    >
+      <h2
+        class="text-[28px] leading-8 w-[327px] md:text-[40px] md:leading-10 md:w-10/12 lg:text-5xl lg:leading-[60px] lg:w-[554px] font-bold text-left text-grower-400"
+      >
+      About our buyers
+      </h2>
+      <p
+        class="w-[327px] text-base md:w-10/12 lg:text-xl lg:leading-8 text-left text-custom_black-900 lg:w-[554px]"
+      >
+      Our typical buyers are food manufacturers, distributors and traders in need of a reliable supplier of high-quality agricultural commodities from Africa.
+      </p>
+    </div>
+  </div>
+  <div class="flex justify-end xl:pr-10">
+    <div
+      class="scroll-parallax flex justify-start items-start w-[120vw] lg:w-[90vw] md:mt-10 lg:mt-0 gap-2 md:gap-8"
+    >
+      <Image
+        src={Image2}
+        alt="Image 2"
+        class="h-60 md:h-80 lg:h-full w-[40vw] lg:w-auto object-cover"
+      />
+      <Image
+        src={Image3}
+        alt="Image 3"
+        class="h-60 md:h-80 lg:h-full w-[40vw] lg:w-auto object-cover"
+      />
+      <Image
+        src={Image4}
+        alt="Image 4"
+        class="h-60 md:h-80 lg:h-full w-[40vw] lg:w-auto object-cover"
+      />
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" is:inline>
+  window.addEventListener("load", () => {
+    const image = document.getElementsByClassName("scroll-parallax");
+
+    new window.simpleParallax(image, {
+      delay: 0,
+      scale: 2,
+      overflow: true,
+      orientation: "left",
+      transition: "cubic-bezier(0,0,0,1)",
+    });
+  });
+</script>

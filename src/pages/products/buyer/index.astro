@@ -60,7 +60,7 @@ if (response) {
     <Hero client:load />
   </HeroContainer>
   <ProcurementTurnAround />
-  <ExperienceCrop />
+  <ExperienceCrop client:visible />
   {
     customerStories.results.length > 0 && (
       <CustomerStories client:visible data={customerStories} />

@@ -30,7 +30,7 @@ const ModalWrapper = ({
         </Transition.Child>
 
         <div className="fixed inset-0 z-10 overflow-y-auto">
-          <div className="flex min-h-full w-xl items-end justify-center p-4 text-center sm:items-center sm:p-0">
+          <div className="flex pt-20 sm:pt-0 min-h-full w-xl m sm:justify-center p-4 text-center sm:items-center sm:p-0">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"

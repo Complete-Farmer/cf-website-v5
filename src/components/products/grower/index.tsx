@@ -4,6 +4,7 @@ export { default as Hero } from "./Hero";
 export { default as Estimate } from "./Estimate";
 export { default as GrowerGetInTouch } from "./GetInTouch";
 export { default as HowCFHelpsYou } from "./HowCFHelpsYou";
+export { default as ApplicationForm } from "./ApplicationForm";
 export { default as CustomerStories } from "./CustomerStories";
 export { default as AvailableCropCard } from "./AvailableCropCard";
 export { default as AboutTheAcademy } from "./AboutTheAcademy.astro";

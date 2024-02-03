@@ -1,6 +1,7 @@
 import Fade from "react-reveal/Fade";
 import { ArrowIcon } from "@assets/icons";
 import { classNames } from "@utils/functions";
+import type { IClickEvent } from "types/app";
 
 interface IProps {
   incentives: {
@@ -61,7 +62,7 @@ export default function SectionList({
               >
                 <a
                   href={i.link || ""}
-                  onClick={(e) => {
+                  onClick={(e: IClickEvent) => {
                     if (i.action) {
                       e.preventDefault();
                       i.action(i.name);

@@ -45,7 +45,7 @@ const TabView = ({ crop }: IProps) => {
   const [tabs, setTabs] = useState(initialTabs);
   const [currentTabData, setCurrentTabData] = useState(initialTabs[0]);
 
-  const handleOnChangeTab = (tabName) => {
+  const handleOnChangeTab = (tabName: string) => {
     const newTabs = tabs.map((tab) => {
       if (tab.name === tabName) tab.current = true;
       if (tab.name !== tabName) tab.current = false;

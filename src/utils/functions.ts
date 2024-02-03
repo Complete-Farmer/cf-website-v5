@@ -78,10 +78,10 @@ export function convertToKebabCase(inputString: string) {
   return inputString.toLowerCase().replace(/\s+/g, "-");
 }
 
-function convertToPascalCaseWithSpaces(inputString) {
+function convertToPascalCaseWithSpaces(inputString: string) {
   const words = inputString.split("_");
   const capitalizedWords = words.map(
-    (word) => word.charAt(0).toUpperCase() + word.slice(1)
+    (word: string) => word.charAt(0).toUpperCase() + word.slice(1)
   );
   return capitalizedWords.join(" ");
 }
@@ -133,7 +133,12 @@ export function generateMarketAvailabilityDataDynamic(plantingDates: {
   return marketAvailabilityData;
 }
 
-export function generateAvailabilityString(availabilityData) {
+export function generateAvailabilityString(
+  availabilityData: {
+    name: string;
+    availability: boolean;
+  }[]
+) {
   let startMonth = "";
   let endMonth = "";
 

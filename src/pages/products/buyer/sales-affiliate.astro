@@ -1,9 +1,18 @@
 ---
 import Layouts from "@layouts/Layouts.astro";
 import { HeroTwoSideImageFade } from "@components/utils";
+import {
+  WhyPromote,
+  AboutOurBuyers,
+  RegistrationForm,
+  OnboardingProcess,
+  HowAffiliateWorks,
+  WhyChooseAffiliate,
+  WhoCanBecomeASalesAffiliate,
+} from "@components/products/buyer/sales-affiliate";
 
-import ImageLeft from "@assets/images/products/buyer/sales-affilate/hero-1.webp";
-import ImageRight from "@assets/images/products/buyer/sales-affilate/hero-2.webp";
+import ImageLeft from "@assets/images/products/buyer/sales-affiliate/hero-1.webp";
+import ImageRight from "@assets/images/products/buyer/sales-affiliate/hero-2.webp";
 ---
 
 <Layouts
@@ -15,6 +24,7 @@ import ImageRight from "@assets/images/products/buyer/sales-affilate/hero-2.webp
     buttonTitle="Join now"
     bgColor="bg-buyer-900"
     textColor="text-white"
+    titleWidth="2xl:max-w-2xl"
     leftImage={ImageLeft.src}
     iconColor="text-[#00FFE0]"
     rightImage={ImageRight.src}
@@ -23,4 +33,16 @@ import ImageRight from "@assets/images/products/buyer/sales-affilate/hero-2.webp
     heading="Become a Complete Farmer sales affiliate"
     text="Do you have a network of buyers in Europe or Asia? If so, join our lucrative affiliate program and start earning today by promoting our high-quality agricultural commodity offerings to them."
   />
+
+  <WhyChooseAffiliate client:visible />
+  <WhoCanBecomeASalesAffiliate />
+  <HowAffiliateWorks client:visible />
+  <OnboardingProcess client:visible />
+  <AboutOurBuyers />
+  <WhyPromote />
+  <!-- modal -->
+  <RegistrationForm client:load />
 </Layouts>
+
+<script async is:inline type="text/javascript" src="/simpleParallax.min.js"
+></script>

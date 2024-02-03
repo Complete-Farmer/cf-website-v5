@@ -1,6 +1,4 @@
 ---
-import { Image } from "astro:assets";
-
 import ImageQ1 from "@assets/images/products/grower/agent/qualification.webp";
 import ImageQ2 from "@assets/images/products/grower/agent/qualification-tablet.webp";
 import ImageQ3 from "@assets/images/products/grower/agent/qualification-mobile.webp";
@@ -9,11 +7,9 @@ import ImageR1 from "@assets/images/products/grower/agent/responsibilities.webp"
 import ImageR2 from "@assets/images/products/grower/agent/responsibilities-tablet.webp";
 import ImageR3 from "@assets/images/products/grower/agent/responsibilities-mobile.webp";
 
-import Leaves from "@assets/images/products/grower/exisiting-leaves.webp";
-// import ListItem from "./ListItem.astro";
-import { classNames } from "@utils/functions";
 import ItemListing from "./ItemListing.astro";
 import Images from "./Images.astro";
+import { HeadingOneLine } from "@components/utils";
 
 const qualification = [
   "18 years and above with at least 1 year of practical experience in crop production.",
@@ -34,45 +30,38 @@ const responsibilities = [
 ];
 ---
 
-<div
-  class="max-w-7xl mx-auto px-0 py-8 md:py-16 lg:py-10 sm:overflow-hidden xl:overflow-visible"
->
-  <div class="flex flex-col justify-center items-center px-1">
-    <p
-      class="w-full mt-4 sm:mt-6 lg:mt-12 text-[28px] md:text-[40px] lg:text-5xl leading-[34px] md:leading-[50px] lg:leading-[60px] font-bold text-center text-grower-400 py-3"
-    >
-      About This Opportunity
-    </p>
-    <p
-      class="w-full px-3 md:px-14 lg:px-44 py-4 text-xs md:text-sm lg:text-base text-center md:text-left lg:text-center text-custom_gray-300"
-    >
-      At Complete Farmer, we empower smallholder farmers with the tools and
-      technology to increase their agricultural productivity while connecting
-      them to global buyers. As one of our grower agents, you will work closely
-      with these farmers by guiding them through implementing the technological
-      solutions we provide on their farms
-    </p>
-  </div>
-
+<section class="2xl:bg-[#FAFAFA]">
   <div
-    class="flex justify-center flex-col lg:flex-row-reverse items-center py-5 lg:py-20 gap-10 overflow-hidden xl:overflow-visible"
+    class="2xl:max-w-7xl mx-auto px-0 py-8 sm:px-10 md:py-16 lg:py-10 overflow-hidden 2xl:overflow-visible"
   >
-    <Images image1={ImageQ1} image2={ImageQ2} image3={ImageQ3} right />
-    <ItemListing
-      data={qualification}
-      title="Qualifications"
-      description="Applicants will be considered for the grower agent role based on the following criteria:"
-    />
-  </div>
+    <div class="xl:pb-10">
+      <HeadingOneLine
+        titleTextColor="text-grower-900"
+        title="About This Opportunity"
+        desc="At Complete Farmer, we empower smallholder farmers with the tools and technology to increase their agricultural productivity while connecting them to global buyers. As one of our grower agents, you will work closely with these farmers by guiding them through implementing the technological solutions we provide on their farms"
+      />
+    </div>
 
-  <div
-    class="flex justify-between flex-col lg:flex-row items-center py-5 lg:py-20 gap-10 overflow-hidden xl:overflow-visible"
-  >
-    <Images image1={ImageR1} image2={ImageR2} image3={ImageR3} />
-    <ItemListing
-      data={responsibilities}
-      title="Responsibilities"
-      description="The Field Agent will be responsible for a range of duties which include, but are not limited to, the following:"
-    />
+    <div
+      class="flex justify-center flex-col xl:flex-row-reverse items-center pb-5 xl:py-20 gap-10"
+    >
+      <Images image1={ImageQ1} image2={ImageQ2} image3={ImageQ3} right />
+      <ItemListing
+        data={qualification}
+        title="Qualifications"
+        description="Applicants will be considered for the grower agent role based on the following criteria:"
+      />
+    </div>
+
+    <div
+      class="flex justify-between flex-col xl:flex-row items-center py-5 xl:py-20 gap-10"
+    >
+      <Images image1={ImageR1} image2={ImageR2} image3={ImageR3} />
+      <ItemListing
+        data={responsibilities}
+        title="Responsibilities"
+        description="The Field Agent will be responsible for a range of duties which include, but are not limited to, the following:"
+      />
+    </div>
   </div>
-</div>
+</section>

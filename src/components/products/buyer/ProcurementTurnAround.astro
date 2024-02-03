@@ -1,5 +1,5 @@
 ---
-import { HeadingOneLine } from "@components/utils";
+import { Button, HeadingOneLine } from "@components/utils";
 import Compare from "./Compare.astro";
 import CompareCards from "./CompareCards";
 ---
@@ -21,14 +21,11 @@ import CompareCards from "./CompareCards";
   <div
     class="container max-w-7xl mx-auto flex flex-col sm:flex-row w-full justify-center items-center py-10 px-5 gap-x-10"
   >
-    <button
-      id="fullComparison"
-      class="flex justify-center items-center w-full md:w-auto h-16 gap-2 md:px-28 py-4 rounded-full bg-buyer-500"
-    >
-      <span class="text-base sm:text-xl font-bold text-left text-white">
-        Full Comparison
-      </span>
-    </button>
+    <Button
+      id="full-comparison"
+      title="Full Comparison"
+      className="py-5 lg:!w-[380px] !rounded-full !bg-buyer-500"
+    />
   </div>
 </section>
 
@@ -38,11 +35,23 @@ import CompareCards from "./CompareCards";
   btns.forEach((btn) => {
     btn.addEventListener("click", () => {
       const id = btn.getAttribute("id");
-      const otherBtn = document.getElementById(id === "with-cf" ? "without-cf" : "with-cf")
-      
-      btn.classList.remove("!bg-transparent", "border", "border-buyer-500", "!text-buyer-500");
+      const otherBtn = document.getElementById(
+        id === "with-cf" ? "without-cf" : "with-cf"
+      );
+
+      btn.classList.remove(
+        "!bg-transparent",
+        "border",
+        "border-buyer-500",
+        "!text-buyer-500"
+      );
       btn.classList.add("!bg-buyer-500");
-      otherBtn.classList.add("!bg-transparent", "border", "border-buyer-500", "!text-buyer-500");
+      otherBtn.classList.add(
+        "!bg-transparent",
+        "border",
+        "border-buyer-500",
+        "!text-buyer-500"
+      );
       otherBtn.classList.remove("!bg-buyer-500");
 
       const cardsToShow = document.querySelectorAll(`.${id}`);
@@ -61,4 +70,15 @@ import CompareCards from "./CompareCards";
       });
     });
   });
+</script>
+
+<script type="module" is:inline>
+  // @ts-nocheck
+  import { $fullComparisonDrawer } from "../../src/utils/stores.ts";
+
+  const fullComparisonBtn = document.getElementById("full-comparison");
+
+  fullComparisonBtn.addEventListener("click", () =>
+    $fullComparisonDrawer.set(true)
+  );
 </script>

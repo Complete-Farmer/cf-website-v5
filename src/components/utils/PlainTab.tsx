@@ -1,4 +1,4 @@
-import type { IPlainProps } from "types/app";
+import type { IClickEvent, IPlainProps } from "types/app";
 import { classNames } from "@utils/functions";
 
 const PlainTab = ({ tabs, changeTab, color, borderColor }: IPlainProps) => {
@@ -11,7 +11,7 @@ const PlainTab = ({ tabs, changeTab, color, borderColor }: IPlainProps) => {
               <a
                 key={tab.name}
                 href={tab.href}
-                onClick={(e) => changeTab?.(e, tab)}
+                onClick={(e: IClickEvent) => changeTab?.(e, tab)}
                 className={classNames(
                   tab.current
                     ? `border-b-2 border-l-0 ${borderColor}`

@@ -3,11 +3,11 @@ import { Popover, Transition } from "@headlessui/react";
 import { useStore } from "@nanostores/react";
 
 import { Wrapper } from "@components/utils";
-import { BuyerGetInTouch } from "@components/products/buyer";
+import { BuyerGetInTouch, FullComparison } from "@components/products/buyer";
 import { GrowerGetInTouch } from "@components/products/grower";
 
 import { classNames } from "@utils/functions";
-import { $authModal, $getInTouchModal } from "@utils/stores";
+import { $authModal, $getInTouchModal, $fullComparisonDrawer } from "@utils/stores";
 
 import {
   ArrowIcon,
@@ -111,13 +111,14 @@ const drawerPropsData = {
 const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
   const authModal = useStore($authModal);
   const getInTouchModal = useStore($getInTouchModal);
+  const fullComparisonDrawer = useStore($fullComparisonDrawer);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [drawerProps, setDrawerProps] = useState<string[]>(
     drawerPropsData.signup
   );
 
   const openMobileMenu = () => setMobileMenuOpen(true);
-  
+
   const toggleModal = () => $getInTouchModal.set(!getInTouchModal);
 
   const handleButtonClick = () => {
@@ -177,7 +178,7 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
           <div className="relative flex flex-row mx-5">
             <div className="font-medium text-gray-900 lg:w-auto lg:items-center lg:justify-center md:mb-0">
               <span className="mx-auto text-xl font-black leading-none text-gray-900 select-none ">
-                <a href="/" className="-m-1.5 p-1.5">
+                <a href={data.href} className="-m-1.5 p-1.5">
                   <img
                     src={data.logo.src}
                     alt="Complete Farmer"
@@ -396,6 +397,11 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
         drawerOpen={authModal}
         drawerProps={drawerProps}
         handleCloseDrawer={handleCloseDrawer}
+      />
+
+      <FullComparison
+        open={fullComparisonDrawer}
+        onClose={() => $fullComparisonDrawer.set(false)}
       />
     </>
   );

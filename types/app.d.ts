@@ -20,7 +20,7 @@ export interface ITab {
   current: boolean;
   data: AsObject<string | AsObject<string>>;
   images: {
-    tablet: string;
+    tablet?: string;
     desktop: string;
   };
 }

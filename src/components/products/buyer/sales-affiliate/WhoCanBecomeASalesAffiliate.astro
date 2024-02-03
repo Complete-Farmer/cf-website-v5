@@ -1,0 +1,31 @@
+---
+import ImageQ1 from "@assets/images/products/buyer/sales-affiliate/qualification.webp";
+import ImageQ2 from "@assets/images/products/buyer/sales-affiliate/qualification-tablet.webp";
+import ImageQ3 from "@assets/images/products/buyer/sales-affiliate/qualification-mobile.webp";
+
+import ItemListing from "./ItemListing.astro";
+import Images from "./Images.astro";
+
+const qualification = [
+  "Has 3+ years selling high-volume of agricultural commodities",
+  "Has 3+ years in international trade",
+  "Has existing relationships with buyers in Asia or Europe or has the skills to build new relationships quickly",
+];
+---
+
+<section class="bg-[#FAFAFA]">
+  <div
+    class="max-w-7xl mx-auto px-0 py-8 md:py-16 lg:py-10 sm:overflow-hidden xl:overflow-visible"
+  >
+    <div
+      class="flex justify-between flex-col sm:flex-row items-center py-5 lg:py-20 gap-10 overflow-hidden xl:overflow-visible"
+    >
+      <Images image1={ImageQ1} image2={ImageQ2} image3={ImageQ3} />
+      <ItemListing
+        data={qualification}
+        title="Who can become a sales affiliate with"
+        description="Our ideal affiliate partner is one that meets all the listed criteria:"
+      />
+    </div>
+  </div>
+</section>

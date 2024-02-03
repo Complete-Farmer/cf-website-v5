@@ -1,0 +1,95 @@
+---
+import { Button, HeadingOneLine } from "@components/utils";
+import Compare from "../Compare.astro";
+import CompareCards from "../CompareCards";
+---
+
+<section class="relative h-full py-10 xl:py-12 bg-buyer-100">
+  <div class="container max-w-6xl mx-auto">
+    <HeadingOneLine
+      titleTextColor="text-buyer-900"
+      title="Why Promote Complete Farmer?"
+      desc="If you are going to advocate for a service, it should be a really good one. Our procurement solution checks all the boxes."
+    />
+    <h2
+      class="text-center lg:px-8 text-buyer-900 text-base lg:text-xl lg:leading-6 py-8 font-bold md:w-full"
+    >
+      Here’s how we make buyers’ lives better
+    </h2>
+    <div
+      class="grid gap-4 sm:gap-6 lg:gap-8 sm:gap-8[x] xl:gap-12 md:mt-10 grid-cols-8 sm:grid-cols-12 lg:grid-cols-12 px-4 sm:px-12 lg:px-8 xl:px-0"
+    >
+      <Compare />
+      <CompareCards />
+    </div>
+  </div>
+
+  <div
+    class="max-w-7xl mx-auto flex flex-col sm:flex-row w-full justify-center items-center py-10 px-5 gap-x-10 gap-y-8"
+  >
+    <Button
+      id="help-buyers"
+      title="Help buyers start sourcing the better way"
+      className="py-5 lg:!w-[380px] !rounded-full !bg-buyer-500"
+    />
+    <Button
+      id="full-comparison"
+      title="Full Comparison"
+      className="py-5 lg:!w-[380px] !rounded-full !bg-transparent border border-buyer-500 !text-buyer-500"
+    />
+  </div>
+</section>
+
+<script type="text/javascript" is:inline>
+  const btns = document.querySelectorAll(".compare-btn");
+
+  btns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("id");
+      const otherBtn = document.getElementById(
+        id === "with-cf" ? "without-cf" : "with-cf"
+      );
+
+      btn.classList.remove(
+        "!bg-transparent",
+        "border",
+        "border-buyer-500",
+        "!text-buyer-500"
+      );
+      btn.classList.add("!bg-buyer-500");
+      otherBtn.classList.add(
+        "!bg-transparent",
+        "border",
+        "border-buyer-500",
+        "!text-buyer-500"
+      );
+      otherBtn.classList.remove("!bg-buyer-500");
+
+      const cardsToShow = document.querySelectorAll(`.${id}`);
+      const cardsToHide = document.querySelectorAll(
+        `.${id === "with-cf" ? "without-cf" : "with-cf"}`
+      );
+
+      cardsToShow.forEach((card) => {
+        card.classList.remove("hidden");
+        card.classList.add("flex");
+      });
+
+      cardsToHide.forEach((card) => {
+        card.classList.remove("flex");
+        card.classList.add("hidden");
+      });
+    });
+  });
+</script>
+
+<script type="module" is:inline>
+  // @ts-nocheck
+  import { $fullComparisonDrawer, $joinSalesAffiliateModal } from "../../src/utils/stores.ts";
+
+  const fullComparisonBtn = document.getElementById("full-comparison");
+  const helpBuyersBtn = document.getElementById("help-buyers");
+
+  helpBuyersBtn.addEventListener("click", () => $joinSalesAffiliateModal.set(true))
+  fullComparisonBtn.addEventListener("click", () => $fullComparisonDrawer.set(true))
+</script>
