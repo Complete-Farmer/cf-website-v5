@@ -93,11 +93,11 @@ function GetInTouchModal({ toggleModal }: { toggleModal: () => void }) {
   const phoneNumber = watch("phoneNumber");
 
   return (
-    <div className="relative w-2xl max-w-5xl isolate sm:w-full bg-white sm:rounded-md px-4 py-6 sm:p-14">
+    <div className="relative w-full max-w-5xl isolate bg-white sm:rounded-xl px-4 py-6 sm:pt-8 sm:pb-14 sm:px-10">
       <div className="flex flex-row-reverse">
         <div
           role="button"
-          className="absolute top-4 right-3 sm:top-5 sm:right-6 text-custom_gray-300 hover:cursor-pointer"
+          className="absolute top-4 right-2 sm:top-5 sm:right-6 text-custom_gray-300 hover:cursor-pointer"
           onClick={toggleModal}
         >
           <MenuCloseIcon className="sm:h-7 sm:w-7" aria-hidden="true" />
@@ -111,11 +111,11 @@ function GetInTouchModal({ toggleModal }: { toggleModal: () => void }) {
 
       <Tab
         categories={categories}
-        className="lg:!max-w-full"
         changeCategory={changeCategory}
         activeBgColor="bg-buyer-500"
         normalBgColor="bg-custom_gray-200"
         inActiveBgColor="bg-custom_gray-200"
+        className="lg:!max-w-full my-4 lg:mt-0"
         inActiveTextColor="text-custom_black-900"
       />
 
@@ -170,21 +170,19 @@ function GetInTouchModal({ toggleModal }: { toggleModal: () => void }) {
       )}
 
       {activeCategory === "Schedule a call" && (
-        <div className="max-h-fit">
-          <InlineWidget
-            url="https://calendly.com/completefarmerbuyer/30min"
-            styles={{
-              height: "46vh"
-            }}
-            pageSettings={{
-              backgroundColor: "ffffff",
-              hideEventTypeDetails: true,
-              hideLandingPageDetails: true,
-              primaryColor: "2463FF",
-              textColor: "4d5055"
-            }}
-          />
-        </div>
+        <InlineWidget
+          url="https://calendly.com/completefarmerbuyer/30min"
+          styles={{
+            height: "46vh"
+          }}
+          pageSettings={{
+            backgroundColor: "000000",
+            hideEventTypeDetails: true,
+            hideLandingPageDetails: true,
+            primaryColor: "2463FF",
+            textColor: "4d5055"
+          }}
+        />
       )}
     </div>
   );
