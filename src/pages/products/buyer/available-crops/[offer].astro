@@ -3,9 +3,12 @@ import type { IAvailableCropOffers } from "types/app";
 
 import Layouts from "@layouts/Layouts.astro";
 import { BreadCrumb } from "@components/utils";
-// import { TabView, CropDetails } from "@components/products/grower/crops";
+import { TabView, CropDetails } from "@components/products/buyer/offers";
 
-import { convertToKebabCase } from "@utils/functions";
+import {
+  convertToKebabCase,
+  generateMarketAvailabilityDataDynamic,
+} from "@utils/functions";
 import { getCropOffers } from "@utils/api";
 
 export async function getStaticPaths() {
@@ -17,14 +20,52 @@ export async function getStaticPaths() {
     for (const c of data) {
       availableCropOffers.push({
         ...c,
-        link: `/products/buyer/available-crops/${convertToKebabCase(
-          c.crop.name
-        )}`,
         specs: [
-          c.specification?.cultivationType,
-          c.specification?.condition,
-          c.specification?.grade,
+          {
+            key: "Variety",
+            value: c.specification.variety.name || "-",
+          },
+          {
+            key: "Botanical Name",
+            value: c.crop.scientificName || "-",
+          },
+          {
+            key: "Grade",
+            value: c.specification.grade || "-",
+          },
+          {
+            key: "Condition",
+            value: c.specification.condition || "-",
+          },
+          {
+            key: "Processing Style",
+            value: c.processingStyle || "-",
+          },
+          {
+            key: "Size",
+            value:
+              c?.sizeRange && Object.keys(c?.sizeRange).length > 0
+                ? `${c?.sizeRange?.min}g to ${c?.sizeRange?.max}g`
+                : "-",
+          },
+          {
+            key: "Color",
+            value: c.specification.color || "-",
+          },
+          {
+            key: "Total Quantity",
+            value: c.quantity ? String(c.quantity) : "-",
+          },
         ],
+        features: [
+          c.crop?.seasonalInformation?.weatherDependency,
+          c.crop?.seasonalInformation?.startPlanting,
+          c.crop?.seasonalInformation?.harvestDates,
+        ].join(", "),
+        link: convertToKebabCase(c.crop.name),
+        seasonality: generateMarketAvailabilityDataDynamic(
+          c.crop.plantingDates
+        ),
       });
     }
   }
@@ -51,7 +92,7 @@ const { offer } = Astro.props;
     href="/products/buyer#available-crops"
   />
   <div class="pt-14">
-    <!-- <CropDetails {offer.crop} client:visible />
-    <TabView {crop} client:visible /> -->
+    <CropDetails offer={offer} client:visible />
+    <TabView offer={offer} client:visible />
   </div>
 </Layouts>

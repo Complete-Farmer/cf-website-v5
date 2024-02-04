@@ -52,16 +52,22 @@ export interface ICrop {
   createdAt: string;
   updatedAt: string;
   description: string;
+  scientificName: string;
   category: ICropCategory;
   cycle: { min: number; max: number };
   plantingDates: {
     [x: string]: string[];
   };
-  websiteData: {
+  websiteData?: {
     protocol: string;
     region: string;
     seasonality: string;
     variety: string;
+  };
+  seasonalInformation?: {
+    weatherDependency: string;
+    startPlanting: string;
+    harvestDates: string;
   };
 }
 
@@ -90,16 +96,29 @@ export interface ICropOffer {
   crop: ICrop;
   quantity: number;
   isPremium: boolean;
-  offerType: string;
-  offerName: string;
-  offerImage: string;
+  origin: string;
+  sizeRange: {
+    min: number;
+    max: number;
+  };
+  details: string[];
+  marketAvailabilty: {
+    region: string;
+    months: string[];
+  }[];
+  processingStyle: string;
   specification: ISpecification;
   price: Record<string, number>;
 }
 
 export interface IAvailableCropOffers extends ICropOffer {
   link: string;
-  specs: string[];
+  features: string;
+  specs: {
+    key: string;
+    value: string;
+  }[];
+  seasonality?: ISeasonality[];
 }
 
 export interface ISeasonality {

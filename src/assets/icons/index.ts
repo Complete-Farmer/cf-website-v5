@@ -20,6 +20,7 @@ export { default as FacebookIcon } from "./facebook";
 export { default as CalenderIcon } from "./calendar";
 export { default as RelationIcon } from "./relation";
 export { default as MenuOpenIcon } from "./menu-open";
+export { default as DownloadIcon } from "./download";
 export { default as NewpaperIcon } from "./newspaper";
 export { default as HeadphoneIcon } from "./headphone";
 export { default as InstagramIcon } from "./instagram";

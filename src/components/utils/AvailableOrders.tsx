@@ -27,7 +27,7 @@ const AvailableOrders = ({
   titleTextColor,
 }: IProps) => {
   return (
-    <div className={`pt-20 pb-20 ${bgColor} `}>
+    <div id="available-crops" className={`pt-20 pb-20 ${bgColor} `}>
       <div className="pb-6">
         <HeadingOneLine title={title} titleTextColor={titleTextColor} />
       </div>

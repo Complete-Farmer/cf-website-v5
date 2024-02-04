@@ -1,44 +1,26 @@
 import { useState } from "react";
 
-import type { IAvailableDemands } from "types/app";
-
 import { classNames } from "@utils/functions";
 
-// import GrowerSpecificationsCard from "./GrowerSpecificationCard";
+import Seasonality from "./Seasonality";
+import AvailableSpecification from "./AvailableSpecification";
 
-import ProtocolImg from "@assets/images/products/grower/crop-details/protocol.webp";
-import VarietyImg from "@assets/images/products/grower/crop-details/variety.webp";
-import AboutImg from "@assets/images/products/grower/crop-details/about.webp";
+import type { IAvailableCropOffers } from "types/app";
 
 interface IProps {
-  crop: IAvailableDemands;
+  offer: IAvailableCropOffers;
 }
 
-const TabView = ({ crop }: IProps) => {
+const TabView = ({ offer }: IProps) => {
   const initialTabs = [
     {
-      name: "Protocol",
-      title: "Protocol",
-      features: [crop.websiteData.protocol],
+      name: "Seasonality",
       current: true,
-      img: ProtocolImg,
       type: "normal",
     },
     {
-      name: "Variety",
-      title: "Variety",
+      name: "Specifications",
       current: false,
-      img: VarietyImg,
-
-      features: [crop.websiteData.variety],
-    },
-    {
-      name: "About",
-      title: "About",
-      current: false,
-      img: AboutImg,
-
-      features: [crop.websiteData.seasonality],
     },
   ];
 
@@ -82,7 +64,7 @@ const TabView = ({ crop }: IProps) => {
                 onClick={() => handleOnChangeTab(tab.name)}
                 className={classNames(
                   tab.current
-                    ? "text-grower-500 border-grower-500 border-b-2 font-bold"
+                    ? "text-buyer-500 border-buyer-500 border-b-2 font-bold"
                     : "text-gray-500 font-normal hover:text-gray-700",
                   "bg-white py-4 px-4 text-center focus:z-10 flex-1 sm:flex-none sm:w-[166px] lg:w-[auto]"
                 )}
@@ -94,37 +76,12 @@ const TabView = ({ crop }: IProps) => {
           </nav>
         </div>
 
-        <div>
-          <div className="space-y-16 px-4  lg:pt-10[x] lg:pt-1[x]">
-            <div className="w-full max-w-7xl">
-              <div className="flex flex-col lg:flex-row">
-                <div className="w-full lg:w-3/5">
-                  {currentTabData.title && (
-                    <div className="flex items-center justify-between w-full">
-                      <h2 className="text-3xl font-bold text-custom_black-900 py-8">
-                        {currentTabData.title}
-                      </h2>
-                    </div>
-                  )}
-
-                  <div className="flex justify-start items-start self-stretch gap-4">
-                    <p className="w-12/12 font-small text-custom_black-900 text-md text-base leading-6 text-left">
-                      {currentTabData.features}
-                    </p>
-                  </div>
-                </div>
-                <div className="w-full lg:w-1/3 flex justify-end items-center">
-                  <div className="mt-4 lg:mt-10">
-                    <img
-                      alt="illustration"
-                      src={currentTabData.img.src}
-                      className="hidden lg:block w-auto h-auto"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="pt-5">
+          {currentTabData.type === "normal" ? (
+            <Seasonality content={offer.features} data={offer.seasonality} />
+          ) : (
+            <AvailableSpecification data={offer.specs} />
+          )}
         </div>
       </div>
     </div>

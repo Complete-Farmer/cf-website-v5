@@ -17,3 +17,4 @@ export { default as AvailableOrders } from "./AvailableOrders";
 export { default as ServiceGuideForm } from "./ServiceGuideForm";
 export { default as CustomerStoryCard } from "./CustomerStoryCard";
 export { default as HeroTwoSideImageFade } from "./HeroTwoSideImageFade";
+export { default as MarketAvailabilityCard } from "./MarketAvailabilityCard";
