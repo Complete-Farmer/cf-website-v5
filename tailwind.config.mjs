@@ -45,6 +45,7 @@ export default {
       backgroundImage: {
         "products": "url('/src/assets/images/products/products-bg.webp')",
         "about-us-hero": "url('/src/assets/images/about-us/hero-background.png')",
+        "investor-relations": "url('/src/assets/images/investor-relations/hero-bg.webp')",
         "footer-pattern": "url('/src/assets/images/home/footer-bg-patterns.webp')",
         "hero-buyer": "url('/src/assets/images/products/buyer/hero-background.webp')",
         "contact-us-bg": "url('/src/assets/images/contact-us/background-pattern.webp')",

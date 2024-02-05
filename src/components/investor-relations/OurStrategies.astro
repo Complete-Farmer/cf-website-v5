@@ -62,14 +62,14 @@ const data = [
     </div>
 
     <div
-      class="container flex flex-col py-0 my-0 md:pl-14 md:flex-row mx-auto px-6 md:px-16 lg:px-10"
+      class="container flex flex-col md:pl-14 md:flex-row mx-auto px-6 md:px-16 lg:px-10"
     >
       <div
-        class="relative mt-10 mb-10 lg:text-left sm:text-center[x] gap-40 w-1/2[x] md:w-full lg:w-1/2[x] xl:w-7/12[x] lg:mb-0 lg:pt-[50px] lg:px-16[x]"
+        class="relative my-10 lg:text-left md:w-full lg:mb-0 lg:pt-[50px] space-y-10"
       >
         <div class="flex flex-col lg:flex-row justify-start items-start gap-3">
           <div
-            id="onboarding-flow"
+            id="our-strategies"
             data-current-index={0}
             class="flex flex-col justify-start items-start lg:w-1/2"
           >
@@ -82,7 +82,7 @@ const data = [
           </div>
 
           <div
-            class="flex flex-col md:justify-start lg:justify-center[x] mt-5 lg:mt-0 sm:ml-8[x] md:-ml-96[x] md:mr-96[x] lg:mr-0 lg:ml-0 lg:w-1/2 space-y-4"
+            class="flex flex-col md:justify-start mt-5 lg:mt-0 lg:mr-0 lg:ml-0 lg:w-1/2 space-y-4"
           >
             <h4 class="text-grower-500 font-bold text-xl">TARGETS</h4>
             {
@@ -94,7 +94,7 @@ const data = [
                   )}
                 >
                   {d.target.map((target) => (
-                    <li class="pt-5[x] my-auto lg:my-auto lg:pt-2">{target}</li>
+                    <li class="my-auto lg:my-auto lg:pt-2">{target}</li>
                   ))}
                 </ul>
               ))
@@ -153,7 +153,7 @@ const data = [
 </section>
 
 <script type="text/javascript" is:inline define:vars={{ data }}>
-  const onboardingFlow = document.querySelector("#onboarding-flow");
+  const onboardingFlow = document.querySelector("#our-strategies");
   const prev = document.querySelector("#previous-button");
   const next = document.querySelector("#next-button");
 

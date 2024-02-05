@@ -50,15 +50,16 @@ const ReportsAndWhitePapers = ({ data }: IProps) => {
   };
 
   return (
-    <section className="py-10 md:py-14 lg:py-24 bg-custom_gray-400">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-14 lg:py-24 bg-custom_gray-400">
+      <div className="max-w-7xl mx-auto sm:px-14 xl:px-0 space-y-7 xl:space-y-0">
         <h3 className="text-[28px] md:text-[32px] leading-[34px] md:leading-10 font-bold text-center sm:text-left text-grower-400">
           Impact reports & white papers
         </h3>
 
         <Tab
           categories={categories}
-          normalBgColor="bg-[#E6E6E6]"
+          normalBgColor="bg-[#E6E6E6] overflow-auto no-scrollbar"
+          className="sm:w-3/4 xl:w-full"
           changeCategory={changeCategory}
           activeBgColor="bg-grower-500"
           inActiveBgColor="bg-[#E6E6E6]"
@@ -66,7 +67,7 @@ const ReportsAndWhitePapers = ({ data }: IProps) => {
         />
 
         {data?.[activeCategory.name].length ? (
-          <div className="flex flex-col sm:grid sm:grid-cols-2 gap-6 items-center justify-center xl:flex-row xl:max-w-full">
+          <div className="flex flex-col px-4 sm:px-0 sm:grid sm:grid-cols-2 gap-6 items-center justify-center xl:flex-row xl:max-w-full">
             {data[activeCategory.name].map(({ name }, index: number) => (
               <ImpactReportCard key={name + index} name={name} />
             ))}

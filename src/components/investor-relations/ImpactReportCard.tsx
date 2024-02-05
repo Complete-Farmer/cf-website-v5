@@ -22,8 +22,8 @@ function ImpactReportCard({ name }: IProps) {
   };
 
   return (
-    <div className="sm:p-4 p-5 lg:p-8 text-center md:flex-row md:text-left bg-white overflow-hidden rounded-lg">
-      <div className="flex justify-between w-full">
+    <div className="w-full sm:w-auto sm:p-4 p-5 lg:p-8 text-center md:flex-row md:text-left bg-white overflow-hidden rounded-lg">
+      <div className="flex flex-col items-start sm:items-center xl:flex-row space-y-3 xl:space-y-0 justify-between w-full">
         <p className="text-base font-normal text-black-700 line-clamp-2 text-left">
           {name}
         </p>

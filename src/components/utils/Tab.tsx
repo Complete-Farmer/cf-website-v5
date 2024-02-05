@@ -42,7 +42,7 @@ export default function TabComp(props: IProps) {
       >
         <Tab.List
           className={classNames(
-            "flex space-x-1 rounded-full  p-1",
+            "flex space-x-1 rounded-full p-1",
             normalBgColor
           )}
         >
@@ -50,7 +50,7 @@ export default function TabComp(props: IProps) {
             <Tab
               key={category.name}
               className={classNames(
-                "w-full rounded-full py-4 text-base leading-5 ",
+                "w-full rounded-full py-4 px-6 text-base leading-5  whitespace-nowrap ",
                 " focus:outline-none ",
                 category.current
                   ? `${activeBgColor} shadow text-white`

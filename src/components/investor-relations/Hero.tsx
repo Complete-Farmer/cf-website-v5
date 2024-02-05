@@ -90,15 +90,15 @@ const Hero = ({ data }: IProps) => {
     title: string;
     description: string;
   }) => (
-    <div className="w-full md:w-1/2 h-full flex flex-col items-center md:items-start justify-center space-y-10">
+    <div className="w-full md:w-1/2 flex flex-col items-center md:items-start justify-center">
       <Fade left duration={1000} delay={500} distance="30px">
-        <div className="space-y-24">
-          <div className="flex flex-col justify-start items-start gap-11 sm:gap-8">
-            <div className="flex flex-col justify-start items-start gap-2">
-              <h1 className="line-clamp-2 text-[28px] pt-8 px-6 lg:px-0 leading-9 text-left font-bold md:-mt-20 md:text-[32px] md:leading-10 lg:-mt-0 lg:text-6xl lg:leading-[80px] text-grower-900">
+        <div className="space-y-10 xl:space-y-24">
+          <div className="flex flex-col justify-start items-start gap-5 sm:gap-8">
+            <div className="flex flex-col justify-start items-start gap-2 sm:pr-6 xl:pr-0">
+              <h1 className="line-clamp-2 text-[28px] leading-9 text-left font-bold md:text-[32px] md:leading-10 lg:text-4xl lg:leading-[50px] xl:text-6xl xl:leading-[80px] text-grower-900">
                 {title}
               </h1>
-              <p className="lg:text-2xl px-6 lg:px-0 font-normal mt-5 text-left text-base lg:leading-9 xl:text-left text-custom_black-900 line-clamp-4">
+              <p className="lg:text-xl xl:text-2xl font-normal text-left text-base xl:leading-9 xl:text-left text-custom_black-900 line-clamp-4">
                 {description}
               </p>
             </div>
@@ -113,12 +113,12 @@ const Hero = ({ data }: IProps) => {
                   hasArrow
                   title="Learn more"
                   onClick={handleButtonClick}
-                  className="py-4 px-6 text-xl !rounded-full !w-fit !font-bold"
+                  className="py-3 px-4 text-base sm:py-4 sm:px-6 sm:text-xl !rounded-full !w-fit !font-bold"
                 />
               </a>
             </div>
           </div>
-          <div className="hidden lg:flex flex-row justify-start items-start gap-7">
+          <div className="flex flex-row justify-start items-start gap-7">
             {sliders?.map((_, index) => {
               if (index === currentSliderIndex) {
                 return (
@@ -153,10 +153,10 @@ const Hero = ({ data }: IProps) => {
 
 
   const RightComp = ({ imageSrc }: { imageSrc: string; }) => (
-    <div className="pt-6 sm:pt-0 lg:mr-16">
+    <div className="pt-6 sm:pt-0 xl:mr-16">
       <Fade right duration={1000} delay={500} distance="30px">
         <img
-          className="w-[100%] h-[200px] md:w-72 md:h-72 lg:w-[445px] lg:h-[445px] rounded-md shadow-md object-cover"
+          className="w-[100%] h-[200px] md:w-72 md:h-72 lg:w-96 lg:h-96 xl:w-[445px] xl:h-[445px] rounded-md shadow-md object-cover"
           src={imageSrc}
           alt=""
         />
@@ -166,7 +166,7 @@ const Hero = ({ data }: IProps) => {
 
   return (
     <section
-      className="w-full investor-relation-slider px-6 sm:px-8 lg:px-0 pb-20 sm:pb-12 lg:py-28 bg-about-us-hero bg-cover bg-custom_orange-200"
+      className="w-full investor-relation-slider px-6 xl:px-0 pb-14 sm:py-20 xl:py-28 bg-investor-relations bg-cover"
     >
       <Slider {...settings} ref={sliderRef}>
         {sliders?.map((dataItem) => (
@@ -174,7 +174,7 @@ const Hero = ({ data }: IProps) => {
             key={dataItem.title}
             className="w-full h-auto"
           >
-            <div className="max-w-7xl mx-auto sm:px-4 xl:px-0 flex sm:items-start sm:justify-between flex-col-reverse md:flex-row h-full">
+            <div className="max-w-7xl mx-auto sm:px-4 xl:px-0 flex sm:items-start gap-4 sm:gap-0 sm:justify-between flex-col-reverse md:flex-row h-full">
               <LeftComp
                 link=""
                 title={dataItem.title}
