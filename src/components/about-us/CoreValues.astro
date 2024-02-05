@@ -1,0 +1,208 @@
+---
+import { Image } from "astro:assets";
+
+import { ChevronIcon } from "@assets/icons";
+import { Button } from "@components/utils";
+
+import coreValues from "@data/core-values.ts";
+---
+
+<div class="w-full py-10 md:py-14 lg:py-20 bg-white">
+  <div
+    class="max-w-7xl flex flex-col px-6 py-0 my-0 md:pl-14 md:flex-row mx-auto lg:px-10"
+  >
+    <div
+      class="relative sm:mb-10 lg:text-left sm:text-center sm:w-1/2 lg:w-1/2 xl:w-7/12 lg:mb-0 lg:pt-[100px] lg:px-16"
+    >
+      <div class="hidden sm:flex flex-col justify-start items-start gap-3">
+        <p
+          class="text-base sm:text-xl lg:text-2xl font-bold text-left text-grower-500 py-10"
+        >
+          CORE VALUES
+        </p>
+        <div
+          id="core-values"
+          data-current-index={0}
+          class="flex flex-col justify-start items-start self-stretch flex-grow-0 flex-shrink-0 relative gap-6"
+        >
+          <p
+            id="title"
+            class="w-96 text-[40px] lg:text-5xl font-bold text-left text-custom_black-900 leading-[30px] md:leading-[50px] lg:leading-[64px]"
+          >
+            {coreValues[0].title}
+          </p>
+          <a
+            class="contents"
+            id="core-value-link"
+            href={`/about-us/core-values/${coreValues[0].slug}`}
+          >
+            <Button
+              hasArrow
+              title="Learn More"
+              className="!w-fit px-5 py-4 !rounded-full !bg-custom_gray-200 !text-grower-500"
+            />
+          </a>
+        </div>
+      </div>
+      <div class="flex sm:hidden flex-col justify-start items-start gap-3">
+        <p class="text-sm font-bold text-left text-grower-500 py-0">
+          CORE VALUES
+        </p>
+
+        <div class="flex flex-col justify-start sm:items-start gap-6 py-0">
+          {
+            coreValues?.map((item, index) => (
+              <>
+                <div class="flex items-baseline space-x-3">
+                  <span class="text-2xl font-bold text-left text-custom_black-900">
+                    0{index + 1}.
+                  </span>
+
+                  <div>
+                    <p class="text-2xl font-bold text-left text-custom_black-900 pt-1 py-3">
+                      {item.title}
+                    </p>
+                    <a
+                      class="contents"
+                      href={`/about-us/core-values/${item.slug}`}
+                    >
+                      <Button
+                        hasArrow
+                        title="Learn More"
+                        className="!w-fit !px-0 !rounded-full !bg-white !text-grower-500"
+                      />
+                    </a>
+                  </div>
+                </div>
+                <div
+                  class={`${
+                    index !== coreValues.length - 1 &&
+                    "border-b border-gray-200"
+                  }`}
+                />
+              </>
+            ))
+          }
+        </div>
+      </div>
+      <div class="hidden sm:flex justify-start items-start mt-20 gap-6">
+        <div
+          role="button"
+          id="previous-button"
+          class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 p-3 rounded-full bg-gray-200 hover:cursor-pointer"
+        >
+          <ChevronIcon className="rotate-90" />
+        </div>
+        <div
+          role="button"
+          id="next-button"
+          class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 p-3 rounded-full bg-[#efefef] hover:cursor-pointer"
+        >
+          <ChevronIcon className="-rotate-90" />
+        </div>
+
+        <div class="hidden sm:flex lg:hidden my-auto ml-6">
+          <p class="text-grower-500 text-[20px] font-bold leading-6">
+            <span id="numbering">{1}</span>
+            <span>/</span>
+            <span>{coreValues?.length}</span>
+          </p>
+        </div>
+      </div>
+      <div
+        class="hidden xl:flex justify-start items-start gap-10 mt-36 lg:-ml-16"
+      >
+        {
+          coreValues.map((item, index) => {
+            return (
+              <div class="flex-grow-0 flex-shrink-0 w-52 h-[69px] relative overflow-hidden">
+                <div
+                  class={`title-button flex justify-center items-start w-52 absolute left-0 top-0 gap-4 cursor-pointer ${
+                    item.isActive ? "text-grower-500" : "text-custom_gray-300"
+                  }`}
+                >
+                  <p class="flex-grow-0 flex-shrink-0 text-base font-bold text-left">
+                    0{index + 1}
+                  </p>
+                  <p class="flex-grow text-base font-bold text-left">
+                    {item.title}
+                  </p>
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+
+    <div class="hidden sm:flex lg:flex lg:justify-center sm:ml-8 lg:ml-0">
+      {
+        coreValues.map((item) => (
+          <Image
+            src={item.image}
+            class={`core-values-image sm:w-[325px] -mt-28 lg:w-auto lg:h-auto object-contain ${
+              !item.isActive ? "hidden" : ""
+            }`}
+            alt={item.title}
+          />
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" is:inline define:vars={{ data: coreValues }}>
+  const onboardingFlow = document.querySelector("#core-values");
+  const prev = document.querySelector("#previous-button");
+  const next = document.querySelector("#next-button");
+
+  const titleButtons = document.querySelectorAll(".title-button");
+
+  let currentIndex = Number(onboardingFlow.getAttribute("data-current-index"));
+
+  prev.addEventListener("click", () => {
+    if (currentIndex === 0) {
+      currentIndex = 4;
+    } else {
+      currentIndex--;
+    }
+    scroll(currentIndex);
+  });
+
+  next.addEventListener("click", () => {
+    if (currentIndex + 1 === data.length) {
+      currentIndex = 0;
+    } else {
+      currentIndex++;
+    }
+    scroll(currentIndex);
+  });
+
+  titleButtons.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      scroll(index);
+    });
+  });
+
+  function scroll(index) {
+    onboardingFlow.dataset.currentIndex = index;
+    document.querySelector("#title").innerHTML = data[index].title;
+    document.querySelector("#numbering").innerHTML = index + 1;
+    document
+      .querySelector("#core-value-link")
+      .setAttribute("href", `/about-us/core-values/${data[index].slug}`);
+
+    const images = document.querySelectorAll(".core-values-image");
+    images.forEach((image) => {
+      image.classList.remove("hidden");
+      image.classList.add("hidden");
+    });
+    images[index].classList.remove("hidden");
+
+    titleButtons.forEach((button) => {
+      button.classList.remove("text-grower-500");
+    });
+    titleButtons[index].classList.add("text-grower-500");
+    titleButtons[index].classList.remove("text-custom_gray-300");
+  }
+</script>

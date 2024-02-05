@@ -1,10 +1,36 @@
 ---
 import Layouts from "@layouts/Layouts.astro";
 
-import { HeroTwoSideImageFade } from "@components/utils";
+import { getNews, getLeaderShip } from "@utils/prismic";
 
+import {
+  Partners,
+  PressHighlights,
+  HeroTwoSideImageFade,
+} from "@components/utils";
+
+import {
+  Section,
+  CoreValues,
+  CEOMessage,
+  OurLeadership,
+} from "@components/about-us";
+
+import Mest from "@assets/images/logos/partners/mest.png";
 import ImageLeft from "@assets/images/about-us/hero-1.webp";
-import ImageRight from "@assets/images/products/buyer/sales-affiliate/hero-2.webp";
+import ImageRight from "@assets/images/about-us/hero-2.webp";
+import TazaPay from "@assets/images/logos/partners/tazapay.png";
+import Ingressive from "@assets/images/logos/partners/ingressive.png";
+import FreezeLink from "@assets/images/logos/partners/freezelink.webp";
+
+const newsData = await getNews({ page: 1, pageSize: 4 });
+
+const leadershipData = await getLeaderShip({
+  page: 1,
+  pageSize: 10,
+});
+
+const assets = [Mest, TazaPay, FreezeLink, Ingressive];
 ---
 
 <Layouts
@@ -17,6 +43,17 @@ import ImageRight from "@assets/images/products/buyer/sales-affiliate/hero-2.web
     rightImage={ImageRight.src}
     heading="Meet the all-in-one platform digitizing agriculture from supply to demand"
   />
+
+  <CEOMessage />
+  <PressHighlights data={newsData} client:visible />
+  <OurLeadership data={leadershipData} client:visible />
+  <CoreValues />
+  <Partners
+    title="Trusted by global brands"
+    client:only="react"
+    assets={assets}
+  />
+  <Section client:visible />
 </Layouts>
 
 <!-- page: "/about-us", -->

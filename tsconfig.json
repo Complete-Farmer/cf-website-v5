@@ -15,8 +15,8 @@
       "@layouts/*": ["src/layouts/*"],
       "@assets/*": ["src/assets/*"],
       "@pages/*": ["src/pages/*"],
-      "@hooks/*": ["src/hooks/*"],
       "@utils/*": ["src/utils/*"],
+      "@data/*": ["src/data/*"],
     }
   },
   "include": [

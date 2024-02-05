@@ -38,7 +38,7 @@ const Hero = ({
       className={classNames(
         bgImage,
         bgColor,
-        "py-14 sm:py-10 xl:py-20 bg-cover"
+        "py-20 sm:py-10 xl:py-20 bg-cover"
       )}
     >
       <div className="flex justify-between items-center h-full">

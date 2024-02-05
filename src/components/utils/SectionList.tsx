@@ -57,7 +57,7 @@ export default function SectionList({
               <div
                 className={classNames(
                   textColor,
-                  "mt-2 flex justify-start flex-grow-0 flex-shrink-0 h-6 sm:mt-6 relative opacity-90 space-x-2 xl:space-x-3"
+                  "mt-2 flex justify-start flex-grow-0 flex-shrink-0 relative opacity-90 space-x-2 xl:space-x-3"
                 )}
               >
                 <a

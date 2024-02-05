@@ -1,13 +1,77 @@
 ---
+import { Image } from "astro:assets";
+
 import Layouts from "@layouts/Layouts.astro";
 
+import coreValues from "@data/core-values.ts";
+
+export async function getStaticPaths() {
+  return coreValues.map((value) => {
+    return {
+      params: { value: value.slug },
+      props: { value },
+    };
+  });
+}
+
+const { value } = Astro.props;
 ---
 
 <Layouts
-  title="About Us | Complete Farmer"
+  title={`${value.title} • Core Value •  About Us • | Complete Farmer`}
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
+  <section
+    class="pb-6 mx-6 sm:mx-0 md:py-10 bg-white min-w-screen animation-fade animation-delay"
+  >
+    <div class="max-w-7xl mx-auto">
+      <div
+        class="flex flex-col-reverse sm:flex-row w-full mx-auto bg-white px-3 sm:px-12 sm:mb-10"
+      >
+        <div class="w-2/3 flex flex-col justify-start items-start gap-4 pt-8">
+          <p
+            class="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-grower-500"
+          >
+            CORE VALUES
+          </p>
+          <p
+            class="flex-grow-0 flex-shrink-0 w-80 h-20 md:w-2/3 mb-3 text-[32px] leading-10 md:text-[40px] md:leading-[50px] lg:text-5xl lg:leading-[68px] font-bold text-left text-custom_black-900"
+          >
+            {value.title}
+          </p>
+        </div>
+        <div
+          class="block w-full mt-6 h-auto sm:w-[300px] sm:h-[165px] justify-end"
+        >
+          <Image class="h-auto w-full" src={value?.image} alt={value.title} />
+        </div>
+      </div>
 
+      {
+        value.lists.map((item, index) => {
+          return (
+            <div
+              class={`mx-3 sm:mx-12  bg-white sm:py-8 gap-2.5 py-6 border-t-0 border-r-0 ${
+                index === value?.lists?.length - 1 ? "border-b-0" : "border-b"
+              } border-l-0 border-[#e6e6e6]`}
+              data-rounded="rounded-lg"
+              data-rounded-max="rounded-full"
+            >
+              <h3
+                class="text-2xl leading-[30px] font-bold text-grower-500"
+                data-primary="purple-500"
+              >
+                {item.title}
+              </h3>
+              <p class="mt-6 text-base leading-6 text-gray-600">
+                {item.description}
+              </p>
+            </div>
+          );
+        })
+      }
+    </div>
+  </section>
 </Layouts>
 
-<!-- page: "/about-us", -->
+<!-- page: "/about-us/core-value/[value].astro", -->

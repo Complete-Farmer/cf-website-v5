@@ -10,7 +10,7 @@ interface IProps {
 export default function Partners({
   title,
   assets,
-  bgColor = "bg-nenutral-50",
+  bgColor = "bg-[#FAFAFA]",
 }: IProps) {
   return (
     <div className={classNames(bgColor, "py-10 sm:py-14 lg:py-20")}>

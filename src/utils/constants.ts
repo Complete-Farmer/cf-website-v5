@@ -12,7 +12,7 @@ export const companyLinks = [
   { name: "Newsroom", href: "/resources/news-room" },
   { name: "Blogs", href: "/resources/blogs" },
   { name: "Events", href: "/resources/events" },
-  { name: "Contact us", href: "/contact-us", isMobile: true }
+  { name: "Contact us", href: "/contact-us", isMobile: true },
 ];
 
 export const supportLinks = [{ name: "Contact us", href: "/contact-us" }];
@@ -31,5 +31,7 @@ export const AWS_POOL_ID = import.meta.env.AWS_POOL_ID;
 export const FACEBOOK_PIXEL_ID = import.meta.env.PUBLIC_FACEBOOK_PIXEL_ID;
 export const PRISM_ACCESS_TOKEN = import.meta.env.PUBLIC_PRISM_ACCESS_TOKEN;
 export const GLOBAL_SITE_TAG_ID = import.meta.env.PUBLIC_GLOBAL_SITE_TAG_ID;
-export const GOOGLE_TAG_MANAGER_ID = import.meta.env.PUBLIC_GOOGLE_TAG_MANAGER_ID;
-export const AWS_DOCUMENT_REPORT_BUCKETS = import.meta.env.AWS_DOCUMENT_REPORT_BUCKETS;
+export const GOOGLE_TAG_MANAGER_ID = import.meta.env
+  .PUBLIC_GOOGLE_TAG_MANAGER_ID;
+export const AWS_DOCUMENT_REPORT_BUCKETS = import.meta.env
+  .AWS_DOCUMENT_REPORT_BUCKETS;

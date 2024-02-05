@@ -71,3 +71,6 @@ export const getInvestorRelationSlider = async (params: IPramas) => {
   return fetchItems("investor_relations_slider", params);
 };
 
+export const getLeaderShip = async (params: IPramas) => {
+  return fetchItems("leaders_team", params);
+};

@@ -1,0 +1,47 @@
+---
+import { Image } from "astro:assets";
+
+import { QuoteIcon } from "@assets/icons";
+import CEOImage from "@assets/images/about-us/ceo.webp";
+---
+
+<section
+  class="pt-16 sm:pt-24 sm:py-20 px-4 sm:px-0 bg-grower-400 bg-about-us-ceo lg:pb-20 xl:px-0 sm:pl-10 lg:px-10"
+>
+  <div class="max-w-7xl px-4 mx-auto md:pr-0">
+    <div
+      class="text-custom_orange-500 flex flex-col sm:flex-row items-center justify-around xl:justify-between"
+    >
+      <div class="w-full sm:w-3/5">
+        <div class="relatives lg:max-w-none max-w-md mx-auto -mt-4 sm:-mt-10">
+          <QuoteIcon />
+          <p
+            class="text-base sm:text-base md:text-base lg:text-2xl text-left text-white lg:pr-32"
+          >
+            Complete Farmer platform has always been envisioned to be an end to
+            end platform for the three key stakeholders on the agriculture value
+            chain, food growers, food buyers, and food lovers. Complete Farmer’s
+            vision is to create a world that eats together by working together.
+            We are relentless and determined to push the boundaries of what is
+            possible.
+          </p>
+          <div class="hidden sm:block relative gap-2 mt-10 font-bold text-left">
+            <p class="text-2xl">Desmond Koney</p>
+            <p class="text-base">CEO, Complete Farmer</p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="w-full mt-12 lg:mt-10 lg:mb-10 mb-12 relative md:w-auto sm:overflow-hidden"
+      >
+        <Image src={CEOImage} class="sm:ml-2 lg:ml-0 w-full" alt="" />
+        <div
+          class="flex flex-col justify-start items-start relative gap-0 mt-8 mb-4 sm:hidden font-bold text-left"
+        >
+          <p class="text-2xl">Desmond Koney</p>
+          <p class="text-base">CEO, Complete Farmer</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
