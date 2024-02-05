@@ -1,6 +1,6 @@
 import SectionList from "@components/utils/SectionList";
 
-import { PeopleIcon, NewpaperIcon, RelationIcon } from "@assets/icons";
+import { PeopleIcon, NewpaperIcon, ContentIcon } from "@assets/icons";
 
 const incentives = [
   {
@@ -20,12 +20,12 @@ const incentives = [
     link: "/resources/news-room",
   },
   {
-    name: "Investor Relations",
-    icon: <RelationIcon />,
+    name: "Blogs",
+    icon: <ContentIcon />,
     description:
-      "Learn more about our mission, growth and impact and how you can be part of it.",
-    linkText: "Go to Investor relations",
-    link: "/investor-relations",
+      "Discover the latest tips and insights on food from production to procurement on our blog. ",
+    linkText: "Go to Blogs",
+    link: "/resources/blogs",
   },
 ];
 

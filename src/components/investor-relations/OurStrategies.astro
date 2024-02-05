@@ -1,0 +1,206 @@
+---
+import { ChevronIcon } from "@assets/icons";
+import { classNames } from "@utils/functions";
+
+const data = [
+  {
+    id: 1,
+    isActive: true,
+    title: "Differentiated products, new channels, a world-class excellence",
+    target: [
+      "Strengthen value proposition for different users on the platform",
+      "Adopt a consistent customer-focused approach for organizational processes",
+      "Build world-class brand and deliver on brand promises",
+      "Develop high-quality products, protocols and services that solve user needs",
+      "Develop high-quality products, protocols and services that solve user needs",
+      "Provide a competitive advantage for growers",
+    ],
+  },
+  {
+    id: 2,
+    title: "Improve traction",
+    target: [
+      "Explore new revenue models",
+      "Adopt a lean approach to financial operations in all departments",
+      "Focus on high-margin commodities and markets",
+      "Develop and scale into product verticals and broaden the scope",
+    ],
+  },
+  {
+    id: 3,
+    title: "Enhance organizational efficiency",
+    target: [
+      "Strengthen and improve relationships with key stakeholders",
+      "Be data-driven through channel and process integration to enhance key activities and work delivery",
+      "Optimize key resource allocation/ deployment and streamline costs",
+      "Standardize and automate processes",
+    ],
+  },
+
+  {
+    id: 4,
+    title: "Geographic expansion",
+    target: [
+      "Implement localisation and growth hacks in different markets",
+      "Explore new customer segments and value chain opportunities",
+      "Implement growth hacking and agile product development with a customer-centric approach.",
+      "Improve ecosystem participation and product-based communities engagements",
+    ],
+  },
+];
+---
+
+<section class="py-10 md:py-14 lg:py-24 bg-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col justify-start items-center gap-5">
+      <h2 class="text-[32px] sm:text-5xl font-bold text-center text-grower-400">
+        Our strategies
+      </h2>
+      <p class="text-sm sm:text-base text-center text-custom_black-900">
+        Learn how we create a world that feeds itself
+      </p>
+    </div>
+
+    <div
+      class="container flex flex-col py-0 my-0 md:pl-14 md:flex-row mx-auto px-6 md:px-16 lg:px-10"
+    >
+      <div
+        class="relative mt-10 mb-10 lg:text-left sm:text-center[x] gap-40 w-1/2[x] md:w-full lg:w-1/2[x] xl:w-7/12[x] lg:mb-0 lg:pt-[50px] lg:px-16[x]"
+      >
+        <div class="flex flex-col lg:flex-row justify-start items-start gap-3">
+          <div
+            id="onboarding-flow"
+            data-current-index={0}
+            class="flex flex-col justify-start items-start lg:w-1/2"
+          >
+            <h3
+              id="title"
+              class="text-2xl md:text-[40px] lg:text-5xl leading-[30px] md:leading-[50px] lg:leading-[68px] font-bold text-left text-custom_black-900 lg:mt-5"
+            >
+              {data[0].title}
+            </h3>
+          </div>
+
+          <div
+            class="flex flex-col md:justify-start lg:justify-center[x] mt-5 lg:mt-0 sm:ml-8[x] md:-ml-96[x] md:mr-96[x] lg:mr-0 lg:ml-0 lg:w-1/2 space-y-4"
+          >
+            <h4 class="text-grower-500 font-bold text-xl">TARGETS</h4>
+            {
+              data.map((d) => (
+                <ul
+                  class={classNames(
+                    d.isActive ? "block" : "hidden",
+                    "target ml-3 sm:ml-10 list-disc marker:text-grower-500 marker:text-2xl space-y-4"
+                  )}
+                >
+                  {d.target.map((target) => (
+                    <li class="pt-5[x] my-auto lg:my-auto lg:pt-2">{target}</li>
+                  ))}
+                </ul>
+              ))
+            }
+          </div>
+        </div>
+        <div class="hidden sm:flex justify-start items-start gap-6">
+          <div
+            role="button"
+            id="previous-button"
+            class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 p-3 rounded-full bg-gray-200 hover:cursor-pointer"
+          >
+            <ChevronIcon className="rotate-90" />
+          </div>
+          <div
+            role="button"
+            id="next-button"
+            class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2.5 p-3 rounded-full bg-[#efefef] hover:cursor-pointer"
+          >
+            <ChevronIcon className="-rotate-90" />
+          </div>
+
+          <div class="hidden sm:flex lg:hidden my-auto ml-6">
+            <p class="text-grower-500 text-[20px] font-bold leading-6">
+              <span id="numbering">{data[0].id}</span>
+              <span>/</span>
+              <span>{data?.length}</span>
+            </p>
+          </div>
+        </div>
+        <div
+          class="hidden xl:flex justify-start lg:justify-center items-start gap-10 mt-20 lg:-ml-16"
+        >
+          {
+            data.map((item) => (
+              <div class="flex-grow-0 flex-shrink-0 max-w-xs relative overflow-hidden">
+                <div
+                  class={`title-button flex justify-center items-start left-0 top-0 gap-4 cursor-pointer ${
+                    item.isActive ? "text-grower-500" : "text-custom_gray-300"
+                  }`}
+                >
+                  <p class="flex-grow-0 flex-shrink-0 text-base font-bold text-left">
+                    0{item.id}
+                  </p>
+                  <p class="flex-grow text-base font-bold text-left">
+                    {item.title}
+                  </p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script type="text/javascript" is:inline define:vars={{ data }}>
+  const onboardingFlow = document.querySelector("#onboarding-flow");
+  const prev = document.querySelector("#previous-button");
+  const next = document.querySelector("#next-button");
+
+  const titleButtons = document.querySelectorAll(".title-button");
+
+  let currentIndex = Number(onboardingFlow.getAttribute("data-current-index"));
+
+  prev.addEventListener("click", () => {
+    if (currentIndex === 0) {
+      currentIndex = 4;
+    } else {
+      currentIndex--;
+    }
+    scroll(currentIndex);
+  });
+
+  next.addEventListener("click", () => {
+    if (currentIndex + 1 === data.length) {
+      currentIndex = 0;
+    } else {
+      currentIndex++;
+    }
+    scroll(currentIndex);
+  });
+
+  titleButtons.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      scroll(index);
+    });
+  });
+
+  function scroll(index) {
+    onboardingFlow.dataset.currentIndex = index;
+    document.querySelector("#title").innerHTML = data[index].title;
+    document.querySelector("#numbering").innerHTML = data[index].id;
+
+    const targets = document.querySelectorAll(".target");
+    targets.forEach((target) => {
+      target.classList.remove("hidden");
+      target.classList.add("hidden");
+    });
+    targets[index].classList.remove("hidden");
+
+    titleButtons.forEach((button) => {
+      button.classList.remove("text-grower-500");
+    });
+    titleButtons[index].classList.add("text-grower-500");
+    titleButtons[index].classList.remove("text-custom_gray-300");
+  }
+</script>

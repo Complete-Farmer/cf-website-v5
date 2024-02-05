@@ -1,11 +1,10 @@
 ---
 import Layouts from "@layouts/Layouts.astro";
 
-import Partners from "@components/utils/Partners";
+import { ParallaxImage, Partners } from "@components/utils";
 import {
   Hero,
   Section,
-  Parallax,
   NewsLetter,
   FasterGrowth,
   CustomerStories,
@@ -15,6 +14,7 @@ import Mest from "@assets/images/logos/partners/mest.png";
 import TazaPay from "@assets/images/logos/partners/tazapay.png";
 import Ingressive from "@assets/images/logos/partners/ingressive.png";
 import FreezeLink from "@assets/images/logos/partners/freezelink.webp";
+import VastFarmingLand from "@assets/images/home/vast-farming-land.webp";
 
 import { getCxStories } from "@utils/prismic";
 
@@ -27,16 +27,13 @@ const assets = [Mest, TazaPay, FreezeLink, Ingressive];
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
   <Hero client:load />
-  <Partners client:only="react" assets={assets} bgColor="bg-nenutral-50" />
+  <Partners title="Trusted by global brands" client:only="react" assets={assets}/>
   <FasterGrowth client:visible />
-  <Parallax />
+  <ParallaxImage imgSrc={VastFarmingLand.src} client:only="react" />
   <CustomerStories client:visible data={customerStories} />
   <Section client:visible />
   <NewsLetter client:visible />
 </Layouts>
-
-<script async is:inline type="text/javascript" src="/simpleParallax.min.js"
-></script>
 
 <script type="text/javascript">
   window.dataLayer.push({

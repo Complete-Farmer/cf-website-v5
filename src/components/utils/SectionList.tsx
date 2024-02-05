@@ -37,7 +37,7 @@ export default function SectionList({
         {incentives.map((i, idx) => (
           <Fade
             bottom
-            delay={500 + idx * 150}
+            delay={300 + idx * 150}
             key={i.name}
             duration={1000 + idx * 150}
             distance="30px"

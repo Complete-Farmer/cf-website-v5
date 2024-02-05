@@ -35,13 +35,15 @@ const fetchItems = async (type: string, params: IPramas) => {
   return items;
 };
 
-// const fetchItemById = async (type: string, params: { id: string }) => {
-//   const item = await Client.getByUID(type, params.id);
-//   return item;
-// };
+const fetchItemById = async (type: string, params: { id: string }) => {
+  const item = await Client.getByUID(type, params.id);
+  return item;
+};
 
 export const getCategories = async (type: string) => {
-  return fetchItems("categories", { filters: filterAt("my.categories.type", type) });
+  return fetchItems("categories", {
+    filters: filterAt("my.categories.type", type),
+  });
 };
 
 export const renderPrismicDesc = (description: any) => {
@@ -56,3 +58,16 @@ export const getCxStories = async (params: IPramas = {}) => {
 export const getContactUsFaqs = async (params: IPramas) => {
   return fetchItems("faq_v3", params);
 };
+
+export const getNews = async (params: IPramas) => {
+  return fetchItems("news-items", params);
+};
+
+export const getNewsById = async (id: string) => {
+  return fetchItemById("news-items", { id });
+};
+
+export const getInvestorRelationSlider = async (params: IPramas) => {
+  return fetchItems("investor_relations_slider", params);
+};
+

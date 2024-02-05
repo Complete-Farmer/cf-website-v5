@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import type { IChangeEvent } from "types/app";
-import { type Accept, useDropzone } from "react-dropzone";
+import { type Accept, useDropzone } from "react-dropzone-esm";
 import type { FieldValues, UseFormSetValue } from "react-hook-form";
 
 import useWindow from "@utils/useWindow";

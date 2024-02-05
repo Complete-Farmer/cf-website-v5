@@ -3,8 +3,8 @@ import "@assets/styles/phonenumberinput.css";
 
 import { useState, useEffect } from "react";
 import PhoneInput from "react-phone-number-input";
-import { XMarkIcon } from "@heroicons/react/20/solid";
 import type { IChangeEvent, IClickEvent } from "types/app";
+import { MenuCloseIcon } from "@assets/icons";
 
 export default function EstimateModal({ toggleModal }: { toggleModal: () => void; }) {
   const [value, setValue] = useState<string>();
@@ -61,7 +61,7 @@ export default function EstimateModal({ toggleModal }: { toggleModal: () => void
         <div className="flex flex-row-reverse">
           <div className="flex flex-row text-center justify-end">
             <p className="text-xl font-bold text-right text-custom_gray-300 hover:cursor-pointer -mt-6" onClick={toggleModal}>
-              <XMarkIcon className="h-8 w-8" aria-hidden="true" />
+              <MenuCloseIcon className="h-8 w-8" aria-hidden="true" />
             </p>
           </div>
           <div className="mx-auto max-w-2xl text-center">
