@@ -1,13 +1,44 @@
 ---
 import Layouts from "@layouts/Layouts.astro";
 
+import { NewsLetter } from "@components/home";
+import { Section } from "@components/investor-relations";
+import { WhyJoinTeam, OpenPositions } from "@components/careers";
+import { HeroTwoSideImageFade, ParallaxImage } from "@components/utils";
+
+import ImageLeft from "@assets/images/careers/hero-1.webp";
+import ImageRight from "@assets/images/careers/hero-2.webp";
+import StaffMeeting from "@assets/images/careers/team-meeting-in-session.webp";
+import { getDepartment } from "@utils/prismic";
+
+const departmentApiData = await getDepartment();
+
+const departmenData = departmentApiData.results.map((item) => ({
+  id: item.id,
+  name: item.data.name,
+}));
+
+const departments = [{ id: "", name: "All roles" }, ...departmenData];
 ---
 
 <Layouts
-  title="About Us | Complete Farmer"
+  title="Career | Complete Farmer"
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
+  <HeroTwoSideImageFade
+    client:visible
+    buttonTitle="Explore vacancies"
+    leftImage={ImageLeft.src}
+    rightImage={ImageRight.src}
+    heading="Where Africa’s most ambitious agriculture changemakers work."
+    text="We want you to join us. Stay with us. And play a key role in shaping the future of agriculture in Africa by building sustainable solutions, a wealthier community, and feeding the world."
+  />
 
+  <WhyJoinTeam client:visible />
+  <ParallaxImage imgSrc={StaffMeeting.src} client:only="react" />
+  <OpenPositions {departments} client:visible />
+  <Section client:visible />
+  <NewsLetter client:visible />
 </Layouts>
 
-<!-- page: "/about-us", -->
+<!-- page: "/careers", -->

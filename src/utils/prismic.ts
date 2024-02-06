@@ -74,3 +74,16 @@ export const getInvestorRelationSlider = async (params: IPramas) => {
 export const getLeaderShip = async (params: IPramas) => {
   return fetchItems("leaders_team", params);
 };
+
+export const getDepartment = async () => {
+  return fetchItems("categories", { filters: filterAt("my.categories.type", "departments") });
+};
+
+export const getJobVacancies = async (params: IPramas) => {
+  return fetchItems("job_vacancies", params);
+};
+
+export const getJobVacanciesById = async (id: string) => {
+  return fetchItemById("job_vacancies", { id });
+};
+

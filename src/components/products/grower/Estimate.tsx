@@ -72,7 +72,7 @@ export default function Estimate() {
                         <Selector
                           options={items}
                           selected={selected}
-                          setSelected={setSelected}
+                          setSelected={(v) => setSelected(v)}
                         />
                       </div>
                       <div className="sm:col-span-12 -mt-2">
@@ -104,7 +104,7 @@ export default function Estimate() {
                         <Selector
                           options={estimate}
                           selected={estimated}
-                          setSelected={setEstimated}
+                          setSelected={(v) => setEstimated(v)}
                         />
                       </div>
                       <div className="sm:col-span-12 mt-4">

@@ -53,7 +53,7 @@ function AvailableCropOfferCard({ data }: IProps) {
 
           <div className="flex flex-col justify-start items-start relative gap-1 w-full sm:w-2/3 md:w-full">
             <p className="w-full text-sm font-bold text-left text-custom_black-900">AVAILABLE SPECS:</p>
-            <p className="w-full text-base text-left lg:w-96 lg:h-6 lg:leading-6 text-[#6c6c6c]">{data.specs.join(", ")}</p>
+            <p className="w-full text-base text-left lg:w-96 lg:h-6 lg:leading-6 text-[#6c6c6c]">{data.specs}</p>
           </div>
 
           <p className="text-xl leading-6 font-bold text-left text-custom_black-900">USD{data.price?.["USD"]}/MT</p>

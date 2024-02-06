@@ -1,5 +1,4 @@
 import { TwoLeavesIcon } from "@assets/icons";
-import SubHeadingShort from "./SubHeadingShort";
 import { useMemo } from "react";
 
 interface IProps {
@@ -34,7 +33,14 @@ const CustomerStoryCard = ({ type = "grower", data }: IProps) => {
         <div className="flex flex-col items-center md:justify-between">
           <div className="flex items-center flex-col">
             <TwoLeavesIcon className={`w-6 h-6 lg:w-auto lg:h-auto ${text}`} />
-            <SubHeadingShort {...data} />
+            <div className="relative mx-auto flex max-w-7xl flex-col items-center px-6 py-4 sm:mt-4 md:mt-6 text-center text-[28px] sm:py-2 lg:px-0 sm:mb-10">
+              <h1
+                className={`text-base sm:text-[24px] lg:text-[28px] lg:leading-[48px] sm:leading-8 tracking-tight ${data.titleTextColor}`}
+              >
+                {data.titleFirstName}
+                <br className="hidden sm:block" /> {data.titleLastName}
+              </h1>
+            </div>
           </div>
           <div className="flex items-center mt-4 md:mt-0">
             <img

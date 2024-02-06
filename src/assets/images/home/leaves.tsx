@@ -1,6 +1,6 @@
 import type { JSX } from "react/jsx-runtime";
 
-const ArrowIcon = (
+const LeaveIcon = (
   props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>
 ) => (
   <svg
@@ -26,4 +26,4 @@ const ArrowIcon = (
   </svg>
 );
 
-export default ArrowIcon;
+export default LeaveIcon;

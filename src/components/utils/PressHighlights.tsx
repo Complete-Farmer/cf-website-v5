@@ -3,7 +3,7 @@ import Fade from "react-reveal/Fade";
 
 import type { IPrismicData } from "types/app";
 
-import { NewsCard } from "@components/news-room";
+import { NewsCard } from "@components/resources/news-room";
 
 import { formatDateWithCommas } from "@utils/functions";
 

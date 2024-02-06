@@ -1,13 +1,15 @@
 ---
 import Layouts from "@layouts/Layouts.astro";
 
+import HeroImage from "@assets/images/resources/blogs.webp";
+import { Hero } from "@components/resources";
 ---
 
 <Layouts
-  title="About Us | Complete Farmer"
+  title="Blogs  • Resources | Complete Farmer"
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
-
+  <Hero image={HeroImage} title="Events" />
 </Layouts>
 
-<!-- page: "/about-us", -->
+<!-- page: "/resources/blogs", -->

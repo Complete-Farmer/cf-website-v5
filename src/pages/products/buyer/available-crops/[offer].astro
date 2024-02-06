@@ -20,7 +20,7 @@ export async function getStaticPaths() {
     for (const c of data) {
       availableCropOffers.push({
         ...c,
-        specs: [
+        details2: [
           {
             key: "Variety",
             value: c.specification.variety.name || "-",

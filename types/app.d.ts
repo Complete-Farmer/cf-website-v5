@@ -113,11 +113,12 @@ export interface ICropOffer {
 
 export interface IAvailableCropOffers extends ICropOffer {
   link: string;
-  features: string;
-  specs: {
+  features?: string;
+  details2?: {
     key: string;
     value: string;
   }[];
+  specs?: string;
   seasonality?: ISeasonality[];
 }
 

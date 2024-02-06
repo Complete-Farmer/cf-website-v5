@@ -4,6 +4,7 @@ import { Button } from "@components/utils";
 import { TwoLeavesIcon } from "@assets/icons";
 import { $applicationFormModal, $joinSalesAffiliateModal } from "@utils/stores";
 import { classNames } from "@utils/functions";
+import useWindow from "@utils/useWindow";
 
 interface IProps {
   text?: string;
@@ -33,6 +34,11 @@ const Hero = ({
   bgColor = "bg-custom_orange-200",
   iconColor = "text-custom_orange-500",
 }: IProps) => {
+  const isCareer = useWindow<boolean>(
+    () => window?.location?.pathname?.includes("career"),
+    false
+  );
+
   return (
     <section
       className={classNames(
@@ -54,12 +60,18 @@ const Hero = ({
             "flex flex-col justify-center text-center sm:text-left xl:text-center items-center sm:items-start xl:items-center px-8 w-full sm:w-3/4 xl:w-1/2 sm:pl-10 xl:px-0 md:mb-20 space-y-6 xl:space-y-7"
           )}
         >
-          <TwoLeavesIcon
-            className={classNames(
-              iconColor,
-              "mx-auto sm:mx-0 xl:mx-auto h-10 w-10"
-            )}
-          />
+          {!isCareer ? (
+            <TwoLeavesIcon
+              className={classNames(
+                iconColor,
+                "mx-auto sm:mx-0 xl:mx-auto h-10 w-10"
+              )}
+            />
+          ) : (
+            <h3 className="text-custom_orange-500 text-2xl font-bold">
+              JOIN THE COMPLETE FARMER TEAM
+            </h3>
+          )}
           <h1
             className={classNames(
               titleWidth,
@@ -78,15 +90,19 @@ const Hero = ({
               <Button
                 title={buttonTitle}
                 onClick={() => {
-                  if (heading.includes("affiliate")) {
+                  if (buttonTitle.includes("affiliate")) {
                     $joinSalesAffiliateModal.set(true);
-                  } else {
+                  } 
+                  if (buttonTitle.includes("academy") || buttonTitle.includes("Agent")) {
                     $applicationFormModal.set(true);
                   }
+                  if (buttonTitle.includes("vacancies")) {
+                    window.location.hash= "vacancies";
+                  } 
                 }}
                 className={classNames(
                   buttonBgColor,
-                  "w-full md:w-4/5 xl:w-80 h-14 xl:h-14 !text-xl !sm:text-base !rounded-full"
+                  "w-full md:w-4/5 xl:w-fit xl:px-10 xl:py-5 !text-xl !sm:text-base !rounded-full"
                 )}
               />
             </div>

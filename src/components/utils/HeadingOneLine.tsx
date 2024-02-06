@@ -3,13 +3,15 @@ import { classNames } from "@utils/functions";
 interface IProps {
   title: string;
   desc?: string;
-  titleTextColor?: string;
+  descClass?: string;
   titleFontSize?: string;
+  titleTextColor?: string;
 }
 
 function HeadingOneLine({
   desc,
   title,
+  descClass,
   titleTextColor = "text-grower-400",
   titleFontSize = "text-2xl md:text-[40px] lg:text-5xl",
 }: IProps) {
@@ -27,7 +29,7 @@ function HeadingOneLine({
       {desc && (
         <p
           className={classNames(
-            titleTextColor,
+            titleTextColor, descClass,
             "text-xs w-[345px] md:text-base md:w-10/12 lg:text-xl lg:leading-8 lg:w-10/12 py-5"
           )}
         >

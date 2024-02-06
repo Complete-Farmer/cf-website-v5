@@ -80,7 +80,7 @@ const TabView = ({ offer }: IProps) => {
           {currentTabData.type === "normal" ? (
             <Seasonality content={offer.features} data={offer.seasonality} />
           ) : (
-            <AvailableSpecification data={offer.specs} />
+            <AvailableSpecification data={offer.details2} />
           )}
         </div>
       </div>

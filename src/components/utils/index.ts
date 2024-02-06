@@ -10,7 +10,6 @@ export { default as LoadingPage } from "./LoadingPage";
 export { default as ParallaxImage } from "./Parallax.tsx";
 export { default as SectionList } from "./SectionList";
 export { default as BreadCrumb } from "./BreadCrumb.astro";
-export { default as SubHeading } from "./SubHeadingShort";
 export { default as SpinnerLoader } from "./SpinnerLoader";
 export { default as HeadingOneLine } from "./HeadingOneLine";
 export { default as NewsletterForm } from "./NewsletterForm";

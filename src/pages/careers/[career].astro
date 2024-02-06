@@ -1,13 +1,18 @@
 ---
+import { BreadCrumb } from "@components/utils";
 import Layouts from "@layouts/Layouts.astro";
-
 ---
 
 <Layouts
   title="About Us | Complete Farmer"
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
-
+  <BreadCrumb
+    bgColor="bg-grower-400"
+    href="/careers#vacancies"
+    textColor="text-grower-500"
+    title="Browse available crops"
+  />
 </Layouts>
 
-<!-- page: "/about-us", -->
+<!-- page: "/careers/[job-title]", -->

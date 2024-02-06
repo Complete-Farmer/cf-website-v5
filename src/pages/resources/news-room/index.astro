@@ -1,13 +1,20 @@
 ---
 import Layouts from "@layouts/Layouts.astro";
 
+import HeroImage from "@assets/images/resources/news-room.webp";
+import { Hero } from "@components/resources";
+import { getNews } from "@utils/prismic";
+
+
+const newsApiData = await getNews({ page: 1, pageSize: 4 });
+
 ---
 
 <Layouts
-  title="About Us | Complete Farmer"
+  title="Newsroom  • Resources | Complete Farmer"
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
-
+  <Hero image={HeroImage} title="Newsroom" />
 </Layouts>
 
-<!-- page: "/about-us", -->
+<!-- page: "/resources/news-room", -->
