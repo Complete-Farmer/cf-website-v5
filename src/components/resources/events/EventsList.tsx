@@ -114,10 +114,10 @@ const EventsList = ({ eventsApiData }: IProps) => {
         categories={categories}
         normalBgColor="bg-white"
         changeCategory={changeCategory}
-        className="lg:!max-w-full lg:!w-2/5"
         inActiveTextColor="text-custom_black-900"
-        activeBgColor="bg-grower-500 !w-fit !px-10"
-        inActiveBgColor="bg-custom_gray-200 !w-fit !px-10"
+        className="!max-w-full lg:!max-w-full lg:!w-2/5 pt-4 pb-3"
+        activeBgColor="bg-grower-500 !w-fit !py-2.5 md:!py-4 !px-5 sm:!px-10"
+        inActiveBgColor="bg-custom_gray-200 !w-fit md:!py-4 !py-2.5 !px-5 sm:!px-10"
       />
       <section className="mx-auto w-full bg-opacity-95">
         <div className="grid gap-x-4 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
@@ -146,7 +146,7 @@ const EventsList = ({ eventsApiData }: IProps) => {
                 setPageNo(pageNo + 1);
               }}
               title={loading ? "Loading" : "Load more"}
-              className="mx-auto sm:!w-60 md:!w-[200px] !bg-custom_gray-500 lg:!text-lg py-4 !rounded-full"
+              className="mx-auto sm:!w-60 md:!w-[200px] !bg-custom_gray-200 !text-grower-500 font-semibold lg:!text-lg py-4 !rounded-full"
             />
           </div>
         )}

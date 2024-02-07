@@ -4,11 +4,11 @@ import Layouts from "@layouts/Layouts.astro";
 import { Hero, NewsRoomList } from "@components/resources";
 
 import { getNews } from "@utils/prismic";
-import { maxRecordsPerPage } from "@utils/constants";
+import { newsConfig } from "@utils/constants";
 
 import HeroImage from "@assets/images/resources/news-room.webp";
 
-const newsApiData = await getNews({ page: 1, pageSize: maxRecordsPerPage });
+const newsApiData = await getNews({ page: 1, pageSize: newsConfig.maxRecordsPerPage });
 ---
 
 <Layouts

@@ -25,7 +25,7 @@ export const legalLinks = [
 export const maxRecordsPerPage = 10;
 
 export const eventsConfig = {
-  maxRecordsPerPage: 9
+  maxRecordsPerPage: 3 //9
 };
 
 export const blogsConfig = {

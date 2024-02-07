@@ -105,7 +105,7 @@ export default function BlogList({ blogsApiData }: IProps) {
               setPageNo(pageNo + 1);
             }}
             title={loading ? "Loading" : "Load more"}
-            className="mx-auto sm:!w-60 md:!w-[200px] !bg-custom_gray-500 lg:!text-lg py-4 !rounded-full"
+            className="mx-auto sm:!w-60 md:!w-[200px] !bg-custom_gray-200 !text-grower-500 font-semibold lg:!text-lg py-4 !rounded-full"
           />
         </div>
       )}
