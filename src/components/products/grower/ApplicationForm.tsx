@@ -1,19 +1,18 @@
+import * as yup from "yup";
 import { useStore } from "@nanostores/react";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-
-import { MenuCloseIcon } from "@assets/icons";
-
-import {
-  Button,
-  Input,
-  PhoneNumber,
-  Uploader,
-  Wrapper,
-} from "@components/utils";
 
 import { $applicationFormModal } from "@utils/stores";
+import useYupValidationResolver from "@utils/useYupValidationResolver";
+
+import {
+  Input,
+  Button,
+  Wrapper,
+  Uploader,
+  PhoneNumber,
+} from "@components/utils";
+import { MenuCloseIcon } from "@assets/icons";
 
 type Inputs = {
   town: string;
@@ -47,8 +46,10 @@ interface Props {
   title: string;
 }
 
+
 const ApplicationForm = ({ title }: Props) => {
   const applicationFormModal = useStore($applicationFormModal);
+  const resolver = useYupValidationResolver(schema);
 
   const {
     watch,
@@ -57,8 +58,7 @@ const ApplicationForm = ({ title }: Props) => {
     handleSubmit,
     formState: { isDirty, isValid, isLoading },
   } = useForm<Inputs>({
-    // @ts-expect-error ts(2322)
-    resolver: yupResolver(schema),
+    resolver,
     defaultValues: {
       town: "",
       email: "",

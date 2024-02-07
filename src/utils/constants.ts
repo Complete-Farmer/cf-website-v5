@@ -22,6 +22,8 @@ export const legalLinks = [
   { name: "Terms & Conditions", href: "/legal/terms-and-conditions" },
 ];
 
+export const maxRecordsPerPage = 10;
+
 export const ENV = import.meta.env.PUBLIC_ENV;
 export const FMS_API = import.meta.env.FMS_API;
 export const BOT_PASS = import.meta.env.BOT_PASS;

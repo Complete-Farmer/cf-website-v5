@@ -40,6 +40,8 @@ export default function NormalHeader({ pathname }: { pathname: string }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerProps, setDrawerProps] = useState(drawerPropsData.login);
 
+  const isBuyer = pathname.includes("buyer");
+
   const handleDrawer = (value: string) => {
     if (value === "Login") setDrawerProps(drawerPropsData.login);
     if (value === "SignUp") setDrawerProps(drawerPropsData.signup);
@@ -243,12 +245,14 @@ export default function NormalHeader({ pathname }: { pathname: string }) {
       </div>
 
       <MobileMenu
+        isBuyer={isBuyer}
         isOpen={mobileMenuOpen}
         handleDrawer={handleDrawer}
         onClose={() => setMobileMenuOpen(false)}
       />
 
       <Drawer
+        isBuyer={isBuyer}
         drawerOpen={drawerOpen}
         drawerProps={drawerProps}
         handleCloseDrawer={handleCloseDrawer}

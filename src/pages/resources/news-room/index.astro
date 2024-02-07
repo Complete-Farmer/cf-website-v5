@@ -2,12 +2,13 @@
 import Layouts from "@layouts/Layouts.astro";
 
 import HeroImage from "@assets/images/resources/news-room.webp";
-import { Hero } from "@components/resources";
+
+import { Hero, NewsRoomList } from "@components/resources";
+
 import { getNews } from "@utils/prismic";
+import { maxRecordsPerPage } from "@utils/constants";
 
-
-const newsApiData = await getNews({ page: 1, pageSize: 4 });
-
+const newsApiData = await getNews({ page: 1, pageSize: maxRecordsPerPage });
 ---
 
 <Layouts
@@ -15,6 +16,7 @@ const newsApiData = await getNews({ page: 1, pageSize: 4 });
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
   <Hero image={HeroImage} title="Newsroom" />
+  <NewsRoomList {newsApiData} />
 </Layouts>
 
 <!-- page: "/resources/news-room", -->

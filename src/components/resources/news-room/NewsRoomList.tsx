@@ -1,61 +1,54 @@
-import React, { useEffect, useState } from "react";
-import NewsCard from "components/utils/NewsCard";
-import { newsConfig } from "constants/config";
-import { getNews } from "api/news";
-import SpinnerLoader from "components/utils/SpinnerLoader";
-import { formatDateWithCommas } from "helpers/dateFunctions";
+import { formatDateWithCommas } from "@utils/functions";
+import { getNews } from "@utils/prismic";
+import { useEffect, useState } from "react";
+import type { IPrismicData, IPrismicDoc } from "types/app";
+import { NewsCard } from ".";
+import { SpinnerLoader } from "@components/utils";
+import { maxRecordsPerPage } from "@utils/constants";
 
-const maxRecordsPerPage = newsConfig.maxRecordsPerPage;
-
+const transformApiData = (doc: IPrismicDoc) => {
+  return doc.map((item) => ({
+    ...item,
+    uid: item.uid,
+    img: item.data.image.url,
+    title: item.data.headline[0].text,
+    tags: item.tags.length === 0 ? [] : item.tags,
+    date: formatDateWithCommas(item.last_publication_date),
+  }));
+};
 interface IProps {
-  data: IPrismicData
+  newsApiData: IPrismicData;
 }
-export default function Example({ data }: IProps) {
+
+export default function NewsRoomList({ newsApiData }: IProps) {
   const [pageNo, setPageNo] = useState(1);
-  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [totalResults, setTotalResults] = useState(0);
+  const [nextPage, setNextPage] = useState(newsApiData.next_page);
+  const [data, setData] = useState(transformApiData(newsApiData.results));
+  const [totalResults, setTotalResults] = useState(
+    newsApiData.total_results_size
+  );
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const _newsApiData = await getNews({ page: pageNo, pageSize: maxRecordsPerPage });
+        const transformedData = transformApiData(_newsApiData.results);
+        setData((prevData) => [...prevData, ...transformedData]);
+        setNextPage(_newsApiData.next_page);
+        setTotalResults(_newsApiData.total_results_size);
+      } catch (error) {
+        setLoading(false);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       setLoading(true);
-
-  //       const newsApiData = await getNews({ page: pageNo, pageSize: maxRecordsPerPage });
-  //       const transformedData = transformApiData(newsApiData.results);
-
-  //       setData((prevData) => [...prevData, ...transformedData]);
-  //       setTotalResults(newsApiData.total_results_size);
-  //     } catch (error) {
-  //       setLoading(false);
-  //       console.error("Error fetching data:", error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [pageNo]);
-
-  // const transformApiData = (apiResults) => {
-  //   return apiResults.map((item) => ({
-  //     ...item,
-  //     // label: "TechCrunch",
-  //     date: formatDateWithCommas(item.last_publication_date),
-  //     img: item.data.image.url,
-  //     title: item.data.headline[0].text,
-  //     uid: item.uid,
-  //     tags: item.tags.length === 0 ? [] : item.tags
-  //   }));
-  // };
+    pageNo > 1 && fetchData();
+  }, [pageNo]);
 
   const handleOnClickOpenPositions = () => {
     setPageNo(pageNo + 1);
-  };
-
-  const isLoadMore = () => {
-    const isBool = data && totalResults !== 0 && totalResults !== data.length && totalResults > maxRecordsPerPage;
-    return isBool;
   };
 
   const handleButtonClick = () => {
@@ -63,12 +56,20 @@ export default function Example({ data }: IProps) {
     //   category: "Button Click",
     //   action: "Load More"
     // });
-
     // window.metapixelfunction("load", "load_more", {});
-
     // window.dataLayer.push({
     //   event: "load_more"
     // });
+  };
+
+  const isLoadMore = () => {
+    const isBool =
+      data &&
+      totalResults !== 0 &&
+      totalResults !== data.length &&
+      totalResults > maxRecordsPerPage &&
+      nextPage;
+    return isBool;
   };
 
   return (
@@ -77,13 +78,14 @@ export default function Example({ data }: IProps) {
         <section className="relative w-full py-2 bg-white bg-opacity-95">
           <div className="max-w-7xl px-4 mx-auto">
             <div className="flex flex-col sm:grid sm:grid-cols-2 items-center justify-center py-8[x] mx-auto xl:flex-row xl:max-w-full">
-              {data &&
-                data.length > 0 &&
-                data.map((item, index) => (
-                  <div key={index} className="border-b border-gray-200 py-2 pt-6">
-                    <NewsCard news={item} />
-                  </div>
-                ))}
+              {data?.map((item, index) => (
+                <div
+                  key={index}
+                  className="border-b border-gray-200 py-2 pt-6"
+                >
+                  <NewsCard news={item} />
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -91,18 +93,16 @@ export default function Example({ data }: IProps) {
 
       {data?.length === 0 && (
         <div className="flex justify-center items-center h-full">
-          <p className="mx-auto">
+          <div className="mx-auto">
             {loading ? (
-              <span className="">
-                <SpinnerLoader loading={loading} color="#36d7b7" />
-              </span>
+              <SpinnerLoader loading={loading} color="#36d7b7" />
             ) : (
-              <span className="">No data</span>
+              <span className="">No job vacancies found</span>
             )}
-          </p>
+          </div>
         </div>
       )}
-      {/* Pagination */}
+
       {isLoadMore() && (
         <div className="w-full text-center">
           <div className="my-12">

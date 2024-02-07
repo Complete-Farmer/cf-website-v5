@@ -56,11 +56,9 @@ const { leader } = Astro.props;
 
                 <dl class="mt-5 lg:mt-10 max-w-xl sm:space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
                   <div class="flex flex-col justify-start items-start relative gap-6">
-                    {leader.quote.map((textItem) => {
+                    {leader.quote.map(({ text }: { text: string }) => {
                       return (
-                        <p class="inline font-normal text-gray-900">
-                          {textItem.text}
-                        </p>
+                        <p class="inline font-normal text-gray-900">{text}</p>
                       );
                     })}
                   </div>

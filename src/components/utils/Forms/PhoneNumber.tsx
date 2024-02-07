@@ -31,7 +31,7 @@ const PhoneNumber = ({
         <label
           className={classNames(
             labelClassName,
-            "self-stretch flex-grow-0 flex-shrink-0 block text-sm font-semibold leading-6  w-2/3 text-left text-custom_gray-300"
+            "text-sm font-semibold leading-6  w-2/3 text-left text-custom_gray-300"
           )}
         >
           {title} {required && <span className="text-[#EB2F2F]">*</span>}

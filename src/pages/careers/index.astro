@@ -9,9 +9,15 @@ import { HeroTwoSideImageFade, ParallaxImage } from "@components/utils";
 import ImageLeft from "@assets/images/careers/hero-1.webp";
 import ImageRight from "@assets/images/careers/hero-2.webp";
 import StaffMeeting from "@assets/images/careers/team-meeting-in-session.webp";
-import { getDepartment } from "@utils/prismic";
+import { getDepartment, getJobVacancies } from "@utils/prismic";
+import { maxRecordsPerPage } from "@utils/constants";
 
 const departmentApiData = await getDepartment();
+const careerApiData = await getJobVacancies({
+  page: 1,
+  pageSize: maxRecordsPerPage,
+  fetchLinks: ["categories.name"],
+});
 
 const departmenData = departmentApiData.results.map((item) => ({
   id: item.id,
@@ -36,7 +42,7 @@ const departments = [{ id: "", name: "All roles" }, ...departmenData];
 
   <WhyJoinTeam client:visible />
   <ParallaxImage imgSrc={StaffMeeting.src} client:only="react" />
-  <OpenPositions {departments} client:visible />
+  <OpenPositions {departments} {careerApiData} client:visible />
   <Section client:visible />
   <NewsLetter client:visible />
 </Layouts>

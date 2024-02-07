@@ -1,6 +1,8 @@
-import { useForm, type SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useForm, type SubmitHandler } from "react-hook-form";
+
+import useYupValidationResolver from "@utils/useYupValidationResolver";
+
 
 import { MenuCloseIcon } from "@assets/icons";
 import { Button, Input, PhoneNumber } from "@components/utils/Forms";
@@ -28,6 +30,8 @@ const schema = yup
   .required();
 
 export default function BookDemo({ toggleModal, activeCategory }: IProps) {
+  const resolver = useYupValidationResolver(schema);
+
   const {
     watch,
     register,
@@ -35,8 +39,7 @@ export default function BookDemo({ toggleModal, activeCategory }: IProps) {
     handleSubmit,
     formState: { isDirty, isValid, isLoading },
   } = useForm<Inputs>({
-    // @ts-expect-error ts(2322)
-    resolver: yupResolver(schema),
+    resolver,
     defaultValues: {
       email: "",
       lastName: "",

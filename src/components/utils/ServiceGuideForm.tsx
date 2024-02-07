@@ -1,12 +1,13 @@
 import "react-toastify/dist/ReactToastify.css";
 
+import * as yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 
 import { MenuCloseIcon } from "@assets/icons";
 import { Button, Input } from "@components/utils";
+
+import useYupValidationResolver from "@utils/useYupValidationResolver";
 
 type Inputs = {
   email: string;
@@ -28,14 +29,14 @@ interface IProps {
 }
 
 function ServiceGuideForm({ onClose, product, buttonBg }: IProps) {
+  const resolver = useYupValidationResolver(schema);
   const {
     reset,
     register,
     handleSubmit,
     formState: { isDirty, isValid, isLoading },
   } = useForm<Inputs>({
-    // @ts-expect-error ts(2322)
-    resolver: yupResolver(schema),
+    resolver,
     defaultValues: {
       email: "",
       firstName: "",

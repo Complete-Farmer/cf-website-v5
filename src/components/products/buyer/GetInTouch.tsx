@@ -1,8 +1,10 @@
 import * as yup from "yup";
-import { InlineWidget } from "react-calendly";
 import { useState } from "react";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { InlineWidget } from "react-calendly";
 import { useForm, type SubmitHandler } from "react-hook-form";
+
+
+import useYupValidationResolver from "@utils/useYupValidationResolver";
 
 import { MenuCloseIcon } from "@assets/icons";
 import { Button, Input, PhoneNumber, Tab, Uploader } from "@components/utils";
@@ -43,6 +45,7 @@ const cateogries = [
 ];
 
 function GetInTouchModal({ toggleModal }: { toggleModal: () => void }) {
+  const resolver = useYupValidationResolver(schema);
   const [categories, setCategories] = useState(cateogries);
   const [activeCategory, setActiveCategory] = useState("Fill in a form");
 
@@ -65,8 +68,7 @@ function GetInTouchModal({ toggleModal }: { toggleModal: () => void }) {
     handleSubmit,
     formState: { isDirty, isValid, isLoading },
   } = useForm<Inputs>({
-    // @ts-expect-error ts(2322)
-    resolver: yupResolver(schema),
+    resolver,
     defaultValues: {
       file: null,
       email: "",

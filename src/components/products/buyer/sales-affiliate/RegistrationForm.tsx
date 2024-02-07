@@ -1,18 +1,18 @@
+import * as yup from "yup";
 import { useStore } from "@nanostores/react";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 
 import { MenuCloseIcon } from "@assets/icons";
 
 import { $joinSalesAffiliateModal } from "@utils/stores";
+import useYupValidationResolver from "@utils/useYupValidationResolver";
 
 import {
-  Button,
   Input,
-  PhoneNumber,
-  Uploader,
+  Button,
   Wrapper,
+  Uploader,
+  PhoneNumber,
 } from "@components/utils";
 
 type Inputs = {
@@ -38,6 +38,7 @@ const schema = yup
   .required();
 
 const RegistrationForm = () => {
+  const resolver = useYupValidationResolver(schema);
   const joinSalesAffiliateModal = useStore($joinSalesAffiliateModal);
 
   const {
@@ -47,8 +48,7 @@ const RegistrationForm = () => {
     handleSubmit,
     formState: { isDirty, isValid, isLoading },
   } = useForm<Inputs>({
-    // @ts-expect-error ts(2322)
-    resolver: yupResolver(schema),
+    resolver,
     defaultValues: {
       file: null,
       email: "",

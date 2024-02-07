@@ -118,7 +118,7 @@ const Uploader = ({
           {...getRootProps({
             className: classNames(
               isBuyer ? "border-dash-long-buyer" : "border-dash-long-grower",
-              "text-center w-full rounded-lg py-6 dropzone"
+              "text-center w-full rounded-lg py-6 dropzone bg-white"
             ),
           })}
         >
@@ -128,7 +128,7 @@ const Uploader = ({
               isBuyer
                 ? "text-buyer-500 focus-within:ring-buyer-500 hover:text-buyer-500"
                 : "text-grower-500 focus-within:ring-grower-500 hover:text-grower-500",
-              "relative cursor-pointer rounded-md bg-white font-semibold focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2"
+              "relative cursor-pointer rounded-md font-semibold focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2"
             )}
           >
             <div className="flex items-end justify-center space-x-2">

@@ -50,5 +50,16 @@ const pathname = Astro.url.pathname;
       <Footer client:visible pathname={pathname} />
     </div>
     <CookieScreen client:only="react" />
+    <style>
+      :global(html) {
+        scroll-behavior: smooth;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        :global(html) {
+          scroll-behavior: auto;
+        }
+      }
+    </style>
   </body>
 </html>

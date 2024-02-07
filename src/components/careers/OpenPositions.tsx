@@ -1,90 +1,91 @@
 import { useState, useEffect } from "react";
 
-import type { IPrismicDoc } from "types/app";
-
-import { filterAt, getJobVacancies } from "@utils/prismic";
+import type { IPrismicData, IPrismicDoc } from "types/app";
 
 import { ArrowIcon } from "@assets/icons";
-import { classNames } from "@utils/functions";
-import { Selector, SpinnerLoader } from "@components/utils";
 
-const maxRecordsPerPage = 10;
+import { classNames } from "@utils/functions";
+import { maxRecordsPerPage } from "@utils/constants";
+import { filterAt, getJobVacancies } from "@utils/prismic";
+import { Button, Selector, SpinnerLoader } from "@components/utils";
+
+const transformApiData = (doc: IPrismicDoc) => {
+  return doc.map((item) => ({
+    ...item,
+    role: item?.data?.title[0]?.text,
+    department: item?.data?.department?.data?.name,
+  }));
+};
 
 interface IProps {
   departments: {
     id: string;
     name: string;
   }[];
+  careerApiData: IPrismicData;
 }
 
-export default function OpenPositions({ departments }: IProps) {
-  const [selectedDepartment, setSelectedDepartment] =
-    useState<(typeof departments)[0]>(departments[0]);
-  const [totalResults, setTotalResults] = useState(0);
-  const [loading, setLoading] = useState(false);
+export default function OpenPositions({ departments, careerApiData }: IProps) {
   const [pageNo, setPageNo] = useState(1);
-  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [nextPage, setNextPage] = useState(careerApiData.next_page);
+  const [data, setData] = useState(transformApiData(careerApiData.results));
+  const [totalResults, setTotalResults] = useState(
+    careerApiData.total_results_size
+  );
+  const [selectedDepartment, setSelectedDepartment] = useState<
+    (typeof departments)[0]
+      >(departments[0]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const filters = selectedDepartment
-          ? filterAt("my.job_vacancies.department", `${selectedDepartment}`)
+        const filters = selectedDepartment.id
+          ? filterAt("my.job_vacancies.department", `${selectedDepartment.id}`)
           : undefined;
-        const careerApiData = await getJobVacancies({
+        const _careerApiData = await getJobVacancies({
           page: pageNo,
           pageSize: maxRecordsPerPage,
           filters,
           fetchLinks: ["categories.name"],
         });
-        const transformedData = transformApiData(careerApiData.results);
-        setData((prevData) =>
-          selectedDepartment?.id === prevData[0]?.data?.department?.id
-            ? [
+        const transformedData = transformApiData(_careerApiData.results);
+        setData((prevData) => {
+          // add new data to previous data but no duplicates
+          if (selectedDepartment?.id) {
+            return transformedData;
+          } else {
+            return [
               ...new Map(
                 [...prevData, ...transformedData].map((item) => [
                   item["id"],
                   item,
                 ])
               ).values(),
-            ]
-            : transformedData
-        );
-        setTotalResults(careerApiData.total_results_size);
+            ];
+          }
+        });
+        setNextPage(_careerApiData.next_page);
+        setTotalResults(_careerApiData.total_results_size);
       } catch (error) {
         setLoading(false);
       } finally {
         setLoading(false);
       }
     };
-    fetchData();
+    if (selectedDepartment.id || pageNo > 1) {
+      fetchData();
+    } else {
+      setNextPage(careerApiData.next_page);
+      setData(transformApiData(careerApiData.results));
+      setTotalResults(careerApiData.total_results_size);
+    }
   }, [pageNo, selectedDepartment]);
 
-  const transformApiData = (apiResults: IPrismicDoc) => {
-    return apiResults.map((item) => ({
-      ...item,
-      role: item?.data?.title[0]?.text,
-      department: item?.data?.department?.data?.name,
-    }));
-  };
-
-  const handleOnClickOpenPositions = () => {
-    setPageNo(pageNo + 1);
-  };
-
-  const handleOnDepartmentChange = (value) => {
+  const handleOnDepartmentChange = (value: (typeof departments)[0]) => {
     setPageNo(1);
     setSelectedDepartment(value);
-  };
-
-  const isLoadMore = () => {
-    const isBool =
-      data &&
-      totalResults !== 0 &&
-      totalResults !== data.length &&
-      totalResults > maxRecordsPerPage;
-    return isBool;
   };
 
   const handleButtonClick = () => {
@@ -110,8 +111,21 @@ export default function OpenPositions({ departments }: IProps) {
     // ReactPixel.track("Load more", {});
   };
 
+  const isLoadMore = () => {
+    const isBool =
+      data &&
+      totalResults !== 0 &&
+      totalResults !== data.length &&
+      totalResults > maxRecordsPerPage &&
+      nextPage;
+    return isBool;
+  };
+
   return (
-    <section id="vacancies" className="pt-16 pb-12 sm:pb-0 lg:pb-20 lg:pt-32 mx-6 sm:mx-12 bg-white">
+    <section
+      id="vacancies"
+      className="pt-16 pb-12 sm:pb-0 lg:pb-0 lg:pt-32 mx-6 sm:mx-12 bg-white"
+    >
       <div
         className={classNames(
           isLoadMore() ? "pb-20" : "pb-28",
@@ -120,11 +134,11 @@ export default function OpenPositions({ departments }: IProps) {
       >
         <div className="flex flex-col sm:flex-row mx-auto justify-between mb-5 sm:mb-10">
           <h2 className="text-2xl font-bold tracking-tight text-custom_green-900 sm:text-4xl">
-              Open positions
+            Open positions
           </h2>
           <div className="flex items-center sm:w-72">
             <label htmlFor="departments" className="sr-only">
-                Departments
+              Departments
             </label>
 
             <Selector
@@ -167,33 +181,31 @@ export default function OpenPositions({ departments }: IProps) {
               </a>
             </li>
           ))}
-          {/* <div className="divide-x sm:hidden" /> */}
+          <div className="divide-x sm:hidden" />
         </ul>
 
-        {data?.length === 0 && (
-          <div className="flex justify-center items-center h-full">
-            <p className="mx-auto">
+        {(data?.length === 0 || loading) && (
+          <div className="flex justify-center items-center pt-10 h-full">
+            <div className="mx-auto">
               {loading ? (
                 <SpinnerLoader loading={loading} color="#36d7b7" />
               ) : (
                 <span className="">No job vacancies found</span>
               )}
-            </p>
+            </div>
           </div>
         )}
 
         {isLoadMore() && (
-          <div className="w-full mt-12 sm:mt-7 mb-2[x] text-center">
-            <button
+          <div className="w-full mt-12 sm:mt-7 lg:mt-20 mx-auto">
+            <Button
               onClick={() => {
-                handleOnClickOpenPositions();
                 handleButtonClick();
+                setPageNo(pageNo + 1);
               }}
-              disabled={loading}
-              className="block sm:w-60 md:w-[255px] h-[64px] w-full py-5 mx-auto rounded-full lg:rounded-full lg:mb-10 bg-custom_lightgreen-500 px-3.5 text-center text-xl font-bold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
-            >
-              {loading ? "Loading" : "Load more"}
-            </button>
+              title={loading ? "Loading" : "Load more"}
+              className="mx-auto sm:!w-60 md:!w-[240px] lg:!text-lg py-4 !rounded-full"
+            />
           </div>
         )}
       </div>

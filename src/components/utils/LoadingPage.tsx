@@ -1,5 +1,3 @@
-import React from "react";
-
 const LoadingPage = () => {
   return (
     <div className="flex gap-3 flex-col justify-center items-center h-[100vh] animate-pulse">

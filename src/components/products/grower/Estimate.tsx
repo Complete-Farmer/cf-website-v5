@@ -32,6 +32,14 @@ export default function Estimate() {
   };
   const isComingSoon = true;
 
+  const handleOnCropChange = (value: (typeof items)[0]) => {
+    setSelected(value);
+  };
+
+  const handleOnEstimatedChange = (value: (typeof estimate)[0]) => {
+    setEstimated(value);
+  };
+
   return (
     <section className="py-20 bg-grower-900">
       <div className="max-w-7xl mx-auto px-4">
@@ -72,7 +80,7 @@ export default function Estimate() {
                         <Selector
                           options={items}
                           selected={selected}
-                          setSelected={(v) => setSelected(v)}
+                          setSelected={handleOnCropChange}
                         />
                       </div>
                       <div className="sm:col-span-12 -mt-2">
@@ -104,7 +112,7 @@ export default function Estimate() {
                         <Selector
                           options={estimate}
                           selected={estimated}
-                          setSelected={(v) => setEstimated(v)}
+                          setSelected={handleOnEstimatedChange}
                         />
                       </div>
                       <div className="sm:col-span-12 mt-4">

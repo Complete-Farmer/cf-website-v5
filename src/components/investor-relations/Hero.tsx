@@ -38,7 +38,7 @@ const Hero = ({ data }: IProps) => {
     slidesToScroll: 1,
     centerPadding: "0px",
     autoplaySpeed: 4000,
-    beforeChange: (_, newIndex) => {
+    beforeChange: (_, newIndex: number) => {
       setCurrentSliderIndex(newIndex);
     },
     responsive: [

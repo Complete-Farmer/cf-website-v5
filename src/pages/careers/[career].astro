@@ -1,18 +1,50 @@
 ---
-import { BreadCrumb } from "@components/utils";
 import Layouts from "@layouts/Layouts.astro";
+
+import { BreadCrumb } from "@components/utils";
+import { ApplicationForm, JobDetails } from "@components/careers";
+
+import { getJobVacancies } from "@utils/prismic";
+
+export async function getStaticPaths() {
+  const careerApiData = await getJobVacancies({
+  page: 1,
+  fetchLinks: ["categories.name"],
+});
+
+  return careerApiData.results.map((career) => {
+    const data = {
+      uid: career.uid,
+      role: career?.data?.title[0]?.text,
+      type: career?.data?.type?.[0]?.text,
+      description: career?.data?.description, 
+      department: career?.data?.department?.data?.name,
+      requirements: career?.data?.requirements, //.map((i: { text: string; }) => i.text),
+      preferred_skills: career?.data?.preferred_skills, //.map((i: { text: string; }) => i.text),
+      responsibilities: career?.data?.responsibilities, //.map((i: { text: string; }) => i.text)
+    };
+    return {
+      params: { career: data.uid },
+      props: { career: data },
+    };
+  });
+}
+
+const { career } = Astro.props;
 ---
 
 <Layouts
-  title="About Us | Complete Farmer"
+  title={`${career.role} • Careers | Complete Farmer`}
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
   <BreadCrumb
     bgColor="bg-grower-400"
     href="/careers#vacancies"
     textColor="text-grower-500"
-    title="Browse available crops"
+    title="Browse Careers"
   />
+  <JobDetails {career} client:visible />
+  <ApplicationForm role={career.role} client:visible />
 </Layouts>
 
 <!-- page: "/careers/[job-title]", -->

@@ -61,7 +61,7 @@ const WhyChooseAffiliate = () => {
     };
   }, [currentIndex, fillingPercentage]);
 
-  const handleSetIndex = (ind) => {
+  const handleSetIndex = (ind: number) => {
     setCurrentIndex(ind);
     setCurrent(data[ind]);
     setFillingPercentage(0);
