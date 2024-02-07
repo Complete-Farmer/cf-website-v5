@@ -3,7 +3,7 @@ import { useStore } from "@nanostores/react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
 import { $applicationFormModal } from "@utils/stores";
-import useYupValidationResolver from "@utils/useYupValidationResolver";
+import useYupValidationResolver from "@hooks/useYupValidationResolver";
 
 import {
   Input,

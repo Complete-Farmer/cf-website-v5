@@ -1,1 +1,2 @@
-// export { default as NewsCard } from "./NewsCard";
+export { default as BlogList } from "./BlogList";
+export { default as BlogCard } from "./BlogCard";

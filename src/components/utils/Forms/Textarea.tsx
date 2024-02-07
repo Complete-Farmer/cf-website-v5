@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 
 import { classNames } from "@utils/functions";
-import useWindow from "@utils/useWindow";
+import useWindow from "@hooks/useWindow";
 
 interface IProps
   extends React.DetailedHTMLProps<

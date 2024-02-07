@@ -1,7 +1,7 @@
 import * as yup from "yup";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
-import useYupValidationResolver from "@utils/useYupValidationResolver";
+import useYupValidationResolver from "@hooks/useYupValidationResolver";
 
 import { MenuCloseIcon } from "@assets/icons";
 import { Button, Input, PhoneNumber, Uploader } from "@components/utils";

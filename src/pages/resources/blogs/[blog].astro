@@ -1,13 +1,79 @@
 ---
-import Layouts from "@layouts/Layouts.astro";
+import { Image } from "astro:assets";
 
+import Layouts from "@layouts/Layouts.astro";
+import { BreadCrumb, PrismicText } from "@components/utils";
+import { RelatedStories, NewsBlogDetailHeader } from "@components/resources";
+
+import { getBlogs } from "@utils/prismic";
+import { formatDateWithCommas } from "@utils/functions";
+
+export async function getStaticPaths() {
+  const blogsApiData = await getBlogs({});
+
+  return blogsApiData.results.map((blog) => {
+    return {
+      params: { blog: blog?.uid },
+      props: {
+        blog: {
+          ...blog,
+          title: blog.data.headline[0].text,
+          date: formatDateWithCommas(blog.last_publication_date),
+        },
+        relatedBlogs: blogsApiData.results
+          .filter((b) => b.uid !== blog.uid)
+          .slice(0, 3)
+          .map((b) => ({
+            ...b,
+            title: b.data.headline[0].text,
+            date: formatDateWithCommas(b.last_publication_date),
+          })),
+      },
+    };
+  });
+}
+
+const { blog, relatedBlogs } = Astro.props;
 ---
 
 <Layouts
-  title="News Room  • Resources | Complete Farmer"
+  title={`${blog.title} • Blogs • Resources | Complete Farmer`}
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
+  <BreadCrumb
+    href="/blog-room"
+    title="Browse News"
+    bgColor="bg-grower-400"
+    textColor="text-grower-500"
+  />
 
+  <div
+    class="flex flex-col justify-center items-center pt-6 lg:pt-20 space-y-16"
+  >
+    <NewsBlogDetailHeader data={blog} client:visible />
+
+    <div
+      class="w-full h-[250px] lg:w-[1040px] sm:h-[400px] lg:h-[500px] md:h-[400px] rounded-md overflow-hidden"
+    >
+      <Image
+        alt={blog.title}
+        src={blog.data.image.url}
+        width={blog.data.image.dimensions.width}
+        height={blog.data.image.dimensions.height}
+        class="w-96 h-[250px] sm:w-inherit sm:h-[400px] lg:h-[500px] object-cover"
+      />
+    </div>
+
+    <section class="max-w-5xl mx-auto lg:px-36 space-y-10 text-justify">
+      {
+        blog.data?.description.length > 0 && (
+          <PrismicText render={blog.data.description} client:visible />
+        )
+      }
+    </section>
+  </div>
+
+  <RelatedStories type="blogs" title="Related Blogs" data={relatedBlogs} />
 </Layouts>
 
-<!-- page: "/resources/news-room", -->
+<!-- page: "/resources/blog-room", -->

@@ -4,15 +4,15 @@ import type { Query, PrismicDocument } from "@prismicio/client";
 
 export type AsObject<T> = Record<string, T>;
 
-export type IPrismicData = Query<
-  PrismicDocument<Record<string, any>, string, string>
->;
-
-export type IPrismicDoc = PrismicDocument<
+export type IPrismicSingleDoc = PrismicDocument<
   Record<string, any>,
   string,
   string
->[];
+>;
+
+export type IPrismicData = Query<IPrismicSingleDoc>;
+
+export type IPrismicDoc = IPrismicSingleDoc[];
 
 export interface ITab {
   href: string;
@@ -139,3 +139,22 @@ export type IClickEvent<T = HTMLButtonElement | HTMLAnchorElement> =
   React.MouseEvent<T, MouseEvent>;
 
 export type IChangeEvent = React.ChangeEvent<HTMLInputElement>;
+
+export interface INews extends IPrismicSingleDoc {
+  date: string;
+  label?: string;
+  title: string;
+  tags: string[];
+}
+
+export interface IBlog extends IPrismicSingleDoc {
+  date: string;
+  label?: string;
+  title: string;
+  tags: string[];
+}
+
+export interface IEvent extends IPrismicSingleDoc {
+  title: string;
+  date: string;
+}

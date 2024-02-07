@@ -27,4 +27,4 @@ const useResolution = () => {
   return { screenType };
 };
 
-export { useResolution };
+export default useResolution;

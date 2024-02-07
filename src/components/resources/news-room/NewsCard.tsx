@@ -1,12 +1,7 @@
+import type { INews } from "types/app";
+
 interface IProps {
-  news: {
-    uid: string;
-    img: string;
-    date: string;
-    label?: string;
-    title: string;
-    tags?: string[];
-  };
+  news: INews;
 }
 
 const NewsCard = ({ news }: IProps) => {
@@ -32,25 +27,28 @@ const NewsCard = ({ news }: IProps) => {
           <h4 className="mt-2 text-base md:text-xl md:leading-6 font-bold text-gray-600 line-clamp-2 text-left hover:underline">
             {news.title}
           </h4>
-
-          <div className="hidden lg:flex mt-3 text-base gap-2 justify-start items-start">
-            {news?.tags?.length > 1 &&
-              news.tags.map((tag) => {
+          {news?.tags?.length > 1 && (
+            <div className="hidden lg:flex mt-3 text-base gap-2 justify-start items-start">
+              {news.tags.map((tag) => {
                 return (
-                  <div key={tag} className="flex justify-start items-start relative overflow-hidden gap-2.5 px-2 py-1 rounded-full bg-[#efefef]">
+                  <div
+                    key={tag}
+                    className="flex justify-start items-start relative overflow-hidden gap-2.5 px-2 py-1 rounded-full bg-[#efefef]"
+                  >
                     <p className="text-xs text-left text-custom_black-900">
                       {tag}
                     </p>
                   </div>
                 );
               })}
-          </div>
+            </div>
+          )}
         </div>
         <div className="flex justify-center items-center overflow-hidden rounded-lg">
           <img
             className="h-20 w-20 sm:w-24 sm:h-24 md:w-20 md:h-20 lg:w-32 lg:h-28 mb-5 rounded-md bg-gray-300 object-cover md:mb-0 transition duration-300 ease-out transform scale-100 bg-cover hover:scale-105"
-            src={news.img}
-            alt=""
+            src={news.data.image.url}
+            alt={news.title}
           />
         </div>
       </div>

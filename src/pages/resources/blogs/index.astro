@@ -1,15 +1,22 @@
 ---
 import Layouts from "@layouts/Layouts.astro";
 
+import { Hero, BlogList } from "@components/resources";
+
+import { getBlogs } from "@utils/prismic";
+import { blogsConfig } from "@utils/constants";
+
 import HeroImage from "@assets/images/resources/blogs.webp";
-import { Hero } from "@components/resources";
+
+const blogsApiData = await getBlogs({ page: 1, pageSize: blogsConfig.maxRecordsPerPage });
 ---
 
 <Layouts
-  title="Blogs  • Resources | Complete Farmer"
+  title="Blogs • Resources | Complete Farmer"
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
-  <Hero image={HeroImage} title="Events" />
+  <Hero image={HeroImage} title="Blogs" />
+  <BlogList {blogsApiData} client:visible />
 </Layouts>
 
 <!-- page: "/resources/blogs", -->

@@ -5,7 +5,7 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { MenuCloseIcon } from "@assets/icons";
 
 import { $joinSalesAffiliateModal } from "@utils/stores";
-import useYupValidationResolver from "@utils/useYupValidationResolver";
+import useYupValidationResolver from "@hooks/useYupValidationResolver";
 
 import {
   Input,

@@ -1,0 +1,50 @@
+---
+import type { INews, IBlog, IEvent } from "types/app";
+
+import { BlogCard, NewsCard } from ".";
+
+interface Props {
+  title: string;
+  type: "news" | "blogs" | "events";
+  data: INews[] | IBlog[] | IEvent[];
+}
+
+const { type, title, data } = Astro.props;
+---
+
+<section
+  class="mx-auto bg-custom_gray-400 py-11 sm:mt-20 sm:py-20 md:pt-14 md:pb-6 lg:pb-10"
+>
+  <div
+    class="sm:max-w-xl md:max-w-full lg:max-w-screen-xl px-4 mx-auto sm:px-4 md:px-8 lg:py-8 sm:py-6 pb-4"
+  >
+    <div class="flex items-center justify-between w-full">
+      <h2
+        class="text-xl md:text-3xl font-bold text-grower-900 w-2/3 px-1 sm:px-0 md:px-0 lg:px-0 xl:px-0"
+      >
+        {title}
+      </h2>
+    </div>
+  </div>
+  <div class="sm:max-w-xl md:max-w-full lg:max-w-screen-xl mx-auto">
+    {
+      type === "news" && (
+        <div class="flex flex-col sm:grid sm:grid-cols-2 items-center justify-center py-8[x] mx-auto xl:flex-row xl:max-w-full">
+          {(data as INews[]).map((item) => (
+            <NewsCard news={item} />
+          ))}
+        </div>
+      )
+    }
+
+    {
+      type === "blogs" && (
+        <div class="mb-10 space-y-8 md:grid md:grid-cols-3 md:gap-x-8 md:space-y-0">
+          {(data as INews[]).map((item) => (
+            <BlogCard blog={item} />
+          ))}
+        </div>
+      )
+    }
+  </div>
+</section>

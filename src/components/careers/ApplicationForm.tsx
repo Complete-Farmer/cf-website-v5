@@ -2,7 +2,7 @@ import * as yup from "yup";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
 import { Input, Button, Uploader, PhoneNumber } from "@components/utils";
-import useYupValidationResolver from "@utils/useYupValidationResolver";
+import useYupValidationResolver from "@hooks/useYupValidationResolver";
 
 type Inputs = {
   email: string;

@@ -4,7 +4,7 @@ import { Button } from "@components/utils";
 import { TwoLeavesIcon } from "@assets/icons";
 import { $applicationFormModal, $joinSalesAffiliateModal } from "@utils/stores";
 import { classNames } from "@utils/functions";
-import useWindow from "@utils/useWindow";
+import useWindow from "@hooks/useWindow";
 
 interface IProps {
   text?: string;

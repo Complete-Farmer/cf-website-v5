@@ -1,3 +1,4 @@
+// import { classNames } from "@utils/functions";
 import { RichText, Elements, type RichTextBlock } from "prismic-reactjs";
 import React from "react";
 
@@ -19,30 +20,48 @@ export const linkResolver = ({ type, uid }) => {
 };
 
 // -- Function to add unique key to props
-const propsWithUniqueKey = function (props: { target?: string; className?: string}, key: number | string) {
-  return Object.assign({ className: `mx: 2 ${props.className}` } || {}, { key });
+const propsWithUniqueKey = function (
+  props: { href?: string; target?: string; className?: string },
+  key: number | string
+) {
+  return Object.assign(props, { key });
 };
 
 // -- HTML Serializer
-const htmlSerializer = function (type: string, element, content, children, key: string) {
+const htmlSerializer = function (
+  type: string,
+  element,
+  content,
+  children,
+  key: string
+) {
   let props = {};
 
   switch (type) {
   case Elements.heading1: // Heading 1
     return (
-      <h1 key={key} className="my-3 font-bold leading-9 text-[26px] md:text-4xl">
+      <h1
+        key={key}
+        className="my-3 font-bold leading-9 text-[26px] md:text-4xl"
+      >
         {children}
       </h1>
     );
   case Elements.heading2: // Heading 2
     return (
-      <h2 key={key} className="my-3 font-bold leading-9 text-[22px] md:text-[28px]">
+      <h2
+        key={key}
+        className="my-3 font-bold leading-9 text-[22px] md:text-[28px]"
+      >
         {children}
       </h2>
     );
   case Elements.heading3: // Heading 3
     return (
-      <h3 key={key} className="my-3 font-bold leading-9 text-[22px] md:text-[28px]">
+      <h3
+        key={key}
+        className="my-3 font-bold leading-9 text-[22px] md:text-[28px]"
+      >
         {children}
       </h3>
     );
@@ -65,42 +84,75 @@ const htmlSerializer = function (type: string, element, content, children, key: 
       </h6>
     );
   case Elements.paragraph: {
-    if(children && children[0]){
-      // Paragraph
-      return (
-        <p key={key} className="my-3 leading-9 text-sm md:text-base">
-          {children}
-        </p>
-      );
-    }
-    return null;
+    // Paragraph
+    return (
+      <p key={key} className="my-3 leading-9 text-sm md:text-base lg:text-lg">
+        {children}
+      </p>
+    );
   }
   case Elements.preformatted: // Preformatted
-    return React.createElement("pre", propsWithUniqueKey({ className: "mt-3" }, key), children);
+    return React.createElement(
+      "pre",
+      propsWithUniqueKey({ className: "mt-3" }, key),
+      children
+    );
   case Elements.strong: // Strong
-    return React.createElement("strong", propsWithUniqueKey({ className: "mt-3" }, key), children);
+    return React.createElement(
+      "strong",
+      propsWithUniqueKey({ className: "my-3" }, key),
+      children
+    );
   case Elements.em: // Emphasis
-    return React.createElement("em", propsWithUniqueKey({ className: "mt-3" }, key), children);
+    return React.createElement(
+      "em",
+      propsWithUniqueKey({ className: "mt-3" }, key),
+      children
+    );
   case Elements.listItem: // Unordered List Item
-    return <li key={key} className="ml-6 mt-3 list-disc text-sm md:text-base">{children}</li>;
+    return (
+      <li key={key} className="ml-6 mt-3 list-disc text-sm md:text-base">
+        {children}
+      </li>
+    );
   case Elements.oListItem: // Ordered List Item
-    return <li key={key} className="ml-6 mt-3 list-disc text-sm md:text-base">{children}</li>;
+    return (
+      <li key={key} className="ml-6 mt-3 list-disc text-sm md:text-base">
+        {children}
+      </li>
+    );
   case Elements.list: // Unordered List
-    return <ul key={key} className="ml-6 mt-3">{children}</ul>;
+    return (
+      <ul key={key} className="ml-6 mt-3">
+        {children}
+      </ul>
+    );
   case Elements.oList: // Ordered List
-    return <ol key={key} className="ml-6 mt-3">{children}</ol>;
-  case Elements.image:{
+    return (
+      <ol key={key} className="ml-6 mt-3">
+        {children}
+      </ol>
+    );
+  case Elements.image: {
     // Image
-    const linkUrl = element.linkTo ? element.linkTo.url || linkResolver(element.linkTo) : null;
-    const linkTarget = element.linkTo && element.linkTo.target ? { target: element.linkTo.target } : {};
+    const linkUrl = element.linkTo
+      ? element.linkTo.url || linkResolver(element.linkTo)
+      : null;
+    const linkTarget =
+        element.linkTo && element.linkTo.target
+          ? { target: element.linkTo.target }
+          : {};
     const linkRel = linkTarget.target ? { rel: "noopener" } : {};
     const img = React.createElement("img", {
       src: element.url,
-      alt: element.alt || ""
+      alt: element.alt || "",
     });
     return React.createElement(
       "p",
-      propsWithUniqueKey({ className: [element.label || "", "block-img"].join(" ") }, key),
+      propsWithUniqueKey(
+        { className: [element.label || "", "block-img"].join(" ") },
+        key
+      ),
       linkUrl ? (
         React.createElement(
           "a",
@@ -108,12 +160,16 @@ const htmlSerializer = function (type: string, element, content, children, key: 
             target: "_blank",
             href: linkUrl,
             ...linkTarget,
-            ...linkRel
+            ...linkRel,
           },
           img
         )
       ) : (
-        <img src={element.url} alt={element.alt} className="text-base mb-3 mt-1" />
+        <img
+          src={element.url}
+          alt={element.alt}
+          className="text-base mb-3 mt-1"
+        />
       )
     );
   }
@@ -123,27 +179,42 @@ const htmlSerializer = function (type: string, element, content, children, key: 
       "data-oembed": element.oembed.embed_url,
       "data-oembed-type": element.oembed.type,
       "data-oembed-provider": element.oembed.provider_name,
-      ...(element.label ? { className: element.label } : {})
+      ...(element.label ? { className: element.label } : {}),
     };
     const embedHtml = React.createElement("div", {
-      dangerouslySetInnerHTML: { __html: element.oembed.html }
+      dangerouslySetInnerHTML: { __html: element.oembed.html },
     });
-    return React.createElement("div", propsWithUniqueKey(props, key), embedHtml);
+    return React.createElement(
+      "div",
+      propsWithUniqueKey(props, key),
+      embedHtml
+    );
   }
   case Elements.hyperlink: {
     // images
-    const targetAttr = element.data.target ? { target: element.data.target } : {};
-    const relAttr = element.data.target ? { rel: "noopener" } : {};
+    const targetAttr = element.data.target
+      ? { target: element.data.target }
+      : {};
+    const relAttr = { rel: "noopener" };
     props = {
       href: element.data.url || linkResolver(element.data),
       ...targetAttr,
-      ...relAttr
+      ...relAttr,
     };
-    return React.createElement("a", propsWithUniqueKey({ target: "_blank", ...props }, key), children);
+
+    return React.createElement(
+      "a",
+      propsWithUniqueKey({ target: "_blank", className: "text-grower-500", ...props }, key),
+      children
+    );
   }
   case Elements.label: // for labels
     props = element.data ? { className: element.data.label } : {};
-    return React.createElement("span", propsWithUniqueKey(props, key), children);
+    return React.createElement(
+      "span",
+      propsWithUniqueKey(props, key),
+      children
+    );
   case Elements.span: // this is for spans
     if (content) {
       return content.split("\n").reduce((acc, p) => {
@@ -163,6 +234,6 @@ const htmlSerializer = function (type: string, element, content, children, key: 
   }
 };
 
-export default function PrismicText({ render }: { render:  RichTextBlock[]}) {
+export default function PrismicText({ render }: { render: RichTextBlock[] }) {
   return <RichText render={render} htmlSerializer={htmlSerializer} />;
 }

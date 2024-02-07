@@ -7,7 +7,7 @@ import MobileBackground from "@assets/images/home/newsletter-bg-mobile.webp";
 import TabletBackground from "@assets/images/home/newsletter-bg-tablet.webp";
 import DesktopBackground from "@assets/images/home/newsletter-bg-desktop.webp";
 
-import { useResolution } from "@utils/useResolution";
+import useResolution from "@hooks/useResolution";
 import { onMailChimpSubmit } from "@utils/functions";
 
 import { Button, Input } from "@components/utils";

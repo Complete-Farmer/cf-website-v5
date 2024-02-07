@@ -4,7 +4,7 @@ import { InlineWidget } from "react-calendly";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
 
-import useYupValidationResolver from "@utils/useYupValidationResolver";
+import useYupValidationResolver from "@hooks/useYupValidationResolver";
 
 import { MenuCloseIcon } from "@assets/icons";
 import { Button, Input, PhoneNumber, Tab, Uploader } from "@components/utils";

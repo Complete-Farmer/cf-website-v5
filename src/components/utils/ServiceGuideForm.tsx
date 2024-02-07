@@ -7,7 +7,7 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { MenuCloseIcon } from "@assets/icons";
 import { Button, Input } from "@components/utils";
 
-import useYupValidationResolver from "@utils/useYupValidationResolver";
+import useYupValidationResolver from "@hooks/useYupValidationResolver";
 
 type Inputs = {
   email: string;

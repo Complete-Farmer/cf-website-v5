@@ -3,7 +3,7 @@ import "@assets/styles/phonenumberinput.css";
 
 import ReactPhoneNumberInput from "react-phone-number-input";
 
-import useWindow from "@utils/useWindow";
+import useWindow from "@hooks/useWindow";
 import { classNames } from "@utils/functions";
 
 interface IProps {

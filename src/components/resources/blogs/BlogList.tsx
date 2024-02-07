@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 
-import { getNews } from "@utils/prismic";
-import { maxRecordsPerPage } from "@utils/constants";
+import { getBlogs } from "@utils/prismic";
+import { blogsConfig } from "@utils/constants";
 import { formatDateWithCommas } from "@utils/functions";
 
 import type { IPrismicData, IPrismicDoc } from "types/app";
 
-import { NewsCard } from ".";
+import { BlogCard } from ".";
 import { Button, SpinnerLoader } from "@components/utils";
+
+const maxRecordsPerPage = blogsConfig.maxRecordsPerPage;
 
 const transformApiData = (doc: IPrismicDoc) => {
   return doc.map((item) => ({
@@ -19,30 +21,30 @@ const transformApiData = (doc: IPrismicDoc) => {
   }));
 };
 interface IProps {
-  newsApiData: IPrismicData;
+  blogsApiData: IPrismicData;
 }
 
-export default function NewsRoomList({ newsApiData }: IProps) {
+export default function BlogList({ blogsApiData }: IProps) {
   const [pageNo, setPageNo] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [nextPage, setNextPage] = useState(newsApiData.next_page);
-  const [data, setData] = useState(transformApiData(newsApiData.results));
+  const [nextPage, setNextPage] = useState(blogsApiData.next_page);
+  const [data, setData] = useState(transformApiData(blogsApiData.results));
   const [totalResults, setTotalResults] = useState(
-    newsApiData.total_results_size
+    blogsApiData.total_results_size
   );
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const _newsApiData = await getNews({
+        const _blogsApiData = await getBlogs({
           page: pageNo,
           pageSize: maxRecordsPerPage,
         });
-        const transformedData = transformApiData(_newsApiData.results);
+        const transformedData = transformApiData(_blogsApiData.results);
         setData((prevData) => [...prevData, ...transformedData]);
-        setNextPage(_newsApiData.next_page);
-        setTotalResults(_newsApiData.total_results_size);
+        setNextPage(_blogsApiData.next_page);
+        setTotalResults(_blogsApiData.total_results_size);
       } catch (error) {
         setLoading(false);
       } finally {
@@ -75,15 +77,12 @@ export default function NewsRoomList({ newsApiData }: IProps) {
   };
 
   return (
-    <section className="relative w-full p-2 pb-6 lg:py-10 bg-white bg-opacity-95">
-      <div className="max-w-7xl px-4  mx-auto">
-        <div className="flex flex-col sm:grid sm:grid-cols-2 items-center justify-center mx-auto xl:flex-row xl:max-w-full">
-          {data?.map((item, index) => (
-            <div key={index} className="border-b border-gray-200 py-2 pt-6">
-              <NewsCard news={item} />
-            </div>
-          ))}
-        </div>
+    <section
+      aria-labelledby="collection-heading"
+      className="mx-auto max-w-xl p-4 pb-6 sm:max-w-7xl sm:px-8 lg:py-10"
+    >
+      <div className="mx-auto grid max-w-2xl auto-rows-fr grid-cols-1 md:gap-4 md:mx-0 md:max-w-none md:grid-cols-3 border-0 border-black">
+        {data?.map((item) => <BlogCard key={item.title} blog={item} isTags />)}
       </div>
 
       {(data?.length === 0 || loading) && (
@@ -106,7 +105,7 @@ export default function NewsRoomList({ newsApiData }: IProps) {
               setPageNo(pageNo + 1);
             }}
             title={loading ? "Loading" : "Load more"}
-            className="mx-auto sm:!w-60 md:!w-[240px] lg:!text-lg py-4 !rounded-full"
+            className="mx-auto sm:!w-60 md:!w-[200px] !bg-custom_gray-500 lg:!text-lg py-4 !rounded-full"
           />
         </div>
       )}

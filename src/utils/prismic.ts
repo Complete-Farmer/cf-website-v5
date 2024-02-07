@@ -83,7 +83,6 @@ export const getJobVacancies = async (params: IPramas) => {
   return fetchItems("job_vacancies", params);
 };
 
-export const getJobVacanciesById = async (id: string) => {
-  return fetchItemById("job_vacancies", { id });
+export const getBlogs = async (params: IPramas) => {
+  return fetchItems("blogs", params);
 };
-

@@ -4,7 +4,7 @@ import ReactDrawer from "react-modern-drawer";
 
 import CFMainLogo from "@assets/images/logos/cf/main.png";
 import { ArrowIcon, MenuCloseIcon } from "@assets/icons";
-import { useResolution } from "@utils/useResolution";
+import useResolution from "@hooks/useResolution";
 import { classNames, getAppLink } from "@utils/functions";
 
 const Drawer: React.FC<{

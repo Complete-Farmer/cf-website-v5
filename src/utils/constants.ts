@@ -24,6 +24,18 @@ export const legalLinks = [
 
 export const maxRecordsPerPage = 10;
 
+export const eventsConfig = {
+  maxRecordsPerPage: 9
+};
+
+export const blogsConfig = {
+  maxRecordsPerPage: 6
+};
+
+export const newsConfig = {
+  maxRecordsPerPage: 6
+};
+
 export const ENV = import.meta.env.PUBLIC_ENV;
 export const FMS_API = import.meta.env.FMS_API;
 export const BOT_PASS = import.meta.env.BOT_PASS;

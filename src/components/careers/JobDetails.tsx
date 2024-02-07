@@ -1,6 +1,13 @@
-import { LinkIcon, LinkedInIcon, TwitterIcon } from "@assets/icons";
-import { Button, PrismicText } from "@components/utils";
+import { useState } from "react";
+import { Tooltip } from "react-tooltip";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { LinkedinShareButton, TwitterShareButton } from "react-share";
 import type { RichTextBlock } from "prismic-reactjs";
+
+import useWindow from "@hooks/useWindow";
+
+import { Button, PrismicText } from "@components/utils";
+import { LinkIcon, LinkedInIcon, TwitterIcon } from "@assets/icons";
 
 interface IProps {
   career: {
@@ -14,33 +21,65 @@ interface IProps {
   };
 }
 
-const icons = [
-  {
-    name: "LinkedIn",
-    href: "#",
-    icon: LinkedInIcon,
-  },
-  {
-    name: "Twitter",
-    href: "#",
-    icon: TwitterIcon,
-  },
-  {
-    name: "Link",
-    href: "#",
-    isHover: false,
-    icon: LinkIcon,
-  },
-];
-
 const JobDetails = ({ career }: IProps) => {
+  const [isHidden, setIsHidden] = useState(false);
+  const link = useWindow(() => window.location.href, "");
+
   const handleClickScroll = () => {
     const element = document.getElementById("form");
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
-  
+
+  const icons = [
+    {
+      name: "LinkedIn",
+      Component: ({ link }: { link: string }) => (
+        <LinkedinShareButton url={link}>
+          <div className="flex justify-start items-start gap-2.5 p-3 rounded-full bg-[#efefef] text-grower-400 hover:text-white hover:bg-grower-500 hover:cursor-pointer">
+            <LinkedInIcon className="text-inherit" />
+          </div>
+        </LinkedinShareButton>
+      ),
+    },
+    {
+      name: "Twitter",
+      Component: ({ link }: { link: string }) => (
+        <TwitterShareButton url={link}>
+          <div className="flex justify-start items-start gap-2.5 p-3 rounded-full bg-[#efefef] text-grower-400 hover:text-white hover:bg-grower-500 hover:cursor-pointer">
+            <TwitterIcon className="text-inherit" />
+          </div>
+        </TwitterShareButton>
+      ),
+    },
+    {
+      name: "Link",
+      Component: ({ link }: { link: string }) => (
+        <>
+          <CopyToClipboard text={link}>
+            <div
+              data-tooltip-content="Copied"
+              data-tooltip-id="my-tooltip-news"
+              onClick={() => setIsHidden(false)}
+              onMouseLeave={() => setTimeout(() => setIsHidden(true), 1000)}
+              className="flex justify-start items-start gap-2.5 p-3 rounded-full bg-[#efefef] text-grower-400 hover:text-white hover:bg-grower-500 hover:cursor-pointer"
+            >
+              <LinkIcon className="text-inherit" />
+            </div>
+          </CopyToClipboard>
+          <Tooltip
+            id="my-tooltip-news"
+            openOnClick
+            globalCloseEvents={{ escape: true }}
+            delayShow={100}
+            hidden={isHidden}
+          />
+        </>
+      ),
+    },
+  ];
+
   return (
     <section className="max-w-7xl mx-auto pt-20 lg:pt-32 lg:pb-24 lg:px-36 space-y-10">
       <div className="space-y-6">
@@ -61,13 +100,13 @@ const JobDetails = ({ career }: IProps) => {
             onClick={() => handleClickScroll()}
           />
           <div className="flex justify-start items-start gap-2 gap-x-4">
-            {icons?.map((item) => {
+            {icons?.map(({ name, Component }) => {
               return (
                 <div
-                  key={item.name}
+                  key={name}
                   className="flex justify-start items-start gap-2.5 p-3 rounded-[38px] bg-[#efefef] text-grower-400 hover:text-white hover:bg-grower-500 hover:cursor-pointer"
                 >
-                  <item.icon className="text-inherit" />
+                  <Component key={name} link={link} />
                 </div>
               );
             })}

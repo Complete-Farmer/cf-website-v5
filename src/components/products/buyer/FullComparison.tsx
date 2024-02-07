@@ -1,7 +1,7 @@
 import "react-modern-drawer/dist/index.css";
 
 import ReactDrawer from "react-modern-drawer";
-import { useResolution } from "@utils/useResolution";
+import useResolution from "@hooks/useResolution";
 
 import Image1 from "@assets/images/products/buyer/full-comparison.webp";
 import Image2 from "@assets/images/products/buyer/full-comparison-with-cf.webp";
