@@ -144,17 +144,23 @@ export interface INews extends IPrismicSingleDoc {
   date: string;
   label?: string;
   title: string;
-  tags: string[];
+  tags?: string[];
 }
 
 export interface IBlog extends IPrismicSingleDoc {
   date: string;
   label?: string;
   title: string;
-  tags: string[];
+  tags?: string[];
 }
 
 export interface IEvent extends IPrismicSingleDoc {
-  title: string;
+  time: string;
   date: string;
+  entry: string;
+  title: string;
+  status: string;
+  isPast: boolean;
+  tags?: string[];
+  platform: string;
 }

@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 
+import { NewsCard } from ".";
+import { Button, SpinnerLoader } from "@components/utils";
+
 import { getNews } from "@utils/prismic";
-import { maxRecordsPerPage } from "@utils/constants";
+import { newsConfig } from "@utils/constants";
 import { formatDateWithCommas } from "@utils/functions";
 
 import type { IPrismicData, IPrismicDoc } from "types/app";
 
-import { NewsCard } from ".";
-import { Button, SpinnerLoader } from "@components/utils";
 
 const transformApiData = (doc: IPrismicDoc) => {
   return doc.map((item) => ({
@@ -37,7 +38,7 @@ export default function NewsRoomList({ newsApiData }: IProps) {
         setLoading(true);
         const _newsApiData = await getNews({
           page: pageNo,
-          pageSize: maxRecordsPerPage,
+          pageSize: newsConfig.maxRecordsPerPage,
         });
         const transformedData = transformApiData(_newsApiData.results);
         setData((prevData) => [...prevData, ...transformedData]);
@@ -69,7 +70,7 @@ export default function NewsRoomList({ newsApiData }: IProps) {
       data &&
       totalResults !== 0 &&
       totalResults !== data.length &&
-      totalResults > maxRecordsPerPage &&
+      totalResults > newsConfig.maxRecordsPerPage &&
       nextPage;
     return isBool;
   };

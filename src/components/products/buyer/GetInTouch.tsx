@@ -31,7 +31,7 @@ const schema = yup
   })
   .required();
 
-const cateogries = [
+const _cateogries = [
   {
     name: "Fill in a form",
     slug: "grower",
@@ -46,18 +46,18 @@ const cateogries = [
 
 function GetInTouchModal({ toggleModal }: { toggleModal: () => void }) {
   const resolver = useYupValidationResolver(schema);
-  const [categories, setCategories] = useState(cateogries);
+  const [categories, setCategories] = useState(_cateogries);
   const [activeCategory, setActiveCategory] = useState("Fill in a form");
 
   const changeCategory = (i: number) => {
     const catIndex = i === 0 ? "Fill in a form" : "Schedule a call";
-    cateogries.filter((c) => {
+    _cateogries.filter((c) => {
       if (c.name === catIndex) c.current = true;
       if (c.name !== catIndex) c.current = false;
       return c;
     });
-    const activeCat = cateogries.find((i) => i.name === catIndex);
-    setCategories(cateogries);
+    const activeCat = _cateogries.find((i) => i.name === catIndex);
+    setCategories(_cateogries);
     activeCat && setActiveCategory(activeCat.name);
   };
 

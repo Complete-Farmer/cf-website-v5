@@ -1,4 +1,6 @@
+import dayjs from "dayjs";
 import jsonp from "jsonp";
+
 import { ENV } from "./constants";
 import type { ISeasonality } from "types/app";
 
@@ -159,3 +161,17 @@ export function generateAvailabilityString(
 }
 
 export const getMonthsFirstLetter = (month: string) => month.split("")[0];
+
+export const isDatePast = (date: string) => dayjs().isAfter(dayjs(date));
+
+export const getDayFromDate = (dateString: string) => {
+  const date = new Date(dateString);
+  const day = date.getDate();
+  return day.toString().padStart(2, "0"); // Ensure the day is always two digits
+};
+
+export const formatDateToMonthAbbreviation = (dateString) => {
+  const date = new Date(dateString);
+  const formattedDate = date.toLocaleDateString(undefined, { month: "short" });
+  return formattedDate.toUpperCase();
+};

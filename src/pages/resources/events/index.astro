@@ -1,8 +1,15 @@
 ---
 import Layouts from "@layouts/Layouts.astro";
 
+import { Hero, EventsList } from "@components/resources";
+
+import { getEvents } from "@utils/prismic";
+import { eventsConfig } from "@utils/constants";
+
 import HeroImage from "@assets/images/resources/events.webp";
-import { Hero } from "@components/resources";
+
+const eventsApiData = await getEvents({ page: 1, pageSize: eventsConfig.maxRecordsPerPage });
+
 ---
 
 <Layouts
@@ -10,6 +17,7 @@ import { Hero } from "@components/resources";
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
   <Hero image={HeroImage} title="Events" />
+  <EventsList {eventsApiData} client:visible />
 </Layouts>
 
 <!-- page: "/resources/events", -->

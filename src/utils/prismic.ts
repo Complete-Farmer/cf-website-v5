@@ -86,3 +86,7 @@ export const getJobVacancies = async (params: IPramas) => {
 export const getBlogs = async (params: IPramas) => {
   return fetchItems("blogs", params);
 };
+
+export const getEvents = async (options) => {
+  return fetchItems("webinars", options);
+};

@@ -50,7 +50,7 @@ export default function TabComp(props: IProps) {
             <Tab
               key={category.name}
               className={classNames(
-                "w-full rounded-full py-4 px-6 text-base leading-5  whitespace-nowrap ",
+                "w-full rounded-full py-4 px-6 text-base leading-5 font-medium whitespace-nowrap ",
                 " focus:outline-none ",
                 category.current
                   ? `${activeBgColor} shadow text-white`

@@ -81,7 +81,7 @@ const OperationalLocations = () => {
               className="flex justify-start items-center gap-6 sm:min-w-[305px]"
             >
               <div className="flex justify-start items-start gap-2.5 p-2 rounded-lg bg-grower-900">
-                <LocationIcon className="" />
+                <LocationIcon className="text-grower-500" />
               </div>
               <p className="md:text-base lg:w-[73px]x h-6 lg:text-2xl lg:w-auto lg:h-7 font-bold text-left text-white">
                 {tabItem.name}
