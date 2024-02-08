@@ -1,0 +1,33 @@
+---
+import type { INews } from "types/app";
+
+import { NewsCard } from "./news-room";
+import ResourceHeader from "./ResourceHeader.astro";
+
+interface Props {
+  news: INews[];
+}
+
+const { news } = Astro.props;
+---
+
+<section class="bg-white bg-opacity-95">
+  <ResourceHeader title="Newsroom" link="/resources/news-room" />
+  <div class="relative w-full py-2">
+    <div class="max-w-7xl px-4 mx-auto">
+      <div
+        class="flex flex-col sm:grid sm:grid-cols-2 items-center justify-center mx-auto xl:flex-row"
+      >
+        {
+          news?.map((item, index) => (
+            <div
+              class={`py-2 pt-6 ${[4, 5].includes(index) ? "" : "border-b border-gray-200"}`}
+            >
+              <NewsCard news={item} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

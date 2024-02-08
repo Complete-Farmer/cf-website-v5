@@ -1,10 +1,10 @@
 {
-  // "extends": "astro/tsconfigs/strict",
   "extends": "astro/tsconfigs/base",
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "baseUrl": ".",
+    "verbatimModuleSyntax": false,
     "plugins": [
       {
         "name": "@astrojs/ts-plugin"
@@ -26,4 +26,7 @@
     "**/*.tsx",
     "src", 
   ],
+  "exclude": [
+    "node_modules",
+  ]
 }

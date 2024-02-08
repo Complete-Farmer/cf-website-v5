@@ -9,9 +9,11 @@ import {
 
 interface IProps {
   event: IEvent;
+  isSlider?: boolean;
+  showDetails?: boolean;
 }
 
-const EventCard = ({ event }: IProps) => {
+const EventCard = ({ event, isSlider = false, showDetails = true }: IProps) => {
   return (
     <a href={`/resources/events/${event.uid}`}>
       <div className="relative w-full">
@@ -32,10 +34,19 @@ const EventCard = ({ event }: IProps) => {
           </p>
         </div>
 
-        <div className="flex justify-start items-start self-stretch relative gap-4 mt-5">
+        <div
+          className={classNames(
+            showDetails ? "flex" : "hidden",
+            "justify-start items-start self-stretch relative gap-4 mt-5"
+          )}
+        >
           <div
             className={classNames(
-              event.isPast ? "text-red-400" : "text-grower-500",
+              isSlider
+                ? "text-white border-2 border-white !bg-transparent"
+                : event.isPast
+                  ? "text-red-400"
+                  : "text-grower-500",
               "w-[60px] h-[70px] font-bold text-left relative overflow-hidden rounded bg-white border border-[#e6e6e6]"
             )}
           >
@@ -48,31 +59,41 @@ const EventCard = ({ event }: IProps) => {
               {getDayFromDate(event.date)}
             </span>
           </div>
-          <div className="flex flex-col h-full w-[100px] justify-start items-start flex-grow relative gap-2">
-            <span className="self-stretch lg:w-4/5 text-base font-bold text-left text-custom_black-900 hover:underline">
+          <div className="flex flex-col h-full w-[100px] justify-start items-start flex-grow relative gap-3">
+            <span
+              className={classNames(
+                isSlider ? "text-white lg:text-2xl" : "text-custom_black-900",
+                "self-stretch lg:w-4/5 text-base font-bold text-left hover:underline"
+              )}
+            >
               {event.title}
             </span>
-            <div className="flex flex-col justify-start items-start self-stretch gap-1 text-custom_gray-300">
+            <div
+              className={classNames(
+                isSlider ? "text-white/90" : "text-custom_gray-300",
+                "flex flex-col justify-start items-start self-stretch gap-1"
+              )}
+            >
               <div className="flex justify-start items-center self-stretch overflow-hidden group rounded-xl gap-4 font-bold lg:font-normal">
                 <CalendarIcon />
-                <p className="flex-grow w-[304px] text-sm lg:text-base text-left">
+                <span className="flex-grow w-[304px] text-sm lg:text-base text-left">
                   {event.date} • {event.time}
-                </p>
+                </span>
               </div>
               <div className="flex justify-start items-center self-stretch relative gap-4">
                 <LocationIcon />
                 <div className="flex justify-start items-start text-sm lg:text-base text-left relative font-bold lg:font-normal">
-                  <p className="">{event.status}</p>
-                  <p className="ml-2 mr-2"> • </p>
-                  <p className="">{event.platform}</p>
+                  <span>{event.status}</span>
+                  <span className="ml-2 mr-2"> • </span>
+                  <span>{event.platform}</span>
                 </div>
               </div>
               <div className="flex justify-start items-center self-stretch relative gap-4 font-bold lg:font-normal">
                 <MoneyIcon />
                 <div className="flex justify-start items-start relative">
-                  <p className="text-sm lg:text-base text-left">
+                  <span className="text-sm lg:text-base text-left">
                     {event.entry}
-                  </p>
+                  </span>
                 </div>
               </div>
             </div>

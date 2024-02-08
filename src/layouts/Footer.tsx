@@ -58,7 +58,7 @@ const socials = [
   },
 ];
 
-export default function Footer({ pathname }: { pathname: string }) {
+export default function Footer({ pathname, isHiring }: { pathname: string, isHiring: boolean }) {
   const isBuyer = pathname.includes("buyer");
 
   const refs: React.RefObject<HTMLButtonElement>[] = useMemo(() => {
@@ -177,15 +177,15 @@ export default function Footer({ pathname }: { pathname: string }) {
                         >
                           {companyItem.name}
                         </a>
-                        {companyItem.name === "Careers" && (
+                        {(companyItem.name === "Careers" && isHiring) && (
                           <div
                             className={`flex sm:hidden lg:flex justify-start items-start gap-2.5 ml-2 px-1.5 py-1 rounded-m ${config.bgHiringColor} rounded-lg`}
                           >
-                            <p
+                            <span
                               className={`text-xs font-bold text-left ${config.hiringColor}`}
                             >
                               We’re hiring
-                            </p>
+                            </span>
                           </div>
                         )}
                       </div>

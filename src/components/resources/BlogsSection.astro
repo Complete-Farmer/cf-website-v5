@@ -1,0 +1,21 @@
+---
+import type { IBlog } from "types/app";
+
+import { BlogCard } from "./blogs";
+import ResourceHeader from "./ResourceHeader.astro";
+
+interface Props {
+  blogs: IBlog[];
+}
+
+const { blogs } = Astro.props;
+---
+
+<section class="my-10">
+  <ResourceHeader title="Blogs" link="/resources/blogs" />
+  <div class="mx-auto max-w-xl mt-4 px-4 sm:max-w-7xl sm:px-8">
+    <div class="grid grid-cols-1 sm:grid-cols-3 sm:gap-x-4 sm:gap-y-8">
+      {blogs?.map((item) => <BlogCard blog={item} isTags />)}
+    </div>
+  </div>
+</section>

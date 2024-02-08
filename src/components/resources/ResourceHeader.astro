@@ -1,0 +1,31 @@
+---
+import { ChevronIcon } from "@assets/icons";
+import { classNames } from "@utils/functions";
+
+interface Props {
+  link: string;
+  title: string;
+  titleColor?: string;
+}
+
+const { link, title, titleColor = "text-grower-900" } = Astro.props;
+---
+
+<div
+  class="px-4 mx-auto lg:max-w-screen-xl sm:max-w-xl md:max-w-full sm:px-4 md:px-8 lg:py-8 sm:py-6 pb-4"
+>
+  <div class="flex items-center justify-between w-full">
+    <h2
+      class={classNames(titleColor, "text-xl md:text-3xl font-bold w-2/3 px-1 sm:px-0 md:px-0 lg:px-0 xl:px-0")}
+    >
+      {title}
+    </h2>
+    <a
+      href={link}
+      class="inline-flex items-center justify-center px-1 sm:px-4 py-2 text-base font-medium leading-6 text-grower-500 whitespace-no-wrap lg:border lg:border-transparent lg:shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 lg:bg-custom_gray-200 lg:rounded-3xl hover:bg-grower-500 hover:text-white"
+    >
+      <span class="font-bold">See All</span>
+      <ChevronIcon className="-rotate-90 h-5 w-5" />
+    </a>
+  </div>
+</div>

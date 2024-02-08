@@ -8,6 +8,7 @@ export { default as ApplicationForm } from "./ApplicationForm";
 export { default as CustomerStories } from "./CustomerStories";
 export { default as AvailableCropCard } from "./AvailableCropCard";
 export { default as AboutTheAcademy } from "./AboutTheAcademy.astro";
+export { default as CustomerStoriesBody } from "./CustomerStoriesBody";
 export { default as EverythingYouNeed } from "./EverythingYouNeed.astro";
 export { default as PlatformOnboarding } from "./PlatformOnboarding.astro";
 export { default as AllInOneFarmingSolution } from "./AllInOneFarmingSolution.astro";

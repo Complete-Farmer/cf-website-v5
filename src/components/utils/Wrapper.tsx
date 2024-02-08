@@ -41,7 +41,7 @@ const ModalWrapper = ({
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className={classNames(className, "flex items-center justify-center w-full h-full transform text-left text-base transition md:my-4 md:max-w-xl md:px-4 lg:max-w-xl")}>{children}</Dialog.Panel>
+              <Dialog.Panel className={classNames(className, "flex items-center justify-center w-full h-full transform text-left text-base transition md:my-4 md:max-w-xl md:px-4")}>{children}</Dialog.Panel>
             </Transition.Child>
           </div>
         </div>

@@ -129,7 +129,7 @@ const CustomerStoriesBody = ({ stories }: IProps) => {
         onClose={() => setOpen(false)}
         className="flex w-[426px] h-[240px] md:w-[640px] md:h-[360px] xl:w-[1280px] xl:h-[720px] relative transform overflow-hidden text-left text-base transition-all mx-auto lg:max-w-7xl"
       >
-        <ReactPlayer url={selectedData} width="100%" height="100%" />
+        <ReactPlayer playing url={selectedData} width="100%" height="100%" />
       </Wrapper>
     </div>
   );

@@ -5,6 +5,7 @@ import Footer from "./Footer.tsx";
 import CookieScreen from "./CookieScreen";
 
 import { GOOGLE_TAG_MANAGER_ID, FACEBOOK_PIXEL_ID } from "@utils/constants";
+import { getJobVacancies } from "@utils/prismic";
 
 export interface Props {
   title: string;
@@ -14,6 +15,9 @@ export interface Props {
 const { title, description } = Astro.props;
 
 const pathname = Astro.url.pathname;
+
+const careerApiData = await getJobVacancies({ page: 1, pageSize: 1 });
+const isHiring = careerApiData.results.length > 0
 ---
 
 <!doctype html>
@@ -47,7 +51,7 @@ const pathname = Astro.url.pathname;
       <slot />
     </main>
     <div class="app-footer">
-      <Footer client:visible pathname={pathname} />
+      <Footer {isHiring} client:visible pathname={pathname} />
     </div>
     <CookieScreen client:only="react" />
     <style>
