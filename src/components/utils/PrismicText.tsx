@@ -1,6 +1,8 @@
-// import { classNames } from "@utils/functions";
-import { RichText, Elements, type RichTextBlock } from "prismic-reactjs";
 import React from "react";
+import { type RichTextBlock } from "prismic-reactjs";
+import * as pkg from "prismic-reactjs";
+
+const { RichText, Elements } = pkg;
 
 export const linkResolver = ({ type, uid }) => {
   // URL for a category type

@@ -1,7 +1,7 @@
 ---
 import type { INews, IBlog, IEvent } from "types/app";
 
-import { BlogCard, NewsCard } from ".";
+import { BlogCard, EventCard, NewsCard } from ".";
 
 interface Props {
   title: string;
@@ -26,12 +26,12 @@ const { type, title, data } = Astro.props;
       </h2>
     </div>
   </div>
-  <div class="sm:max-w-xl md:max-w-full lg:max-w-screen-xl mx-auto">
+  <div class="sm:max-w-xl md:max-w-full lg:max-w-screen-xl mx-auto pb-10">
     {
       type === "news" && (
         <div class="flex flex-col sm:grid sm:grid-cols-2 items-center justify-center py-8[x] mx-auto xl:flex-row xl:max-w-full">
-          {(data as INews[]).map((item) => (
-            <NewsCard news={item} />
+          {(data as INews[]).map((news) => (
+            <NewsCard news={news} />
           ))}
         </div>
       )
@@ -39,9 +39,19 @@ const { type, title, data } = Astro.props;
 
     {
       type === "blogs" && (
-        <div class="mb-10 space-y-8 md:grid md:grid-cols-3 md:gap-x-8 md:space-y-0">
-          {(data as INews[]).map((item) => (
-            <BlogCard blog={item} />
+        <div class="space-y-8 md:grid md:grid-cols-3 md:gap-x-8 md:space-y-0">
+          {(data as INews[]).map((blog) => (
+            <BlogCard blog={blog} />
+          ))}
+        </div>
+      )
+    }
+
+    {
+      type === "events" && (
+        <div class="grid gap-x-4 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+          {(data as IEvent[]).map((event) => (
+            <EventCard event={event} />
           ))}
         </div>
       )

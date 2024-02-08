@@ -29,7 +29,7 @@ export default function FasterGrowth() {
   return (
     <div className="sm:pb-16 overflow-hidden">
       <div className="flex relative mt-6 mb-10 sm:mt-20 pb-0 pt-10 flex-col z-20 px-5 sm:px-10 justify-center items-center tracking-normal leading-6 text-white box-border">
-        <h2 className="text-[28px] sm:text-[40px] lg:text-5xl font-bold px-1 sm:px-20 text-center mb-0 font-sans text-green-900 tracking-normal leading-[34px] sm:leading-[50px] max-w-60">
+        <h2 className="text-[28px] sm:text-[40px] lg:text-5xl font-bold px-1 sm:px-20 text-center mb-0 font-sans text-green-900 tracking-normal leading-[34px] sm:leading-[50px]">
           Faster growth starts with Complete Farmer
         </h2>
       </div>

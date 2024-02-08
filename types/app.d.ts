@@ -164,3 +164,9 @@ export interface IEvent extends IPrismicSingleDoc {
   tags?: string[];
   platform: string;
 }
+
+export interface IFaQ extends IPrismicSingleDoc {
+  date: string;
+  question: string;
+  answer: string;
+}

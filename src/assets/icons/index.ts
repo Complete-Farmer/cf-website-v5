@@ -2,6 +2,7 @@ export { default as FileIcon } from "./file";
 export { default as FlagIcon } from "./flag";
 export { default as PlayIcon } from "./play";
 export { default as LinkIcon } from "./link";
+export { default as ClockIcon } from "./clock";
 export { default as QuoteIcon } from "./quote";
 export { default as ArrowIcon } from "./arrow";
 export { default as CaretIcon } from "./caret";

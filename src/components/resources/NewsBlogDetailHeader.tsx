@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Tooltip } from "react-tooltip";
-import { CopyToClipboard } from "react-copy-to-clipboard";
+import * as pkg from "react-copy-to-clipboard";
 import {
   FacebookShareButton,
   LinkedinShareButton,
@@ -16,6 +16,8 @@ import {
 import useWindow from "@hooks/useWindow";
 
 import type { INews, IBlog } from "types/app";
+
+const { CopyToClipboard } = pkg;
 
 const NewsBlogDetailHeader = ({ data }: { data: INews | IBlog }) => {
   const link = useWindow(() => window.location.href, "");

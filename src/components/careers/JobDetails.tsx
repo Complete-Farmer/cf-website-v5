@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Tooltip } from "react-tooltip";
-import { CopyToClipboard } from "react-copy-to-clipboard";
+import * as pkg from "react-copy-to-clipboard";
 import { LinkedinShareButton, TwitterShareButton } from "react-share";
 import type { RichTextBlock } from "prismic-reactjs";
 
@@ -8,6 +8,8 @@ import useWindow from "@hooks/useWindow";
 
 import { Button, PrismicText } from "@components/utils";
 import { LinkIcon, LinkedInIcon, TwitterIcon } from "@assets/icons";
+
+const { CopyToClipboard } = pkg;
 
 interface IProps {
   career: {

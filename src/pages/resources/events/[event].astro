@@ -1,13 +1,153 @@
 ---
+import { Image } from "astro:assets";
 import Layouts from "@layouts/Layouts.astro";
+import { RegisterEvent, RelatedStories } from "@components/resources";
 
+import { getEvents } from "@utils/prismic";
+import { isDatePast, formatDateWithCommas } from "@utils/functions";
+import { PrismicText } from "@components/utils";
+
+export async function getStaticPaths() {
+  const eventsApiData = await getEvents({});
+
+  return eventsApiData.results.map((event) => {
+    return {
+      params: { event: event?.uid },
+      props: {
+        event: {
+          ...event,
+          image: event?.data?.webinar_image,
+          fullDate: event?.data?.webinar_date,
+          speakers: event?.data?.speakers || [],
+          title: event?.data?.webinar_title?.[0].text,
+          entry: event?.data?.entry?.[0].text ?? "Free",
+          isPast: isDatePast(event?.data?.webinar_date),
+          heading: event?.data?.webinar_title?.[0]?.text,
+          tags: event.tags.length === 0 ? [] : event.tags,
+          status: event?.data?.status?.[0].text ?? "Online",
+          platform: event?.data?.platform?.[0].text ?? "Twitter",
+          time: event?.data?.time?.[0].text ?? "12:00PM - 2:00PM",
+          date: formatDateWithCommas(event?.data?.webinar_date),
+        },
+        relatedEvents: eventsApiData.results
+          .filter((e) => e.uid !== event.uid)
+          .slice(0, 3)
+          .map((e) => ({
+            ...e,
+            image: e?.data?.webinar_image,
+            fullDate: e?.data?.webinar_date,
+            speakers: e?.data?.speakers || [],
+            title: e?.data?.webinar_title?.[0]?.text,
+            entry: e?.data?.entry?.[0]?.text ?? "Free",
+            isPast: isDatePast(e?.data?.webinar_date),
+            tags: e.tags.length === 0 ? [] : e.tags,
+            heading: e?.data?.webinar_title?.[0]?.text,
+            status: e?.data?.status?.[0]?.text ?? "Online",
+            platform: e?.data?.platform?.[0]?.text ?? "Twitter",
+            time: e?.data?.time?.[0]?.text ?? "12:00PM - 2:00PM",
+            date: formatDateWithCommas(e.data.webinar_date),
+          })),
+      },
+    };
+  });
+}
+
+const { event, relatedEvents } = Astro.props;
 ---
 
 <Layouts
-  title="News Room • Resources | Complete Farmer"
+  title="Events • Resources | Complete Farmer"
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
+  <div class="flex flex-col justify-center items-center space-y-16">
+    <div
+      class="w-full h-[250px] lg:w-[1040px] sm:h-[400px] lg:h-[500px] md:h-[400px] rounded-md overflow-hidden"
+    >
+      <Image
+        alt={event.title}
+        src={event.image.url}
+        width={event.image.dimensions.width}
+        height={event.image.dimensions.height}
+        class="lg:mx-auto w-full h-[270px] md:h-[300px] lg:h-[498px] object-cover"
+      />
+    </div>
 
+    <div
+      class="max-w-7xl lg:mx-auto lg:px-5 lg:hidden block mx-6 sm:mx-12 sm:mb-12"
+    >
+      <h3
+        class="w-full text-xl sm:leading-6 md:text-2xl md:leading-[30px] lg:text-2xl lg:leading-[30px] font-bold text-left text-custom_black-900"
+      >
+        {event.heading}
+      </h3>
+    </div>
+
+    <div
+      class="max-w-7xl lg:mx-auto mx-auto px-4 mb-16 sm:mb-0 sm:px-6 lg:px-0 flex flex-col-reverse lg:flex-row justify-center items-center md:items-start lg:space-x-5 w-full h-full"
+    >
+      <div
+        class="flex flex-col justify-start items-start w-full sm:px-10 sm:my-16 lg:px-0 lg:my-0 lg:w-2/4 mr-auto relative gap-8 md:gap-14"
+      >
+        <div class="space-y-7">
+          <h3
+            class="hidden lg:block w-full text-xl sm:text-xl sm:leading-6 md:text-2xl md:leading-[30px] lg:text-2xl lg:leading-[30px] font-bold text-left text-custom_black-900"
+          >
+            {event.heading}
+          </h3>
+          {
+            event.data?.description?.length > 0 && (
+              <PrismicText render={event.data.description} client:visible />
+            )
+          }
+
+          <p class="text-2xl font-bold text-left text-custom_black-900">
+            HOSTS
+          </p>
+          <div class="flex justify-start items-start gap-8 my-4 flex-wrap">
+            {
+              event?.speakers?.map((speaker) => {
+                return (
+                  <div class="flex flex-col justify-center items-center flex-grow-0 flex-shrink-0 relative gap-2">
+                    <img
+                      id="speaker-img"
+                      data-name={speaker.text}
+                      src={speaker.img || undefined}
+                      class="w-28 h-28 relative overflow-hidden rounded-full bg-red-200 bg-cover bg-no-repeat bg-center"
+                    />
+                    <p class="text-base font-bold text-center text-custom_black-900">
+                      {speaker.text.split(",")[0]}
+                    </p>
+                  </div>
+                );
+              })
+            }
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="flex flex-col items-center justify-center w-full my-6 px-3 sm:my-0 lg:py-2 mx-auto rounded-lg lg:w-1/2 lg:mx-auto xl:w-5/12"
+      >
+        <RegisterEvent data={event} client:visible />
+      </div>
+    </div>
+  </div>
+
+  <RelatedStories type="events" title="Related Events" data={relatedEvents} />
 </Layouts>
 
 <!-- page: "/resources/news-room", -->
+
+<script type="module" is:inline>
+  // @ts-nocheck
+  import { createImageFromInitials } from "../../src/utils/functions.ts";
+
+  const images = document.querySelectorAll("#speaker-img");
+  images.forEach((image) => {
+    if (!image.hasAttribute("src")) {
+      const name = image.getAttribute("data-name");
+      const src = createImageFromInitials(500, name.split(",")[0]);
+      image.setAttribute("src", src);
+    }
+  });
+</script>
