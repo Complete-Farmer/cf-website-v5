@@ -50,7 +50,7 @@ const { blog, relatedBlogs } = Astro.props;
   <div
     class="flex flex-col justify-center items-center pt-6 lg:pt-20 space-y-16"
   >
-    <NewsBlogDetailHeader data={blog} client:visible />
+    <NewsBlogDetailHeader data={blog} client:only="react" />
 
     <div
       class="w-full h-[250px] lg:w-[1040px] sm:h-[400px] lg:h-[500px] md:h-[400px] rounded-md overflow-hidden"

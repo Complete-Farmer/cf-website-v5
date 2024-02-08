@@ -56,7 +56,7 @@ const { crop } = Astro.props;
     href="/products/grower/new-farmer"
   />
   <div class="pt-14">
-    <CropDetails {crop} client:visible />
+    <CropDetails {crop} client:only="react" />
     <TabView {crop} client:visible />
   </div>
 </Layouts>

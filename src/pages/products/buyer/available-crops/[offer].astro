@@ -92,7 +92,7 @@ const { offer } = Astro.props;
     href="/products/buyer#available-crops"
   />
   <div class="pt-14">
-    <CropDetails offer={offer} client:visible />
+    <CropDetails offer={offer} client:only="react" />
     <TabView offer={offer} client:visible />
   </div>
 </Layouts>

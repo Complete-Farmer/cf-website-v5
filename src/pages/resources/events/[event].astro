@@ -56,7 +56,7 @@ const { event, relatedEvents } = Astro.props;
 ---
 
 <Layouts
-  title="Events • Resources | Complete Farmer"
+  title={`${event.title} • Events • Resources | Complete Farmer`}
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
   <div class="flex flex-col justify-center items-center space-y-16">
@@ -96,7 +96,7 @@ const { event, relatedEvents } = Astro.props;
           </h3>
           {
             event.data?.description?.length > 0 && (
-              <PrismicText render={event.data.description} client:visible />
+              <PrismicText render={event.data.description} client:only="react" />
             )
           }
 
@@ -128,9 +128,9 @@ const { event, relatedEvents } = Astro.props;
       <div
         class="flex flex-col items-center justify-center w-full my-6 px-3 sm:my-0 lg:py-2 mx-auto rounded-lg lg:w-1/2 lg:mx-auto xl:w-5/12"
       >
-        <RegisterEvent data={event} client:visible />
+        <RegisterEvent data={event} client:only="react" />
       </div>
-    </div>
+    </div> 
   </div>
 
   <RelatedStories type="events" title="Related Events" data={relatedEvents} />
@@ -138,7 +138,7 @@ const { event, relatedEvents } = Astro.props;
 
 <!-- page: "/resources/news-room", -->
 
-<script type="module" is:inline>
+<script type="module">
   // @ts-nocheck
   import { createImageFromInitials } from "../../src/utils/functions.ts";
 

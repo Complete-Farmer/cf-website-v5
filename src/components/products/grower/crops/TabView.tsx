@@ -4,8 +4,6 @@ import type { IAvailableDemands } from "types/app";
 
 import { classNames } from "@utils/functions";
 
-// import GrowerSpecificationsCard from "./GrowerSpecificationCard";
-
 import ProtocolImg from "@assets/images/products/grower/crop-details/protocol.webp";
 import VarietyImg from "@assets/images/products/grower/crop-details/variety.webp";
 import AboutImg from "@assets/images/products/grower/crop-details/about.webp";
@@ -19,7 +17,7 @@ const TabView = ({ crop }: IProps) => {
     {
       name: "Protocol",
       title: "Protocol",
-      features: [crop.websiteData.protocol],
+      features: crop?.websiteData ? [crop?.websiteData?.protocol] : [],
       current: true,
       img: ProtocolImg,
       type: "normal",
@@ -30,7 +28,7 @@ const TabView = ({ crop }: IProps) => {
       current: false,
       img: VarietyImg,
 
-      features: [crop.websiteData.variety],
+      features: crop?.websiteData ? [crop?.websiteData?.variety] : [],
     },
     {
       name: "About",
@@ -38,7 +36,7 @@ const TabView = ({ crop }: IProps) => {
       current: false,
       img: AboutImg,
 
-      features: [crop.websiteData.seasonality],
+      features: crop?.websiteData ? [crop?.websiteData?.seasonality] : [],
     },
   ];
 

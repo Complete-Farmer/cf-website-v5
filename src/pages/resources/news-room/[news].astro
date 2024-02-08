@@ -17,13 +17,13 @@ export async function getStaticPaths() {
       props: {
         news: {
           ...news,
-          title: news.data.headline[0].text,
-          date: formatDateWithCommas(news.last_publication_date),
+          title: news?.data?.headline?.[0]?.text,
+          date: formatDateWithCommas(news?.last_publication_date),
         },
         relatedNews: newsApiData.results.filter((n) => n.uid !== news.uid).slice(0, 4).map((n) => ({
           ...n,
-          title: n.data.headline[0].text,
-          date: formatDateWithCommas(n.last_publication_date),
+          title: n?.data?.headline?.[0]?.text,
+          date: formatDateWithCommas(n?.last_publication_date),
         }))
       },
     };
@@ -35,7 +35,7 @@ const { news, relatedNews } = Astro.props;
 
 <Layouts
   title={`${news.title} • News Room • Resources | Complete Farmer`}
-  description={news?.data?.description?.[0]?.text || news.title}
+  description={news?.data?.description?.[0]?.text || news?.title}
 >
   <BreadCrumb
     href="/news-room"
@@ -47,7 +47,7 @@ const { news, relatedNews } = Astro.props;
   <div
     class="flex flex-col justify-center items-center pt-6 lg:pt-20 space-y-16"
   >
-    <NewsBlogDetailHeader data={news} client:visible />
+    <NewsBlogDetailHeader data={news} client:only="react" />
 
     <div
       class="w-full h-[250px] lg:w-[1040px] sm:h-[400px] lg:h-[500px] md:h-[400px] rounded-md overflow-hidden"
