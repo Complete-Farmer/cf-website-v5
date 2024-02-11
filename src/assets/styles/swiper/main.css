@@ -10,7 +10,7 @@
 .swiper-button-prev,
 .swiper-button-next {
   top: 40%;
-  z-index: 2;
+  z-index: 20;
   cursor: pointer;
   position: absolute;
   background: white;

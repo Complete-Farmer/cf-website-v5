@@ -25,16 +25,14 @@ const { id, ...props } = Astro.props;
 
   swiperEl?.forEach((e) => {
     if (e) {
-      const props: SwiperOptions = JSON.parse(e.getAttribute("data-props"))
+      const props: SwiperOptions = JSON.parse(e.getAttribute("data-props"));
       const swiperParams = {
-        ...props,
         injectStylesUrls: [
           "../../src/assets/styles/swiper/main.css",
           `../../src/assets/styles/swiper/${e.id}.css`,
         ],
-        on: {
-          init() {},
-        },
+        on: { init() {} },
+        ...props,
       };
 
       swiperParams.modules = [];

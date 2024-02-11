@@ -1,10 +1,12 @@
 ---
 import {
   BlogsSection,
-  EventsSection,
-  ResourceHeader,
+  // EventsSection,
+  // ResourceHeader,
   NewsRoomSection,
 } from "@components/resources";
+
+import EventsSection from "@components/resources/EventsSection.astro";
 
 import Layouts from "@layouts/Layouts.astro";
 
@@ -61,9 +63,11 @@ const events = eventsApiData.results.map((item) => ({
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
   <NewsRoomSection news={news} />
-  <EventsSection events={events} client:only="react" >
+  <!-- <EventsSection events={events} client:only="react" >
     <ResourceHeader title="Events" link="/resources/events" titleColor="text-white" />
-  </EventsSection>
+  </EventsSection> -->
+
+  <EventsSection events={events}/>
   <BlogsSection blogs={blogs} />
 </Layouts>
 

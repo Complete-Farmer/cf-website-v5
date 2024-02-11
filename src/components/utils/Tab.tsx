@@ -21,6 +21,7 @@ export default function TabComp(props: IProps) {
     changeCategory,
     activeBgColor = "",
     inActiveBgColor = "",
+    normalBgColor="",
     inActiveTextColor = "",
   } = props;
   const initialIndex = categories.findIndex((category) => category.current);
@@ -43,7 +44,7 @@ export default function TabComp(props: IProps) {
           id="tab_list"
           className={classNames(
             "flex space-x-1 rounded-full p-1",
-            inActiveBgColor
+            normalBgColor
           )}
         >
           {categories.map((category) => (
