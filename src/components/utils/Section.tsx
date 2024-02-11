@@ -21,14 +21,16 @@ export default function Section({
     setActive(name);
   };
 
-  const fillTwo= product == "Buyer" ? "#367AFE" : undefined;
+  const fillTwo = product == "Buyer" ? "#367AFE" : undefined;
 
   const incentives = [
     {
       name: "Newsletter",
       icon: <NewpaperIcon fillTwo={fillTwo} />,
       description:
-        "Make smarter business decisions backed by data and stay ahead of food production trends with useful insights that cuts through the noise.",
+        product == "Grower"
+          ? "Discover the latest tips and insights on food and agricultural production on our blog."
+          : "Make smarter business decisions backed by data and stay ahead of food production trends with useful insights that cuts through the noise.",
       linkText: "Join the newsletter",
       action: (i: string) => openModal(i),
     },
@@ -36,17 +38,19 @@ export default function Section({
       name: "Service guide",
       icon: <ServiceGuideIcon fillTwo={fillTwo} />,
       description:
-        "See how we help you maximise your yield, connect you to new markets and increase your profitability. With CF Grower.",
+        product == "Grower"
+          ? "See how we help you maximise your yield, connect you to new markets and increase your profitability. With CF Grower."
+          : "See how we make crop procurement easier for you and help you crush your targets with confidence. With CF Buyer.",
       linkText: "Send me the service guide!",
       action: (i: string) => openModal(i),
     },
     {
-      name: "Customer stories",
+      name: "Blogs",
       icon: <ContentIcon fillTwo={fillTwo} />,
       description:
         "Discover the latest tips and insights on food and agricultural production on our blog.",
-      linkText: "Go to customer stories",
-      link: "/products/grower/customer-stories",
+      linkText: "Go to Blogs",
+      link: "/products/resources/blogs",
     },
   ];
 
@@ -54,7 +58,7 @@ export default function Section({
     <div className="px-6 bg-[#FAFAFA]">
       <SectionList
         incentives={incentives}
-        textColor={product == "Buyer" ? "text-buyer-500": undefined}
+        textColor={product == "Buyer" ? "text-buyer-500" : undefined}
       />
       <Wrapper isOpen={open} onClose={() => toggleModal()}>
         {active === "Newsletter" ? (

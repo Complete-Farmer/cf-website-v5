@@ -2,6 +2,7 @@ import { Tab } from "@headlessui/react";
 
 import { classNames, getAppLink } from "@utils/functions";
 import HeadingOneLine from "@components/utils/HeadingOneLine";
+import { Button } from "@components/utils";
 
 interface IProps {
   title: string;
@@ -76,12 +77,14 @@ const HowCFHelpsYou = ({
                         {showBtn && (
                           <a
                             target="_blank"
+                            rel="noreferrer"
+                            className="contents"
                             href={getAppLink("Signup Grower")}
-                            className="hidden lg:flex w-fit justify-center items-center h-16 relative gap-2 px-8 py-4 rounded-full bg-grower-500 hover:cursor-pointer" rel="noreferrer"
                           >
-                            <span className="text-xl leading-6 font-bold text-left text-white">
-                              Get started
-                            </span>
+                            <Button
+                              title="Get started"
+                              className="md:!w-fit px-8 py-4 !rounded-full"
+                            />
                           </a>
                         )}
                       </div>

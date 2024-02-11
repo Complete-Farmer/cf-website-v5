@@ -1,0 +1,75 @@
+---
+import type { IPrismicData } from "types/app";
+import {
+  Button,
+  SwiperSlide,
+  HeadingOneLine,
+  SwiperContainer,
+  CustomerStoryTextCard,
+} from "@components/utils";
+
+const swiperProps = {
+  rewind: true,
+  navigation: true,
+  centeredSlides: true,
+  initialSlide: 0,
+  spaceBetween: 20,
+  slidesPerView: 1.2,
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false,
+  },
+  id: "home-customer-stories-swiper",
+};
+
+interface Props {
+  data: IPrismicData;
+}
+
+const { data } = Astro.props;
+
+const buyerData = [];
+
+data.results
+  .filter((item) => item?.data?.description.length > 0)
+  .forEach((item) => {
+    const transformedItem = {
+      image: item.data.image,
+      id: item.uid || item.id,
+      titleTextColor: "text-white",
+      name: item?.data?.name[0]?.text,
+      titleFirstName: item?.data?.description[0]?.text,
+    };
+    buyerData.push(transformedItem);
+  });
+---
+
+<section
+  class="relative bg-buyer-900 bg-customer-stories-buyer-bg-pattern h-full py-6 xl:py-20 px-0 space-y-14"
+>
+  <HeadingOneLine
+    titleTextColor="text-white"
+    title="Enabling seamless sourcing one buyer at a time."
+    desc="CF buyer helps commodity buyers gain control of their procurement process from order to delivery guaranteeing seamless sourcing and reliable fulfillment. See how we’ve helped other buyers like you"
+  />
+
+  <SwiperContainer {...swiperProps}>
+    {
+      buyerData.map((item) => (
+        <SwiperSlide>
+          <CustomerStoryTextCard type="buyer" data={item} />
+        </SwiperSlide>
+      ))
+    }
+  </SwiperContainer>
+
+  <div>
+    <a href="/products/buyer/customer-stories" class="contents">
+      <Button
+        title="See all stories"
+        hasArrow
+        className="!w-auto mx-auto !rounded-full px-8 py-4 !bg-buyer-500 text-xl"
+      />
+    </a>
+  </div>
+</section>

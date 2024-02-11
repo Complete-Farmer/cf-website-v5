@@ -1,23 +1,24 @@
 ---
+import type { IAvailableCropOffers } from "types/app";
+
 import Layouts from "@layouts/Layouts.astro";
 import HeroContainer from "@components/products/HeroContainer.astro";
 
 import {
   Hero,
   ExperienceCrop,
-  CustomerStories,
+  CustomerStoriesSwiper,
   ProcurementTurnAround,
 } from "@components/products/buyer";
+import { AvailableCrops, Section } from "@components/utils";
 
 import { getCropOffers } from "@utils/api";
-import { filterAt, getCategories, getCxStories } from "@utils/prismic";
-import type { IAvailableCropOffers } from "types/app";
 import { convertToKebabCase } from "@utils/functions";
-import { AvailableOrders, Section } from "@components/utils";
+import { filterAt, getCategories, getCxStories } from "@utils/prismic";
 
 const { results } = await getCategories("products");
 
-const buyerId = results.find((c) => c.data.name === "Buyer").id;
+const buyerId = results.find((c) => c.data.name === "Grower").id;
 
 const filters = filterAt("my.customer_stories_v3.category", buyerId);
 
@@ -45,7 +46,7 @@ if (response) {
           c.specification?.cultivationType,
           c.specification?.condition,
           c.specification?.grade,
-        ].join(', '),
+        ].join(", "),
       });
     }
   }
@@ -63,13 +64,12 @@ if (response) {
   <ExperienceCrop client:visible />
   {
     customerStories.results.length > 0 && (
-      <CustomerStories client:visible data={customerStories} />
+      <CustomerStoriesSwiper data={customerStories} />
     )
   }
   {
     availableCropOffers.length > 0 && (
-      <AvailableOrders
-        client:visible
+      <AvailableCrops
         cardType="buyer"
         bgColor="bg-buyer-200"
         data={availableCropOffers}
@@ -82,9 +82,9 @@ if (response) {
 </Layouts>
 
 <!-- page: "/products/buyer", -->
-<!-- <script type="module">
+<!-- <script>
   // @ts-nocheck
-  import { $authModal } from "../../src/utils/stores.ts";
+  import { $authModal } from "@utils/stores.ts";
 
   function toggleAuthModal() {
     $authModal.set(true);

@@ -85,7 +85,7 @@ const CustomerStoriesBody = ({ stories }: IProps) => {
           {stories.map((story, i) => (
             <div key={story.name}>
               <div className="mx-1.5">
-                <p
+                <div
                   className="cursor-pointer"
                   key={i}
                   onClick={() => toggleModal(story.id)}
@@ -117,7 +117,7 @@ const CustomerStoriesBody = ({ stories }: IProps) => {
                       </div>
                     </div>
                   </div>
-                </p>
+                </div>
               </div>
             </div>
           ))}

@@ -1,0 +1,54 @@
+---
+import "swiper/element/css/navigation";
+
+import { SwiperOptions } from "swiper/types";
+
+interface Props extends SwiperOptions {
+  id?: string;
+}
+
+const { id, ...props } = Astro.props;
+---
+
+<swiper-container id={id} data-props={JSON.stringify(props)} init="false">
+  <slot />
+</swiper-container>
+
+<script>
+  import { register } from "swiper/element";
+  import { SwiperOptions } from "swiper/types";
+  import { Autoplay, Navigation } from "swiper/modules";
+
+  register();
+
+  const swiperEl = document.querySelectorAll("swiper-container");
+
+  swiperEl?.forEach((e) => {
+    if (e) {
+      const props: SwiperOptions = JSON.parse(e.getAttribute("data-props"))
+      const swiperParams = {
+        ...props,
+        injectStylesUrls: [
+          "../../src/assets/styles/swiper/main.css",
+          `../../src/assets/styles/swiper/${e.id}.css`,
+        ],
+        on: {
+          init() {},
+        },
+      };
+
+      swiperParams.modules = [];
+
+      if (props.autoplay) {
+        swiperParams.modules.push(Autoplay);
+      }
+
+      if (props.navigation) {
+        swiperParams.modules.push(Navigation);
+      }
+
+      Object.assign(e, swiperParams);
+      e.initialize();
+    }
+  });
+</script>

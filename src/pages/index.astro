@@ -7,7 +7,7 @@ import {
   Section,
   NewsLetter,
   FasterGrowth,
-  CustomerStories,
+  CustomerStoriesSwiper,
 } from "@components/home";
 
 import Mest from "@assets/images/logos/partners/mest.png";
@@ -30,7 +30,7 @@ const assets = [Mest, TazaPay, FreezeLink, Ingressive];
   <Partners title="Trusted by global brands" client:only="react" assets={assets}/>
   <FasterGrowth client:idle />
   <ParallaxImage imgSrc={VastFarmingLand.src} client:only="react" />
-  <CustomerStories client:idle data={customerStories} />
+  <CustomerStoriesSwiper data={customerStories} />
   <Section client:idle />
   <NewsLetter client:idle />
 </Layouts>

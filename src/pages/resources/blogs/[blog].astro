@@ -41,8 +41,8 @@ const { blog, relatedBlogs } = Astro.props;
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
   <BreadCrumb
-    href="/blog-room"
-    title="Browse News"
+    href="/resources/blogs"
+    title="Browse Blogs"
     bgColor="bg-grower-400"
     textColor="text-grower-500"
   />
@@ -64,7 +64,7 @@ const { blog, relatedBlogs } = Astro.props;
       />
     </div>
 
-    <section class="max-w-5xl mx-auto lg:px-36 space-y-10 text-justify">
+    <section class="max-w-5xl mx-auto lg:px-36 space-y-10 text-left">
       {
         blog.data?.description.length > 0 && (
           <PrismicText render={blog.data.description} client:only="react" />

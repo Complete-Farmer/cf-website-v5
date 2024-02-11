@@ -27,10 +27,10 @@ import ImageRight from "@assets/images/products/grower/farm-manager-academy/hero
   <ApplicationForm client:load title="Join the academy" />
 </Layouts>
 
-<script type="module">
+<script>
   // @ts-nocheck
-  import { $applicationFormModal } from "../../src/utils/stores.ts";
+  import { $applicationFormModal } from "@utils/stores.ts";
 
   const btn = document.getElementById("get-academy-form");
-  btn.addEventListener("click", () => $applicationFormModal.set(true));
+  btn?.addEventListener("click", () => $applicationFormModal.set(true));
 </script>

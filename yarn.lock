@@ -857,6 +857,11 @@
     "@smithy/types" "^2.9.1"
     tslib "^2.5.0"
 
+"@ayco/astro-resume@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@ayco/astro-resume/-/astro-resume-0.4.0.tgz#8c5cbc46f76e863df50ea0e64cd8d2200f57ea55"
+  integrity sha512-2J1gPC0i6mnP/PLGjdfvCpt4DXFZJsKtxwhRvXCqpnXbaIrNHxCIIhXjJjhqojNCnMR5jTF4OabhQ5rPaSwOEQ==
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.23.5":
   version "7.23.5"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.23.5.tgz#9009b69a8c602293476ad598ff53e4562e15c244"

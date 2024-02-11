@@ -12,8 +12,8 @@ import {
   AllInOneFarmingSolution,
   InterestedInBecomingAgent,
 } from "@components/products/grower";
+import { AvailableCrops } from "@components/utils";
 
-import AvailableOrders from "@components/utils/AvailableOrders";
 import { convertToKebabCase } from "@utils/functions";
 import { getAvaiableCrops, getCropVarieties } from "@utils/api";
 import { getCxStories, getCategories, filterAt } from "@utils/prismic";
@@ -76,7 +76,11 @@ if (statusCode == 200) {
       availableDemands.push({
         ...c,
         link: `/products/grower/crops/${convertToKebabCase(c.name)}`,
-        varieties: response.data.map((v) => ({ _id: v._id, name: v.name, imageUrl: v.imageUrl })),
+        varieties: response.data.map((v) => ({
+          _id: v._id,
+          name: v.name,
+          imageUrl: v.imageUrl,
+        })),
       });
     }
   }
@@ -121,8 +125,7 @@ if (statusCode == 200) {
   }
   {
     availableDemands.length > 0 && (
-      <AvailableOrders
-        client:visible
+      <AvailableCrops
         cardType="grower"
         data={availableDemands}
         bgColor="bg-grower-200"
@@ -134,9 +137,9 @@ if (statusCode == 200) {
 </GrowerIndexLayout>
 
 <!-- page: "/products/grower/new-farmer", -->
-<script type="module">
+<script>
   // @ts-nocheck
-  import { $authModal } from "../../src/utils/stores.ts";
+  import { $authModal } from "@utils/stores.ts";
 
   function toggleAuthModal() {
     $authModal.set(true);
@@ -146,5 +149,5 @@ if (statusCode == 200) {
 
   const btn = document.getElementById("get-started");
 
-  btn.addEventListener("click", toggleAuthModal);
+  btn?.addEventListener("click", toggleAuthModal);
 </script>

@@ -10,4 +10,4 @@ export const $fullComparisonDrawer = atom<boolean>(false);
 
 export const $joinSalesAffiliateModal = atom<boolean>(false);
 
-
+export const $homeCustomerStoriesActiveTab = atom<"grower" | "buyer">("grower");

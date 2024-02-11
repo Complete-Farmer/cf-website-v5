@@ -1,0 +1,75 @@
+---
+import HeadingOneLine from "./HeadingOneLine";
+import { SwiperSlide, SwiperContainer } from "./Swiper";
+
+import { AvailableCropCard } from "@components/products/grower";
+import { AvailableCropOfferCard } from "@components/products/buyer";
+
+import type { IAvailableCropOffers, IAvailableDemands } from "types/app";
+
+interface Props {
+  title: string;
+  bgColor: string;
+  titleTextColor: string;
+  cardType: "grower" | "buyer";
+  data: IAvailableCropOffers[] | IAvailableDemands[];
+}
+
+const { data, title, bgColor, cardType, titleTextColor } = Astro.props;
+---
+
+<div id="available-crops" class={`pt-20 pb-20 ${bgColor}`}>
+  <div class="pb-6">
+    <HeadingOneLine title={title} titleTextColor={titleTextColor} />
+  </div>
+  <div class="mx-auto max-w-7xl px-0 sm:px-0 lg:px-8 sm:pt-10 lg:pt-0">
+    <div class="mx-auto lg:max-w-none">
+      <section
+        aria-labelledby="related-heading"
+        class="relative px-0 pl-2 py-16 lg:px-4 lg:py-6 scale-[1]"
+      >
+        <SwiperContainer
+          rewind
+          navigation
+          initialSlide={0}
+          spaceBetween={20}
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
+          id="avaialble-crop-swiper"
+          breakpoints={{
+            0: {
+              slidesPerView: 1.1,
+            },
+            370: {
+              slidesPerView: 1.2,
+            },
+            440: {
+              slidesPerView: 1.3,
+            },
+            639: {
+              slidesPerView: 2.1,
+            },
+            1024: {
+              slidesPerView: 4,
+            },
+          }}
+          ,
+        >
+          {
+            data.map((item) => (
+              <SwiperSlide>
+                {cardType === "grower" ? (
+                  <AvailableCropCard data={item} />
+                ) : (
+                  <AvailableCropOfferCard data={item} />
+                )}
+              </SwiperSlide>
+            ))
+          }
+        </SwiperContainer>
+      </section>
+    </div>
+  </div>
+</div>
