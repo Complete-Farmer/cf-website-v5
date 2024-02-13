@@ -1,0 +1,17 @@
+---
+interface Props {
+  aboutRegion: string;
+}
+
+const { aboutRegion } = Astro.props;
+---
+<div class="relative flex flex-col gap-8 justify-start items-start sm:mt-4 sm:px-6 pt-5 pb-3 rounded-lg bg-white sm:border sm:border-[#e6e6e6]">
+  <!-- <div class="absolute left-[-15px] top-[0px] w-[100vw] h-[8px] bg-custom_gray-400 sm:hidden"></div> -->
+  <div class="pb-6 sm:pb-0">
+    <p class="text-base font-bold text-left text-custom_gray-300 py-1">
+      REGION
+    </p>
+    <p class="text-base text-black py-1">{aboutRegion}</p>
+  </div>
+  <div class="absolute left-[-15px] bottom-[0px] w-[100vw] h-[8px] bg-custom_gray-400 sm:hidden"></div>
+</div>

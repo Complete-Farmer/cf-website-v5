@@ -1,0 +1,46 @@
+---
+import type { IPrismicData } from "types/app";
+
+import { getYouTubeThumbnailUrl } from "@utils/functions";
+
+import { Button, HeadingOneLine } from "@components/utils";
+
+import CustomerStoriesBody from "./CustomerStoriesBody.astro";
+import CustomerStoryVideoModal from "./CustomerStoryVideoModal";
+
+interface Props {
+  data: IPrismicData;
+}
+
+const { data } = Astro.props;
+
+const stories = data.results
+  .filter((item) => item.data.video_uri && item.data.video_uri.url) // Filter out items without video URI
+  .map((item) => {
+    const transformedItem = {
+      id: item.uid,
+      duration: item.data.duration,
+      video: item.data.video_uri.url,
+      name: item?.data?.name[0]?.text,
+      imageSrc: getYouTubeThumbnailUrl(item.data.video_uri.url),
+    };
+    return transformedItem;
+  });
+---
+
+<div class="md:py-10 lg:py-20">
+  <HeadingOneLine
+    title="Enabling shared prosperity one farmer at a time"
+    desc="CF Grower helps farmers experience growth in their fields and bank accounts by helping them build lasting wealth for themselves and their communities. See how we’ve helped other farmers like you."
+  />
+  <CustomerStoriesBody stories={stories} />
+  <CustomerStoryVideoModal client:idle />
+  <div class="flex items-center justify-center h-full mt-12">
+    <a href="/products/grower/customer-stories" class="contents">
+      <Button
+        title=" See all stories"
+        className="!w-fit py-4 px-8 !rounded-full"
+      />
+    </a>
+  </div>
+</div>

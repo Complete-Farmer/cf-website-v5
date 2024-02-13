@@ -6,11 +6,11 @@ import GrowerIndexLayout from "@layouts/GrowerIndexLayout.astro";
 import {
   Estimate,
   HowCFHelpsYou,
-  CustomerStories,
   EverythingYouNeed,
   PlatformOnboarding,
   AllInOneFarmingSolution,
   InterestedInBecomingAgent,
+  CustomerStoriesVideoContainer,
 } from "@components/products/grower";
 import { AvailableCrops } from "@components/utils";
 
@@ -120,7 +120,7 @@ if (statusCode == 200) {
   />
   {
     customerStories.results.length > 0 && (
-      <CustomerStories client:only="react" data={customerStories} />
+      <CustomerStoriesVideoContainer data={customerStories} />
     )
   }
   {

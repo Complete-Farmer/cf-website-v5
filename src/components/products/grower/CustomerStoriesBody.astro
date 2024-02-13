@@ -1,0 +1,91 @@
+---
+import { PlayIcon } from "@assets/icons";
+import { SwiperSlide, SwiperContainer } from "@components/utils";
+
+interface Props {
+  stories: {
+    id: string;
+    name: string;
+    video: string;
+    imageSrc: string;
+    duration?: number;
+  }[];
+}
+
+const { stories } = Astro.props;
+---
+
+<div class="mt-8">
+  <div
+    class="mx-auto max-w-7xl md:px-0 sm:pt-10 px-0 overflow-hidden text-center lg:px-8"
+  >
+    <SwiperContainer
+      loop={stories.length > 3}
+      initialSlide={stories.length > 3 ? 0 : 1}
+      centeredSlides={stories.length > 3}
+      slidesPerView={1.05}
+      spaceBetween={10}
+      autoplay={{
+        delay: 5000,
+        disableOnInteraction: false,
+      }}
+      breakpoints={{
+        768: {
+          slidesPerView: 2.05,
+        },
+        1280: {
+          slidesPerView: 2.52,
+        },
+      }}
+    >
+      {
+        stories.map((story) => (
+          <SwiperSlide>
+            <div
+              role="button"
+              data-video-url={story.video}
+              class="story-video-button relative w-full"
+            >
+              <div class="block overflow-hidden group rounded-xl relative">
+                <img
+                  alt={story.name}
+                  src={story.imageSrc}
+                  class="w-full h-80 object-cover transition-all duration-300 ease-out sm:h-80 lg:h-96 group-hover:scale-110"
+                />
+              </div>
+              <div class="flex justify-start items-center absolute left-4 bottom-[20%] gap-1.5 px-3 py-2 rounded-lg bg-white text-grower-500">
+                <PlayIcon />
+                <span class="text-sm font-bold">
+                  {story.duration?.toFixed(2)}
+                </span>
+              </div>
+              <div>
+                <div class="flex justify-start items-start relative gap-4 mt-5">
+                  <div class="flex flex-col h-full w-full justify-start items-start relative gap-2 ">
+                    <span class="text-base lg:text-2xl lg:leading-9  font-bold text-left text-custom_black-900 hover:underline">
+                      {story.name}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))
+      }
+    </SwiperContainer>
+  </div>
+</div>
+
+<script>
+  import { $selectedVideoUrl } from "@utils/stores";
+
+  const btns = document.querySelectorAll(".story-video-button");
+
+  btns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const url = btn.getAttribute("data-video-url");
+      // console.log("url",url)
+      $selectedVideoUrl.set(url);
+    });
+  });
+</script>

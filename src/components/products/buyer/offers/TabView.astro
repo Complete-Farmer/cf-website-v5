@@ -1,0 +1,56 @@
+---
+import type { IAvailableCropOffers } from "types/app";
+
+import { TabDetailsContainer } from "@components/utils";
+
+import Seasonality from "./Seasonality.astro";
+import AvailableSpecification from "./AvailableSpecification.astro";
+
+interface Props {
+  offer: IAvailableCropOffers;
+}
+
+const { offer } = Astro.props;
+
+const tabs = [
+  {
+    title: "Seasonality",
+  },
+  {
+    title: "Specifications",
+  },
+];
+---
+
+<TabDetailsContainer {tabs}>
+  <div class="pt-5">
+    <Seasonality content={offer.features} data={offer.seasonality} />
+    <AvailableSpecification data={offer.details2} />
+  </div>
+</TabDetailsContainer>
+
+<script type="text/javascript" is:inline define:vars={{ data: tabs }}>
+  const btns = document.querySelectorAll(".crop-details-tab-button");
+
+  btns.forEach((tab, index) => {
+    tab.addEventListener("click", () => {
+      if (index == 0) {
+        document
+          .getElementById("seasonality")
+          .classList.replace("hidden", "flex");
+        document
+          .getElementById("available-specifications")
+          .classList.replace("block", "hidden");
+      }
+
+      if (index == 1) {
+        document
+          .getElementById("seasonality")
+          .classList.replace("flex", "hidden");
+        document
+          .getElementById("available-specifications")
+          .classList.replace("hidden", "block");
+      }
+    });
+  });
+</script>

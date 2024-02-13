@@ -1,0 +1,74 @@
+---
+import { classNames } from "@utils/functions";
+
+interface Props {
+  tabs: {
+    title: string;
+  }[];
+}
+
+const { tabs } = Astro.props;
+---
+
+<div class="bg-white lg:mx-auto lg:max-w-7xl lg:mb-10">
+  <div
+    class="mx-auto max-w-7xl lg:py-2 sm:px-2 lg:px-8 sm:border-1 sm:border-[1px] sm:mx-8 rounded-lg sm:mb-6 lg:mb-0"
+  >
+    <div class="sm:block">
+      <nav class="flex sm:justify-center items-center border-b-[1px]">
+        {
+          tabs.map((tab, index) => (
+            <button
+              class={classNames(
+                index === 0
+                  ? "text-grower-500 border-grower-500 border-b-2 font-bold"
+                  : "text-gray-500 font-normal hover:text-gray-700",
+                "crop-details-tab-button bg-white py-4 px-4 text-center focus:z-10 flex-1 sm:flex-none sm:w-[166px] lg:w-[auto]"
+              )}
+              aria-current={index === 0 ? "page" : undefined}
+            >
+              {tab.title}
+            </button>
+          ))
+        }
+      </nav>
+    </div>
+
+    <slot />
+  </div>
+</div>
+
+<script type="text/javascript" is:inline>
+  const btns = document.querySelectorAll(".crop-details-tab-button");
+
+  btns.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      btns.forEach((_tab) => {
+        _tab.removeAttribute("aria-current");
+        _tab.classList.remove(
+          "text-grower-500",
+          "border-grower-500",
+          "border-b-2",
+          "font-bold"
+        );
+        _tab.classList.add(
+          "text-gray-500",
+          "font-normal",
+          "hover:text-gray-700"
+        );
+      });
+      tab.setAttribute("aria-current", "page");
+      tab.classList.remove(
+        "text-gray-500",
+        "font-normal",
+        "hover:text-gray-700"
+      );
+      tab.classList.add(
+        "text-grower-500",
+        "border-grower-500",
+        "border-b-2",
+        "font-bold"
+      );
+    });
+  });
+</script>

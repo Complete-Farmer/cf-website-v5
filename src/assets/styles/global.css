@@ -26,63 +26,9 @@ body {
     }
   }
 
-  .investor-relation-slider .slick-dots {
-    position: relative;
-    transform: translate(-21%, 0px);
-  }
-
-  .investor-relation-slider .slick-slider .slick-arrow {
-    display: none;
-  }
-
-  .investor-relation-slider .slick-dots li button {
-    border: 1px solid #31bc2e;
-    border-radius: 99px;
-    position: absolute;
-    left: 0px !important;
-    width: 12px !important;
-    height: 12px !important;
-  }
-
-  .investor-relation-slider .slick-dots li.slick-active button {
-    background-color: #31bc2e;
-  }
-
-  .investor-relation-slider .slick-dots li button::before {
-    content: "";
-  }
-
-  .order-slider .slick-dots {
-    position: absolute !important;
-    bottom: 16px !important;
-  }
-
-  .order-slider .slick-dots li button {
-    height: 8px;
-    width: 8px;
-    background-color: white;
-    border-radius: 50%;
-    opacity: 0.6;
-  }
-
-  .order-slider .slick-dots li.slick-active button {
-    background: white;
-    opacity: 1;
-    height: 8px;
-    width: 8px;
-  }
-
-  .order-slider .slick-dots li button::before {
-    background: white;
-    opacity: 1;
-    content: "" !important;
-    border-radius: 50%;
-    height: 8px;
-    width: 8px;
-  }
-
+  /* #region Know css */
   .swiper-slide-active .event_card_details {
-    display: flex;
+    @apply flex
   }
   
   .border-dash-long-buyer {
@@ -93,87 +39,29 @@ body {
     background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='8' ry='8' stroke='%2331BC2EFF' stroke-width='3' stroke-dasharray='6%2c 14' stroke-dashoffset='6' stroke-linecap='square'/%3e%3c/svg%3e");
   }
 
-  @media (min-width: 360px) {
-    .investor-relation-slider .slick-dots {
-      transform: translate(-20%, 0px);
-    }
+  .reactphone {
+    @apply w-full h-10 sm:h-14 bg-[#EFEFEF] rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6
+  }
+  
+  .phone-input-white .reactphone, .phone-input-white .reactphone input {
+    @apply !bg-white
+  }
+  
+  .reactphone input {
+    @apply border-0 bg-[#EFEFEF] placeholder:text-gray-400 focus:ring-0
+  }
+  
+  .reactphone.PhoneInput--focus {
+    @apply ring-2 ring-inset;
+  }
+  
+  .grower .reactphone.PhoneInput--focus {
+    @apply ring-grower-500;
+  }
+  
+  .buyer .reactphone.PhoneInput--focus {
+    @apply ring-buyer-500;
   }
 
-  @media (min-width: 390px) {
-    .investor-relation-slider .slick-dots {
-      transform: translate(-22%, 0px);
-    }
-  }
-
-  @media (min-width: 412px) {
-    .investor-relation-slider .slick-dots {
-      transform: translate(-24%, 0px);
-    }
-  }
-
-  @media (min-width: 414px) {
-    .investor-relation-slider .slick-dots {
-      transform: translate(-24%, 0px);
-    }
-  }
-
-  @media (min-width: 768px){
-    .investor-relation-slider .slick-dots {
-      transform: translate(-34%, -58px);
-    }
-
-    .investor-relation-news + .investor-element:nth-child(3){
-      border: 0px !important;
-    }
-  }
-
-  @media (min-width: 840px) {
-    .investor-relation-slider .slick-dots {
-      display: none !important;
-    }
-  }
-
-  @media (min-width: 1135px) {
-    .smaller-laptop {
-      left: 6px !important;
-    }
-
-    .resources-text {
-      top: 45px !important;
-    }
-
-    .data-text {
-      top: 85px !important;
-    }
-
-    .capital-text {
-      top: 125px !important;
-    }
-
-    .eachother-text {
-      top: 165px !important;
-    }
-  }
-
-  @media (min-width: 1302px) {
-    .smaller-laptop {
-      left: 192px !important;
-    }
-
-    .resources-text {
-      top: 5px !important;
-    }
-
-    .data-text {
-      top: 45px !important;
-    }
-
-    .capital-text {
-      top: 85px !important;
-    }
-
-    .eachother-text {
-      top: 125px !important;
-    }
-  }
+  /* #endregion Know css */
 }

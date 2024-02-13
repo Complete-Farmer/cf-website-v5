@@ -1,0 +1,73 @@
+---
+import type { IPrismicData } from "types/app";
+
+import { Fading, SwiperSlide, SwiperContainer } from "@components/utils";
+
+import LeftItem from "./LeftItem.astro";
+import RightItem from "./RightItem.astro";
+
+interface Props {
+  data?: IPrismicData;
+}
+
+const { data } = Astro.props;
+
+const news = data?.results.map((item) => ({
+  ...item,
+  id: item.uid,
+  title: item?.data?.title[0]?.text,
+  sliderimage: item.data.sliderimage,
+  link: item?.data?.learn_more?.url,
+  description: item?.data?.summarytext[0]?.text,
+}));
+
+const swiperProps = {
+  loop: true,
+  pagination: {
+    clickable: true,
+  },
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false,
+  },
+  initialSlide: 1,
+  slidesPerView: 1,
+  centeredSlides: true,
+  id: "investors-relations-hero-swiper",
+};
+---
+
+<section
+  class="w-full min-h-[65vh] px-6 xl:px-0 pb-14 sm:py-20 xl:py-28 bg-investor-relations bg-cover"
+>
+  <SwiperContainer {...swiperProps}>
+    {
+      news.map((_new) => (
+        <SwiperSlide>
+          <div class="w-full h-auto">
+            <div class="max-w-7xl mx-auto sm:px-4 xl:px-0 flex sm:items-start gap-4 sm:gap-0 sm:justify-between flex-col-reverse md:flex-row h-full">
+              <div class="w-full md:w-1/2 flex flex-col items-center md:items-start justify-center">
+                <Fading left client:only="react">
+                  <LeftItem
+                    link={_new.link}
+                    title={_new.title}
+                    description={_new.description}
+                  />
+                </Fading>
+              </div>
+              <div class="pt-6 sm:pt-0 xl:mr-16">
+                <Fading right client:only="react">
+                  <RightItem
+                    title={_new.title}
+                    url={_new.sliderimage.url}
+                    dimensions={_new.sliderimage.dimensions}
+                  />
+                </Fading>
+              </div>
+            </div>
+          </div>
+        </SwiperSlide>
+      ))
+    }
+  </SwiperContainer>
+</section>

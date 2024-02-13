@@ -53,10 +53,14 @@ const { crop } = Astro.props;
     title="Browse crops"
     bgColor="bg-grower-400"
     textColor="text-grower-500"
-    href="/products/grower/new-farmer"
+    href="/products/grower/new-farmer#available-crops"
   />
-  <div class="pt-14">
-    <CropDetails {crop} client:only="react" />
-    <TabView {crop} client:visible />
+  <div class="pt-14 space-y-10">
+    <div>
+      <CropDetails {crop} />
+    </div>
+    <div>
+      <TabView {crop} /> 
+    </div>
   </div>
 </Layouts>

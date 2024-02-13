@@ -13,11 +13,11 @@
   z-index: 20;
   cursor: pointer;
   position: absolute;
-  background: white;
   border-radius: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-image: url("../../icons/slider-chevron.svg");
+  @apply !bg-custom_gray-400;
 }
 
 .swiper-button-prev {

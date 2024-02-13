@@ -1,0 +1,85 @@
+---
+import type { IAvailableDemands } from "types/app";
+
+import { TabDetailsContainer } from "@components/utils";
+
+import ProtocolImg from "@assets/images/products/grower/crop-details/protocol.webp";
+import VarietyImg from "@assets/images/products/grower/crop-details/variety.webp";
+import AboutImg from "@assets/images/products/grower/crop-details/about.webp";
+
+interface Props {
+  crop: IAvailableDemands;
+}
+
+const { crop } = Astro.props;
+
+const tabs = [
+  {
+    title: "Protocol",
+    img: ProtocolImg,
+    features: crop?.websiteData ? [crop?.websiteData?.protocol] : [],
+  },
+  {
+    title: "Variety",
+    img: VarietyImg,
+    features: crop?.websiteData ? [crop?.websiteData?.variety] : [],
+  },
+  {
+    title: "About",
+    img: AboutImg,
+    features: crop?.websiteData ? [crop?.websiteData?.seasonality] : [],
+  },
+];
+---
+<TabDetailsContainer {tabs}>
+  <div class="space-y-16 px-4 lg:pt-10[x] lg:pt-1[x]">
+    <div class="w-full max-w-7xl">
+      <div class="flex flex-col lg:flex-row">
+        <div class="w-full lg:w-3/5">
+          <div class="flex items-center justify-between w-full">
+            <h2
+              id="active-tab-title"
+              class="text-3xl font-bold text-custom_black-900 py-8"
+            >
+              {tabs[0].title}
+            </h2>
+          </div>
+
+          <div class="flex justify-start items-start self-stretch gap-4">
+            <p
+              id="active-tab-text"
+              class="w-12/12 font-small text-custom_black-900 text-md text-base leading-6 text-left"
+            >
+              {tabs[0].features}
+            </p>
+          </div>
+        </div>
+        <div class="w-full lg:w-1/3 flex justify-end items-center">
+          <div class="mt-4 lg:mt-10">
+            <img
+              id="active-tab-image"
+              alt="illustration"
+              src={tabs[0].img.src}
+              class="hidden lg:block w-auto h-auto"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</TabDetailsContainer>
+
+<script type="text/javascript" is:inline define:vars={{ data: tabs }}>
+  const btns = document.querySelectorAll(".crop-details-tab-button");
+
+  btns.forEach((tab, index) => {
+    tab.addEventListener("click", () => {
+      document.getElementById("active-tab-title").innerText = data[index].title;
+      document.getElementById("active-tab-text").innerText =
+        data[index].features;
+      document
+        .getElementById("active-tab-image")
+        .setAttribute("src", data[index].img.src);
+    });
+  });
+</script>

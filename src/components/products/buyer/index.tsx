@@ -1,3 +1,5 @@
+export * from "./offers";
+export * from "./sales-affiliate";
 export { default as Hero } from "./Hero";
 export { default as BuyerGetInTouch } from "./GetInTouch";
 export { default as FullComparison } from "./FullComparison";

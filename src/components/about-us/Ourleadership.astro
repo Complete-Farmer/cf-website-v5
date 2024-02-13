@@ -1,0 +1,101 @@
+---
+import type { IPrismicData } from "types/app";
+
+import { LinkedInIcon } from "@assets/icons";
+
+import { SwiperSlide, SwiperContainer } from "@components/utils";
+
+interface Props {
+  data: IPrismicData;
+}
+
+const { data } = Astro.props;
+
+const leaders = data.results.map((item) => ({
+  ...item,
+  uid: item?.uid,
+  slug: item?.uid,
+  name: item?.data?.fullname[0]?.text,
+  role: item?.data?.position[0]?.text,
+  linkedIn: item?.data?.linkedin?.url,
+  imageUrl: item?.data?.image?.url.replace("?auto=compress,format", ""),
+}));
+---
+
+<div class="bg-white sm:pb-10">
+  <div class="mx-auto max-w-7xl px-0 overflow-hidden text-center lg:px-8">
+    <div class="mx-auto max-w-2xl">
+      <h2
+        class="text-[28px] sm:text-5xl font-bold tracking-tight text-custom_green-900"
+      >
+        Our leadership
+      </h2>
+    </div>
+    <div class="mt-16">
+      <SwiperContainer
+        loop={leaders.length > 3}
+        initialSlide={leaders.length > 3 ? 0 : 1}
+        centeredSlides={leaders.length > 3}
+        slidesPerView={1.05}
+        spaceBetween={10}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+        }}
+        breakpoints={{
+          0: {
+            centeredSlides: true,
+          },
+          768: {
+            slidesPerView: 2.05,
+          },
+          1280: {
+            slidesPerView: 3,
+          },
+        }}
+      >
+        {
+          leaders.map((person) => (
+            <SwiperSlide>
+              <div>
+                <a href={`/about-us/leaders/${person.slug}`}>
+                  <div
+                    aria-hidden="true"
+                    class="aspect-h-3 aspect-w-3 mx-1 md:mx-2 overflow-hidden rounded-lg "
+                  >
+                    <div class="">
+                      <img
+                        alt=""
+                        src={person.imageUrl}
+                        class="w-12/12 md:mb-0 border rounded-lg hover:cursor-pointer"
+                      />
+                    </div>
+                  </div>
+                  <h3 class="mt-4 mx-2 text-lg sm:text-xl text-left font-bold leading-8 tracking-tight text-custom_green-900 hover:underline">
+                    {person.name}
+                  </h3>
+                  <p class="text-sm text-left mx-2 leading-7 text-gray-800">
+                    {person.role}
+                  </p>
+                </a>
+                <div class="text-[#0A66C2] flex justify-start items-center self-stretch[x] flex-grow-0[x] flex-shrink-[x]0 relative[x] gap-2 mx-2">
+                  <LinkedInIcon className="text-[#0A66C2]" />
+
+                  <p class="text-sm font-bold text-left leading-7 hover:underline">
+                    <a
+                      href={person.linkedIn}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      LinkedIn profile
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))
+        }
+      </SwiperContainer>
+    </div>
+  </div>
+</div>

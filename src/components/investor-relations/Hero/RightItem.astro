@@ -1,0 +1,20 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  url: string;
+  title: string;
+  dimensions: { width: number; height: number };
+}
+const { url, title, dimensions } = Astro.props;
+---
+
+<div>
+  <Image
+    src={url}
+    alt={title}
+    width={dimensions.width}
+    height={dimensions.height}
+    class="w-[100%] h-[200px] md:w-72 md:h-72 lg:w-96 lg:h-96 xl:w-[445px] xl:h-[445px] rounded-md shadow-md object-cover"
+  />
+</div>

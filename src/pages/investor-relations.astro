@@ -62,7 +62,7 @@ const heroSiderData = await getInvestorRelationSlider({
   title="Investor Relations | Complete Farmer"
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
-  {heroSiderData?.results?.length > 0 && <Hero data={heroSiderData} client:only="react" />}
+  {heroSiderData?.results?.length > 0 && <Hero data={heroSiderData} />}
   <Partners title="Our Investors" client:only="react" assets={assets} />
   <OurMission />
   <ParallaxImage imgSrc={Managers.src} client:only="react" />

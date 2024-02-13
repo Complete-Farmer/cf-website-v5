@@ -1,0 +1,83 @@
+---
+import type { IAvailableCropOffers } from "types/app";
+
+import { Tooltip } from "react-tooltip";
+import { DownloadIcon } from "@assets/icons";
+import { Button, ImageSwiperContainer } from "@components/utils";
+
+interface Props {
+  offer: IAvailableCropOffers;
+}
+
+const { offer } = Astro.props;
+
+const images = [
+  {
+    source: offer.specification.variety.imageUrl,
+    name: offer.specification.variety.name,
+  },
+  { source: offer.crop.category.imageUrl, name: offer.crop.category.title },
+  { source: offer.crop.imageUrl, name: offer.crop.name },
+];
+---
+
+<ImageSwiperContainer {images}>
+  <div class="space-y-2">
+    <div class="">
+      <h1
+        class="text-[32px] leading-[40px] font-bold tracking-tight text-gray-900"
+      >
+        {offer.crop.name}
+      </h1>
+
+      <div class="text-base leading-6">
+        <p
+          class="text-md sm:text-base tracking-tight text-custom_gray-300 font-cera"
+        >
+          Variety: {offer.specification.variety.name}
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <h2 class="sr-only">Product price</h2>
+      <p class="text-xl font-bold tracking-tight text-gray-900 font-cera">
+        USD {offer.price["USD"]}/MT
+      </p>
+    </div>
+  </div>
+
+  <div class="flex space-x-6 items-end">
+    <Button title="Order this crop" className="py-4 !h-fit !bg-buyer-500" />
+    <div class="pt-4 lg:pt-0" id="tooltip-buyer-download">
+      <button class="border border-buyer-500 rounded-md px-4 py-4">
+        <DownloadIcon className="text-buyer-500" />
+      </button>
+    </div>
+  </div>
+
+  <Tooltip
+    anchorSelect="#tooltip-buyer-download"
+    place="top"
+    content="Download specifications"
+  />
+
+  {
+    offer.details && (
+      <div class="px-0 sm:px-0 lg:mt-5 py-4">
+        <div class="relative overflow-hidden rounded-lg sm:border border-[#e6e6e6] py-6 sm:px-4">
+          <h3 class="text-sm font-bold text-left text-custom_gray-300">
+            CROP DETAILS
+          </h3>
+          <ul class="list-disc px-7 py-4 space-y-4 text-base leading-6">
+            {offer.details.map((detail: string) => (
+              <li class="text-base text-left text-custom_black-900">
+                {detail}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    )
+  }
+</ImageSwiperContainer>

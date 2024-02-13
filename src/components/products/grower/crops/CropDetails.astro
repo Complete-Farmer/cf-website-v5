@@ -1,0 +1,52 @@
+---
+import type { IAvailableDemands } from "types/app";
+
+import Region from "./Region.astro";
+import Seasonality from "./Seasonality.astro";
+import { ImageSwiperContainer } from "@components/utils";
+
+interface Props {
+  crop: IAvailableDemands;
+}
+
+const { crop } = Astro.props;
+
+const varietiesImages = crop.varieties.map((v) => ({
+  source: v.imageUrl,
+  name: v.name,
+}));
+
+const images = [
+  { source: crop.category.imageUrl, name: crop.category.title },
+  { source: crop.imageUrl, name: crop.name },
+  ...varietiesImages,
+];
+---
+
+<ImageSwiperContainer {images}>
+  <div>
+    <h1
+      class="text-[32px] leading-[40px] font-bold tracking-tight text-gray-900"
+    >
+      {crop.name}
+    </h1>
+
+    <div class="text-base leading-6">
+      <p
+        class="text-md sm:text-base font-bold tracking-tight text-custom_gray-300 font-cera"
+      >
+        Demanded Varieties:{" "}
+        {varietiesImages.map((v) => v.name).join(", ")}
+      </p>
+    </div>
+  </div>
+
+  <div class="py-4 sm:pt-0 sm:pb-4">
+    <Seasonality data={crop.seasonality} />
+    {
+      crop.websiteData?.region && (
+        <Region aboutRegion={crop.websiteData.region} />
+      )
+    }
+  </div>
+</ImageSwiperContainer>
