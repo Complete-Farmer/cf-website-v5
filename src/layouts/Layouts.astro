@@ -51,7 +51,7 @@ const isHiring = careerApiData.results.length > 0
       <slot />
     </main>
     <div class="app-footer">
-      <Footer {isHiring} client:visible pathname={pathname} />
+      <Footer {isHiring} client:load pathname={pathname} />
     </div>
     <CookieScreen client:only="react" />
     <style>

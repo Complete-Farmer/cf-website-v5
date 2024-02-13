@@ -9,7 +9,7 @@ import {
   CaretIcon,
 } from "@assets/icons";
 
-import CFFooterLogo from "@assets/images/logos/cf/footer.png";
+import CFFooterLogo from "@assets/images/logos/cf/footer.webp";
 
 import {
   companyLinks,

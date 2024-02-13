@@ -11,7 +11,7 @@ import { getCxStories } from "@utils/prismic";
 import { Wrapper } from "..";
 
 interface IProps {
-  filters: string[];
+  filters?: string[];
   isBuyer?: boolean;
   data: IPrismicData;
   totalResults: number;

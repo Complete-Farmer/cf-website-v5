@@ -25,12 +25,12 @@ const { id, ...props } = Astro.props;
 
   swiperEl?.forEach((e) => {
     if (e) {
-      const urls = [`${origin}/src/assets/styles/swiper/main.css`];
+      const urls = [`${origin}/swiper/main.css`];
 
       const props: SwiperOptions = JSON.parse(e.getAttribute("data-props"));
 
       if (e.id) {
-        urls.push(`${origin}/src/assets/styles/swiper/${e.id}.css`);
+        urls.push(`${origin}/swiper/${e.id}.css`);
       }
       
       const swiperParams: SwiperOptions = {

@@ -9,6 +9,7 @@ export { default as AboutTheAcademy } from "./AboutTheAcademy.astro";
 export { default as AvailableCropCard } from "./AvailableCropCard.astro";
 export { default as EverythingYouNeed } from "./EverythingYouNeed.astro";
 export { default as PlatformOnboarding } from "./PlatformOnboarding.astro";
+export { default as CustomerStoriesBody } from "./CustomerStoriesBody.astro";
 export { default as AllInOneFarmingSolution } from "./AllInOneFarmingSolution.astro";
 export { default as InterestedInBecomingAgent } from "./InterestedInBecomingAgent.astro";
 export { default as CustomerStoriesVideoContainer } from "./CustomerStoriesVideoContainer.astro";

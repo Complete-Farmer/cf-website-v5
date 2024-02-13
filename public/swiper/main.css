@@ -1,0 +1,31 @@
+.swiper {
+  position: unset !important;
+}
+
+.swiper-button-prev svg,
+.swiper-button-next svg {
+  display: none;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  top: 40%;
+  z-index: 20;
+  cursor: pointer;
+  position: absolute;
+  border-radius: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #F6F6F6;
+  background-image: url("./chevron.svg");
+}
+
+.swiper-button-prev {
+  transform: rotate(180deg);
+}
+
+@media screen and (max-width: 1080px) {
+  .swiper-button-next,.swiper-button-prev {
+    display: none;
+  }
+}
