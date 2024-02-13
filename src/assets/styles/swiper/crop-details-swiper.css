@@ -1,0 +1,39 @@
+.swiper-button-prev,
+.swiper-button-next {
+  @apply hidden;
+}
+
+.swiper-pagination {
+  @apply flex justify-center space-x-2 absolute h-2.5 left-0 right-0 bottom-3 z-10;
+}
+
+.swiper-pagination-bullet {
+  @apply block h-2.5 w-2.5 rounded-full;
+}
+
+.swiper-pagination-bullet {
+  @apply bg-white/60;
+}
+
+.swiper-pagination-bullet-active {
+  @apply bg-white;
+}
+
+@media (min-width: 1280px) {
+  .swiper-pagination {
+    @apply hidden;
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    @apply block top-1/2 w-12 h-12 !bg-[length:24px];
+  }
+
+  .swiper-button-prev {
+    left: 4%;
+  }
+
+  .swiper-button-next {
+    right: 4%;
+  }
+}

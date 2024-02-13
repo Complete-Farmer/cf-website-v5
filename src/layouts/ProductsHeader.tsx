@@ -19,8 +19,8 @@ import {
   MenuCloseIcon,
   MenuOpenIcon,
 } from "@assets/icons";
-import BuyerLogo from "@assets/images/logos/cf/buyer.png";
-import GrowerLogo from "@assets/images/logos/cf/grower.png";
+import BuyerLogo from "@assets/images/logos/cf/buyer.webp";
+import GrowerLogo from "@assets/images/logos/cf/grower.webp";
 
 import Drawer from "./Drawer";
 import MobileMenu from "./MobileMenu";

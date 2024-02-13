@@ -3,7 +3,7 @@ import Fade from "react-reveal/Fade";
 import SmallFarmer from "@assets/images/products/grower/smallholder-farmer.webp";
 import Leaves from "@assets/images/products/grower/smallholder-leaves.webp";
 
-import { ArrowIcon } from "@assets/icons";
+import { Button } from "@components/utils";
 
 const SmallFarmerImpact = () => {
   return (
@@ -11,25 +11,23 @@ const SmallFarmerImpact = () => {
       <Fade left duration={1000} delay={500} distance="30px">
         <div className="sm:flex sm:flex-col relative w-full sm:w-1/2 text-left pt-16 lg:pb-16">
           <h2 className="flex items-center mb-3 sm:mb-4 lg:mb-12 text-[28px] lg:text-5xl font-bold text-grower-400">
-              Smallholder farmer impact
+            Smallholder farmer impact
           </h2>
 
-          <p className="w-full lg:w-5/6 text-base sm:text-base md:text-base lg:text-xl text-custom_black-900 leading-6 sm:leading-6 md:leading-6 lg:leading-[32px] py-2">
-              We are leading the way by empowering smallholder farmers with the
-              resources and technology for sustainable food security. Learn more
-              about how we work with smallholder farmers to protect the
-              environment, drive increased yield and enable shared prosperity.
+          <p className="w-full lg:w-5/6 text-base sm:text-base md:text-base lg:text-xl text-custom_black-900 leading-6 sm:leading-6 md:leading-6 lg:leading-[32px] py-2 mb-4">
+            We are leading the way by empowering smallholder farmers with the
+            resources and technology for sustainable food security. Learn more
+            about how we work with smallholder farmers to protect the
+            environment, drive increased yield and enable shared prosperity.
           </p>
 
-          <div className="flex items-center justify-start py-6">
-            <a
-              href="/products/grower/customer-stories"
-              className="bg-grower-500 flex items-center justify-center text-xl h-16 px-8 space-x-3 font-bold tracking-wide text-white transition duration-200 rounded-full focus:shadow-outline focus:outline-none"
-            >
-              <span>Learn more</span>
-              <ArrowIcon />
-            </a>
-          </div>
+          <a href="/products/grower/customer-stories" className="contents">
+            <Button
+              hasArrow
+              title="Learn more"
+              className="md:!w-fit px-8 py-4 !rounded-full"
+            />
+          </a>
         </div>
       </Fade>
 

@@ -1,0 +1,8 @@
+---
+interface Props {
+  lazy?: boolean
+}
+
+const { lazy } = Astro.props;
+---
+<swiper-slide lazy={lazy}><slot /></swiper-slide>

@@ -1,2 +1,2 @@
-export { default as TabView } from "./TabView";
-export { default as CropDetails } from "./CropDetails";
+export { default as TabView } from "./TabView.astro";
+export { default as CropDetails } from "./CropDetails.astro";

@@ -46,13 +46,13 @@ import ImageRight from "@assets/images/products/grower/agent/hero-image-2.webp";
   <ApplicationForm client:load title="Become a Grower Agent" />
 </Layouts>
 
-<script type="module">
+<script>
   // @ts-nocheck
-  import { $applicationFormModal } from "../../src/utils/stores.ts";
+  import { $applicationFormModal } from "@utils/stores.ts";
 
   const btns = document.querySelectorAll("#get-agent-form");
 
-  btns.forEach((btn) => {
+  btns?.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
       $applicationFormModal.set(true);

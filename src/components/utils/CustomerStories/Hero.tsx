@@ -14,7 +14,7 @@ interface IProps {
 const Hero = (props: IProps) => (
   <section
     className={classNames(
-      props.isBuyer ? "bg-hero-buyer" : "bg-hero-grower",
+      props.isBuyer ? "bg-hero-buyer" : "bg-grower-400",
       "w-full px-6 sm:px-10 text-white pb-20 sm:pb-48 xl:pb-32 bg-cover"
     )}
   >

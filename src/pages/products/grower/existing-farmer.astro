@@ -14,8 +14,8 @@ import {
   AllInOneFarmingSolution,
   InterestedInBecomingAgent,
 } from "@components/products/grower";
+import { AvailableCrops } from "@components/utils";
 
-import AvailableOrders from "@components/utils/AvailableOrders";
 import { convertToKebabCase } from "@utils/functions";
 import { getAvaiableCrops, getCropVarieties } from "@utils/api";
 
@@ -71,7 +71,11 @@ if (statusCode == 200) {
       availableDemands.push({
         ...c,
         link: `/products/grower/crops/${convertToKebabCase(c.name)}`,
-        varieties: response.data.map((v) => ({ _id: v._id, name: v.name, imageUrl: v.imageUrl })),
+        varieties: response.data.map((v) => ({
+          _id: v._id,
+          name: v.name,
+          imageUrl: v.imageUrl,
+        })),
       });
     }
   }
@@ -107,8 +111,7 @@ if (statusCode == 200) {
   <PlatformOnboarding />
   {
     availableDemands.length > 0 && (
-      <AvailableOrders
-        client:visible
+      <AvailableCrops
         cardType="grower"
         data={availableDemands}
         bgColor="bg-grower-200"
@@ -131,17 +134,17 @@ if (statusCode == 200) {
 
 <!-- page: "/products/grower/existing-farmer", -->
 
-<script type="module">
+<script>
   // @ts-nocheck
-  import { $getInTouchModal } from "../../src/utils/stores.ts";
+  import { $getInTouchModal } from "@utils/stores.ts";
 
   const btn = document.getElementById("get-started");
   const btn1 = document.getElementById("get-started-1");
 
-  btn.addEventListener("click", () => $getInTouchModal.set(true));
+  btn?.addEventListener("click", () => $getInTouchModal.set(true));
 
-  btn1.addEventListener("click", (e) => {
-    e.preventDefault()
-    $getInTouchModal.set(true)
+  btn1?.addEventListener("click", (e) => {
+    e.preventDefault();
+    $getInTouchModal.set(true);
   });
 </script>

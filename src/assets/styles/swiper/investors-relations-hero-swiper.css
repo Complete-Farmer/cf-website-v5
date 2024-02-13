@@ -1,0 +1,15 @@
+.swiper-pagination {
+  @apply flex space-x-2 absolute h-3 left-[16%] -bottom-4 z-10;
+}
+
+.swiper-pagination-bullet {
+  @apply block h-3 w-3 rounded-full;
+}
+
+.swiper-pagination-bullet {
+  @apply bg-white/50;
+}
+
+.swiper-pagination-bullet-active {
+  @apply bg-grower-500;
+}

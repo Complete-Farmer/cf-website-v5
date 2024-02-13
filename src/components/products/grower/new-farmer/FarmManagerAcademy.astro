@@ -3,8 +3,7 @@ import { Image } from "astro:assets";
 
 import ManagerAcademy from "@assets/images/products/grower/farm-manager-academy.png";
 
-import { ArrowIcon } from "@assets/icons";
-
+import { Button } from "@components/utils";
 ---
 
 <div
@@ -19,7 +18,7 @@ import { ArrowIcon } from "@assets/icons";
       >
         The Farm Manager Academy
       </p>
-      <p class="text-xl text-center md:text-left text-grower-400">
+      <p class="text-xl text-center md:text-left text-grower-400  mb-4">
         <span
           class="block md:hidden text-sm md:text-base lg:text-xl lg:leading-8 text-center md:text-left text-grower-400"
         >
@@ -30,8 +29,8 @@ import { ArrowIcon } from "@assets/icons";
         <span
           class="hidden md:block lg:hidden text-sm md:text-base lg:text-xl lg:leading-8 text-center md:text-left text-grower-400"
         >
-          Build farm management expertise. Manage <br /> Farms. Earn with
-          Complete Farmer&nbsp;
+          Build farm management expertise. Manage <br /> Farms. Earn with Complete
+          Farmer&nbsp;
         </span>
 
         <span
@@ -39,21 +38,17 @@ import { ArrowIcon } from "@assets/icons";
         >
           Build farm management expertise.
           <br />
-           Manage Farms. Earn with Complete Farmer&nbsp;
+          Manage Farms. Earn with Complete Farmer&nbsp;
         </span>
       </p>
 
-      <div
-        class="flex justify-center items-center w-full md:w-fit gap-2 px-8 mt-4 py-4 rounded-full bg-grower-500"
-      >
-        <a
-          href="/products/grower/farm-manager-academy"
-          class="text-base font-bold text-left text-white"
-        >
-          Learn more
-        </a>
-        <ArrowIcon className="text-white" />
-      </div>
+      <a href="/products/grower/farm-manager-academy" class="contents">
+        <Button
+          hasArrow
+          title="Learn more"
+          className="md:!w-fit px-8 py-4 !rounded-full"
+        />
+      </a>
     </div>
 
     <Image

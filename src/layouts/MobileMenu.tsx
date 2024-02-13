@@ -5,9 +5,9 @@ import { classNames } from "@utils/functions";
 
 import { MenuCloseIcon } from "@assets/icons";
 
-import BuyerLogo from "@assets/images/logos/cf/buyer.png";
-import GrowerLogo from "@assets/images/logos/cf/grower.png";
-import MainLogo from "@assets/images/logos/cf/main.png";
+import BuyerLogo from "@assets/images/logos/cf/buyer.webp";
+import GrowerLogo from "@assets/images/logos/cf/grower.webp";
+import MainLogo from "@assets/images/logos/cf/main.webp";
 
 const products = [
   {

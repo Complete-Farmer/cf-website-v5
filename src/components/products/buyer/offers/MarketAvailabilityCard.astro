@@ -1,0 +1,60 @@
+---
+import type { ISeasonality } from "types/app";
+
+import { Tooltip } from "react-tooltip";
+
+import {
+  classNames,
+  generateAvailabilityString,
+  getMonthsFirstLetter,
+} from "@utils/functions";
+
+interface Props extends ISeasonality {}
+
+const { plantingArea, availabilityData } = Astro.props;
+---
+
+<div class="flex flex-col justify-start items-start space-y-4 pt-4">
+  <p class="text-base text-left text-custom_black-900">
+    <span class="">Availability in the</span>
+    <span class="font-bold">{plantingArea} region</span>
+    <span class="">:</span>
+    <span class="font-bold">
+      {generateAvailabilityString(availabilityData)}
+    </span>
+  </p>
+  <div
+    class="flex justify-between items-center gap-2 text-xs w-full text-left text-custom_gray-300"
+  >
+    <p class="font-bold">JAN</p>
+    <div class="flex justify-between items-start gap-1 w-full">
+      {
+        availabilityData.map((d) => (
+          <>
+            <span id={"tooltip" + d.name} class="w-full">
+              <div
+                class={classNames(
+                  d.availability ? "bg-grower-500" : "bg-gray-100",
+                  "overflow-auto h-1 w-full sm:h-1 rounded-lg"
+                )}
+              />
+            </span>
+            <Tooltip
+              place="top"
+              anchorSelect={"#tooltip" + d.name}
+              content={getMonthsFirstLetter(d.name)}
+              className="block sm:hidden"
+            />
+            <Tooltip
+              place="top"
+              anchorSelect={"#tooltip" + d.name}
+              content={d.name}
+              className="hidden sm:block"
+            />
+          </>
+        ))
+      }
+    </div>
+    <p class="font-bold">DEC</p>
+  </div>
+</div>

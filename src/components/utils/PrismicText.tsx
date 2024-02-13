@@ -44,7 +44,7 @@ const htmlSerializer = function (
     return (
       <h1
         key={key}
-        className="my-3 font-bold leading-9 text-[26px] md:text-4xl"
+        className="text-left my-3 font-bold leading-9 text-[26px] md:text-4xl"
       >
         {children}
       </h1>
@@ -53,7 +53,7 @@ const htmlSerializer = function (
     return (
       <h2
         key={key}
-        className="my-3 font-bold leading-9 text-[22px] md:text-[28px]"
+        className="text-left my-3 font-bold leading-9 text-[22px] md:text-[28px]"
       >
         {children}
       </h2>
@@ -62,26 +62,26 @@ const htmlSerializer = function (
     return (
       <h3
         key={key}
-        className="my-3 font-bold leading-9 text-[22px] md:text-[28px]"
+        className="text-left my-3 font-bold leading-9 text-[22px] md:text-[28px]"
       >
         {children}
       </h3>
     );
   case Elements.heading4: // Heading 4
     return (
-      <h4 key={key} className="my-3 font-bold leading-9 text-xl md:text-2xl">
+      <h4 key={key} className="text-left my-3 font-bold leading-9 text-xl md:text-2xl">
         {children}
       </h4>
     );
   case Elements.heading5: // Heading 5
     return (
-      <h5 key={key} className="my-3 font-bold leading-9 text-lg md:text-xl">
+      <h5 key={key} className="text-left my-3 font-bold leading-9 text-lg md:text-xl">
         {children}
       </h5>
     );
   case Elements.heading6: // Heading 6
     return (
-      <h6 key={key} className="my-3 font-bold leading-9 text-base md:text-xl">
+      <h6 key={key} className="text-left my-3 font-bold leading-9 text-base md:text-xl">
         {children}
       </h6>
     );
@@ -113,13 +113,13 @@ const htmlSerializer = function (
     );
   case Elements.listItem: // Unordered List Item
     return (
-      <li key={key} className="ml-6 mt-3 list-disc text-sm md:text-base">
+      <li key={key} className="ml-6 mt-3 list-disc text-sm md:text-base lg:text-lg">
         {children}
       </li>
     );
   case Elements.oListItem: // Ordered List Item
     return (
-      <li key={key} className="ml-6 mt-3 list-disc text-sm md:text-base">
+      <li key={key} className="ml-6 mt-3 list-disc text-sm md:text-base lg:text-lg">
         {children}
       </li>
     );

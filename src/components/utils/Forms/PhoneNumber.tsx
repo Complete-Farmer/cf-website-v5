@@ -1,5 +1,4 @@
 import "react-phone-number-input/style.css";
-import "@assets/styles/phonenumberinput.css";
 
 import ReactPhoneNumberInput from "react-phone-number-input";
 

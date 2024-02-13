@@ -1,6 +1,9 @@
 
 export * from "./Forms";
+export * from "./Swiper";
+export * from "./CropDetails";
 export { default as Tab } from "./Tab";
+export { default as Fading } from "./Fading";
 export { default as Wrapper } from "./Wrapper";
 export { default as Section } from "./Section";
 export { default as PlainTab } from "./PlainTab";
@@ -15,8 +18,7 @@ export { default as SpinnerLoader } from "./SpinnerLoader";
 export { default as HeadingOneLine } from "./HeadingOneLine";
 export { default as NewsletterForm } from "./NewsletterForm";
 export { default as PressHighlights } from "./PressHighlights";
-export { default as AvailableOrders } from "./AvailableOrders";
 export { default as ServiceGuideForm } from "./ServiceGuideForm";
-export { default as CustomerStoryCard } from "./CustomerStoryCard";
+export { default as AvailableCrops } from "./AvailableCrops.astro";
 export { default as HeroTwoSideImageFade } from "./HeroTwoSideImageFade";
-export { default as MarketAvailabilityCard } from "./MarketAvailabilityCard";
+export { default as CustomerStoryTextCard } from "./CustomerStoryTextCard.astro";

@@ -1,14 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 
-import { Tab } from "@components/utils";
-import { Button, SpinnerLoader } from "@components/utils";
+import { EventCard } from "./";
+import { Tab, Button, SpinnerLoader } from "@components/utils";
 
 import { getEvents } from "@utils/prismic";
 import { eventsConfig } from "@utils/constants";
 import { formatDateWithCommas, isDatePast } from "@utils/functions";
 
 import type { IPrismicData, IPrismicDoc } from "types/app";
-import { EventCard } from ".";
 
 const _cateogries = [
   { id: 0, name: "All", current: true },

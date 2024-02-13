@@ -2,7 +2,7 @@ import Fade from "react-reveal/Fade";
 import PlainTab from "@components/utils/PlainTab";
 import type { ITab } from "types/app";
 import { Button } from "@components/utils";
-import { classNames } from "@utils/functions";
+import { classNames, getAppLink } from "@utils/functions";
 
 interface IProps {
   tabs: ITab[];
@@ -44,19 +44,24 @@ const HeroLeft = ({ tabs, currentTab }: IProps) => {
             </p>
           </div>
           <div className="flex flex-col sm:flex-row w-full xl:justify-start items-start gap-6">
-            <Button
-              title={firstButtonText}
-              onClick={handleButtonClick}
-              className={classNames(
-                firstButtonText.includes("Started")
-                  ? "xl:!w-[145px]"
-                  : " xl:!w-[130px]",
-                "py-4 sm:!w-[170px] text-xl !rounded-full"
-              )}
-            />
+            <a
+              href={getAppLink("Signup Grower")}
+              className="contents"
+            >
+              <Button
+                title={firstButtonText}
+                onClick={handleButtonClick}
+                className={classNames(
+                  firstButtonText.includes("Started")
+                    ? "xl:!w-[145px]"
+                    : " xl:!w-[130px]",
+                  "py-4 sm:!w-[170px] text-xl !rounded-full"
+                )}
+              />
+            </a>
 
             <a
-              href={"/products?tab=" + currentTab.href}
+              href="/products?tab=grower"
               className="contents"
             >
               <Button

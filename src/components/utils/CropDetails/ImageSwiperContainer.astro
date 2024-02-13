@@ -1,0 +1,60 @@
+---
+import { SwiperSlide, SwiperContainer } from "@components/utils";
+
+interface Props {
+  images: {
+    source: string;
+    name: string;
+  }[];
+}
+
+const { images } = Astro.props;
+
+const swiperProps = {
+  rewind: true,
+  spaceBetween: 0,
+  slidesPerView: 1,
+  initialSlide: 0,
+  pagination: {
+    clickable: true,
+  },
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false,
+  },
+  navigation: true,
+  centeredSlides: true,
+  id: "crop-details-swiper",
+};
+---
+
+<div class="mx-auto max-w-7xl xl:max-w-7xl xl:px-8">
+  <div
+    class="space-y-10 xl:space-y-0 xl:grid xl:grid-cols-5 xl:items-start xl:gap-x-14"
+  >
+    <div
+      class="xl:mt-6 xl:rounded-md xl:col-span-3 xl:border xl:border-gray-200 xl:shadow-sm"
+    >
+      <SwiperContainer {...swiperProps}>
+        {
+          images.map(({ source, name }) => (
+            <SwiperSlide lazy>
+              <img
+                alt={name}
+                src={source}
+                loading="lazy"
+                class="w-[100vw] h-[200px] sm:h-[400px] xl:h-[615px] xlLw-full object-cover object-center rounded-md bg-white"
+              />
+            </SwiperSlide>
+          ))
+        }
+      </SwiperContainer>
+    </div>
+
+    <div
+      class="px-4 sm:px-8 xl:px-0 xl:mt-5 xl:pt-5 overflow-hidden space-y-4 col-span-2"
+    >
+      <slot />
+    </div>
+  </div>
+</div>

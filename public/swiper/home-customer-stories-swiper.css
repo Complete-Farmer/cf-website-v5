@@ -1,0 +1,14 @@
+.swiper-button-prev,
+.swiper-button-next {
+  width: 72px !important;
+  height: 72px !important;
+  background-size: 32px 32px !important;
+}
+
+.swiper-button-prev {
+  left: 6.5%;
+}
+
+.swiper-button-next {
+  right: 6.5%;
+}

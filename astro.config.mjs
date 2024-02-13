@@ -12,8 +12,10 @@ export default defineConfig({
     format: "directory",
     assets: "assets"
   },
+  image: {
+    domains: ["https://completefarmer.s3.us-east-2.amazonaws.com"],
+  },
   site:  "https://www.completefarmer.com",
-  // site:  "http://cf-astro-test.s3-website.us-east-2.amazonaws.com/",
   redirects: {
     "/products/grower/": "/products/grower/new-farmer/",
     "/legal/": "/legal/terms-and-conditions"

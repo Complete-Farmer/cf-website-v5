@@ -1,0 +1,36 @@
+---
+import { Button } from "@components/utils";
+
+interface Props {
+  link: string;
+  title: string;
+  description: string;
+}
+const { link, title, description } = Astro.props;
+---
+
+<div class="space-y-10 xl:space-y-24">
+  <div class="flex flex-col justify-start items-start gap-5 sm:gap-8">
+    <div class="flex flex-col justify-start items-start gap-2 sm:pr-6 xl:pr-0">
+      <h1
+        class="line-clamp-2 text-[28px] leading-9 text-left font-bold md:text-[32px] md:leading-10 lg:text-4xl lg:leading-[50px] xl:text-6xl xl:leading-[80px] text-grower-900"
+      >
+        {title}
+      </h1>
+      <p
+        class="lg:text-xl xl:text-2xl font-normal text-left text-base xl:leading-9 xl:text-left text-custom_black-900 line-clamp-4"
+      >
+        {description}
+      </p>
+    </div>
+    <div class="flex justify-left">
+      <a href={link} target="_blank" rel="noreferrer" class="contents">
+        <Button
+          hasArrow
+          title="Learn more"
+          className="py-3 px-4 text-base sm:py-4 sm:px-6 sm:text-xl !rounded-full !w-fit !font-bold"
+        />
+      </a>
+    </div>
+  </div>
+</div>

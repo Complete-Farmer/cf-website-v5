@@ -72,13 +72,13 @@ import CompareCards from "./CompareCards";
   });
 </script>
 
-<script type="module">
+<script>
   // @ts-nocheck
-  import { $fullComparisonDrawer } from "../../src/utils/stores.ts";
+  import { $fullComparisonDrawer } from "@utils/stores.ts";
 
   const fullComparisonBtn = document.getElementById("full-comparison");
 
-  fullComparisonBtn.addEventListener("click", () =>
+  fullComparisonBtn?.addEventListener("click", () =>
     $fullComparisonDrawer.set(true)
   );
 </script>

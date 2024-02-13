@@ -1,0 +1,193 @@
+---
+import type { IPrismicData } from "types/app";
+import {
+  Button,
+  Tab,
+  SwiperSlide,
+  SwiperContainer,
+  CustomerStoryTextCard,
+} from "@components/utils";
+
+const tabs = [
+  {
+    name: "Grower",
+    slug: "grower",
+    current: true,
+  },
+  {
+    name: "Buyer",
+    slug: "buyer",
+    current: false,
+  },
+];
+
+const swiperProps = {
+  rewind: true,
+  navigation: true,
+  centeredSlides: true,
+  initialSlide: 0,
+  spaceBetween: 20,
+  slidesPerView: 1.2,
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false,
+  },
+  id: "home-customer-stories-swiper",
+};
+
+interface Props {
+  data: IPrismicData;
+}
+
+const { data } = Astro.props;
+
+const buyerData = [];
+const growerData = [];
+
+data.results
+  .filter((item) => item?.data?.description.length > 0)
+  .forEach((item) => {
+    const transformedItem = {
+      image: item.data.image,
+      id: item.uid || item.id,
+      titleTextColor: "text-white",
+      imageUrl: item.data.image.url,
+      name: item?.data?.name[0]?.text,
+      titleFirstName: item?.data?.description[0]?.text,
+    };
+    if (item.data.category?.data.name === "Grower") {
+      growerData.push(transformedItem);
+    }
+    if (item.data.category?.data.name === "Buyer") {
+      buyerData.push(transformedItem);
+    }
+  });
+---
+
+<section
+  id="home_customer_stories_section"
+  class="relative h-full py-14 pb-16 sm:py-20 xl:py-32 sm:pb-40 bg-cover bg-customer-stories-grower-bg-pattern bg-grower-900"
+>
+  <div
+    class="flex relative py-4 mb-5 flex-col px-10 justify-center items-center text-center tracking-normal leading-6 sm:text-center text-white"
+  >
+    <h2
+      class="text-center mb-4 font-sans text-white text-[28px] sm:text-5xl font-bold sm:font-semibold tracking-normal leading-none md:mb-12 lg:mb-4"
+    >
+      Customer Stories
+    </h2>
+    <Tab categories={tabs} />
+  </div>
+
+  <div id="grower-swiper" class="block">
+    <SwiperContainer {...swiperProps}>
+      {
+        growerData.map((item) => (
+          <SwiperSlide>
+            <CustomerStoryTextCard data={item} />
+          </SwiperSlide>
+        ))
+      }
+    </SwiperContainer>
+  </div>
+  <div id="buyer-swiper" class="hidden">
+    <SwiperContainer {...swiperProps}>
+      {
+        buyerData.map((item) => (
+          <SwiperSlide>
+            <CustomerStoryTextCard type="buyer" data={item} />
+          </SwiperSlide>
+        ))
+      }
+    </SwiperContainer>
+  </div>
+
+  <div class="mt-6 md:mt-10 xl:mt-20">
+    <a href="/customer-stories" class="contents">
+      <Button
+        hasArrow
+        title="See all stories"
+        id="home_customer_stories_see_all_stories"
+        className="!w-auto mx-auto !rounded-full px-8 py-4 text-xl"
+      />
+    </a>
+  </div>
+</section>
+
+<script>
+  import { $homeCustomerStoriesActiveTab as $activeTab } from "@utils/stores.ts";
+  let activeTab = $activeTab.get();
+
+  const seeAllStoriesBtn = document.getElementById(
+    "home_customer_stories_see_all_stories"
+  );
+  const csSection = document.getElementById("home_customer_stories_section");
+  const growerTabBtn = document.getElementById("tab-grower");
+  const buyerTabBtn = document.getElementById("tab-buyer");
+  const tabListBtn = document.getElementById("tab_list");
+
+  const growerSwiper = document.getElementById("grower-swiper");
+  const buyerSwiper = document.getElementById("buyer-swiper");
+
+  tabListBtn?.classList.add("bg-grower-400");
+
+  growerTabBtn?.addEventListener("click", () => {
+    $activeTab.set("grower");
+    updateTab($activeTab.get());
+  });
+
+  buyerTabBtn?.addEventListener("click", () => {
+    $activeTab.set("buyer");
+    updateTab($activeTab.get());
+  });
+
+  function updateTab(tab: typeof activeTab) {
+    if (tab === "grower") {
+      seeAllStoriesBtn?.classList.replace("bg-buyer-500", "bg-grower-500");
+      csSection?.classList.replace("bg-buyer-900", "bg-grower-900");
+      csSection?.classList.replace(
+        "bg-customer-stories-buyer-bg-pattern",
+        "bg-customer-stories-grower-bg-pattern"
+      );
+
+      growerTabBtn?.setAttribute("aria-selected", "true");
+      growerTabBtn?.setAttribute("tabindex", "0");
+      growerTabBtn?.setAttribute("data-headlessui-state", "selected");
+      growerTabBtn?.classList.add("bg-grower-500");
+
+      buyerTabBtn?.classList.remove("bg-buyer-500");
+      buyerTabBtn?.setAttribute("aria-selected", "false");
+      buyerTabBtn?.setAttribute("tabindex", "-1");
+      buyerTabBtn?.setAttribute("data-headlessui-state", "");
+
+      tabListBtn?.classList.replace("bg-buyer-600", "bg-grower-400");
+
+      growerSwiper?.classList.replace("hidden", "block");
+      buyerSwiper?.classList.replace("block", "hidden");
+    } else {
+      seeAllStoriesBtn?.classList.replace("bg-grower-500", "bg-buyer-500");
+      csSection?.classList.replace("bg-grower-900", "bg-buyer-900");
+      csSection?.classList.replace(
+        "bg-customer-stories-grower-bg-pattern",
+        "bg-customer-stories-buyer-bg-pattern"
+      );
+
+      buyerTabBtn?.setAttribute("aria-selected", "true");
+      buyerTabBtn?.setAttribute("tabindex", "0");
+      buyerTabBtn?.setAttribute("data-headlessui-state", "selected");
+      buyerTabBtn?.classList.add("bg-buyer-500");
+
+      growerTabBtn?.classList.remove("bg-grower-500");
+      growerTabBtn?.setAttribute("aria-selected", "false");
+      growerTabBtn?.setAttribute("tabindex", "-1");
+      growerTabBtn?.setAttribute("data-headlessui-state", "");
+
+      tabListBtn?.classList.replace("bg-grower-400", "bg-buyer-600");
+
+      buyerSwiper?.classList.replace("hidden", "block");
+      growerSwiper?.classList.replace("block", "hidden");
+    }
+  }
+
+  updateTab(activeTab);
+</script>

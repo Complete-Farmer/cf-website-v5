@@ -138,12 +138,12 @@ const { event, relatedEvents } = Astro.props;
 
 <!-- page: "/resources/news-room", -->
 
-<script type="module">
+<script>
   // @ts-nocheck
-  import { createImageFromInitials } from "../../src/utils/functions.ts";
+  import { createImageFromInitials } from "@utils/functions.ts";
 
   const images = document.querySelectorAll("#speaker-img");
-  images.forEach((image) => {
+  images?.forEach((image) => {
     if (!image.hasAttribute("src")) {
       const name = image.getAttribute("data-name");
       const src = createImageFromInitials(500, name.split(",")[0]);

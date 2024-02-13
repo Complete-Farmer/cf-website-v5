@@ -36,7 +36,7 @@ const Button = ({
       )}
     >
       {isLoading && <div>loading</div>}
-      <span>{title}</span>
+      <span className="text-base xl:text-lg">{title}</span>
       {hasArrow && <ArrowIcon className={arrowClass}/>}
     </button>
   );

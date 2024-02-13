@@ -1,0 +1,62 @@
+---
+import type { ISeasonality } from "types/app";
+
+import { Tooltip } from "react-tooltip";
+
+import { classNames, generateAvailabilityString, getMonthsFirstLetter } from "@utils/functions";
+
+interface Props {
+  data: ISeasonality[];
+}
+
+const { data } = Astro.props
+---
+<div class="flex flex-col justify-center sm:px-6 sm:pt-6 pb-8 lg:px-0 rounded-lg sm:border sm:border-gray-100 overflow-hidden">
+  <div class="lg:px-6">
+    <div class="flex flex-col sm:flex-row sm:justify-start sm:items-center w-full pb-4">
+      <p class="text-base font-bold text-left text-custom_gray-300">
+        SEASONALITY
+      </p>
+      <button class="bg-grower-500 text-white rounded-full px-4 py-2 mt-3 sm:mt-0 sm:ml-4 w-[100px] sm:w-[auto]">
+        Ghana
+      </button>
+    </div>
+    <div class="space-y-5  divide-y">
+      {data.map((item, i) => (
+        <div
+          class="flex flex-col justify-start items-start space-y-4 pt-4"
+        >
+          <p class="text-base text-left text-custom_black-900">
+            <span class="">
+            Availability in the{" "}
+            </span>
+            <span class="font-bold">
+              {item.plantingArea} region
+            </span>
+            <span class="">: </span>
+            <span class="font-bold">
+              {generateAvailabilityString(item.availabilityData)}
+            </span>
+          </p>
+          <div class="flex justify-between items-center gap-2 text-xs w-full text-left text-custom_gray-300">
+            <p class="font-bold">JAN</p>
+            <div class="flex justify-between items-start gap-1 w-full">
+              {item.availabilityData.map((d) => {
+                return (
+                  <>
+                    <span id={"tooltip" + d.name} class="w-full">
+                      <div class={classNames(d.availability ? "bg-grower-500" : "bg-gray-100", "overflow-auto h-1 w-full sm:h-1 rounded-lg")} />
+                    </span>
+                    <Tooltip place="top" anchorSelect={"#tooltip" + d.name} content={getMonthsFirstLetter(d.name)} className="block sm:hidden" client:idle />
+                    <Tooltip place="top" anchorSelect={"#tooltip" + d.name} content={d.name} className="hidden sm:block" client:idle />
+                  </>
+                );
+              })}
+            </div>
+            <p class="font-bold">DEC</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>

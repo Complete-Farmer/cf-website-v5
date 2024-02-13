@@ -1,0 +1,66 @@
+---
+import { SwiperOptions } from "swiper/types";
+
+interface Props extends SwiperOptions {
+  id?: string;
+}
+
+const { id, ...props } = Astro.props;
+---
+
+<swiper-container id={id} data-props={JSON.stringify(props)} init="false">
+  <slot />
+</swiper-container>
+
+<script>
+  import { register } from "swiper/element";
+  import { SwiperOptions } from "swiper/types";
+  import { Autoplay, Navigation, Pagination } from "swiper/modules";
+
+  register();
+
+  const swiperEl = document.querySelectorAll("swiper-container");
+
+  const origin = window.location.origin;
+
+  swiperEl?.forEach((e) => {
+    if (e) {
+      const urls = [`${origin}/swiper/main.css`];
+
+      const props: SwiperOptions = JSON.parse(e.getAttribute("data-props"));
+
+      if (e.id) {
+        urls.push(`${origin}/swiper/${e.id}.css`);
+      }
+      
+      const swiperParams: SwiperOptions = {
+        injectStylesUrls: [...urls],
+        on: { init() {} },
+        ...props,
+      };
+
+      if (props.autoplay) {
+        swiperParams.modules = [Autoplay];
+      }
+
+      if (props.navigation) {
+        if (swiperParams.modules) {
+          swiperParams.modules.push(Navigation);
+        } else {
+          swiperParams.modules = [Navigation];
+        }
+      }
+
+      if (props.pagination) {
+        if (swiperParams.modules) {
+          swiperParams.modules.push(Pagination);
+        } else {
+          swiperParams.modules = [Pagination];
+        }
+      }
+
+      Object.assign(e, swiperParams);
+      e.initialize();
+    }
+  });
+</script>

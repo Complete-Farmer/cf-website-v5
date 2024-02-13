@@ -1,0 +1,43 @@
+---
+import { Image } from "astro:assets";
+
+import ImageIllus from "@assets/images/products/buyer/specification.webp";
+
+interface Props {
+  data: {
+    key: string;
+    value: string;
+  }[];
+}
+
+const { data } = Astro.props;
+---
+
+<div id="available-specifications" class="hidden w-full max-w-7xl">
+  <div class="flex flex-row px-4">
+    <div class="w-full lg:w-3/5">
+      <div class="flex items-center justify-between w-full">
+        <h2 class="text-3xl font-bold text-custom_black-900 py-8">
+          Available Specifications
+        </h2>
+      </div>
+      <div class="flex gap-3">
+        <div>
+          {
+            data.map((detail) => (
+              <div class="flex justify-start items-start gap-4 font-small text-custom_black-900 text-md text-base leading-8 text-left mt-1">
+                <span>{detail.key}:</span>
+                <span>{detail.value}</span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+    <div class="hidden sm:flex w-full lg:w-1/3 justify-end items-center">
+      <div class="lg:mt-20 mt-4">
+        <Image src={ImageIllus} alt="specification" class="w-64 h-64" />
+      </div>
+    </div>
+  </div>
+</div>

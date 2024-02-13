@@ -1,0 +1,69 @@
+---
+import type { IEvent } from "types/app";
+
+import { SwiperSlide, SwiperContainer } from "@components/utils";
+
+import { EventCard } from "./events";
+import ResourceHeader from "./ResourceHeader.astro";
+
+interface Props {
+  events: IEvent[];
+}
+
+const { events } = Astro.props;
+
+const swiperProps = {
+  id: "resource-events-swiper",
+  rewind: true,
+  navigation: true,
+  initialSlide: 2,
+  slidesPerView: 1.2,
+  centeredSlides: true,
+  breakpoints: {
+    0: {
+      slidesPerView: 1.1,
+    },
+    370: {
+      slidesPerView: 1.1,
+    },
+    440: {
+      slidesPerView: 1.5,
+    },
+    639: {
+      slidesPerView: 2,
+    },
+    800: {
+      slidesPerView: 2,
+    },
+    1024: {
+      slidesPerView: 2.2,
+    },
+    1370: {
+      slidesPerView: 3,
+    },
+    1880: {
+      slidesPerView: 3,
+    },
+  },
+};
+---
+
+<section class="w-full relative bg-grower-900 pt-20 pb-36">
+  <ResourceHeader
+    title="Events"
+    link="/resources/events"
+    titleColor="text-white"
+  />
+
+  <SwiperContainer {...swiperProps}>
+    {
+      events.map((event) => (
+        <SwiperSlide>
+          <div class="w-auto ml-2 sm:ml-14 md:ml-9 lg:ml-6">
+            <EventCard event={event} isSlider />
+          </div>
+        </SwiperSlide>
+      ))
+    }
+  </SwiperContainer>
+</section>

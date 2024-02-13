@@ -1,57 +1,77 @@
-import "react-phone-number-input/style.css";
-import "@assets/styles/phonenumberinput.css";
+import * as yup from "yup";
+import { useState } from "react";
+import { useForm, type SubmitHandler } from "react-hook-form";
 
-import { useState, useEffect } from "react";
-import PhoneInput from "react-phone-number-input";
-import type { IChangeEvent, IClickEvent } from "types/app";
 import { MenuCloseIcon } from "@assets/icons";
+import useYupValidationResolver from "@hooks/useYupValidationResolver";
 
-export default function EstimateModal({ toggleModal }: { toggleModal: () => void; }) {
-  const [value, setValue] = useState<string>();
-  const [isLoading, setIsLoading] = useState(false);
-  const [farmPlan, setFarmPlan] = useState(null);
-  const [isValidEmail, setIsValidEmail] = useState(false);
+import { Input, Button, PhoneNumber } from "@components/utils";
 
-  const [form, setForm] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phoneNumber: ""
+type Inputs = {
+  email: string;
+  lastName: string;
+  firstName: string;
+  phoneNumber: string;
+};
+
+const schema = yup
+  .object()
+  .shape({
+    lastName: yup.string().required(),
+    firstName: yup.string().required(),
+    phoneNumber: yup.string().required(),
+    email: yup.string().email().required(),
+  })
+  .required();
+
+export default function EstimateModal({
+  toggleModal,
+}: {
+  toggleModal: () => void;
+}) {
+  const resolver = useYupValidationResolver(schema);
+  const [farmPlan] = useState(null);
+
+  const {
+    watch,
+    register,
+    setValue,
+    handleSubmit,
+    formState: { isDirty, isValid, isLoading },
+  } = useForm<Inputs>({
+    resolver,
+    defaultValues: {
+      email: "",
+      lastName: "",
+      firstName: "",
+      phoneNumber: "",
+    },
   });
 
-  useEffect(() => {
-    setIsValidEmail(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email));
-  }, [form.email]);
-
-  const handleValueChange = (newValue: string) => {
-    setValue(newValue);
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data);
   };
 
-  const handleInputChange = (e: IChangeEvent) => {
-    const { name, value } = e.target;
-    setForm((prevForm) => ({ ...prevForm, [name]: value }));
-  };
+  const phoneNumber = watch("phoneNumber");
 
-  const handleGenerateFarmPlan = (e: IClickEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      setFarmPlan("dummy");
-    }, 1000);
-  };
+  // const handleGenerateFarmPlan = (e: IClickEvent) => {
+  //   e.preventDefault();
+  //   setIsLoading(true);
+  //   setTimeout(() => {
+  //     setIsLoading(false);
+  //     setFarmPlan("dummy");
+  //   }, 1000);
+  // };
 
   const handleLinkClick = () => {
     // ReactGA.event({
     //   category: "Link Click",
     //   action: "Free Plan"
     // });
-
     // window.dataLayer = window.dataLayer || [];
     // window.dataLayer.push({
     //   event: "FreePlan"
     // });
-
     // ReactPixel.track("Free Plan", {});
   };
 
@@ -60,9 +80,12 @@ export default function EstimateModal({ toggleModal }: { toggleModal: () => void
       <div className=" px-6">
         <div className="flex flex-row-reverse">
           <div className="flex flex-row text-center justify-end">
-            <p className="text-xl font-bold text-right text-custom_gray-300 hover:cursor-pointer -mt-6" onClick={toggleModal}>
-              <MenuCloseIcon className="h-8 w-8" aria-hidden="true" />
-            </p>
+            <button
+              className="flex justify-center items-center h-10 w-10 rounded-full bg-custom_gray-200"
+              onClick={toggleModal}
+            >
+              <MenuCloseIcon />
+            </button>
           </div>
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-xl leading-6 md:text-2xl md:leading-[30px] font-bold sm:tracking-tight text-custom_green-900">
@@ -70,98 +93,76 @@ export default function EstimateModal({ toggleModal }: { toggleModal: () => void
             </h2>
           </div>
         </div>
-        <form action="#" method="POST" className="mx-auto mt-6 max-w-xl sm:mt-10">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="mx-auto mt-6 max-w-xl sm:mt-10"
+        >
           <div className="grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-2">
-            <div>
-              <label htmlFor="first-name" className="text-custom_gray-300 block text-sm font-semibold leading-5 pb-2">
-                First Name <span className="text-[#EB2F2F]">*</span>
-              </label>
-              <div>
-                <input
-                  type="text"
-                  name="first-name"
-                  id="first-name"
-                  placeholder="Eg. John"
-                  autoComplete="given-name"
-                  className="block w-full h-14  bg-[#EFEFEF]  rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-custom_gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-base leading-6"
-                />
-              </div>
-            </div>
+            <Input
+              required
+              type="text"
+              id="firstName"
+              title="First Name"
+              placeholder="Eg. Kofi"
+              autoComplete="given-name"
+              {...register("firstName")}
+            />
 
-            <div>
-              <label htmlFor="last-name" className="text-custom_gray-300 block text-sm font-semibold leading-5 pb-2">
-                Last Name <span className="text-[#EB2F2F]">*</span>
-              </label>
-              <div>
-                <input
-                  type="text"
-                  name="last-name"
-                  id="last-name"
-                  placeholder="Eg. Doe"
-                  autoComplete="family-name"
-                  className="block w-full h-14 bg-[#EFEFEF]  rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-custom_gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-base leading-6"
-                />
-              </div>
-            </div>
+            <Input
+              required
+              type="text"
+              id="lastName"
+              title="Last Name"
+              placeholder="Eg. Okeke"
+              autoComplete="family-name"
+              {...register("lastName")}
+            />
 
-            <div className="col-span-2">
-              <label htmlFor="email" className="text-custom_gray-300 block text-sm font-semibold leading-5 pb-2">
-                Email <span className="text-[#EB2F2F]">*</span>
-              </label>
-              <div>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  placeholder="example@company.com"
-                  autoComplete="email"
-                  onChange={handleInputChange}
-                  className="block w-full h-14 bg-[#EFEFEF] rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-custom_gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-base leading-6"
-                />
-              </div>
-            </div>
+            <Input
+              required
+              id="email"
+              type="email"
+              autoComplete="email"
+              title="Buisiness Email"
+              outerClassName="col-span-2"
+              placeholder="example@company.com"
+              {...register("email")}
+            />
 
-            <div className="col-span-2">
-              <label htmlFor="phone-number" className="text-custom_gray-300 block text-sm font-semibold leading-5 pb-2">
-                Phone Number <span className="text-[#EB2F2F]">*</span>
-              </label>
-              <div className="relative ">
-                <div className="absolute inset-y-0 left-0 flex items-center">
-                  <label htmlFor="country" className="sr-only">
-                    Country
-                  </label>
-                </div>
-                <PhoneInput
-                  className="reactphone text-base leading-6"
-                  international
-                  countryCallingCodeEditable={false}
-                  defaultCountry="GH"
-                  value={value}
-                  onChange={handleValueChange}
-                  style={{ outline: "none" }}
-                />
-              </div>
-            </div>
+            <PhoneNumber
+              required
+              value={phoneNumber}
+              title="Phone Number"
+              outerClassName="col-span-2"
+              onChange={(val: string) => setValue("phoneNumber", val)}
+            />
           </div>
           <div className="mt-10">
-            <button
+            <Button
               type="submit"
-              onClick={handleGenerateFarmPlan}
-              disabled={isLoading || farmPlan || !isValidEmail}
-              className="block w-full disabled:cursor-not-allowed disabled:bg-[#ADE4AB] rounded-lg bg-custom_green-500 sm:px-3.5 py-2.5 text-center text-base leading-6 font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
-            >
-              Submit
-            </button>
+              className="h-16"
+              isLoading={isLoading}
+              title="Submit"
+              isDisabled={!isDirty || !isValid}
+            />
           </div>
           <div className="col-span-full mt-8 mb-10">
             <p className="w-full max-w-5xl text-sm text-center text-custom_black-900">
               <span>
                 By clicking on Submit, I agree to Complete Farmer{" "}
-                <a onClick={handleLinkClick} href="/terms-and-conditions" className="text-grower-500 font-semibold">
+                <a
+                  onClick={handleLinkClick}
+                  href="www.completefarmer.com/terms-and-conditions"
+                  className="text-grower-500 font-semibold"
+                >
                   Terms & Conditions
                 </a>{" "}
                 and <br className="hidden xl:block" />
-                <a onClick={handleLinkClick} href="/privacy-policy" className="text-grower-500 font-semibold">
+                <a
+                  onClick={handleLinkClick}
+                  href="www.completefarmer.com/privacy-policy"
+                  className="text-grower-500 font-semibold"
+                >
                   Privacy Policy
                 </a>
               </span>{" "}
@@ -173,7 +174,9 @@ export default function EstimateModal({ toggleModal }: { toggleModal: () => void
       {farmPlan && (
         <div className="w-full max-w-5xl mt-4 mx-0 relative bg-custom_gray-400 py-8">
           <div className="px-6 flex justify-between hover:cursor-pointer">
-            <p className="text-xl font-bold text-left text-custom_black-900">Download generated farm plan</p>
+            <p className="text-xl font-bold text-left text-custom_black-900">
+              Download generated farm plan
+            </p>
             <div className="flex justify-start items-start h-6 opacity-80 gap-2">
               <svg
                 width={24}
@@ -189,7 +192,9 @@ export default function EstimateModal({ toggleModal }: { toggleModal: () => void
                   fill="#31BC2E"
                 />
               </svg>
-              <p className="text-xl font-bold text-center text-grower-500">Download</p>
+              <p className="text-xl font-bold text-center text-grower-500">
+                Download
+              </p>
             </div>
           </div>
         </div>

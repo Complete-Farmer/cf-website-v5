@@ -83,13 +83,13 @@ import CompareCards from "../CompareCards";
   });
 </script>
 
-<script type="module">
+<script>
   // @ts-nocheck
-  import { $fullComparisonDrawer, $joinSalesAffiliateModal } from "../../src/utils/stores.ts";
+  import { $fullComparisonDrawer, $joinSalesAffiliateModal } from "@utils/stores.ts";
 
   const fullComparisonBtn = document.getElementById("full-comparison");
   const helpBuyersBtn = document.getElementById("help-buyers");
 
-  helpBuyersBtn.addEventListener("click", () => $joinSalesAffiliateModal.set(true))
-  fullComparisonBtn.addEventListener("click", () => $fullComparisonDrawer.set(true))
+  helpBuyersBtn?.addEventListener("click", () => $joinSalesAffiliateModal.set(true))
+  fullComparisonBtn?.addEventListener("click", () => $fullComparisonDrawer.set(true))
 </script>

@@ -1,9 +1,9 @@
 import { Fragment, useState } from "react";
 import { Popover, Transition } from "@headlessui/react";
 
-import CFBuyerLogo from "@assets/images/logos/cf/buyer.png";
-import CFGrowerLogo from "@assets/images/logos/cf/grower.png";
-import CFMainLogo from "@assets/images/logos/cf/main.png";
+import CFBuyerLogo from "@assets/images/logos/cf/buyer.webp";
+import CFGrowerLogo from "@assets/images/logos/cf/grower.webp";
+import CFMainLogo from "@assets/images/logos/cf/main.webp";
 
 import { ArrowIcon, ChevronIcon, MenuOpenIcon } from "@assets/icons";
 

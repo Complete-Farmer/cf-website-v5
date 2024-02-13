@@ -101,8 +101,8 @@ const ApplicationForm = ({ role }: { role: string }) => {
     window.open(mailtoLink, "_blank");
   };
 
-  const phoneNumber = watch("phoneNumber");
   const resumeFile = watch("resumeFile");
+  const phoneNumber = watch("phoneNumber");
   const coverLetterFile = watch("coverLetterFile");
 
   return (

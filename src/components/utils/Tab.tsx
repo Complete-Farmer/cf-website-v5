@@ -7,22 +7,22 @@ interface IProps {
     current: boolean;
   }[];
   className?: string;
-  changeCategory: (i: number) => void;
-  activeBgColor: string;
-  inActiveBgColor: string;
-  normalBgColor: string;
+  changeCategory?: (i: number) => void;
+  activeBgColor?: string;
+  inActiveBgColor?: string;
+  normalBgColor?: string;
   inActiveTextColor?: string;
 }
 
 export default function TabComp(props: IProps) {
   const {
-    className,
+    className = "",
     categories,
     changeCategory,
-    activeBgColor,
-    inActiveBgColor,
-    normalBgColor,
-    inActiveTextColor,
+    activeBgColor = "",
+    inActiveBgColor = "",
+    normalBgColor="",
+    inActiveTextColor = "",
   } = props;
   const initialIndex = categories.findIndex((category) => category.current);
 
@@ -37,10 +37,11 @@ export default function TabComp(props: IProps) {
         key={initialIndex}
         defaultIndex={initialIndex}
         onChange={(index) => {
-          changeCategory(index);
+          changeCategory?.(index);
         }}
       >
         <Tab.List
+          id="tab_list"
           className={classNames(
             "flex space-x-1 rounded-full p-1",
             normalBgColor
@@ -48,9 +49,10 @@ export default function TabComp(props: IProps) {
         >
           {categories.map((category) => (
             <Tab
+              id={`tab-${category.name.toLowerCase()}`}
               key={category.name}
               className={classNames(
-                "w-full rounded-full py-4 px-6 text-base leading-5 font-bold whitespace-nowrap ",
+                "w-full rounded-full py-4 px-6 text-base leading-5 font-bold whitespace-nowrap",
                 " focus:outline-none ",
                 category.current
                   ? `${activeBgColor} shadow text-white`

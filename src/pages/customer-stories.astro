@@ -1,18 +1,34 @@
 ---
 import Layouts from "@layouts/Layouts.astro";
 
-import { Hero, StoriesSlider } from "@components/customer-stories";
+import { Hero, StoryList } from "@components/utils/CustomerStories";
+
 import { getCxStories } from "@utils/prismic";
 
-const customerStories = await getCxStories({ fetchLinks: ["categories.name"] });
+const customerStories = await getCxStories({
+  page: 1,
+  pageSize: 6,
+  fetchLinks: ["categories.name"],
+});
 ---
 
 <Layouts
-  title="Cutomer Stories | Complete Farmer"
+  title="Customer Stories | Complete Farmer"
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
-  <Hero client:idle />
-  <!-- <StoriesSlider data={customerStories} client:visible /> -->
+  <Hero
+    client:idle
+    url="https://www.youtube.com/watch?v=_9HgDUGrjCQ"
+    title="See how we’ve served others like you."
+    thumbnail="https://img.youtube.com/vi/_9HgDUGrjCQ/maxresdefault.jpg"
+    description="Browse through the inspiring success stories of customers empowered by our solutions."
+  />
+
+  <StoryList
+    client:idle
+    data={customerStories}
+    totalResults={customerStories.total_results_size}
+  />
 </Layouts>
 
 <!-- page: "/about-us", -->

@@ -2,7 +2,7 @@ import "react-modern-drawer/dist/index.css";
 import React, { useEffect, useState } from "react";
 import ReactDrawer from "react-modern-drawer";
 
-import CFMainLogo from "@assets/images/logos/cf/main.png";
+import CFMainLogo from "@assets/images/logos/cf/main.webp";
 import { ArrowIcon, MenuCloseIcon } from "@assets/icons";
 import useResolution from "@hooks/useResolution";
 import { classNames, getAppLink } from "@utils/functions";
