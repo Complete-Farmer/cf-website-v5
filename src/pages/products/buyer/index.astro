@@ -18,7 +18,7 @@ import { filterAt, getCategories, getCxStories } from "@utils/prismic";
 
 const { results } = await getCategories("products");
 
-const buyerId = results.find((c) => c.data.name === "Grower").id;
+const buyerId = results.find((c) => c.data.name === "Buyer").id;
 
 const filters = filterAt("my.customer_stories_v3.category", buyerId);
 
@@ -74,7 +74,8 @@ if (response) {
         bgColor="bg-buyer-200"
         data={availableCropOffers}
         titleTextColor="text-buyer-400"
-        title="See what other farmers are growing"
+        title="Finally experience a procurement platform that caters to your specifications."
+        desc="Say goodbye to scrambling to hit your targets and dealing with let-downs from suppliers. We make sourcing easier and more efficient for you and your team.  "
       />
     )
   }
@@ -82,17 +83,3 @@ if (response) {
 </Layouts>
 
 <!-- page: "/products/buyer", -->
-<!-- <script>
-  // @ts-nocheck
-  import { $authModal } from "@utils/stores.ts";
-
-  function toggleAuthModal() {
-    $authModal.set(true);
-    document.querySelector(".app-body").style.filter = "blur(4px)";
-    document.querySelector(".app-footer").style.filter = "blur(4px)";
-  }
-
-  const btn = document.getElementById("get-started");
-
-  btn.addEventListener("click", toggleAuthModal);
-</script> -->

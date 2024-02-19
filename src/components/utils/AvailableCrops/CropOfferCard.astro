@@ -1,0 +1,61 @@
+---
+import type { IAvailableCropOffers } from "types/app";
+
+import CardWrapper from "./CardWrapper.astro";
+
+interface Props {
+  data: IAvailableCropOffers;
+}
+
+const { data } = Astro.props;
+
+const crop = data.crop;
+const variety = data.specification.variety;
+const varietyTitle = `${variety.name} ${variety.scientificName ? `(${variety.scientificName})` : ""}`;
+---
+
+<CardWrapper link={data.link} imageAlt={crop.name} imageUrl={crop.imageUrl}>
+  <div
+    class="flex flex-col justify-start items-start self-stretch relative space-y-4 pt-4"
+  >
+    <div
+      class="flex flex-col justify-start items-start self-stretch relative gap-1 w-full sm:w-2/3 md:w-full"
+    >
+      <a
+        href={data.link}
+        class="self-stretch w-full text-base font-bold text-left text-custom_black-900 group-hover:underline underline-offset-1 decoration-2 decoration-custom_black-900"
+      >
+        {crop.name}
+      </a>
+
+      <div
+        class="w-full flex flex-col sm:w-2/3 md:w-full cursor-default truncate"
+        title={varietyTitle}
+      >
+        <span class="text-base text-left lg:leading-6 text-custom_gray-300">
+          {varietyTitle}
+        </span>
+        <span class="text-base text-left lg:leading-6 text-custom_gray-300"
+          >{data.quantity} MT Total quantity</span
+        >
+      </div>
+    </div>
+
+    <div
+      class="flex flex-col justify-start items-start relative gap-1 w-full sm:w-2/3 md:w-full"
+    >
+      <p class="w-full text-sm font-bold text-left text-custom_black-900">
+        AVAILABLE SPECS:
+      </p>
+      <p
+        class="w-full text-base text-left lg:w-96 lg:h-6 lg:leading-6 text-[#6c6c6c]"
+      >
+        {data.specs}
+      </p>
+    </div>
+
+    <p class="text-xl leading-6 font-bold text-left text-custom_black-900">
+      USD{data.price?.["USD"]}/MT
+    </p>
+  </div>
+</CardWrapper>
