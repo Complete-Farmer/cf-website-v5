@@ -76,4 +76,8 @@ const { type, image1, image2, image3, image4, description } = Astro.props;
       transition: "cubic-bezier(0,0,0,1)",
     });
   });
+
+  document.getElementById("get-started")?.addEventListener("click", () => {
+    document.getElementById("toggle-modal-get-in-touch").click();
+  });
 </script>

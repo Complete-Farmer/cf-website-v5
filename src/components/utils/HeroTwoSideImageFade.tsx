@@ -88,6 +88,7 @@ const Hero = ({
           {buttonTitle && (
             <div className="w-full flex items-center justify-center md:justify-start xl:justify-center">
               <Button
+                id="hero-two-side-img-fade-button"
                 title={buttonTitle}
                 onClick={() => {
                   if (buttonTitle.includes("affiliate")) {

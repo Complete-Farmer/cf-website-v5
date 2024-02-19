@@ -62,24 +62,24 @@ const cfBenefits = [
 
 const availableDemands: IAvailableDemands[] = [];
 
-const { statusCode, data } = await getAvaiableCrops();
+// const { statusCode, data } = await getAvaiableCrops();
 
-if (statusCode == 200) {
-  for (const c of data) {
-    const response = await getCropVarieties(c._id);
-    if (response.statusCode == 200 && response.data.length > 0) {
-      availableDemands.push({
-        ...c,
-        link: `/products/grower/crops/${convertToKebabCase(c.name)}`,
-        varieties: response.data.map((v) => ({
-          _id: v._id,
-          name: v.name,
-          imageUrl: v.imageUrl,
-        })),
-      });
-    }
-  }
-}
+// if (statusCode == 200) {
+//   for (const c of data) {
+//     const response = await getCropVarieties(c._id);
+//     if (response.statusCode == 200 && response.data.length > 0) {
+//       availableDemands.push({
+//         ...c,
+//         link: `/products/grower/crops/${convertToKebabCase(c.name)}`,
+//         varieties: response.data.map((v) => ({
+//           _id: v._id,
+//           name: v.name,
+//           imageUrl: v.imageUrl,
+//         })),
+//       });
+//     }
+//   }
+// }
 ---
 
 <GrowerIndexLayout
@@ -125,7 +125,7 @@ if (statusCode == 200) {
     titleColor="text-grower-500"
     title="Looking to sell your <br /> harvested produce?"
     button={{
-      href: "#",
+      href: "!#",
       bgColor: "bg-white",
       textColor: "text-grower-500",
     }}
@@ -133,18 +133,10 @@ if (statusCode == 200) {
 </GrowerIndexLayout>
 
 <!-- page: "/products/grower/existing-farmer", -->
-
-<script>
-  // @ts-nocheck
-  import { $getInTouchModal } from "@utils/stores.ts";
-
-  const btn = document.getElementById("get-started");
-  const btn1 = document.getElementById("get-started-1");
-
-  btn?.addEventListener("click", () => $getInTouchModal.set(true));
-
-  btn1?.addEventListener("click", (e) => {
+<script type="text/javascript" is:inline>
+  const btn = document.getElementById("get-started-1");
+  btn?.addEventListener("click", (e) => {
     e.preventDefault();
-    $getInTouchModal.set(true);
+    document.getElementById("toggle-modal-get-in-touch").click();
   });
 </script>

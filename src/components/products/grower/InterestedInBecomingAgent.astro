@@ -43,17 +43,18 @@ const classes = isAgent
         <Fragment set:html={title} />
       </p>
       <a
-        id={button.href === "#" ? (button.id || "get-started-1") : undefined}
+        id={button.href === "!#" ? (button.id || "get-started-1") : undefined}
         href={button.href}
         class={classNames(
           button.bgColor,
           button.textColor,
-          "flex justify-center items-center w-full md:w-fit gap-2 px-8 py-4 rounded-full"
+          "flex justify-center items-center w-full md:w-fit gap-2 px-8 py-4 rounded-full cursor-pointer"
         )}
       >
         <span class="text-base font-bold text-left"> Get Started</span>
         <ArrowIcon />
       </a>
+      
     </div>
     <Image src={image} alt={title} class="sm:h-[220px] md:h-[200px] md:w-[155px] lg:h-auto lg:w-auto" />
   </div>

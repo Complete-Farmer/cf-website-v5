@@ -27,10 +27,10 @@ import ImageRight from "@assets/images/products/grower/farm-manager-academy/hero
   <ApplicationForm client:load title="Join the academy" />
 </Layouts>
 
-<script>
-  // @ts-nocheck
-  import { $applicationFormModal } from "@utils/stores.ts";
-
+<script type="text/javascript" is:inline>
   const btn = document.getElementById("get-academy-form");
-  btn?.addEventListener("click", () => $applicationFormModal.set(true));
+  const btn2 = document.getElementById("hero-two-side-img-fade-button");
+  btn?.addEventListener("click", () => {
+    btn2.click()
+  });
 </script>

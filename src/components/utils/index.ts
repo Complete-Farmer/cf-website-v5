@@ -13,12 +13,13 @@ export { default as ParallaxImage } from "./Parallax";
 export { default as PrismicText } from "./PrismicText";
 export { default as LoadingPage } from "./LoadingPage";
 export { default as SectionList } from "./SectionList";
-export { default as BreadCrumb } from "./BreadCrumb.astro";
 export { default as SpinnerLoader } from "./SpinnerLoader";
 export { default as HeadingOneLine } from "./HeadingOneLine";
 export { default as NewsletterForm } from "./NewsletterForm";
 export { default as PressHighlights } from "./PressHighlights";
 export { default as ServiceGuideForm } from "./ServiceGuideForm";
-export { default as AvailableCrops } from "./AvailableCrops/index.astro";
 export { default as HeroTwoSideImageFade } from "./HeroTwoSideImageFade";
+
+export { default as BreadCrumb } from "./BreadCrumb.astro";
+export { default as AvailableCrops } from "./AvailableCrops/index.astro";
 export { default as CustomerStoryTextCard } from "./CustomerStoryTextCard.astro";
