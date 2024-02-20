@@ -47,13 +47,15 @@ const KeepOurProgress = () => {
                 <Input
                   title="Email"
                   name="email"
+                  className="bg-white"
                   placeholder="Enter email address"
                 />
 
                 <Textarea
-                  title="Subject"
-                  name="subject"
-                  placeholder="Enter email address"
+                  title="Message"
+                  name="message"
+                  className="bg-white"
+                  placeholder="500 maximum characters"
                 />
               </div>
 

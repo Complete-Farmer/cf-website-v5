@@ -140,7 +140,7 @@ const Hero = () => {
               />
             </a>
 
-            <a href={"/products?tab=" + currentTab.href} className="contents">
+            <a href={"/products/?tab=" + currentTab.href} className="contents">
               <Button
                 onClick={handleButtonClick}
                 title={secondButton.text}

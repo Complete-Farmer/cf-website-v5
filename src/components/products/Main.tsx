@@ -94,10 +94,10 @@ function Main() {
   }
 
   return (
-    <div className="flex flex-col justify-between pb-12">
-      <section className="bg-cover bg-no-repeat bg-products space-y-10 h-[70vh]">
-        <div className="z-40 px-4 sm:px-6 pb-32 pt-5 sm:pt-6 mx-auto text-center text-white max-w-7xl lg:pb-0 lg:pt-12">
-          <div className="w-full px-4 mx-auto text-center">
+    <div className="flex flex-col md:justify-between pb-6 md:pb-12 space-y-6 md:space-y-0">
+      <section className="bg-cover bg-no-repeat bg-products px-4 space-y-5 md:space-y-10 md:h-[40vh] 2xl:h-[70vh]">
+        <div className="z-40 pt-5 sm:pt-6 mx-auto text-center text-white max-w-7xl lg:pb-0 lg:pt-12">
+          <div className="w-full mx-auto text-center">
             <div className="flex items-center justify-center">
               <Tab
                 categories={categories}
@@ -108,17 +108,8 @@ function Main() {
                 inActiveTextColor="text-custom_black-900"
               />
             </div>
-            <h1 className="mt-8 sm:mt-0 mb-4 font-sans text-[24px] sm:text-[32px] lg:text-[40px] font-semibold text-black lg:text-5xl tracking-tighter lg:hidden">
-              {activeCategory === "Grower"
-                ? data.grower.titleFirst
-                : data.buyer.titleFirst}
-              <br className="hidden sm:block" />{" "}
-              {activeCategory === "Grower"
-                ? data.grower.titleLast
-                : data.buyer.titleLast}
-            </h1>
 
-            <h1 className="hidden lg:block mt-8 sm:mt-0 mb-4 font-sans font-semibold text-black lg:text-[40px] tracking-tighter px-48 leading-[50px]">
+            <h1 className="mt-8 sm:mt-0 mb-4 text-[24px] font-sans font-semibold text-black lg:text-[40px] tracking-tighter xl:px-48 xl:leading-[50px]">
               {activeCategory === "Grower"
                 ? data.grower.descriptionFirst
                 : `${data.buyer.titleFirst}`}
@@ -128,14 +119,7 @@ function Main() {
                 : data.buyer.titleLast}
             </h1>
 
-            <p className="mt-0 text-base text-custom_black-900 sm:text-sm lg:text-2xl lg:hidden">
-              {activeCategory === "Grower"
-                ? data.grower.descriptionFirst
-                : data.buyer.descriptionFirst}
-              <br className="hidden sm:block" />
-            </p>
-
-            <p className="mt-0 text-custom_black-900 lg:text-[24px] hidden lg:block px-48 leading-[36px]">
+            <p className="mt-0 text-base text-custom_black-900 lg:text-[24px] 2xl:px-48 2xl:leading-[36px]">
               {activeCategory === "Grower"
                 ? data.grower.descriptionLast
                 : data.buyer.descriptionLastDesktop}
@@ -143,8 +127,8 @@ function Main() {
           </div>
         </div>
 
-        <div className="relative flex items-center justify-center lg:w-full w-full max-w-7xl lg:max-w-7xl mr-4 sm:mr-0 lg:mx-auto">
-          <div className="absolute w-full -top-0">
+        <div className="relative 2xl:min-h-2 flex items-center justify-center lg:w-full w-full max-w-7xl lg:max-w-7xl mr-4 sm:mr-0 lg:mx-auto">
+          <div className="md:absolute w-full -top-0">
             <div className="mx-auto w-full lg:w-5/6 overflow-hidden rounded-lg shadow-2xl">
               <div className="top-0 bottom-0 left-0 right-0 absolute flex items-center justify-center">
                 <div
@@ -174,25 +158,19 @@ function Main() {
         </Wrapper>
       </section>
 
-      <div className="lg:hidden mt-24 sm:mt-72 text-custom_black-900 px-4 text-xs sm:text-base sm:px-28 sm:text-center">
-        <p>
-          {activeCategory === "Grower"
-            ? data.grower.descriptionLast
-            : data.buyer.descriptionLast}
-        </p>
+      <div className="px-4">
+        <Button
+          title="Book a custom demo"
+          onClick={() => {
+            toggleModal();
+            handleButtonClick();
+          }}
+          className={classNames(
+            "w-full md:w-1/4 py-4 mx-auto md:mt-80 lg:mt-96",
+            `!${activeBgColor}`
+          )}
+        />
       </div>
-
-      <Button
-        title="Book a custom demo"
-        onClick={() => {
-          toggleModal();
-          handleButtonClick();
-        }}
-        className={classNames(
-          "w-full lg:w-1/4 py-4 mx-auto mt-96",
-          `!${activeBgColor}`
-        )}
-      />
 
       <Wrapper
         isOpen={open}

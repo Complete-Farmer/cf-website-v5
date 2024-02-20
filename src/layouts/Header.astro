@@ -11,8 +11,8 @@ const { pathname } = Astro.props;
 
 {
   pathname.includes("buyer") || pathname.includes("grower/") ? ( //FIXME: this will cause a bug but regx to the rescus
-    <ProductsHeader client:load pathname={pathname} />
+    <ProductsHeader client:idle pathname={pathname} />
   ) : (
-    <NormalHeader client:load pathname={pathname} />
+    <NormalHeader client:idle pathname={pathname} />
   )
 }

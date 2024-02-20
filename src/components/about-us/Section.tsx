@@ -4,7 +4,7 @@ import { PeopleIcon, NewpaperIcon, RelationIcon } from "@assets/icons";
 
 const incentives = [
   {
-    name: "Career",
+    name: "Careers",
     icon: <PeopleIcon />,
     description:
       "See what roles are open and learn more about the perks of working with Complete Farmer.",

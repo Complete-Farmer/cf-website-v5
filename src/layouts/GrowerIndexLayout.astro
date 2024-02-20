@@ -70,7 +70,7 @@ const currentTab = tabs.find((tab) => tab.current);
 
 <Layouts {title} {description}>
   <HeroContainer bgImage="bg-hero-grower">
-    <Hero {tabs} {currentTab} client:load />
+    <Hero {tabs} {currentTab} client:idle />
   </HeroContainer>
   <slot />
   <Section client:visible />

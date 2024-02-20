@@ -15,6 +15,7 @@ import { AvailableCrops, Section } from "@components/utils";
 import { getCropOffers } from "@utils/api";
 import { convertToKebabCase } from "@utils/functions";
 import { filterAt, getCategories, getCxStories } from "@utils/prismic";
+import { ChevronIcon } from "@assets/icons";
 
 const { results } = await getCategories("products");
 
@@ -60,6 +61,13 @@ if (response) {
   <HeroContainer bgImage="bg-hero-buyer">
     <Hero client:load />
   </HeroContainer>
+  <div class="flex space-x-2 justify-center bg-buyer-500 w-full py-5 text-xl font-bold">
+    <p class="text-white">Join our Sales Affiliate Program and earn commissions.</p>
+    <a href="buyer/sales-affiliate" class="flex space-x-1 text-[#00FFE0] items-end">
+      <span>Learn more</span>
+      <ChevronIcon className="-rotate-90" />
+    </a>
+  </div>
   <ProcurementTurnAround />
   <ExperienceCrop client:visible />
   {

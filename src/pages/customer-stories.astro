@@ -2,6 +2,7 @@
 import Layouts from "@layouts/Layouts.astro";
 
 import { Hero, StoryList } from "@components/utils/CustomerStories";
+import { Tab } from "@components/utils";
 
 import { getCxStories } from "@utils/prismic";
 
@@ -10,19 +11,32 @@ const customerStories = await getCxStories({
   pageSize: 6,
   fetchLinks: ["categories.name"],
 });
+
+const tabs = [
+  { id: 0, current: true, name: "All" },
+  { id: 1, current: false, name: "Grower" },
+  { id: 2, current: false, name: "Buyer" },
+  { id: 3, current: false, name: "Corporate" },
+];
 ---
 
 <Layouts
   title="Customer Stories | Complete Farmer"
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
-  <Hero
-    client:idle
-    url="https://www.youtube.com/watch?v=_9HgDUGrjCQ"
-    title="See how we’ve served others like you."
-    thumbnail="https://img.youtube.com/vi/_9HgDUGrjCQ/maxresdefault.jpg"
-    description="Browse through the inspiring success stories of customers empowered by our solutions."
-  />
+  <div class="mx-auto">
+    <div class="max-w-7xl mx-auto">
+      <Tab categories={tabs} />
+    </div>
+
+    <Hero
+      client:idle
+      url="https://www.youtube.com/watch?v=_9HgDUGrjCQ"
+      title="See how we’ve served others like you."
+      thumbnail="https://img.youtube.com/vi/_9HgDUGrjCQ/maxresdefault.jpg"
+      description="Browse through the inspiring success stories of customers empowered by our solutions."
+    />
+  </div>
 
   <StoryList
     client:idle
@@ -32,3 +46,58 @@ const customerStories = await getCxStories({
 </Layouts>
 
 <!-- page: "/about-us", -->
+<script>
+  import { $customerStoriesActiveTab as $activeTab } from "@utils/stores.ts";
+  let activeTab = $activeTab.get();
+
+  const allTabBtn = document.getElementById("tab-all");
+  const growerTabBtn = document.getElementById("tab-grower");
+  const buyerTabBtn = document.getElementById("tab-buyer");
+  const coTabBtn = document.getElementById("tab-corporate");
+
+  const data = [
+    {
+      key: "All",
+      btn: allTabBtn,
+    },
+    {
+      key: "Grower",
+      btn: growerTabBtn,
+    },
+    {
+      key: "Buyer",
+      btn: buyerTabBtn,
+    },
+    {
+      key: "Corporate",
+      btn: coTabBtn,
+    },
+  ];
+
+  data.forEach((item) => {
+    item.btn?.addEventListener("click", () => {
+      $activeTab.set(item.key as any);
+      updateTab($activeTab.get());
+    });
+  });
+
+  function updateTab(tab: typeof activeTab) {
+    data.forEach((item) => {
+      if (item.key === tab) {
+        item.btn?.setAttribute("aria-selected", "true");
+        item.btn?.setAttribute("tabindex", "0");
+        item.btn?.setAttribute("data-headlessui-state", "selected");
+        item.btn?.classList.remove("bg-custom_gray-200");
+        item.btn?.classList.add("bg-grower-500", "shadow", "text-white");
+      } else {
+        item.btn?.classList.add("bg-custom_gray-200");
+        item.btn?.classList.remove("bg-grower-500", "shadow", "text-white");
+        item.btn?.setAttribute("aria-selected", "false");
+        item.btn?.setAttribute("tabindex", "-1");
+        item.btn?.setAttribute("data-headlessui-state", "");
+      }
+    });
+  }
+
+  updateTab(activeTab);
+</script>

@@ -50,7 +50,7 @@ export default function Section({
       description:
         "Discover the latest tips and insights on food and agricultural production on our blog.",
       linkText: "Go to Blogs",
-      link: "/products/resources/blogs",
+      link: "/resources/blogs",
     },
   ];
 

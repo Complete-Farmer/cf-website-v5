@@ -13,7 +13,7 @@ import ImageRight from "@assets/images/products/grower/farm-manager-academy/hero
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
   <HeroTwoSideImageFade
-    client:visible
+    client:idle
     leftImage={ImageLeft.src}
     rightImage={ImageRight.src}
     buttonTitle="Join the academy"
@@ -24,13 +24,15 @@ import ImageRight from "@assets/images/products/grower/farm-manager-academy/hero
   <AboutTheAcademy />
 
   <!-- modal -->
-  <ApplicationForm client:load title="Join the academy" />
+  <ApplicationForm client:idle title="Join the academy" />
 </Layouts>
 
 <script type="text/javascript" is:inline>
-  const btn = document.getElementById("get-academy-form");
-  const btn2 = document.getElementById("hero-two-side-img-fade-button");
-  btn?.addEventListener("click", () => {
-    btn2.click()
+  const btns = document.querySelectorAll(".get-academy-form");
+
+  btns?.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.getElementById("hero-two-side-img-fade-button").click();
+    });
   });
 </script>

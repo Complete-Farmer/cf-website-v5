@@ -91,7 +91,7 @@ const Hero = ({
                 id="hero-two-side-img-fade-button"
                 title={buttonTitle}
                 onClick={() => {
-                  if (buttonTitle.includes("affiliate")) {
+                  if (buttonTitle.includes("affiliate") || buttonTitle.includes("Join now")) {
                     $joinSalesAffiliateModal.set(true);
                   } 
                   if (buttonTitle.includes("academy") || buttonTitle.includes("Agent")) {
