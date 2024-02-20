@@ -4,6 +4,7 @@ import type { IAvailableCropOffers } from "types/app";
 import { Tooltip } from "react-tooltip";
 import { DownloadIcon } from "@assets/icons";
 import { Button, ImageSwiperContainer } from "@components/utils";
+import { getAppLink } from "@utils/functions";
 
 interface Props {
   offer: IAvailableCropOffers;
@@ -48,7 +49,14 @@ const images = [
   </div>
 
   <div class="flex space-x-6 items-end">
-    <Button title="Order this crop" className="py-4 !h-fit !bg-buyer-500" />
+    <a
+      target="_blank"
+      class="contents"
+      rel="noreferrer"
+      href={getAppLink("Signup Buyer", `offer=${offer._id}`)}
+    >
+      <Button title="Order this crop" className="py-4 !h-fit !bg-buyer-500" />
+    </a>
     <div class="pt-4 lg:pt-0" id="tooltip-buyer-download">
       <button class="border border-buyer-500 rounded-md px-4 py-4">
         <DownloadIcon className="text-buyer-500" />
