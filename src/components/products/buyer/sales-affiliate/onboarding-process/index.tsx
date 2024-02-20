@@ -72,7 +72,7 @@ class OnboardingProcess extends Component {
   changeTextContentBasedOnScroll = () => {
     const { slideNumber } = this.state;
     return (
-      <div id="animation-div">
+      <div id="animation-div" className="w-full">
         <Content activeIndex={slideNumber} data={data} />
       </div>
     );
@@ -81,10 +81,7 @@ class OnboardingProcess extends Component {
   render() {
     return (
       <div
-        style={{
-          display: "flex",
-          flexFlow: "row nowrap",
-        }}
+        className="flex flex-row flex-nowrap"
       >
         {this.changeTextContentBasedOnScroll()}
       </div>

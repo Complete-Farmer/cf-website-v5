@@ -45,8 +45,10 @@ const HeroLeft = ({ tabs, currentTab }: IProps) => {
           </div>
           <div className="flex flex-col sm:flex-row w-full xl:justify-start items-start gap-6">
             <a
-              href={getAppLink("Signup Grower")}
+              target="_blank"
+              rel="noreferrer"
               className="contents"
+              href={getAppLink("Signup Grower")}
             >
               <Button
                 title={firstButtonText}
@@ -60,10 +62,7 @@ const HeroLeft = ({ tabs, currentTab }: IProps) => {
               />
             </a>
 
-            <a
-              href="/products?tab=grower"
-              className="contents"
-            >
+            <a href="/products?tab=grower" className="contents">
               <Button
                 onClick={handleButtonClick}
                 title={currentTab.data.secondButtonText as string}

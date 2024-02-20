@@ -20,6 +20,12 @@
   background-image: url("./chevron.svg");
 }
 
+.swiper-pagination.swiper-pagination-lock,
+.swiper-button-prev.swiper-button-lock,
+.swiper-button-next.swiper-button-lock {
+  display: none;
+}
+
 .swiper-button-prev {
   transform: rotate(180deg);
 }

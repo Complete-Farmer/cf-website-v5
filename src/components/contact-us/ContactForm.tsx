@@ -125,13 +125,13 @@ export default function ContactForm({
             title="Leave a Message"
             name="message"
             outerClassName="col-span-2 "
-            placeholder="Enter email address"
+            placeholder="Leave a Message"
           />
         </div>
         <div className="mt-10 sm:mt-12">
           <Button
             type="submit"
-            className="h-16"
+            className="h-14"
             isLoading={isLoading}
             title="Submit"
             isDisabled={!isDirty || !isValid}

@@ -1,0 +1,38 @@
+---
+import type { IAvailableDemands } from "types/app";
+
+import CardWrapper from "./CardWrapper.astro";
+
+interface Props {
+  data: IAvailableDemands;
+}
+
+const { data } = Astro.props;
+
+const varieties = data.varieties.map((v) => v.name).join(", ");
+---
+
+<CardWrapper link={data.link} imageAlt={data.name} imageUrl={data.imageUrl}>
+  <div
+    class="flex flex-col justify-start items-start self-stretch relative gap-2 pt-4"
+  >
+    <div
+      class="flex flex-col justify-start items-start self-stretch relative gap-1 w-full sm:w-2/3 md:w-full"
+    >
+      <a
+        href={data.link}
+        class="self-stretch w-full text-base font-bold text-left text-custom_black-900 group-hover:underline underline-offset-1 decoration-2 decoration-custom_black-900"
+      >
+        {data.name}
+      </a>
+    </div>
+    <div
+      class="w-full sm:w-2/3 md:w-full cursor-default truncate"
+      title={varieties}
+    >
+      <span class="text-base text-left lg:leading-6 text-custom_gray-300">
+        Varieties: {varieties}
+      </span>
+    </div>
+  </div>
+</CardWrapper>

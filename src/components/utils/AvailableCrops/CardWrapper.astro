@@ -1,0 +1,40 @@
+---
+import { Image } from "astro:assets";
+
+import { classNames } from '@utils/functions';
+
+interface Props {
+  link: string;
+  imageAlt: string;
+  imageUrl: string;
+}
+
+const { link, imageAlt, imageUrl } = Astro.props;
+
+const isBuyer = Astro.url.pathname.includes('buyer')
+---
+
+<div class="group w-[285px]">
+  <div class="relative">
+    <div
+      class="relative h-72 w-full overflow-hidden rounded-lg border border-gray-100"
+    >
+      <Image
+        width={285}
+        height={288}
+        alt={imageAlt}
+        src={imageUrl}
+        class="h-full w-full object-cover object-center bg-white rounded-lg"
+      />
+    </div>
+    <slot />
+  </div>
+  <div class="mt-6">
+    <a
+      href={link}
+      class={classNames(isBuyer ? "text-buyer-500 hover:bg-buyer-500": "text-grower-500 hover:bg-grower-500", "relative flex items-center bg-white justify-center rounded-3xl border border-1 border-buyer-100 px-8 py-2 text-sm font-medium hover:text-white")}
+    >
+      See details
+    </a>
+  </div>
+</div>

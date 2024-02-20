@@ -56,7 +56,7 @@ data.results
   <SwiperContainer {...swiperProps}>
     {
       buyerData.map((item) => (
-        <SwiperSlide>
+        <SwiperSlide lazy>
           <CustomerStoryTextCard type="buyer" data={item} />
         </SwiperSlide>
       ))

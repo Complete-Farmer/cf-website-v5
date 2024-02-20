@@ -15,10 +15,11 @@ import { AvailableCrops, Section } from "@components/utils";
 import { getCropOffers } from "@utils/api";
 import { convertToKebabCase } from "@utils/functions";
 import { filterAt, getCategories, getCxStories } from "@utils/prismic";
+import { ChevronIcon } from "@assets/icons";
 
 const { results } = await getCategories("products");
 
-const buyerId = results.find((c) => c.data.name === "Grower").id;
+const buyerId = results.find((c) => c.data.name === "Buyer").id;
 
 const filters = filterAt("my.customer_stories_v3.category", buyerId);
 
@@ -60,6 +61,13 @@ if (response) {
   <HeroContainer bgImage="bg-hero-buyer">
     <Hero client:load />
   </HeroContainer>
+  <div class="flex space-x-2 justify-center bg-buyer-500 w-full py-5 text-xl font-bold">
+    <p class="text-white">Join our Sales Affiliate Program and earn commissions.</p>
+    <a href="buyer/sales-affiliate" class="flex space-x-1 text-[#00FFE0] items-end">
+      <span>Learn more</span>
+      <ChevronIcon className="-rotate-90" />
+    </a>
+  </div>
   <ProcurementTurnAround />
   <ExperienceCrop client:visible />
   {
@@ -74,7 +82,8 @@ if (response) {
         bgColor="bg-buyer-200"
         data={availableCropOffers}
         titleTextColor="text-buyer-400"
-        title="See what other farmers are growing"
+        title="Finally experience a procurement platform that caters to your specifications."
+        desc="Say goodbye to scrambling to hit your targets and dealing with let-downs from suppliers. We make sourcing easier and more efficient for you and your team.  "
       />
     )
   }
@@ -82,17 +91,3 @@ if (response) {
 </Layouts>
 
 <!-- page: "/products/buyer", -->
-<!-- <script>
-  // @ts-nocheck
-  import { $authModal } from "@utils/stores.ts";
-
-  function toggleAuthModal() {
-    $authModal.set(true);
-    document.querySelector(".app-body").style.filter = "blur(4px)";
-    document.querySelector(".app-footer").style.filter = "blur(4px)";
-  }
-
-  const btn = document.getElementById("get-started");
-
-  btn.addEventListener("click", toggleAuthModal);
-</script> -->

@@ -1,26 +1,27 @@
 ---
-import HeadingOneLine from "./HeadingOneLine";
-import { SwiperSlide, SwiperContainer } from "./Swiper";
+import HeadingOneLine from "../HeadingOneLine";
+import { SwiperSlide, SwiperContainer } from "../Swiper";
 
-import { AvailableCropCard } from "@components/products/grower";
-import { AvailableCropOfferCard } from "@components/products/buyer";
+import CropOfferCard from "./CropOfferCard.astro";
+import CropDemandCard from "./CropDemandCard.astro";
 
 import type { IAvailableCropOffers, IAvailableDemands } from "types/app";
 
 interface Props {
   title: string;
   bgColor: string;
+  desc?: string;
   titleTextColor: string;
   cardType: "grower" | "buyer";
   data: IAvailableCropOffers[] | IAvailableDemands[];
 }
 
-const { data, title, bgColor, cardType, titleTextColor } = Astro.props;
+const { data, desc, title, bgColor, cardType, titleTextColor } = Astro.props;
 ---
 
 <div id="available-crops" class={`pt-20 pb-20 ${bgColor}`}>
   <div class="pb-6">
-    <HeadingOneLine title={title} titleTextColor={titleTextColor} />
+    <HeadingOneLine title={title} titleTextColor={titleTextColor} desc={desc} />
   </div>
   <div class="mx-auto max-w-7xl px-0 sm:px-0 lg:px-8 sm:pt-10 lg:pt-0">
     <div class="mx-auto lg:max-w-none">
@@ -58,11 +59,11 @@ const { data, title, bgColor, cardType, titleTextColor } = Astro.props;
         >
           {
             data.map((item) => (
-              <SwiperSlide>
+              <SwiperSlide lazy>
                 {cardType === "grower" ? (
-                  <AvailableCropCard data={item} />
+                  <CropDemandCard data={item} />
                 ) : (
-                  <AvailableCropOfferCard data={item} />
+                  <CropOfferCard data={item} />
                 )}
               </SwiperSlide>
             ))

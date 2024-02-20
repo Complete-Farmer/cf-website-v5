@@ -1,13 +1,17 @@
-import { useEffect, useMemo, useState } from "react";
 import ReactPlayer from "react-player";
+import { useStore } from "@nanostores/react";
+import { useEffect, useMemo, useState } from "react";
 
 import { CaretIcon, PlayIcon } from "@assets/icons";
-import { classNames, getYouTubeThumbnailUrl } from "@utils/functions";
 import EmptyImage from "@assets/images/products/story-list-empty.png";
+
+import { $customerStoriesActiveTab } from "@utils/stores";
+import { getCxStories } from "@utils/prismic";
+import { classNames, getYouTubeThumbnailUrl } from "@utils/functions";
 
 import Tabs from "./Tabs";
 import type { IPrismicData } from "types/app";
-import { getCxStories } from "@utils/prismic";
+
 import { Wrapper } from "..";
 
 interface IProps {
@@ -31,22 +35,32 @@ const StoryList = ({
   const [filteredData, setFilteredData] = useState([]);
   const [videoUrl, setVideoUrl] = useState(null);
   const [totalResults, setTotalResults] = useState(_totalResults);
+  const customerStoriesActiveTab = useStore($customerStoriesActiveTab);
 
   const transformData = (data: IPrismicData) => {
-    return data.results.map((item) => {
-      const transformedItem = {
-        id: item.uid,
-        duration: item.data.duration,
-        video: item.data.video_uri.url,
-        name: item?.data?.name[0]?.text,
-        type: item.data.type === "Videos" ? "video" : "article",
-        imageSrc: getYouTubeThumbnailUrl(item.data.video_uri.url),
-      };
-      return transformedItem;
+    const buildData = (item) => ({
+      id: item.uid,
+      duration: item.data.duration,
+      video: item.data.video_uri.url,
+      name: item?.data?.name[0]?.text,
+      type: item.data.type === "Videos" ? "video" : "article",
+      imageSrc: getYouTubeThumbnailUrl(item.data.video_uri.url),
     });
+    if (customerStoriesActiveTab === "All") {
+      return data.results.map((item) => buildData(item));
+    } else {
+      return data.results
+        .filter(
+          (item) => item.data.category?.data.name === customerStoriesActiveTab
+        )
+        .map((item) => buildData(item));
+    }
   };
 
-  const _data = useMemo(() => transformData(data), [data]);
+  const _data = useMemo(
+    () => transformData(data),
+    [data, customerStoriesActiveTab]
+  );
 
   useEffect(() => {
     // set initials data

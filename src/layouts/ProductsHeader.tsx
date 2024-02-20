@@ -312,6 +312,7 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
           <div className="inline-flex items-center mx-5 space-x-2 md:space-x-4 lg:space-x-6 lg:justify-end">
             <div className="hidden sm:flex justify-start items-center relative gap-1 px-4 py-2 rounded-full bg-white">
               <button
+                id="toggle-modal-get-in-touch"
                 onClick={toggleModal}
                 className={classNames(
                   "text-base font-bold text-center ",

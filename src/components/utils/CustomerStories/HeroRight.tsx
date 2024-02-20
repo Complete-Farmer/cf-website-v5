@@ -15,10 +15,10 @@ const HeroRight = ({ url, isBuyer, thumbnail }: IProps) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="flex w-full justify-center items-center md:w-1/2  h-full lg:pt-0 overflow-hidden">
+    <div className="flex w-full justify-center items-center 2xl:w-1/2 h-full lg:pt-0 overflow-hidden">
       <Fade right duration={1000} delay={500} distance="30px">
-        <div className="relative h-full w-full max-[1279px]:pl-10 lg:pr-0 pr-10 flex justify-center items-center">
-          <div className="lg:w-[550px] lg:h-[450px] w-[285px] h-[272px] ">
+        <div className="relative h-full w-full flex justify-center items-center">
+          <div className="w-full h-[272px] md:h-[550px] 2xl:w-[550px] 2xl:h-[450px]">
             <div className="relative overflow-hidden w-full h-full">
               <div className="top-0 bottom-0 left-0 right-0 absolute flex items-center justify-center">
                 <div

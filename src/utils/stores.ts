@@ -14,6 +14,6 @@ export const $joinSalesAffiliateModal = atom<boolean>(false);
 
 export const $homeCustomerStoriesActiveTab = atom<"grower" | "buyer">("grower");
 
-export const $customerStoriesActiveTab = atom<"Videos" | "Articles">("Videos");
+export const $customerStoriesActiveTab = atom<"All" | "Grower" | "Buyer" | "Corporate">("All");
 
 

@@ -6,7 +6,6 @@ export { default as GrowerGetInTouch } from "./GetInTouch";
 export { default as HowCFHelpsYou } from "./HowCFHelpsYou";
 export { default as ApplicationForm } from "./ApplicationForm";
 export { default as AboutTheAcademy } from "./AboutTheAcademy.astro";
-export { default as AvailableCropCard } from "./AvailableCropCard.astro";
 export { default as EverythingYouNeed } from "./EverythingYouNeed.astro";
 export { default as PlatformOnboarding } from "./PlatformOnboarding.astro";
 export { default as CustomerStoriesBody } from "./CustomerStoriesBody.astro";

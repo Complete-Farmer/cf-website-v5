@@ -62,6 +62,8 @@ const Drawer: React.FC<{
               className="pb-7 mt-7 border-b-2 border-gray-200 2xl:border-none"
             >
               <a
+                target="_blank"
+                rel="noreferrer"
                 href={getAppLink(item)}
                 className="flex justify-between lg:justify-start items-center relative gap-4  w-full"
               >

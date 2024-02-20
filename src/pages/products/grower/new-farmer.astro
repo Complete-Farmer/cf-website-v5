@@ -127,8 +127,8 @@ if (statusCode == 200) {
     availableDemands.length > 0 && (
       <AvailableCrops
         cardType="grower"
-        data={availableDemands}
         bgColor="bg-grower-200"
+        data={availableDemands}
         titleTextColor="text-grower-400"
         title="See what other farmers are growing"
       />
@@ -137,17 +137,3 @@ if (statusCode == 200) {
 </GrowerIndexLayout>
 
 <!-- page: "/products/grower/new-farmer", -->
-<script>
-  // @ts-nocheck
-  import { $authModal } from "@utils/stores.ts";
-
-  function toggleAuthModal() {
-    $authModal.set(true);
-    document.querySelector(".app-body").style.filter = "blur(4px)";
-    document.querySelector(".app-footer").style.filter = "blur(4px)";
-  }
-
-  const btn = document.getElementById("get-started");
-
-  btn?.addEventListener("click", toggleAuthModal);
-</script>
