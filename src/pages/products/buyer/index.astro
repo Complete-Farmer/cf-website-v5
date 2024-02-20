@@ -61,11 +61,11 @@ if (response) {
   <HeroContainer bgImage="bg-hero-buyer">
     <Hero client:load />
   </HeroContainer>
-  <div class="flex space-x-2 justify-center bg-buyer-500 w-full py-5 text-xl font-bold">
-    <p class="text-white">Join our Sales Affiliate Program and earn commissions.</p>
-    <a href="buyer/sales-affiliate" class="flex space-x-1 text-[#00FFE0] items-end">
+  <div class="flex space-x-2 justify-between md:justify-center items-center bg-buyer-500 w-full px-4 py-5 text-xs md:text-xl font-bold">
+    <p class="text-white w-1/2 md:w-auto">Join our Sales Affiliate Program and earn commissions.</p>
+    <a href="buyer/sales-affiliate" class="flex flex-row flex-nowrap space-x-1 text-[#00FFE0] items-end">
       <span>Learn more</span>
-      <ChevronIcon className="-rotate-90" />
+      <ChevronIcon className="w-4 md:w-auto h-4 md:h-auto -rotate-90" />
     </a>
   </div>
   <ProcurementTurnAround />

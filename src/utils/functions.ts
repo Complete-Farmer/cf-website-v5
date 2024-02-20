@@ -8,7 +8,7 @@ export function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export const getAppLink = (text: string) => {
+export const getAppLink = (text: string, query?: string) => {
   let product = "grower";
   const pathname = text.includes("Login") ? "login" : "signup";
 
@@ -24,7 +24,7 @@ export const getAppLink = (text: string) => {
     product + (ENV === "DEV" ? "-test" : "")
   }.completefarmer.com/`;
 
-  return url + pathname;
+  return url + pathname + (query ? `?${query}` : "");
 };
 
 interface IFields {

@@ -153,6 +153,7 @@ export default function NormalHeader({ pathname }: { pathname: string }) {
                                         >
                                           <div className="flex justify-start">
                                             <img
+                                              alt={item.name}
                                               src={item.logo.src}
                                               className="h-6 grayscale group-hover:grayscale-0"
                                             />
