@@ -18,5 +18,3 @@ const blogsApiData = await getBlogs({ page: 1, pageSize: blogsConfig.maxRecordsP
   <Hero image={HeroImage} title="Blogs" />
   <BlogList {blogsApiData} client:visible />
 </Layouts>
-
-<!-- page: "/resources/blogs", -->

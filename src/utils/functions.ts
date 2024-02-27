@@ -30,7 +30,7 @@ export const getAppLink = (text: string, query?: string) => {
 interface IFields {
   email: string;
   firstname?: string;
-  tags: string;
+  tags: string | number;
 }
 export const onMailChimpSubmit = (fields: IFields) => {
   const { email, firstname, tags } = fields;
@@ -43,9 +43,7 @@ export const onMailChimpSubmit = (fields: IFields) => {
     _d = _d.concat(`&FNAME=${firstname}`);
   }
 
-  jsonp(_d, { param: "c" }, () => {
-    console.log("Data Added in the Mailchimp");
-  });
+  jsonp(_d, { param: "c" });
 };
 
 export const formatDateWithCommas = (dateString: string) => {
@@ -220,4 +218,13 @@ export const createImageFromInitials = (size, name) => {
   context.fillText(name, size / 2, size / 2);
 
   return canvas.toDataURL();
+};
+
+export const fileToBase64 = async (file: File) => {
+  return new Promise((resolve, reject) => {
+    const reader = new window.FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (e) => reject(e);
+  });
 };

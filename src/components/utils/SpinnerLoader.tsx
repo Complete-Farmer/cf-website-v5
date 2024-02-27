@@ -3,16 +3,20 @@ import ClipLoader from "react-spinners/ClipLoader";
 interface IProps {
   loading?: boolean;
   color?: string;
+  size?: number;
 }
 
-const SpinnerLoader = ({ loading = true, color = "#ffffff" }: IProps) => {
+const SpinnerLoader = ({
+  size = 35,
+  loading = true,
+  color = "#ffffff",
+}: IProps) => {
   return (
     <ClipLoader
+      size={size}
       color={color}
       loading={loading}
-      size={35}
       aria-label="Loading Spinner"
-      data-testid="loader"
     />
   );
 };

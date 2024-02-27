@@ -6,6 +6,7 @@ interface ImportMetaEnv {
   readonly BOT_EMAIL: string;
   readonly AWS_REGION: string;
   readonly AWS_POOL_ID: string;
+  readonly PUBLIC_AUTH_API: string;
   readonly PUBLIC_ENV: "DEV" | "PROD";
   readonly PUBLIC_FACEBOOK_PIXEL_ID: string;
   readonly PUBLIC_PRISM_ACCESS_TOKEN: string;

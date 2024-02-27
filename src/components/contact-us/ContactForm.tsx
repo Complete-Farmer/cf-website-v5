@@ -1,38 +1,45 @@
 import * as yup from "yup";
+import { toast } from "react-toastify";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
 import { Input, Button, Textarea, PhoneNumber } from "@components/utils";
 import useYupValidationResolver from "@hooks/useYupValidationResolver";
 import { MenuCloseIcon } from "@assets/icons";
+import { contactForm } from "@utils/api";
 
 type Inputs = {
   email: string;
+  message: string;
+  country: string;
   lastName: string;
   firstName: string;
   phoneNumber: string;
-  message: string;
 };
 
 const schema = yup
   .object()
   .shape({
+    country: yup.string().required(),
+    message: yup.string().required(),
     lastName: yup.string().required(),
     firstName: yup.string().required(),
     phoneNumber: yup.string().required(),
     email: yup.string().email().required(),
-    message: yup.string().required(),
   })
   .required();
 
 export default function ContactForm({
+  subject,
   changeToggle,
 }: {
+  subject: string;
   changeToggle: () => void;
 }) {
   const resolver = useYupValidationResolver(schema);
 
   const {
     watch,
+    reset,
     register,
     setValue,
     handleSubmit,
@@ -41,6 +48,7 @@ export default function ContactForm({
     resolver,
     defaultValues: {
       email: "",
+      country: "",
       message: "",
       lastName: "",
       firstName: "",
@@ -48,22 +56,29 @@ export default function ContactForm({
     },
   });
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    try {
+      const res = await contactForm({ ...data, subject });
+      if(res.statusCode === 200) {
+        reset({});
+        toast(res.message, { type: "success" });
+        // ReactGA.event({
+        //   category: "Button Click",
+        //   action: "News Letter"
+        // });
+        // window.metapixelfunction("news", "news_letter", {});
+        // window.dataLayer.push({ event: "news_letter" });
+      } else {
+        throw new Error(res.message);
+      }
+    } catch (error) {
+      toast(error.message || error?.data?.message || "Unknown server error", {
+        type: "error",
+      });
+    }
   };
 
   const phoneNumber = watch("phoneNumber");
-
-  // const handleButtonClick = () => {
-  //   // ReactGA.event({
-  //   //   category: "Button Click",
-  //   //   action: "News Letter"
-  //   // });
-  //   // window.metapixelfunction("news", "news_letter", {});
-  //   // window.dataLayer.push({
-  //   //   event: "news_letter"
-  //   // });
-  // };
 
   return (
     <div className="bg-white max-w-7xl relative mx-auto xl:px-0 items-center h-full">
@@ -116,24 +131,27 @@ export default function ContactForm({
             value={phoneNumber}
             title="Phone Number"
             outerClassName="col-span-2"
-            onChange={(val: string) => setValue("phoneNumber", val)}
+            onChange={(number: string, country: string) => {
+              setValue("country", country);
+              setValue("phoneNumber", number);
+            }}
           />
 
           <Textarea
             rows={4}
             required
             title="Leave a Message"
-            name="message"
             outerClassName="col-span-2 "
             placeholder="Leave a Message"
+            {...register("message")}
           />
         </div>
         <div className="mt-10 sm:mt-12">
           <Button
             type="submit"
+            title="Submit"
             className="h-14"
             isLoading={isLoading}
-            title="Submit"
             isDisabled={!isDirty || !isValid}
           />
         </div>

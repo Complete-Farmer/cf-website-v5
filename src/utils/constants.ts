@@ -22,18 +22,25 @@ export const legalLinks = [
   { name: "Terms & Conditions", href: "/legal/terms-and-conditions" },
 ];
 
+export const mailChimpTags = {
+  Grower: 7931902,
+  Buyer: 7931898,
+  Investor: 7931894,
+  Home: 7931890,
+};
+
 export const maxRecordsPerPage = 10;
 
 export const eventsConfig = {
-  maxRecordsPerPage: 9
+  maxRecordsPerPage: 9,
 };
 
 export const blogsConfig = {
-  maxRecordsPerPage: 6
+  maxRecordsPerPage: 6,
 };
 
 export const newsConfig = {
-  maxRecordsPerPage: 6
+  maxRecordsPerPage: 6,
 };
 
 export const ENV = import.meta.env.PUBLIC_ENV;
@@ -42,6 +49,7 @@ export const BOT_PASS = import.meta.env.BOT_PASS;
 export const BOT_EMAIL = import.meta.env.BOT_EMAIL;
 export const AWS_REGION = import.meta.env.AWS_REGION;
 export const AWS_POOL_ID = import.meta.env.AWS_POOL_ID;
+export const AUTH_API = import.meta.env.PUBLIC_AUTH_API;
 export const FACEBOOK_PIXEL_ID = import.meta.env.PUBLIC_FACEBOOK_PIXEL_ID;
 export const PRISM_ACCESS_TOKEN = import.meta.env.PUBLIC_PRISM_ACCESS_TOKEN;
 export const GLOBAL_SITE_TAG_ID = import.meta.env.PUBLIC_GLOBAL_SITE_TAG_ID;

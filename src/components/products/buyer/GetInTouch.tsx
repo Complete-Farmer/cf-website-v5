@@ -1,9 +1,12 @@
 import * as yup from "yup";
+import { toast } from "react-toastify";
 import { useState } from "react";
 import { InlineWidget } from "react-calendly";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
+import { fileToBase64 } from "@utils/functions";
 
+import { getInTouch } from "@utils/api";
 import useYupValidationResolver from "@hooks/useYupValidationResolver";
 
 import { MenuCloseIcon } from "@assets/icons";
@@ -11,6 +14,7 @@ import { Button, Input, PhoneNumber, Tab, Uploader } from "@components/utils";
 
 type Inputs = {
   email: string;
+  country: string;
   fullName: string;
   file: File | null;
   phoneNumber: string;
@@ -62,33 +66,79 @@ function GetInTouchModal({ toggleModal }: { toggleModal: () => void }) {
   };
 
   const {
+    reset,
     watch,
     register,
     setValue,
     handleSubmit,
-    formState: { isDirty, isValid, isLoading },
+    formState: { isDirty, isValid, isSubmitting },
   } = useForm<Inputs>({
     resolver,
     defaultValues: {
       file: null,
       email: "",
+      country: "",
       fullName: "",
       phoneNumber: "",
     },
   });
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
-    // ReactGA.event({
-    //   category: "Button Click",
-    //   action: "Send"
-    // });
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    try {
+      const res = await getInTouch({
+        to: "buyer@completefarmer.com",
+        subject: "Inquiry and Contact Information",
+        text: `
+        Dear Buyer Team,
+        
+        I hope this email finds you well. My name is ${data.fullName} from ${data.country}, and I am reaching out to inquire about the "Buyer" product.
+        
+        In order to provide you with the necessary details and discuss further ${data.file ? ", I've attached my portfolio." : "."} 
+        
+        Please find below my contact information:
+        • Full Name: ${data.fullName}
+        • Email: ${data.email}
+        • Phone Number: ${data.phoneNumber}
+        • Country: ${data.country}
+        
+        I am looking forward to hearing from you and discussing this matter further. Please feel free to contact me via email or phone at your earliest convenience.
+        
+        Thank you for your time and consideration.
+        
+        Warm regards,
+        ${data.fullName}  
+        ${data.phoneNumber}
+        `,
+        attachments: [
+          {
+            path: await fileToBase64(data.file),
+            filename: data.file.name,
+          },
+        ].filter((i) => i.path),
+      });
 
-    // window.metapixelfunction("send", "details_send", {});
+      if (res.statusCode === 200) {
+        reset({});
+        toggleModal();
+        toast(res.message, { type: "success" });
+        // ReactGA.event({
+        //   category: "Button Click",
+        //   action: "Send"
+        // });
 
-    // window.dataLayer.push({
-    //   event: "details_send"
-    // });
+        // window.metapixelfunction("send", "details_send", {});
+
+        // window.dataLayer.push({
+        //   event: "details_send"
+        // });
+      } else {
+        throw new Error(res.message);
+      }
+    } catch (error) {
+      toast(error.message || error?.data?.message || "Unknown server error", {
+        type: "error",
+      });
+    }
   };
 
   const file = watch("file");
@@ -130,7 +180,7 @@ function GetInTouchModal({ toggleModal }: { toggleModal: () => void }) {
               id="fullName"
               title="Full Name"
               placeholder="Eg. John Okeke"
-              autoComplete="given-name"
+              autoComplete="given-name family-name"
               {...register("fullName")}
             />
 
@@ -147,7 +197,10 @@ function GetInTouchModal({ toggleModal }: { toggleModal: () => void }) {
             <PhoneNumber
               value={phoneNumber}
               title="Phone Number"
-              onChange={(val: string) => setValue("phoneNumber", val)}
+              onChange={(number: string, country) => {
+                setValue("country", country);
+                setValue("phoneNumber", number);
+              }}
             />
 
             <Uploader
@@ -155,7 +208,7 @@ function GetInTouchModal({ toggleModal }: { toggleModal: () => void }) {
               value={file}
               // @ts-expect-error any
               setValue={setValue}
-              title="Add attachment"
+              title="Add attachment (Portfolio)"
               accept={{ "application/pdf": [".pdf"] }}
               description="Be it a rough draft or a detailed brief, as long as you find it relevant. Max size: <span class='font-bold'>10MB</span>"
             />
@@ -164,9 +217,9 @@ function GetInTouchModal({ toggleModal }: { toggleModal: () => void }) {
           <Button
             title="Send"
             type="submit"
-            isLoading={isLoading}
+            isLoading={isSubmitting}
             isDisabled={!isDirty || !isValid}
-            className="py-4"
+            className="h-14"
           />
         </form>
       )}

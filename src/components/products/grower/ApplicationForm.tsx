@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import { toast } from "react-toastify";
 import { useStore } from "@nanostores/react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
@@ -13,6 +14,8 @@ import {
   PhoneNumber,
 } from "@components/utils";
 import { MenuCloseIcon } from "@assets/icons";
+import { submitApplication } from "@utils/api";
+import { fileToBase64 } from "@utils/functions";
 
 type Inputs = {
   town: string;
@@ -46,17 +49,19 @@ interface Props {
   title: string;
 }
 
-
 const ApplicationForm = ({ title }: Props) => {
   const applicationFormModal = useStore($applicationFormModal);
   const resolver = useYupValidationResolver(schema);
 
+  const onClose = () => $applicationFormModal.set(false);
+
   const {
+    reset,
     watch,
     register,
     setValue,
     handleSubmit,
-    formState: { isDirty, isValid, isLoading },
+    formState: { isDirty, isValid, isSubmitting },
   } = useForm<Inputs>({
     resolver,
     defaultValues: {
@@ -70,69 +75,71 @@ const ApplicationForm = ({ title }: Props) => {
     },
   });
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    handleButtonClick();
-    const emailTo = "careers@completefarmer.com";
-    const subject = "Application for Grower Agent";
-    const { firstName, lastName, email, phoneNumber, region, town, file } =
-      data;
-
-    const body = `
-  Dear Complete Farmer,
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    try {
+      const res = await submitApplication({
+        text: `
+      Dear Complete Farmer,
+      
+      I am writing to express my interest to ${title.includes("Agent") ? "become an Agent": "enroll in the farm manager academy"} at your company. 
+    
+      Here are my details:
+      
+      • First Name: ${data.firstName}
+      • Last Name: ${data.lastName}
+      • Email: ${data.email}
+      • Phone Number: ${data.phoneNumber}
+      • Region: ${data.region}
+      • Town: ${data.town}
+      
+      I have attached my resume for your consideration.
+      
+      Thank you for your time.
+      
+      Sincerely,
+    ${data.firstName} ${data.lastName}
+      `,
+        to: "grower@completefarmer.com",
+        subject: title.includes("Agent") ? "Application for Grower Agent": "Application to the farm manager academy",
+        attachments: [
+          {
+            path: await fileToBase64(data.file),
+            filename: data.file.name
+          },
+        ]
+      });
   
-  I am writing to express my interest to become Agent at your company. 
-
-  Here are my details:
-  
-  First Name: ${firstName}
-  Last Name: ${lastName}
-  Email: ${email}
-  Phone Number: ${phoneNumber}
-  Region: ${region}
-  Town: ${town}
-  
-  I have attached my resume for your consideration.
-  
-  Thank you for your time.
-  
-  Sincerely,
-  [Your Name]
-  `;
-
-    let mailtoLink = `mailto:${emailTo}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
-    const resumeFileName = encodeURIComponent(file.name);
-    mailtoLink += `&attachment1=${resumeFileName}`;
-
-    window.open(mailtoLink, "_blank");
+      if(res.statusCode === 200) {
+        reset({});
+        onClose();
+        toast(res.message, { type: "success" });
+        // ReactGA.event({
+        //   category: "Button Click",
+        //   action: "Submit"
+        // });
+        // // window.metapixelfunction("submit", "agent_grower_agent", {});
+        // window.dataLayer.push({
+        //   event: "agent_grower_agent"
+        // });
+        //   window.metapixelfunction("submit", "join_academy", {});
+        //   window.dataLayer.push({
+        //     event: "join_academy"
+        //   });
+      } else {
+        throw new Error(res.message);
+      }
+    } catch (error) {
+      toast(error.message || error?.data?.message || "Unknown server error", {
+        type: "error",
+      });
+    }
   };
-
-  const handleButtonClick = () => {
-    // ReactGA.event({
-    //   category: "Button Click",
-    //   action: "Submit"
-    // });
-    // // window.metapixelfunction("submit", "agent_grower_agent", {});
-    // window.dataLayer.push({
-    //   event: "agent_grower_agent"
-    // });
-    //   window.metapixelfunction("submit", "join_academy", {});
-    //   window.dataLayer.push({
-    //     event: "join_academy"
-    //   });
-  };
-
+  
   const file = watch("file");
   const phoneNumber = watch("phoneNumber");
 
-  const onClose = () => $applicationFormModal.set(false);
-
   return (
-    <Wrapper
-      onClose={onClose}
-      isOpen={applicationFormModal}
-    >
+    <Wrapper onClose={onClose} isOpen={applicationFormModal}>
       <div className="w-2xl max-w-5xl isolate sm:w-full bg-white sm:rounded-2xl px-8 py-12">
         <div className="relative flex flex-row-reverse">
           <div className="absolute flex flex-row text-center justify-end -top-8 -right-4">
@@ -231,7 +238,7 @@ const ApplicationForm = ({ title }: Props) => {
             title="Submit"
             type="submit"
             className="h-14"
-            isLoading={isLoading}
+            isLoading={isSubmitting}
             isDisabled={!isDirty || !isValid}
           />
         </form>

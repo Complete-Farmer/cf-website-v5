@@ -1,0 +1,20 @@
+---
+import FormA from "./FormA";
+import FormB from "./FormB";
+---
+
+<section class="bg-custom_gray-400 py-14 sm:py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-14 xl:px-0 space-y-14">
+    <h2
+      class="text-[24px] md:text-[40px] lg:text-5xl md:leading-[50px] lg:leading-[60px] font-bold text-left text-grower-400"
+    >
+      Keep up with our progress
+    </h2>
+    <div
+      class="flex flex-col xl:flex-row space-y-10 xl:space-y-0 justify-between items-start"
+    >
+      <FormA client:idle />
+      <FormB client:idle />
+    </div>
+  </div>
+</section>

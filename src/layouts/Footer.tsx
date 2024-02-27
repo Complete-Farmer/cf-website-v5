@@ -1,3 +1,6 @@
+import "react-toastify/dist/ReactToastify.css";
+
+import { ToastContainer } from "react-toastify";
 import React, { useCallback, useMemo } from "react";
 import { Disclosure } from "@headlessui/react";
 
@@ -347,6 +350,8 @@ export default function Footer({ pathname, isHiring }: { pathname: string, isHir
           <p>@2023 Complete Farmer Limited. All rights reserved.</p>
         </div>
       </div>
+
+      <ToastContainer />
     </footer>
   );
 }

@@ -18,5 +18,3 @@ const newsApiData = await getNews({ page: 1, pageSize: newsConfig.maxRecordsPerP
   <Hero image={HeroImage} title="Newsroom" />
   <NewsRoomList {newsApiData} client:visible />
 </Layouts>
-
-<!-- page: "/resources/news-room", -->

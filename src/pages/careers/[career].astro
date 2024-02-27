@@ -43,8 +43,6 @@ const { career } = Astro.props;
     textColor="text-grower-500"
     title="Browse Careers"
   />
-  <JobDetails {career} client:visible />
-  <ApplicationForm role={career.role} client:visible />
+  <JobDetails {career} client:idle />
+  <ApplicationForm role={career.role} client:idle />
 </Layouts>
-
-<!-- page: "/careers/[job-title]", -->

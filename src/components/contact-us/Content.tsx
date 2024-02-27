@@ -7,6 +7,7 @@ interface IProps {
   faqs: any[];
   toggle: boolean;
   loading: boolean;
+  subject: string;
   onLoadMore: () => void;
   changeToggle: () => void;
   isLoadMore: () => boolean;
@@ -15,6 +16,7 @@ export default function Content({
   faqs,
   toggle,
   loading,
+  subject,
   onLoadMore,
   isLoadMore,
   changeToggle,
@@ -84,7 +86,7 @@ export default function Content({
             <ChevronIcon />
           </button>
         )}
-        {toggle && <ContactForm changeToggle={changeToggle} />}
+        {toggle && <ContactForm subject={subject} changeToggle={changeToggle} />}
       </div>
     </div>
   );
