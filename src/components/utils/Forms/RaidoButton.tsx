@@ -10,10 +10,20 @@ interface IProps
   > {
   title: string;
   labelClassName?: string;
+  bgColor?: string;
 }
 
-const Checkbox = forwardRef(
-  ({ title, className, labelClassName, ...rest }: IProps, ref) => {
+const RaidoButton = forwardRef(
+  (
+    {
+      title,
+      className,
+      bgColor = "bg-[#EFEFEF]",
+      labelClassName,
+      ...rest
+    }: IProps,
+    ref
+  ) => {
     const isBuyer = useWindow<boolean>(
       () => window?.location?.pathname?.includes("buyer"),
       false
@@ -23,11 +33,14 @@ const Checkbox = forwardRef(
         <input
           ref={ref as React.LegacyRef<HTMLInputElement>}
           {...rest}
-          type="checkbox"
+          type="radio"
           className={classNames(
             className,
-            isBuyer ? "focus:ring-buyer-500" : "focus:ring-grower-500",
-            "block w-5 h-5 text-base bg-[#EFEFEF] cursor-pointer rounded-md border-0 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+            bgColor,
+            isBuyer
+              ? "focus:ring-buyer-500 text-buyer-500"
+              : "focus:ring-grower-500 text-grower-500",
+            "block w-5 h-5 cursor-pointer rounded-full border-0 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset"
           )}
         />
 
@@ -45,6 +58,6 @@ const Checkbox = forwardRef(
   }
 );
 
-Checkbox.displayName = "Checkbox";
+RaidoButton.displayName = "RaidoButton";
 
-export default Checkbox;
+export default RaidoButton;
