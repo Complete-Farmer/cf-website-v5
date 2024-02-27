@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import { toast } from "react-toastify";
 import { useStore } from "@nanostores/react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
@@ -14,9 +15,12 @@ import {
   Uploader,
   PhoneNumber,
 } from "@components/utils";
+import { submitApplication } from "@utils/api";
+import { fileToBase64 } from "@utils/functions";
 
 type Inputs = {
   email: string;
+  country: string;
   fullName: string;
   file: File | null;
   phoneNumber: string;
@@ -41,7 +45,10 @@ const RegistrationForm = () => {
   const resolver = useYupValidationResolver(schema);
   const joinSalesAffiliateModal = useStore($joinSalesAffiliateModal);
 
+  const onClose = () => $joinSalesAffiliateModal.set(false);
+
   const {
+    reset,
     watch,
     register,
     setValue,
@@ -52,12 +59,70 @@ const RegistrationForm = () => {
     defaultValues: {
       file: null,
       email: "",
+      country: "",
       fullName: "",
       phoneNumber: "",
     },
   });
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    try {
+      const res = await submitApplication({
+        text: `
+      Dear Complete Farmer,
+      
+      I am writing to express my interest to become a buyer sales affiliate at your company. 
+    
+      Here are my details:
+      
+      • Full Name: ${data.fullName}
+      • Email: ${data.email}
+      • Phone Number: ${data.phoneNumber}
+      • Country: ${data.country}
+      
+      I have attached my resume for your consideration.
+      
+      Thank you for your time.
+      
+      Sincerely,
+    ${data.fullName}
+      `,
+        to: "buyer@completefarmer.com",
+        subject: "Application for sales affiliate",
+        attachments: [
+          {
+            path: await fileToBase64(data.file),
+            filename: data.file.name
+          },
+        ]
+      });
+  
+      if(res.statusCode === 200) {
+        reset({});
+        onClose();
+        toast(res.message, { type: "success" });
+        // ReactGA.event({
+        //   category: "Button Click",
+        //   action: "Submit"
+        // });
+        // // window.metapixelfunction("submit", "agent_grower_agent", {});
+        // window.dataLayer.push({
+        //   event: "agent_grower_agent"
+        // });
+        //   window.metapixelfunction("submit", "join_academy", {});
+        //   window.dataLayer.push({
+        //     event: "join_academy"
+        //   });
+      } else {
+        throw new Error(res.message);
+      }
+    } catch (error) {
+      toast(error.message || error?.data?.message || "Unknown server error", {
+        type: "error",
+      });
+    }
+  };
+  
 
   const file = watch("file");
   const phoneNumber = watch("phoneNumber");
@@ -65,14 +130,14 @@ const RegistrationForm = () => {
   return (
     <Wrapper
       isOpen={joinSalesAffiliateModal}
-      onClose={() => $joinSalesAffiliateModal.set(false)}
+      onClose={onClose}
     >
       <div className="relative w-2xl max-w-5xl isolate sm:w-full bg-white sm:rounded-md px-4 py-6 sm:p-8">
         <div className="flex flex-row-reverse">
           <div
             role="button"
             className="absolute top-4 right-3 sm:top-5 sm:right-6 text-custom_gray-300 hover:cursor-pointer"
-            onClick={() => $joinSalesAffiliateModal.set(false)}
+            onClick={onClose}
           >
             <MenuCloseIcon className="sm:h-7 sm:w-7" aria-hidden="true" />
           </div>
@@ -93,7 +158,7 @@ const RegistrationForm = () => {
               id="fullName"
               title="Full Name"
               placeholder="Eg. John Okeke"
-              autoComplete="given-name"
+              autoComplete="given-name family-name"
               {...register("fullName")}
             />
 
@@ -110,7 +175,10 @@ const RegistrationForm = () => {
             <PhoneNumber
               value={phoneNumber}
               title="Phone Number"
-              onChange={(val: string) => setValue("phoneNumber", val)}
+              onChange={(number: string, country) => {
+                setValue("country", country);
+                setValue("phoneNumber", number);
+              }}
             />
 
             <Uploader
@@ -118,7 +186,7 @@ const RegistrationForm = () => {
               value={file}
               // @ts-expect-error any
               setValue={setValue}
-              title="Add attachment"
+              title="Upload Resume/CV"
               accept={{ "application/pdf": [".pdf"] }}
               description="Be it a rough draft or a detailed brief, as long as you find it relevant. Max size: <span class='font-bold'>2MB</span>"
             />
@@ -129,7 +197,7 @@ const RegistrationForm = () => {
             type="submit"
             isLoading={isLoading}
             isDisabled={!isDirty || !isValid}
-            className="!bg-buyer-500 py-4"
+            className="!bg-buyer-500 h-14"
           />
         </form>
       </div>

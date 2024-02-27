@@ -3,6 +3,7 @@ import { useState } from "react";
 import { NewpaperIcon, ContentIcon, ServiceGuideIcon } from "@assets/icons";
 
 import { Wrapper, SectionList, NewsletterForm, ServiceGuideForm } from ".";
+import { mailChimpTags } from "@utils/constants";
 
 export default function Section({
   product = "Grower",
@@ -21,26 +22,26 @@ export default function Section({
     setActive(name);
   };
 
-  const fillTwo = product == "Buyer" ? "#367AFE" : undefined;
+  const isBuyer = product == "Buyer";
+
+  const fillTwo = isBuyer ? "#367AFE" : undefined;
 
   const incentives = [
     {
       name: "Newsletter",
       icon: <NewpaperIcon fillTwo={fillTwo} />,
-      description:
-        product == "Grower"
-          ? "Discover the latest tips and insights on food and agricultural production on our blog."
-          : "Make smarter business decisions backed by data and stay ahead of food production trends with useful insights that cuts through the noise.",
+      description: !isBuyer
+        ? "Discover the latest tips and insights on food and agricultural production on our blog."
+        : "Make smarter business decisions backed by data and stay ahead of food production trends with useful insights that cuts through the noise.",
       linkText: "Join the newsletter",
       action: (i: string) => openModal(i),
     },
     {
       name: "Service guide",
       icon: <ServiceGuideIcon fillTwo={fillTwo} />,
-      description:
-        product == "Grower"
-          ? "See how we help you maximise your yield, connect you to new markets and increase your profitability. With CF Grower."
-          : "See how we make crop procurement easier for you and help you crush your targets with confidence. With CF Buyer.",
+      description: !isBuyer
+        ? "See how we help you maximise your yield, connect you to new markets and increase your profitability. With CF Grower."
+        : "See how we make crop procurement easier for you and help you crush your targets with confidence. With CF Buyer.",
       linkText: "Send me the service guide!",
       action: (i: string) => openModal(i),
     },
@@ -63,7 +64,7 @@ export default function Section({
       <Wrapper isOpen={open} onClose={() => toggleModal()}>
         {active === "Newsletter" ? (
           <NewsletterForm
-            tag="7931902"
+            tag={mailChimpTags[isBuyer ? "Buyer": "Grower"]}
             buttonBg="bg-grower-500"
             onClose={() => toggleModal()}
           />

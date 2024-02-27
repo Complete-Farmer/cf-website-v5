@@ -43,7 +43,7 @@ function ServiceGuideForm({ onClose, product, buttonBg }: IProps) {
     },
   });
 
-  const onSubmit: SubmitHandler<Inputs> = () => {
+  const onSubmit: SubmitHandler<Inputs> = async () => {
     reset({ email: "", firstName: "" });
 
     toast("Successfully Subscribed", {

@@ -1,11 +1,12 @@
 import * as yup from "yup";
+import { toast } from "react-toastify";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
 import useYupValidationResolver from "@hooks/useYupValidationResolver";
 
-
 import { MenuCloseIcon } from "@assets/icons";
 import { Button, Input, PhoneNumber } from "@components/utils/Forms";
+import { getInTouch } from "@utils/api";
 
 interface IProps {
   toggleModal: () => void;
@@ -33,11 +34,12 @@ export default function BookDemo({ toggleModal, activeCategory }: IProps) {
   const resolver = useYupValidationResolver(schema);
 
   const {
+    reset,
     watch,
     register,
     setValue,
     handleSubmit,
-    formState: { isDirty, isValid, isLoading },
+    formState: { isDirty, isValid, isSubmitting },
   } = useForm<Inputs>({
     resolver,
     defaultValues: {
@@ -48,46 +50,57 @@ export default function BookDemo({ toggleModal, activeCategory }: IProps) {
     },
   });
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    handleButtonClick();
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    try {
+      const res = await getInTouch({
+        text: `
+        Dear ${activeCategory} Team,
 
-    const emailTo = (activeCategory + "@completefarmer.com").toLowerCase();
-    const subject = `Request for ${activeCategory} Demo`;
-    const { firstName, lastName, email, phoneNumber } = data;
+        I hope this email finds you well. My name is ${data.firstName} ${data.lastName}, and I am interested in learning more about ${activeCategory} through a product demo.
+        
+        I've heard great things about ${activeCategory} and believe it could greatly benefit [mention your company or yourself briefly, if applicable].
+        
+        Could you please schedule a product demonstration at your earliest convenience? I am eager to explore its features and see how it aligns with our needs.
+        
+        Here are my contact details for scheduling the demo:
+        
+        • Full Name: ${data.firstName} ${data.lastName}
+        • Email: ${data.email}
 
-    const body = `
-  Dear Complete Farmer,
-  
-  Here are my details:
-  
-  First Name: ${firstName}
-  Last Name: ${lastName}
-  Email: ${email}
-  Phone Number: ${phoneNumber}
-  
-  
-  Sincerely,
-  [Your Name]
-  `;
-    const mailtoLink = `mailto:${emailTo}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
+        Looking forward to experiencing ${activeCategory} firsthand and discussing its potential for [mention your goals or needs, if applicable].
+        
+        Thank you for your attention to this request.
+        
+        Warm regards,
+        ${data.firstName} ${data.lastName}
+      `,
+        to: (activeCategory + "@completefarmer.com").toLowerCase(),
+        subject: `Request for ${activeCategory} Product Demo`,
+      });
 
-    window.open(mailtoLink, "_blank");
+      if (res.statusCode === 200) {
+        reset({});
+        toggleModal();
+        toast(res.message, { type: "success" });
+        // ReactGA.event({
+        //   category: "Button Click",
+        //   action: "Submit",
+        // });
+        // window.metapixelfunction("submit", "book_demo", {});
+        // window.dataLayer.push({
+        //   event: "book_demo",
+        // });
+      } else {
+        throw new Error(res.message);
+      }
+    } catch (error) {
+      toast(error.message || error?.data?.message || "Unknown server error", {
+        type: "error",
+      });
+    }
   };
 
   const phoneNumber = watch("phoneNumber");
-
-  const handleButtonClick = () => {
-    // ReactGA.event({
-    //   category: "Button Click",
-    //   action: "Submit",
-    // });
-    // window.metapixelfunction("submit", "book_demo", {});
-    // window.dataLayer.push({
-    //   event: "book_demo",
-    // });
-  };
 
   return (
     <div className="relative w-2xl max-w-5xl isolate sm:w-full bg-white sm:rounded-md px-4 py-6 sm:p-8">
@@ -159,7 +172,7 @@ export default function BookDemo({ toggleModal, activeCategory }: IProps) {
         <Button
           type="submit"
           title="Submit"
-          isLoading={isLoading}
+          isLoading={isSubmitting}
           isDisabled={!isDirty || !isValid}
           className="h-14"
         />

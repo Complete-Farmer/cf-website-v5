@@ -1,8 +1,11 @@
 import * as yup from "yup";
+import { toast } from "react-toastify";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
 import { Input, Button, Uploader, PhoneNumber } from "@components/utils";
 import useYupValidationResolver from "@hooks/useYupValidationResolver";
+import { submitApplication } from "@utils/api";
+import { fileToBase64 } from "@utils/functions";
 
 type Inputs = {
   email: string;
@@ -18,12 +21,12 @@ type Inputs = {
 const schema = yup
   .object()
   .shape({
+    currentCompany: yup.string(),
+    previousCompany: yup.string(),
     lastName: yup.string().required(),
     firstName: yup.string().required(),
     phoneNumber: yup.string().required(),
     email: yup.string().email().required(),
-    currentCompany: yup.string().required(),
-    previousCompany: yup.string().required(),
     resumeFile: yup
       .mixed()
       .test("fileSize", "The file is too large", (value: File) => {
@@ -33,7 +36,7 @@ const schema = yup
     coverLetterFile: yup
       .mixed()
       .test("fileSize", "The file is too large", (value: File) => {
-        if (!value) return false;
+        if (!value) return true;
         return value.size <= 2097152;
       }),
   })
@@ -43,11 +46,12 @@ const ApplicationForm = ({ role }: { role: string }) => {
   const resolver = useYupValidationResolver(schema);
 
   const {
+    reset,
     watch,
     register,
     setValue,
     handleSubmit,
-    formState: { isDirty, isValid, isLoading },
+    formState: { isDirty, isValid, isSubmitting },
   } = useForm<Inputs>({
     resolver,
     defaultValues: {
@@ -62,43 +66,66 @@ const ApplicationForm = ({ role }: { role: string }) => {
     },
   });
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    const emailTo = "careers@completefarmer.com";
-    const subject = `Application for ${role}`;
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    try {
+      const res = await submitApplication({
+        text: `
+        Dear Hiring Manager,
+  
+        I am writing to express my interest in the position at your company. 
+        Here are my details:
+        
+        • Email: ${data.email}
+        • Last Name: ${data.lastName}
+        • First Name: ${data.firstName}
+        • Phone Number: ${data.phoneNumber}
+        • Current Company: ${data.currentCompany || "NA"}
+        • Previous Company: ${data.previousCompany || "NA"}
+        
+        I have attached my resume and cover letter for your consideration.
+        
+        Thank you for your time.
+      
+        Sincerely,
+        ${data.firstName} ${data.lastName}
+      `,
+        subject: `Application for ${role}`,
+        attachments: [
+          {
+            path: await fileToBase64(data.resumeFile),
+            filename: data.resumeFile.name,
+          },
+          {
+            path: await fileToBase64(data.coverLetterFile),
+            filename: data.coverLetterFile.name,
+          },
+        ].filter((i) => i.path),
+      });
 
-    const body = `
-  Dear Hiring Manager,
-  
-  I am writing to express my interest in the position at your company. 
-  Here are my details:
-  
-  Email: ${data.email}
-  Last Name: ${data.lastName}
-  First Name: ${data.firstName}
-  Phone Number: ${data.phoneNumber}
-  Current Company: ${data.currentCompany}
-  Previous Company: ${data.previousCompany}
-  
-  I have attached my resume and cover letter for your consideration.
-  
-  Thank you for your time.
-  
-  Sincerely,
-  [Your Name]
-  `;
-    let mailtoLink = `mailto:${emailTo}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    if (resumeFile) {
-      const resumeFileName = encodeURIComponent(resumeFile.name);
-      mailtoLink += `&attachment1=${resumeFileName}`;
+      if (res.statusCode === 200) {
+        reset({});
+        // onClose();
+        toast(res.message, { type: "success" });
+        // ReactGA.event({
+        //   category: "Button Click",
+        //   action: "Submit"
+        // });
+        // // window.metapixelfunction("submit", "agent_grower_agent", {});
+        // window.dataLayer.push({
+        //   event: "agent_grower_agent"
+        // });
+        //   window.metapixelfunction("submit", "join_academy", {});
+        //   window.dataLayer.push({
+        //     event: "join_academy"
+        //   });
+      } else {
+        throw new Error(res.message);
+      }
+    } catch (error) {
+      toast(error.message || error?.data?.message || "Unknown server error", {
+        type: "error",
+      });
     }
-
-    if (coverLetterFile) {
-      const coverLetterFileName = encodeURIComponent(coverLetterFile.name);
-      mailtoLink += `&attachment2=${coverLetterFileName}`;
-    }
-
-    window.open(mailtoLink, "_blank");
   };
 
   const resumeFile = watch("resumeFile");
@@ -146,7 +173,7 @@ const ApplicationForm = ({ role }: { role: string }) => {
               id="email"
               type="email"
               autoComplete="email"
-              title="Buisiness Email"
+              title="Email"
               className="!bg-white"
               outerClassName="col-span-2"
               placeholder="example@company.com"
@@ -162,19 +189,6 @@ const ApplicationForm = ({ role }: { role: string }) => {
             />
 
             <Input
-              required
-              type="text"
-              id="lastName"
-              title="Last Name"
-              placeholder="Eg. Okeke"
-              className="!bg-white"
-              outerClassName="col-span-2"
-              autoComplete="family-name"
-              {...register("lastName")}
-            />
-
-            <Input
-              required
               type="text"
               id="currentCompany"
               title="Current Company"
@@ -186,7 +200,6 @@ const ApplicationForm = ({ role }: { role: string }) => {
             />
 
             <Input
-              required
               type="text"
               id="previousCompany"
               title="Previous Company"
@@ -212,7 +225,6 @@ const ApplicationForm = ({ role }: { role: string }) => {
 
             <div className="col-span-2 sm:col-span-1">
               <Uploader
-                required
                 name="coverLetterFile"
                 value={coverLetterFile}
                 // @ts-expect-error any
@@ -226,8 +238,8 @@ const ApplicationForm = ({ role }: { role: string }) => {
 
           <Button
             type="submit"
-            className="h-16"
-            isLoading={isLoading}
+            className="h-14"
+            isLoading={isSubmitting}
             title="Submit application"
             isDisabled={!isDirty || !isValid}
           />

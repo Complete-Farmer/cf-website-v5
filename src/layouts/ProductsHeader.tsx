@@ -72,6 +72,7 @@ const config = [
   {
     logo: BuyerLogo,
     name: "CF Buyer",
+    href: "/products/buyer",
     popoverArrowIcon: ArrowIcon,
     textcolor: "text-buyuer-400",
     activeBgColor: "bg-buyer-500",

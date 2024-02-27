@@ -1,23 +1,35 @@
-import "react-toastify/dist/ReactToastify.css";
-
 import { useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
+
+import * as yup from "yup";
+import { useForm, type SubmitHandler } from "react-hook-form";
+
+import useYupValidationResolver from "@hooks/useYupValidationResolver";
 
 import MobileBackground from "@assets/images/home/newsletter-bg-mobile.webp";
 import TabletBackground from "@assets/images/home/newsletter-bg-tablet.webp";
 import DesktopBackground from "@assets/images/home/newsletter-bg-desktop.webp";
 
 import useResolution from "@hooks/useResolution";
-import { onMailChimpSubmit } from "@utils/functions";
 
 import { Button, Input } from "@components/utils";
+import { onMailChimpSubmit } from "@utils/functions";
+import { mailChimpTags } from "@utils/constants";
+
+type Inputs = {
+  email: string;
+};
+
+const schema = yup
+  .object()
+  .shape({
+    email: yup.string().email().required(),
+  })
+  .required();
 
 export default function NewsLetter() {
-  const activeBgColor = "bg-grower-500";
   const { screenType } = useResolution();
   const [background, setBackground] = useState<string>();
-  const [email, setEmail] = useState("");
-  const [isEmailValid, setIsEmailValid] = useState(false);
 
   useEffect(() => {
     if (screenType === "mobile") {
@@ -36,44 +48,28 @@ export default function NewsLetter() {
     }
   }, [screenType]);
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const enteredEmail = e.target.value;
-    setEmail(enteredEmail);
+  const resolver = useYupValidationResolver(schema);
 
-    const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(enteredEmail);
-    setIsEmailValid(isValidEmail);
-  };
+  const {
+    reset,
+    register,
+    handleSubmit,
+    formState: { isDirty, isValid, isSubmitting },
+  } = useForm<Inputs>({
+    resolver,
+    defaultValues: { email: "" },
+  });
 
-  const handleButtonClick = () => {
-
-    const elem = document.getElementById("mce-EMAIL") as HTMLInputElement;
-    if (elem?.value) {
-      onMailChimpSubmit({
-        email: elem.value,
-        tags: "7931890", // Home Tag
-      });
-
-      // Reset the input field
-      setEmail("");
-      toast("Successfully Subscribed", {
-        type: "success"
-      });
-
-      // ReactGA.event({
-      //   category: "Button Click",
-      //   action: "News Letter"
-      // });
-
-      // try {
-      //   window.metapixelfunction("news", "news_letter", {});
-
-      //   window.dataLayer.push({
-      //     event: "news_letter"
-      //   });
-      // } catch (error) {
-      //   console.log("error: ", error);
-      // }
-    }
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    onMailChimpSubmit({ email: data.email, tags: mailChimpTags["Home"] });
+    reset({ email: "" });
+    toast("Please check your inbox for comfirmation", { type: "success", position: "bottom-center" });
+    // ReactGA.event({
+    //   category: "Button Click",
+    //   action: "News Letter"
+    // });
+    // window.metapixelfunction("news", "news_letter", {});
+    // window.dataLayer.push({  event: "news_letter" });
   };
 
   return (
@@ -87,32 +83,26 @@ export default function NewsLetter() {
         <p className="text-xl font-bold text-center text-custom_black-900 sm:text-[32px] lg:text-5xl">
           Subscribe to our newsletters.
         </p>
-        <div className="flex flex-col lg:flex-row justify-between items-center w-full lg:w-1/3 gap-2 sm:gap-4">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col lg:flex-row justify-between items-center w-full lg:w-1/3 gap-2 sm:gap-4"
+        >
           <Input
             required
             id="email"
-            name="email"
             type="email"
-            value={email}
-            autoComplete="email"
-            onChange={handleEmailChange}
             placeholder="Enter email address"
+            {...register("email")}
           />
 
-          <div className="">
-            <Button
-              title="Subscribe"
-              // isLoading={isLoading}
-              onClick={(e) => {
-                e.preventDefault();
-                handleButtonClick();
-              }}
-              isDisabled={!isEmailValid}
-              className={`!${activeBgColor} w-full h-14 sm:w-40[x] sm:w-[605px] sm:h-16 lg:w-[139px] lg:h-[56px] sm:text-base`}
-            />
-            <ToastContainer hideProgressBar />
-          </div>
-        </div>
+          <Button
+            type="submit"
+            title="Subscribe"
+            isLoading={isSubmitting}
+            isDisabled={!isDirty || !isValid}
+            className="w-full h-14 lg:w-56"
+          />
+        </form>
       </div>
     </div>
   );

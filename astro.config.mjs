@@ -32,6 +32,7 @@ export default defineConfig({
             "connect.facebook.net",
             "www.google-analytics.com",
             "googleads.g.doubleclick.net",
+            "www.googletagmanager.com",
             "snap.licdn.com"
           ];
           if (proxyDomains.includes(url.hostname)) {

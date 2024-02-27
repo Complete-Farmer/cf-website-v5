@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 import Content from "./Content";
-import {SpinnerLoader, Selector } from "@components/utils";
+import { SpinnerLoader, Selector } from "@components/utils";
 
 import { filterAt, getContactUsFaqs } from "@utils/prismic";
 
@@ -125,6 +125,7 @@ export default function Main({ data }: IProps) {
                   toggle={toggle}
                   loading={loading}
                   isLoadMore={isLoadMore}
+                  subject={selected.name}
                   changeToggle={changeToggle}
                   onLoadMore={handleOnClickLoadMore}
                 />

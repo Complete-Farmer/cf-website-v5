@@ -1,7 +1,5 @@
-import "react-toastify/dist/ReactToastify.css";
-
 import * as yup from "yup";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
 import { MenuCloseIcon } from "@assets/icons";
@@ -24,7 +22,7 @@ const schema = yup
   .required();
 
 interface IProps {
-  tag: string;
+  tag: number;
   buttonBg: string;
   onClose: () => void;
 }
@@ -33,10 +31,10 @@ function NewsletterForm({ tag, onClose, buttonBg }: IProps) {
   const resolver = useYupValidationResolver(schema);
 
   const {
+    reset,
     register,
     handleSubmit,
-    reset,
-    formState: { isDirty, isValid, isLoading },
+    formState: { isDirty, isValid, isSubmitting },
   } = useForm<Inputs>({
     resolver,
     defaultValues: {
@@ -51,18 +49,19 @@ function NewsletterForm({ tag, onClose, buttonBg }: IProps) {
       firstname: data.firstName,
       tags: tag,
     });
-
+    onClose();
     reset({ email: "", firstName: "" });
-
-    toast("Successfully Subscribed", {
-      type: "success",
-    });
+    toast("Please check your inbox for comfirmation", { type: "success", position: "bottom-center" });
+    // ReactGA.event({
+    //   category: "Button Click",
+    //   action: "News Letter"
+    // });
+    // window.metapixelfunction("news", "news_letter", {});
+    // window.dataLayer.push({  event: "news_letter" });
   };
 
   return (
-    <div
-      className="relative w-96 z-10 h-auto p-5 overflow-hidden bg-white border-gray-300 rounded-lg shadow-2xl"
-    >
+    <div className="relative w-96 z-10 h-auto p-5 overflow-hidden bg-white border-gray-300 rounded-lg shadow-2xl">
       <div className="flex flex-row-reverse relative">
         <div
           className="absolute text-custom_gray-300 hover:cursor-pointer"
@@ -72,7 +71,7 @@ function NewsletterForm({ tag, onClose, buttonBg }: IProps) {
         </div>
         <div className="mx-auto w-full text-center">
           <h2 className="text-xl leading-6 md:text-2xl md:leading-[30px] font-bold sm:tracking-tight text-grower-400">
-              Join our newsletter
+            Join our newsletter
           </h2>
         </div>
       </div>
@@ -105,12 +104,10 @@ function NewsletterForm({ tag, onClose, buttonBg }: IProps) {
           <Button
             type="submit"
             title="Subscribe"
-            isLoading={isLoading}
+            isLoading={isSubmitting}
             className={`!${buttonBg} h-14`}
             isDisabled={!isDirty || !isValid}
           />
-
-          <ToastContainer hideProgressBar />
         </div>
       </form>
     </div>

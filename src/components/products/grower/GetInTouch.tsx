@@ -1,54 +1,115 @@
 import * as yup from "yup";
+import { toast } from "react-toastify";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
 import useYupValidationResolver from "@hooks/useYupValidationResolver";
 
 import { MenuCloseIcon } from "@assets/icons";
 import { Button, Input, PhoneNumber, Uploader } from "@components/utils";
+import { getInTouch } from "@utils/api";
+import { fileToBase64 } from "@utils/functions";
 
 type Inputs = {
   email: string;
+  country: string;
   fullName: string;
   file: File | null;
   phoneNumber: string;
 };
 
 const schema = yup
-  .object().shape({
+  .object()
+  .shape({
     phoneNumber: yup.string(),
     fullName: yup.string().required(),
     email: yup.string().email().required(),
-    file: yup.mixed().test("fileSize", "The file is too large", (value: File) => {
-      if (!value) return true;
-      return value.size <= 10485760;
-    }),
+    file: yup
+      .mixed()
+      .test("fileSize", "The file is too large", (value: File) => {
+        if (!value) return true;
+        return value.size <= 10485760;
+      }),
   })
   .required();
 
-const GetInTouchForm = ({
-  toggleModal,
-}: {
-  toggleModal: () => void;
-}) => {
+const GetInTouchForm = ({ toggleModal }: { toggleModal: () => void }) => {
   const resolver = useYupValidationResolver(schema);
 
   const {
+    reset,
     watch,
     register,
     setValue,
     handleSubmit,
-    formState: { isDirty, isValid, isLoading },
+    formState: { isDirty, isValid, isSubmitting },
   } = useForm<Inputs>({
     resolver,
     defaultValues: {
       file: null,
       email: "",
+      country: "",
       fullName: "",
       phoneNumber: "",
     },
   });
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    try {
+      const res = await getInTouch({
+        to: "grower@completefarmer.com",
+        subject: "Inquiry and Contact Information",
+        text: `
+        Dear Grower Team,
+        
+        I hope this email finds you well. My name is ${data.fullName} from ${data.country}, and I am reaching out to inquire about the "Grower" product.
+        
+        In order to provide you with the necessary details and discuss further ${data.file ? ", I've attached my portfolio." : "."} 
+        
+        Please find below my contact information:
+        • Full Name: ${data.fullName}
+        • Email: ${data.email}
+        • Phone Number: ${data.phoneNumber}
+        • Country: ${data.country}
+        
+        I am looking forward to hearing from you and discussing this matter further. Please feel free to contact me via email or phone at your earliest convenience.
+        
+        Thank you for your time and consideration.
+        
+        Warm regards,
+        ${data.fullName}  
+        ${data.phoneNumber}
+        `,
+        attachments: [
+          {
+            path: await fileToBase64(data.file),
+            filename: data.file.name,
+          },
+        ].filter((i) => i.path),
+      });
+
+      if (res.statusCode === 200) {
+        reset({});
+        toggleModal();
+        toast(res.message, { type: "success" });
+        // ReactGA.event({
+        //   category: "Button Click",
+        //   action: "Send"
+        // });
+
+        // window.metapixelfunction("send", "details_send", {});
+
+        // window.dataLayer.push({
+        //   event: "details_send"
+        // });
+      } else {
+        throw new Error(res.message);
+      }
+    } catch (error) {
+      toast(error.message || error?.data?.message || "Unknown server error", {
+        type: "error",
+      });
+    }
+  };
 
   const file = watch("file");
   const phoneNumber = watch("phoneNumber");
@@ -80,7 +141,7 @@ const GetInTouchForm = ({
             id="fullName"
             title="Full Name"
             placeholder="Eg. John Okeke"
-            autoComplete="given-name"
+            autoComplete="given-name family-name"
             {...register("fullName")}
           />
 
@@ -97,7 +158,10 @@ const GetInTouchForm = ({
           <PhoneNumber
             value={phoneNumber}
             title="Phone Number"
-            onChange={(val: string) => setValue("phoneNumber", val)}
+            onChange={(number: string, country) => {
+              setValue("country", country);
+              setValue("phoneNumber", number);
+            }}
           />
 
           <Uploader
@@ -105,7 +169,7 @@ const GetInTouchForm = ({
             value={file}
             // @ts-expect-error any
             setValue={setValue}
-            title="Add attachment"
+            title="Add attachment (Portfolio)"
             accept={{ "application/pdf": [".pdf"] }}
             description="Be it a rough draft or a detailed brief, as long as you find it relevant. Max size: <span class='font-bold'>10MB</span>"
           />
@@ -114,9 +178,9 @@ const GetInTouchForm = ({
         <Button
           title="Send"
           type="submit"
-          isLoading={isLoading}
+          isLoading={isSubmitting}
           isDisabled={!isDirty || !isValid}
-          className="py-4"
+          className="h-14"
         />
       </form>
     </div>

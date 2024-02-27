@@ -1,6 +1,8 @@
 import "react-phone-number-input/style.css";
 
-import ReactPhoneNumberInput from "react-phone-number-input";
+import { useState, useEffect } from "react";
+import { getName } from "country-list";
+import ReactPhoneNumberInput, { parsePhoneNumber } from "react-phone-number-input";
 
 import useWindow from "@hooks/useWindow";
 import { classNames } from "@utils/functions";
@@ -11,7 +13,7 @@ interface IProps {
   required?: boolean;
   outerClassName?: string;
   labelClassName?: string;
-  onChange: (val: string) => void;
+  onChange: (number: string, country: string) => void;
 }
 
 const PhoneNumber = ({
@@ -22,7 +24,16 @@ const PhoneNumber = ({
   labelClassName,
   required = false,
 }: IProps) => {
+  const [number, setNumber] = useState("");
   const isBuyer = useWindow<boolean>(() => window?.location?.pathname?.includes("buyer"), false);
+
+  useEffect(() => {
+    if(number){
+      const phoneNumber = parsePhoneNumber(number);
+      onChange(number, getName(phoneNumber.country));
+    }
+  }, [number]);
+  
 
   return (
     <div className={classNames(outerClassName, isBuyer ? "buyer": "grower", "w-full space-y-2")}>
@@ -40,7 +51,7 @@ const PhoneNumber = ({
       <ReactPhoneNumberInput
         international
         value={value}
-        onChange={onChange}
+        onChange={setNumber}
         defaultCountry="GH"
         className="reactphone"
         style={{ outline: "none" }}
