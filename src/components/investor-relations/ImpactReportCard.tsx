@@ -1,23 +1,41 @@
+import { useState } from "react";
+import { toast } from "react-toastify";
+import MoonLoader from "react-spinners/MoonLoader";
+
 import { DownloadIcon } from "@assets/icons";
-import { getSignedAwsDownloadableFileUrl } from "@utils/aws";
 import { classNames } from "@utils/functions";
+import { getSignedAwsDownloadableFileUrl } from "@utils/aws";
 
 interface IProps {
   name: string;
 }
 
 function ImpactReportCard({ name }: IProps) {
-  const handleDownload = async () => {
-    let bucket = "";
-    if (name.includes("hite")) bucket = "cf-white-papers";
-    if (name.includes("mpact")) bucket = "cf-impact-reports";
-    if (name.includes("vision")) bucket = "cf-vivid-vision-reports";
+  const [isLoading, setisLoading] = useState(false);
 
-    if (bucket !== "") {
-      const url = await getSignedAwsDownloadableFileUrl(name + ".pdf", bucket);
-      window.open(url, "_blank");
-    } else {
-      console.log("Couldn't download files, please contact support");
+  const handleDownload = async () => {
+    setisLoading(true);
+    try {
+      let bucket = "";
+      if (name.includes("hite")) bucket = "cf-white-papers";
+      if (name.includes("mpact")) bucket = "cf-impact-reports";
+      if (name.includes("vision")) bucket = "cf-vivid-vision-reports";
+
+      if (bucket !== "") {
+        const url = await getSignedAwsDownloadableFileUrl(
+          name + ".pdf",
+          bucket
+        );
+        window.open(url, "_blank");
+      } else {
+        console.log("Couldn't download files, please contact support");
+      }
+    } catch (error) {
+      toast(error.message || "Unknow error occured, try again.", {
+        type: "error",
+      });
+    } finally {
+      setisLoading(false);
     }
   };
 
@@ -30,14 +48,31 @@ function ImpactReportCard({ name }: IProps) {
         <button
           onClick={handleDownload}
           className={classNames(
-            name.toLowerCase().includes("grower")
-              ? "text-grower-500"
-              : "text-buyer-500",
+            name.toLowerCase().includes("buyer")
+              ? "text-buyer-500"
+              : "text-grower-500",
             "flex justify-start items-center gap-2 text-sm font-bold"
           )}
         >
-          <span className="text-sm font-bold text-left">Download PDF</span>
-          <DownloadIcon />
+          {isLoading ? (
+            <>
+              <MoonLoader
+                size={20}
+                loading={isLoading}
+                color={
+                  name.toLowerCase().includes("buyer") ? "#367AFE" : "#31BC2E"
+                }
+              />
+              <span className="text-sm font-bold text-left loading-text loading-text-b">
+                Please wait
+              </span>
+            </>
+          ) : (
+            <>
+              <span className="text-sm font-bold text-left">Download PDF</span>
+              <DownloadIcon />
+            </>
+          )}
         </button>
       </div>
     </div>

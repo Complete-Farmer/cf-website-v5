@@ -58,6 +58,5 @@ export const getSignedAwsDownloadableFileUrl = async (
     Key: key,
   });
 
-  const url = await getSignedUrl(client, command2, { expiresIn: 3600 });
-  return url;
+  return await getSignedUrl(client, command2, { expiresIn: 3600 });
 };
