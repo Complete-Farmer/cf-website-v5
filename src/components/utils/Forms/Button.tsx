@@ -1,7 +1,6 @@
 import { classNames } from "@utils/functions";
 import type { IClickEvent } from "types/app";
 import { ArrowIcon } from "@assets/icons";
-// import { SpinnerLoader } from "@components/utils";
 import MoonLoader from "react-spinners/MoonLoader";
 
 
