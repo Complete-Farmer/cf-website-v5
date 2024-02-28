@@ -1,13 +1,15 @@
 import "react-toastify/dist/ReactToastify.css";
 
 import * as yup from "yup";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
 import { MenuCloseIcon } from "@assets/icons";
 import { Button, Input } from "@components/utils";
 
 import useYupValidationResolver from "@hooks/useYupValidationResolver";
+import { onMailChimpSubmit } from "@utils/functions";
+import { mailChimpTags } from "@utils/constants";
 
 type Inputs = {
   email: string;
@@ -30,11 +32,14 @@ interface IProps {
 
 function ServiceGuideForm({ onClose, product, buttonBg }: IProps) {
   const resolver = useYupValidationResolver(schema);
+
+  const isBuyer = product == "Buyer";
+
   const {
     reset,
     register,
     handleSubmit,
-    formState: { isDirty, isValid, isLoading },
+    formState: { isDirty, isValid, isSubmitting },
   } = useForm<Inputs>({
     resolver,
     defaultValues: {
@@ -43,12 +48,22 @@ function ServiceGuideForm({ onClose, product, buttonBg }: IProps) {
     },
   });
 
-  const onSubmit: SubmitHandler<Inputs> = async () => {
-    reset({ email: "", firstName: "" });
-
-    toast("Successfully Subscribed", {
-      type: "success",
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    onMailChimpSubmit({
+      email: data.email,
+      firstname: data.firstName,
+      id:  isBuyer ? "3e78dce99f" : "95c59f4d99",
+      tags:  mailChimpTags[isBuyer ? "BuyerServiceGuide": "GrowerServiceGuide"],
     });
+    onClose();
+    reset({ email: "", firstName: "" });
+    toast("Thank you for subscribing", { type: "success", position: "bottom-center" });
+    // ReactGA.event({
+    //   category: "Button Click",
+    //   action: "Service Guide"
+    // });
+    // window.metapixelfunction("news", "service_guide", {});
+    // window.dataLayer.push({  event: "service_guide" });
   };
 
   return (
@@ -97,13 +112,11 @@ function ServiceGuideForm({ onClose, product, buttonBg }: IProps) {
         <div>
           <Button
             type="submit"
-            isLoading={isLoading}
+            isLoading={isSubmitting}
             className={`!${buttonBg} h-14`}
             title="Send me a service guide"
             isDisabled={!isDirty || !isValid}
           />
-
-          <ToastContainer hideProgressBar />
         </div>
       </form>
     </div>

@@ -4,9 +4,10 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 
 import useYupValidationResolver from "@hooks/useYupValidationResolver";
 
-import { Input, Button, RaidoButton,  } from "@components/utils";
+import { Input, Button, RaidoButton } from "@components/utils";
 import { onMailChimpSubmit } from "@utils/functions";
 import { mailChimpTags } from "@utils/constants";
+import { useEffect, useState } from "react";
 
 type Inputs = {
   email: string;
@@ -16,13 +17,13 @@ type Inputs = {
 const schema = yup
   .object()
   .shape({
-    existing: yup.string(),
-    prospective: yup.string(),
+    investorType: yup.string().required(),
     email: yup.string().email().required(),
   })
   .required();
 
 const FormA = () => {
+  const [isSuccess, setSuccessful] = useState(false);
   const resolver = useYupValidationResolver(schema);
 
   const defaultValues = {
@@ -34,7 +35,7 @@ const FormA = () => {
     reset,
     register,
     handleSubmit,
-    formState: { isDirty, isValid, isSubmitting },
+    formState: { isDirty, isValid, isSubmitting, isSubmitSuccessful },
   } = useForm<Inputs>({
     resolver,
     defaultValues,
@@ -43,11 +44,15 @@ const FormA = () => {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     onMailChimpSubmit({
       email: data.email,
-      // firstname: data.investorType,
-      tags: mailChimpTags.Investor,
+      id: "675ea5998d",
+      tags: mailChimpTags[data.investorType + "Investor"],
     });
     reset(defaultValues);
-    toast("Please check your inbox for comfirmation", { type: "success", position: "bottom-center" });
+    toast("Please check your inbox for comfirmation", {
+      type: "success",
+      position: "bottom-center",
+      theme: "colored",
+    });
     // ReactGA.event({
     //   category: "Button Click",
     //   action: "Keeping up with our progress"
@@ -56,10 +61,21 @@ const FormA = () => {
     // window.dataLayer.push({ event: "news_letter" });
   };
 
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      setSuccessful(true);
+      setTimeout(() => {
+        setSuccessful(false);
+      }, 5000);
+    }
+  }, [isSubmitSuccessful]);
+
   return (
     <div className="w-full xl:w-1/2">
-      <form 
-        onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-start items-start w-full xl:w-[400px] gap-6">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col justify-start items-start w-full xl:w-[400px] gap-6"
+      >
         <Input
           name="email"
           title="Email"
@@ -72,26 +88,32 @@ const FormA = () => {
             <RaidoButton
               id="existing"
               bgColor="bg-white"
-              value="Existing Investor"
+              value="Existing"
               title="Existing Investor"
               {...register("investorType")}
             />
             <RaidoButton
               bgColor="bg-white"
               id="prospective_investor"
-              value="Prospective Investor"
+              value="Prospective"
               title="Prospective Investor"
               {...register("investorType")}
             />
           </div>
-
-          <Button
-            type="submit"
-            title="Submit"
-            isLoading={isSubmitting}
-            isDisabled={!isDirty || !isValid}
-            className="xl:!w-fit px-8 py-4 !rounded-xl"
-          />
+          <div className="space-y-2">
+            <Button
+              type="submit"
+              title="Submit"
+              isLoading={isSubmitting}
+              isDisabled={!isDirty || !isValid}
+              className="xl:!w-fit px-8 py-4 !rounded-xl"
+            />
+            {isSuccess && (
+              <span className="text-grower-500">
+                Please check your inbox for comfirmation
+              </span>
+            )}
+          </div>
         </div>
       </form>
     </div>

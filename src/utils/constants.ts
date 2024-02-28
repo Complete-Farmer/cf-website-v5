@@ -23,10 +23,14 @@ export const legalLinks = [
 ];
 
 export const mailChimpTags = {
-  Grower: 7931902,
-  Buyer: 7931898,
-  Investor: 7931894,
   Home: 7931890,
+  Buyer: 7931898,
+  Grower: 7931902,
+  Investor: 7931894,
+  ExistingInvestor: 7933273,
+  BuyerServiceGuide: 7933265,
+  GrowerServiceGuide: 7931902,
+  ProspectiveInvestor: 7933277,
 };
 
 export const maxRecordsPerPage = 10;
