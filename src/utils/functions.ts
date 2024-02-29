@@ -28,17 +28,20 @@ export const getAppLink = (text: string, query?: string) => {
 };
 
 interface IFields {
+  id?: string;
   email: string;
   firstname?: string;
-  tags: string | number;
+  tags?: string | number;
 }
 export const onMailChimpSubmit = (fields: IFields) => {
-  const { email, firstname, tags } = fields;
+  const { id= "062b1734e2", email, firstname, tags } = fields;
 
-  const url =
-    "https://completefarmer.us4.list-manage.com/subscribe/post?u=d9d1e9683abc0d8614a94ae3b&amp;id=062b1734e2&amp;v_id=6858&amp;f_id=00f903ebf0";
+  const url = "https://completefarmer.us4.list-manage.com/subscribe/post?u=d9d1e9683abc0d8614a94ae3b&amp;id=" + id + "&amp;v_id=6858&amp;f_id=00f903ebf0";
 
-  let _d = `${url}&EMAIL=${email}&tags=${tags}`;
+  let _d = `${url}&EMAIL=${email}`;
+  if (tags) {
+    _d = _d.concat(`&tags=${tags}`);
+  }
   if (firstname) {
     _d = _d.concat(`&FNAME=${firstname}`);
   }

@@ -3,9 +3,11 @@ import { toast } from "react-toastify";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
 import useYupValidationResolver from "@hooks/useYupValidationResolver";
+import useSuccessNotify from "@hooks/useSuccessNotify";
 
-import { Button, Input, Textarea } from "@components/utils";
+import { Button, Input, SuccessText, Textarea } from "@components/utils";
 import { getInTouch } from "@utils/api";
+import { useState } from "react";
 
 // import {  } from "@utils/api";
 
@@ -25,6 +27,7 @@ const schema = yup
   .required();
 
 const FormB = () => {
+  const [message, setMessage] = useState("");
   const resolver = useYupValidationResolver(schema);
 
   const defaultValues = {
@@ -37,12 +40,11 @@ const FormB = () => {
     reset,
     register,
     handleSubmit,
-    formState: { isDirty, isValid, isSubmitting },
+    formState: { isDirty, isValid, isSubmitting, isSubmitSuccessful },
   } = useForm<Inputs>({
     resolver,
     defaultValues,
   });
-
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
@@ -59,6 +61,7 @@ const FormB = () => {
 
       if (res.statusCode === 200) {
         reset({});
+        setMessage(res.message);
         toast(res.message, { type: "success" });
         // ReactGA.event({
         //   category: "Button Click",
@@ -80,6 +83,7 @@ const FormB = () => {
     }
   };
 
+  const showSuccessMessage = useSuccessNotify(isSubmitSuccessful);
 
   return (
     <div className="w-full xl:w-1/2 flex flex-col items-end">
@@ -113,13 +117,16 @@ const FormB = () => {
           />
         </div>
 
-        <Button
-          type="submit"
-          title="Submit"
-          isLoading={isSubmitting}
-          isDisabled={!isDirty || !isValid}
-          className="xl:!w-fit px-8 py-4 !rounded-xl"
-        />
+        <div className="space-y-2">
+          <Button
+            type="submit"
+            title="Submit"
+            isLoading={isSubmitting}
+            isDisabled={!isDirty || !isValid}
+            className="xl:!w-fit px-8 py-4 !rounded-xl"
+          />
+          {showSuccessMessage && message && <SuccessText text={message} />}
+        </div>
       </form>
     </div>
   );

@@ -26,6 +26,7 @@ env:
   BOT_EMAIL: ${{ secrets.BOT_EMAIL }}
   PUBLIC_ENV: ${{ secrets.PUBLIC_ENV }}
   AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+  PUBLIC_AUTH_API: ${{ secrets.PUBLIC_AUTH_API }}
   PUBLIC_AWS_REGION: ${{ secrets.PUBLIC_AWS_REGION }}
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   PUBLIC_AWS_POOL_ID: ${{ secrets.PUBLIC_AWS_POOL_ID }}

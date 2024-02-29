@@ -30,7 +30,9 @@ const PhoneNumber = ({
   useEffect(() => {
     if(number){
       const phoneNumber = parsePhoneNumber(number);
-      onChange(number, getName(phoneNumber.country));
+      if(phoneNumber?.isValid){
+        onChange(number, getName(phoneNumber.country));
+      }
     }
   }, [number]);
   
