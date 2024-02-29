@@ -10,6 +10,7 @@ export { default as PlainTab } from "./PlainTab";
 export { default as Partners } from "./Partners";
 export { default as HeroRight } from "./HeroRight";
 export { default as ParallaxImage } from "./Parallax";
+export { default as SuccessText } from "./SuccessText";
 export { default as PrismicText } from "./PrismicText";
 export { default as LoadingPage } from "./LoadingPage";
 export { default as SectionList } from "./SectionList";

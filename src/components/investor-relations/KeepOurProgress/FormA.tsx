@@ -2,12 +2,13 @@ import * as yup from "yup";
 import { toast } from "react-toastify";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
+import useSuccessNotify from "@hooks/useSuccessNotify";
 import useYupValidationResolver from "@hooks/useYupValidationResolver";
 
-import { Input, Button, RaidoButton } from "@components/utils";
+import { Input, Button, RaidoButton, SuccessText } from "@components/utils";
+
 import { onMailChimpSubmit } from "@utils/functions";
 import { mailChimpTags } from "@utils/constants";
-import { useEffect, useState } from "react";
 
 type Inputs = {
   email: string;
@@ -23,7 +24,6 @@ const schema = yup
   .required();
 
 const FormA = () => {
-  const [isSuccess, setSuccessful] = useState(false);
   const resolver = useYupValidationResolver(schema);
 
   const defaultValues = {
@@ -61,14 +61,7 @@ const FormA = () => {
     // window.dataLayer.push({ event: "news_letter" });
   };
 
-  useEffect(() => {
-    if (isSubmitSuccessful) {
-      setSuccessful(true);
-      setTimeout(() => {
-        setSuccessful(false);
-      }, 5000);
-    }
-  }, [isSubmitSuccessful]);
+  const showSuccessMessage = useSuccessNotify(isSubmitSuccessful);
 
   return (
     <div className="w-full xl:w-1/2">
@@ -108,10 +101,8 @@ const FormA = () => {
               isDisabled={!isDirty || !isValid}
               className="xl:!w-fit px-8 py-4 !rounded-xl"
             />
-            {isSuccess && (
-              <span className="text-grower-500">
-                Please check your inbox for comfirmation
-              </span>
+            {showSuccessMessage && (
+              <SuccessText text="Please check your inbox for comfirmation" />
             )}
           </div>
         </div>
