@@ -39,7 +39,7 @@ body {
   }
 
   .reactphone {
-    @apply w-full h-10 sm:h-14 bg-[#EFEFEF] rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6
+    @apply w-full h-14 bg-[#EFEFEF] rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 sm:text-sm sm:leading-6
   }
   
   .phone-input-white .reactphone, .phone-input-white .reactphone input {

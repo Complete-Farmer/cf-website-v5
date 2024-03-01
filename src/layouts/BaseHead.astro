@@ -55,12 +55,16 @@ const {
 ></script>
 <script is:inline define:vars={{ GLOBAL_SITE_TAG_ID }} type="text/partytown">
   window.dataLayer = window.dataLayer || [];
-  function gtag() {
+  // window.dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+  window.gtag = function () {
     dataLayer.push(arguments);
-  }
-  gtag("js", new Date());
+  };
+  window.gtag("js", new Date());
 
-  gtag("config", GLOBAL_SITE_TAG_ID);
+  // Set Google Ads
+  // window.gtag("config", "AW-<GOOGLE_ADS_ID>");
+
+  window.gtag("config", GLOBAL_SITE_TAG_ID);
 </script>
 <!-- End Google tag -->
 

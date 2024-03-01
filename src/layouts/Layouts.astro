@@ -17,7 +17,7 @@ const { title, description } = Astro.props;
 const pathname = Astro.url.pathname;
 
 const careerApiData = await getJobVacancies({ page: 1, pageSize: 1 });
-const isHiring = careerApiData.results.length > 0
+const isHiring = careerApiData.results.length > 0;
 ---
 
 <!doctype html>
@@ -65,19 +65,17 @@ const isHiring = careerApiData.results.length > 0
         }
       }
     </style>
+
+    <script type="text/javascript">
+      const path = window.location.pathname;
+      window.dataLayer.push({
+        event: "pageview",
+        page: path,
+      });
+
+      window.gtag("set", "page", path);
+      window.gtag("send", "pageview");
+      window.fbq("track", "PageView");
+    </script>
   </body>
 </html>
-
-
-<script type="text/javascript">
-  window.dataLayer.push({
-    event: "pageview",
-    page: window.location.href,
-  });
-
-  // // ga("set", "page", "/contact-us.html");
-  // // ga("send", "pageview");
-
-  window.fbq("track", "PageView");
-</script>
-

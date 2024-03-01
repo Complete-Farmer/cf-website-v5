@@ -40,7 +40,7 @@ const schema = yup
       .mixed()
       .test("fileSize", "The file is too large", (value: File) => {
         if (!value) return false;
-        return value.size <= 10485760;
+        return value.size <= 2097152;
       }),
   })
   .required();
@@ -169,6 +169,7 @@ const ApplicationForm = ({ title }: Props) => {
               placeholder="Eg. John"
               autoComplete="given-name"
               {...register("firstName")}
+              outerClassName="col-span-2 lg:col-span-1"
             />
 
             <Input
@@ -179,19 +180,19 @@ const ApplicationForm = ({ title }: Props) => {
               placeholder="Eg. Okeke"
               autoComplete="family-name"
               {...register("lastName")}
+              outerClassName="col-span-2 lg:col-span-1"
             />
 
-            <div className="col-span-2">
-              <Input
-                required
-                id="email"
-                type="email"
-                autoComplete="email"
-                title="Email"
-                placeholder="example@company.com"
-                {...register("email")}
-              />
-            </div>
+            <Input
+              required
+              id="email"
+              type="email"
+              autoComplete="email"
+              title="Email"
+              outerClassName="col-span-2"
+              placeholder="example@company.com"
+              {...register("email")}
+            />
 
             <div className="col-span-2">
               <PhoneNumber
@@ -209,6 +210,7 @@ const ApplicationForm = ({ title }: Props) => {
               title="Region"
               placeholder="Enter your region"
               {...register("region")}
+              outerClassName="col-span-2 lg:col-span-1"
             />
 
             <Input
@@ -218,6 +220,7 @@ const ApplicationForm = ({ title }: Props) => {
               title="Town"
               placeholder="Enter your town"
               {...register("town")}
+              outerClassName="col-span-2 lg:col-span-1"
             />
 
             <div className="col-span-2">

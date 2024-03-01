@@ -42,7 +42,7 @@ export default defineConfig({
           }
           return url;
         },
-        forward: ["fbq", "dataLayer.push"],
+        forward: ["fbq", "dataLayer.push", "gtag"],
       },
     }),
   ],
