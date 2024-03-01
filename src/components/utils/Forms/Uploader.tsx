@@ -67,8 +67,9 @@ const Uploader = ({
     });
 
   const onDrop = useCallback(
-    (droppedFiles: File[]) =>
-      onChange(isMulti ? droppedFiles : droppedFiles[0]),
+    (droppedFiles: File[]) => {
+      onChange(isMulti ? droppedFiles : droppedFiles[0]);
+    } ,
     [setValue, name]
   );
 
@@ -121,6 +122,7 @@ const Uploader = ({
               "text-center w-full rounded-lg py-6 dropzone bg-white"
             ),
           })}
+          onClick={e => e.stopPropagation()}
         >
           <label
             htmlFor={name}
