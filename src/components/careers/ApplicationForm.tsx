@@ -103,21 +103,17 @@ const ApplicationForm = ({ role }: { role: string }) => {
       });
 
       if (res.statusCode === 200) {
-        reset({});
-        // onClose();
         toast(res.message, { type: "success" });
-        // ReactGA.event({
-        //   category: "Button Click",
-        //   action: "Submit"
-        // });
-        // // window.metapixelfunction("submit", "agent_grower_agent", {});
-        // window.dataLayer.push({
-        //   event: "agent_grower_agent"
-        // });
-        //   window.metapixelfunction("submit", "join_academy", {});
-        //   window.dataLayer.push({
-        //     event: "join_academy"
-        //   });
+        window.gtag("event", "form_submit", {
+          event_category: "Job Application Form",
+          event_label: `Application for ${role}`,
+        });
+
+        window.fbq("track", "SubmitApplication", {
+          content_name: `Application for ${role}`,
+          content_category: "Job Application Form",
+        });
+        reset({});
       } else {
         throw new Error(res.message);
       }

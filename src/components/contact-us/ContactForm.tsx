@@ -59,15 +59,17 @@ export default function ContactForm({
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
       const res = await contactForm({ ...data, subject });
-      if(res.statusCode === 200) {
-        reset({});
+      if (res.statusCode === 200) {
         toast(res.message, { type: "success" });
-        // ReactGA.event({
-        //   category: "Button Click",
-        //   action: "News Letter"
-        // });
-        // window.metapixelfunction("news", "news_letter", {});
-        // window.dataLayer.push({ event: "news_letter" });
+        window.fbq("track", "Contact", {
+          content_category: "Contact Form",
+          content_name: "Contact Us",
+        });
+        window.gtag("event", "form_submit", {
+          event_category: "Contact Form",
+          event_label: "Contact Us",
+        });
+        reset({});
       } else {
         throw new Error(res.message);
       }

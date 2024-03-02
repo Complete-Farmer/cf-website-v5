@@ -79,17 +79,17 @@ export default function BookDemo({ toggleModal, activeCategory }: IProps) {
       });
 
       if (res.statusCode === 200) {
-        reset({});
         toggleModal();
         toast(res.message, { type: "success" });
-        // ReactGA.event({
-        //   category: "Button Click",
-        //   action: "Submit",
-        // });
-        // window.metapixelfunction("submit", "book_demo", {});
-        // window.dataLayer.push({
-        //   event: "book_demo",
-        // });
+        window.gtag("event", "form_submit", {
+          event_category: "Book Demo",
+          event_label: `${activeCategory} Product Demo`,
+        });
+        window.fbq("track", "CompleteRegistration", {
+          content_category: "Book Demo",
+          content_name: `${activeCategory} Product Demo`,
+        });
+        reset({});
       } else {
         throw new Error(res.message);
       }

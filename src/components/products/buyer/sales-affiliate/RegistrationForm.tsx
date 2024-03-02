@@ -101,18 +101,15 @@ const RegistrationForm = () => {
         reset({});
         onClose();
         toast(res.message, { type: "success" });
-        // ReactGA.event({
-        //   category: "Button Click",
-        //   action: "Submit"
-        // });
-        // // window.metapixelfunction("submit", "agent_grower_agent", {});
-        // window.dataLayer.push({
-        //   event: "agent_grower_agent"
-        // });
-        //   window.metapixelfunction("submit", "join_academy", {});
-        //   window.dataLayer.push({
-        //     event: "join_academy"
-        //   });
+        window.gtag("event", "form_submit", {
+          event_category: "Job Application Form",
+          event_label: "Application for sales affiliate",
+        });
+
+        window.fbq("track", "SubmitApplication", {
+          content_name: "Application for sales affiliate",
+          content_category: "Job Application Form",
+        });
       } else {
         throw new Error(res.message);
       }

@@ -58,12 +58,12 @@ function ServiceGuideForm({ onClose, product, buttonBg }: IProps) {
     onClose();
     reset({ email: "", firstName: "" });
     toast("Thank you for subscribing", { type: "success", position: "bottom-center" });
-    // ReactGA.event({
-    //   category: "Button Click",
-    //   action: "Service Guide"
-    // });
+    window.gtag("event", "service_guide_button_click", {
+      event_category: "UI interactions",
+      event_label: isBuyer ? "Buyer ": "Grower " + "Service Guide"
+    });
     // window.metapixelfunction("news", "service_guide", {});
-    // window.dataLayer.push({  event: "service_guide" });
+    window.dataLayer.push({ event: "service_guide" });
   };
 
   return (

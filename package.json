@@ -70,6 +70,8 @@
   },
   "devDependencies": {
     "@types/country-list": "^2.1.4",
+    "@types/facebook-pixel": "^0.0.30",
+    "@types/gtag.js": "^0.0.19",
     "@typescript-eslint/eslint-plugin": "^6.13.1",
     "@typescript-eslint/parser": "^6.13.1",
     "eslint": "^8.55.0",

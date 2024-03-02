@@ -1,5 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+declare global {
+  interface Window {
+    dataLayer: {
+      event: string;
+      [x: string]: string
+    }[];
+  }
+}
+
 import type { Query, PrismicDocument } from "@prismicio/client";
 
 export type AsObject<T> = Record<string, T>;
