@@ -62,14 +62,16 @@ export default function NewsLetter() {
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     onMailChimpSubmit({ email: data.email, tags: mailChimpTags["Home"] });
-    reset({ email: "" });
     toast("Please check your inbox for comfirmation", { type: "success", position: "bottom-center" });
-    // ReactGA.event({
-    //   category: "Button Click",
-    //   action: "News Letter"
-    // });
-    // window.metapixelfunction("news", "news_letter", {});
-    // window.dataLayer.push({  event: "news_letter" });
+    window.gtag("event", "form_submit", {
+      event_category: "Newsletter Subscription",
+      event_label: "List: Complete Farmer Signup",
+    });
+    window.fbq("track", "CompleteRegistration", {
+      content_category: "Newsletter Subscription",
+      content_name: "List: Complete Farmer Signup",
+    });
+    reset({ email: "" });
   };
 
   return (

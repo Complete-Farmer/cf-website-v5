@@ -2251,6 +2251,16 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-1.0.5.tgz#a6ce3e556e00fd9895dd872dd172ad0d4bd687f4"
   integrity sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==
 
+"@types/facebook-pixel@^0.0.30":
+  version "0.0.30"
+  resolved "https://registry.yarnpkg.com/@types/facebook-pixel/-/facebook-pixel-0.0.30.tgz#147d12f9c400f4e3f17c265ff17767c97eb68689"
+  integrity sha512-zg/T6dmkcyzX4rj4MjnEUdijPjF7Fj1xw8CmYxz5MeoUuYU0iDbTL8qNdcbSTTkRrPTCtq3Db002Use4ikoNmw==
+
+"@types/gtag.js@^0.0.19":
+  version "0.0.19"
+  resolved "https://registry.yarnpkg.com/@types/gtag.js/-/gtag.js-0.0.19.tgz#40ebbef85c8b2915df164d16304d3fbdfdaa1a41"
+  integrity sha512-KHoDzrf9rSd0mooKN576PjExpdk/XRrNu4RQnmigsScSTSidwyOUe9kDrHz9UPKjiBrx2QEsSkexbJSgS0j72w==
+
 "@types/hast@^2.0.0":
   version "2.3.10"
   resolved "https://registry.yarnpkg.com/@types/hast/-/hast-2.3.10.tgz#5c9d9e0b304bbb8879b857225c5ebab2d81d7643"

@@ -88,19 +88,17 @@ const GetInTouchForm = ({ toggleModal }: { toggleModal: () => void }) => {
       });
 
       if (res.statusCode === 200) {
-        reset({});
         toggleModal();
         toast(res.message, { type: "success" });
-        // ReactGA.event({
-        //   category: "Button Click",
-        //   action: "Send"
-        // });
-
-        // window.metapixelfunction("send", "details_send", {});
-
-        // window.dataLayer.push({
-        //   event: "details_send"
-        // });
+        window.gtag("event", "form_submit", {
+          event_category: "Contact Form",
+          event_label: "Get in touch",
+        });
+        window.fbq("track", "Contact", {
+          content_category: "Contact Form",
+          content_name: "Get in touch",
+        });
+        reset({});
       } else {
         throw new Error(res.message);
       }

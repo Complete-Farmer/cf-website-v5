@@ -77,6 +77,7 @@ const ApplicationForm = ({ title }: Props) => {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
+      const subject = title.includes("Agent") ? "Application for Grower Agent": "Application to the farm manager academy";
       const res = await submitApplication({
         text: `
       Dear Complete Farmer,
@@ -100,7 +101,7 @@ const ApplicationForm = ({ title }: Props) => {
     ${data.firstName} ${data.lastName}
       `,
         to: "grower@completefarmer.com",
-        subject: title.includes("Agent") ? "Application for Grower Agent": "Application to the farm manager academy",
+        subject,
         attachments: [
           {
             path: await fileToBase64(data.file),
@@ -113,18 +114,15 @@ const ApplicationForm = ({ title }: Props) => {
         reset({});
         onClose();
         toast(res.message, { type: "success" });
-        // ReactGA.event({
-        //   category: "Button Click",
-        //   action: "Submit"
-        // });
-        // // window.metapixelfunction("submit", "agent_grower_agent", {});
-        // window.dataLayer.push({
-        //   event: "agent_grower_agent"
-        // });
-        //   window.metapixelfunction("submit", "join_academy", {});
-        //   window.dataLayer.push({
-        //     event: "join_academy"
-        //   });
+        window.gtag("event", "form_submit", {
+          event_category: "Job Application Form",
+          event_label: subject,
+        });
+
+        window.fbq("track", "SubmitApplication", {
+          content_name: subject,
+          content_category: "Job Application Form",
+        });
       } else {
         throw new Error(res.message);
       }

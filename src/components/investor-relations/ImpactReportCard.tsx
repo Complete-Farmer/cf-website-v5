@@ -26,6 +26,10 @@ function ImpactReportCard({ name }: IProps) {
           name + ".pdf",
           bucket
         );
+        window.gtag("event", `${bucket.replaceAll("-", "_")}_file_download`, {
+          "event_category": "downloads",
+          "event_label": url
+        });
         window.open(url, "_blank");
       } else {
         console.log("Couldn't download files, please contact support");

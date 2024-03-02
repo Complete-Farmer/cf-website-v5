@@ -47,18 +47,20 @@ const FormA = () => {
       id: "675ea5998d",
       tags: mailChimpTags[data.investorType + "Investor"],
     });
-    reset(defaultValues);
     toast("Please check your inbox for comfirmation", {
       type: "success",
       position: "bottom-center",
       theme: "colored",
     });
-    // ReactGA.event({
-    //   category: "Button Click",
-    //   action: "Keeping up with our progress"
-    // });
-    // window.metapixelfunction("news", "news_letter", {});
-    // window.dataLayer.push({ event: "news_letter" });
+    window.gtag("event", "form_submit", {
+      event_category: "Newsletter Subscription",
+      event_label: "List: Investors",
+    });
+    window.fbq("track", "CompleteRegistration", {
+      content_category: "Newsletter Subscription",
+      content_name: "List: Investors",
+    });
+    reset(defaultValues);
   };
 
   const showSuccessMessage = useSuccessNotify(isSubmitSuccessful);
