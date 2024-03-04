@@ -19,17 +19,6 @@ export default function SectionList({
   textColor = "text-grower-500",
   incentives,
 }: IProps) {
-  const handleLinkClick = () => {
-    // ReactGA.event({
-    //   category: "Link Click",
-    //   action: "Section Link"
-    // });
-    // window.dataLayer = window.dataLayer || [];
-    // window.dataLayer.push({
-    //   event: "SectionLinkClick"
-    // });
-    // ReactPixel.track("Section Link", {});
-  };
 
   return (
     <div className="mx-auto max-w-7xl px-8 py-4 md:py-5 sm:px-2 xl:py-16 xl:px-4">
@@ -67,7 +56,6 @@ export default function SectionList({
                       e.preventDefault();
                       i.action(i.name);
                     }
-                    handleLinkClick();
                   }}
                   className="text-base sm:text-[20px] font-bold text-center xl:block hover:cursor-pointer"
                 >

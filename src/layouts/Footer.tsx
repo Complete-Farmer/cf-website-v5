@@ -61,7 +61,13 @@ const socials = [
   },
 ];
 
-export default function Footer({ pathname, isHiring }: { pathname: string, isHiring: boolean }) {
+export default function Footer({
+  pathname,
+  isHiring,
+}: {
+  pathname: string;
+  isHiring: boolean;
+}) {
   const isBuyer = pathname.includes("buyer");
 
   const refs: React.RefObject<HTMLButtonElement>[] = useMemo(() => {
@@ -101,18 +107,6 @@ export default function Footer({ pathname, isHiring }: { pathname: string, isHir
       : "hover:bg-buyer-500",
   };
 
-  const handleLinkClick = () => {
-    // ReactGA.event({
-    //   category: "Link Click",
-    //   action: "Footer Item Clicked"
-    // });
-    // window.dataLayer = window.dataLayer || [];
-    // window.dataLayer.push({
-    //   event: "FooterItemClick"
-    // });
-    // ReactPixel.track("Footer Item", {});
-  };
-
   return (
     <footer
       className={`bg-footer-pattern bg-cover ${config.bgColor}`}
@@ -134,7 +128,7 @@ export default function Footer({ pathname, isHiring }: { pathname: string, isHir
                 <a
                   key={s.name}
                   href={s.link}
-                  target="_blank" 
+                  target="_blank"
                   rel="noreferrer"
                   className={`p-2 rounded-full ${config.bgColorSocial} ${config.hoverNavItemColorSocial}`}
                 >
@@ -155,7 +149,6 @@ export default function Footer({ pathname, isHiring }: { pathname: string, isHir
                     return (
                       <a
                         key={productItem.name}
-                        onClick={handleLinkClick}
                         href={productItem.href}
                         className={`sm:text-sm lg:text-base text-left text-white ${config.hoverNavItemColor}`}
                       >
@@ -174,13 +167,12 @@ export default function Footer({ pathname, isHiring }: { pathname: string, isHir
                     return (
                       <div className="flex" key={companyItem.name}>
                         <a
-                          onClick={handleLinkClick}
                           href={companyItem.href}
                           className={`sm:text-sm lg:text-base text-left text-white ${config.hoverNavItemColor}`}
                         >
                           {companyItem.name}
                         </a>
-                        {(companyItem.name === "Careers" && isHiring) && (
+                        {companyItem.name === "Careers" && isHiring && (
                           <div
                             className={`flex sm:hidden lg:flex justify-start items-start gap-2.5 ml-2 px-1.5 py-1 rounded-m ${config.bgHiringColor} rounded-lg`}
                           >
@@ -208,7 +200,6 @@ export default function Footer({ pathname, isHiring }: { pathname: string, isHir
                     return (
                       <a
                         key={supportItem.name}
-                        onClick={handleLinkClick}
                         href={supportItem.href}
                         className={`sm:text-sm lg:text-base text-left text-white ${config.hoverNavItemColor}`}
                       >
@@ -227,7 +218,7 @@ export default function Footer({ pathname, isHiring }: { pathname: string, isHir
                     <a
                       key={s.name}
                       href={s.link}
-                      target="_blank" 
+                      target="_blank"
                       rel="noreferrer"
                       className={`p-2 rounded-full ${config.bgColorSocial} ${config.hoverNavItemColorSocial}`}
                     >
@@ -241,16 +232,10 @@ export default function Footer({ pathname, isHiring }: { pathname: string, isHir
                   LEGAL
                 </p>
                 <div className="flex flex-col text-sm lg:text-xl justify-start items-start gap-2 sm:gap-4">
-                  <a
-                    onClick={handleLinkClick}
-                    href={navigation?.terms?.termsAndConditions?.href}
-                  >
+                  <a href={navigation?.terms?.termsAndConditions?.href}>
                     {navigation?.terms?.termsAndConditions?.name}
                   </a>
-                  <a
-                    onClick={handleLinkClick}
-                    href={navigation?.terms?.privacyPolicy?.href}
-                  >
+                  <a href={navigation?.terms?.privacyPolicy?.href}>
                     {navigation?.terms?.privacyPolicy?.name}
                   </a>
                 </div>
@@ -265,14 +250,12 @@ export default function Footer({ pathname, isHiring }: { pathname: string, isHir
           </p>
           <div className="flex sm:hidden lg:flex items-start text-base justify-start space-x-6 md:items-center md:justify-center">
             <a
-              onClick={handleLinkClick}
               href={navigation.terms.termsAndConditions.href}
               className={`text-white transition hover:text-primary pr-6 border-r ${config.borderColor} ${config.hoverNavItemColor}`}
             >
               {navigation.terms.termsAndConditions.name}
             </a>
             <a
-              onClick={handleLinkClick}
               href={navigation.terms.privacyPolicy.href}
               className={`transition hover:text-primary text-left text-white ${config.hoverNavItemColor}`}
             >
@@ -294,7 +277,13 @@ export default function Footer({ pathname, isHiring }: { pathname: string, isHir
           </div>
           <div className="flex space-x-2">
             {socials.map((s) => (
-              <a key={s.name} href={s.link} target="_blank" className="p-1" rel="noreferrer">
+              <a
+                key={s.name}
+                href={s.link}
+                target="_blank"
+                className="p-1"
+                rel="noreferrer"
+              >
                 <s.icon />
               </a>
             ))}
@@ -332,7 +321,7 @@ export default function Footer({ pathname, isHiring }: { pathname: string, isHir
                         >
                           {mobileNavigationDisclouserTabs[
                             each as keyof typeof mobileNavigationDisclouserTabs
-                          ]?.map((e: { href: string; name: string; }) => (
+                          ]?.map((e: { href: string; name: string }) => (
                             <a href={e.href} key={e.name}>
                               {e.name}
                             </a>

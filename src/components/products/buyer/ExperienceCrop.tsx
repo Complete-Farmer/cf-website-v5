@@ -64,14 +64,14 @@ const HowAffiliateWorks = () => {
   };
 
   const handleButtonClick = () => {
-    // ReactGA.event({
-    //   category: "Button Click",
-    //   action: "Affiliate Program"
-    // });
-    // window.metapixelfunction("Affiliate", "affiliate_program", {});
-    // window.dataLayer.push({
-    //   event: "affiliate_program"
-    // });
+    window.fbq("track", "click", {
+      content_category: "Affiliate Button Clicked",
+      content_name: "Affiliate Program"
+    });
+    window.gtag("event", "Affiliate", {
+      event_category: "Affiliate Button Clicked",
+      event_label: "Affiliate Program"
+    });
   };
 
   return (

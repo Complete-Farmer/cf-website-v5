@@ -1,9 +1,9 @@
 ---
 import "../assets/styles/global.css";
 import {
-  GLOBAL_SITE_TAG_ID,
-  GOOGLE_TAG_MANAGER_ID,
   FACEBOOK_PIXEL_ID,
+  GOOGLE_MEASUREMENT_ID,
+  GOOGLE_TAG_MANAGER_ID,
 } from "../utils/constants";
 
 interface Props {
@@ -50,10 +50,10 @@ const {
   async
   is:inline
   type="text/partytown"
-  define:vars={{ GLOBAL_SITE_TAG_ID }}
-  src={`https://www.googletagmanager.com/gtag/js?id=${GLOBAL_SITE_TAG_ID}`}
+  define:vars={{ GOOGLE_MEASUREMENT_ID }}
+  src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_MEASUREMENT_ID}`}
 ></script>
-<script is:inline define:vars={{ GLOBAL_SITE_TAG_ID }} type="text/partytown">
+<script is:inline define:vars={{ GOOGLE_MEASUREMENT_ID }} type="text/partytown">
   window.dataLayer = window.dataLayer || [];
   window.gtag = function () {
     dataLayer.push(arguments);
@@ -63,7 +63,7 @@ const {
   // Set Google Ads
   // window.gtag("config", "AW-<GOOGLE_ADS_ID>");
 
-  window.gtag("config", GLOBAL_SITE_TAG_ID);
+  window.gtag("config", GOOGLE_MEASUREMENT_ID);
 </script>
 <!-- End Google tag -->
 

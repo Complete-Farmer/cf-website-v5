@@ -65,7 +65,7 @@ export default function ContactForm({
           content_category: "Contact Form",
           content_name: "Contact Us",
         });
-        window.gtag("event", "form_submit", {
+        window.gtag("event", "contact_form", {
           event_category: "Contact Form",
           event_label: "Contact Us",
         });

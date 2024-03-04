@@ -1,20 +1,6 @@
 import CookieConsent from "react-cookie-consent";
 
 export default function CookieScreen() {
-  const handleLinkClick = () => {
-    // ReactGA.event({
-    //   category: "Link Click",
-    //   action: "Privacy Policy"
-    // });
-
-    // window.dataLayer = window.dataLayer || [];
-    // window.dataLayer.push({
-    //   event: "PrivacyPolicy"
-    // });
-
-    // ReactPixel.track("Privacy Policy", {});
-  };
-
   return (
     <CookieConsent
       flipButtons
@@ -41,10 +27,10 @@ export default function CookieScreen() {
           cookies,
           <br className="hidden xl:block" />
           please read our{" "}
-          <a onClick={handleLinkClick} href="/legal/privacy-policy" className="hover:cursor-pointer hover:underline">
-            Privacy Policy.{" "}
+          <a href="/legal/privacy-policy" className="hover:cursor-pointer hover:underline">
+            Privacy Policy.
           </a>
-        </span>{" "}
+        </span>
       </p>
     </CookieConsent>
   );

@@ -124,29 +124,6 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
 
   const toggleModal = () => $getInTouchModal.set(!getInTouchModal);
 
-  const handleButtonClick = () => {
-    // ReactGA.event({
-    //   category: "Button Click",
-    //   action: "Signed"
-    // });
-    // window.metapixelfunction("profile", "profile_signed", {});
-    // window.dataLayer.push({
-    //   event: "profile_signed"
-    // });
-  };
-
-  const handleClick = () => {
-    // ReactGA.event({
-    //   category: "a Click",
-    //   action: "Page a"
-    // });
-    // window.dataLayer = window.dataLayer || [];
-    // window.dataLayer.push({
-    //   event: "PageaClick"
-    // });
-    // ReactPixel.track("Page a", {});
-  };
-
   const handleDrawer = (value: string) => {
     setMobileMenuOpen(false);
     if (value === "Login") setDrawerProps(drawerPropsData.login);
@@ -158,6 +135,15 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
     (document.querySelector(".app-footer") as HTMLElement).style.filter =
       "blur(4px)";
     $authModal.set(true);
+
+    window.fbq("track", "click", {
+      content_category: "Auth Button Clicked",
+      content_name: "Redirect to " + value,
+    });
+    window.gtag("event", "generate_lead", {
+      event_category: "Auth Button Clicked",
+      event_label: "Redirect to " + value,
+    });
   };
 
   const handleCloseDrawer = () => {
@@ -206,7 +192,6 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
                   >
                     <a
                       href="/products/grower/new-farmer"
-                      onClick={handleClick}
                       className={classNames(
                         isNewFarmer ? "text-white" : "",
                         "text-base font-bold text-center"
@@ -219,7 +204,6 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
 
                 {isBuyer ? (
                   <a
-                    onClick={handleClick}
                     href={data.firstText.href}
                     className={
                       pathname === data.firstText.href
@@ -241,7 +225,6 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
                   >
                     <a
                       href={"/products/grower/existing-farmer"}
-                      onClick={handleClick}
                       className={classNames(
                         isExistingFarmer ? "text-white" : "",
                         "text-base font-bold text-center"
@@ -281,7 +264,6 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
                                 <a
                                   key={item.name}
                                   href={item.href}
-                                  onClick={handleClick}
                                   className={classNames(
                                     isBuyer
                                       ? "hover:text-buyer-500"
@@ -337,10 +319,7 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
             </Wrapper>
             <div className="hidden sm:flex justify-start items-center relative gap-1 px-4 py-2 rounded-full bg-white">
               <button
-                onClick={() => {
-                  handleDrawer("Login");
-                  handleButtonClick();
-                }}
+                onClick={() => handleDrawer("Login")}
                 className={classNames(
                   "text-base font-bold text-center ",
                   data.textcolor
@@ -357,10 +336,7 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
               }`}
             >
               <button
-                onClick={() => {
-                  handleDrawer("SignUp");
-                  handleButtonClick();
-                }}
+                onClick={() => handleDrawer("SignUp")}
                 className="text-sm md:text-base font-bold text-center text-white"
               >
                 Sign up

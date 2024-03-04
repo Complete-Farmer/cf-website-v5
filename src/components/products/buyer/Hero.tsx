@@ -8,14 +8,14 @@ import { getAppLink } from "@utils/functions";
 
 const Hero = () => {
   const handleButtonClick = () => {
-    // ReactGA.event({
-    //   category: "Button Click",
-    //   action: "Source Crop"
-    // });
-    // window.metapixelfunction("crop", "source_crop", {});
-    // window.dataLayer.push({
-    //   event: "source_crop"
-    // });
+    window.fbq("track", "click", {
+      content_category: "Auth Button Clicked",
+      content_name: "Redirect to Buyer Signup",
+    });
+    window.gtag("event", "generate_lead", {
+      event_category: "Auth Button Clicked",
+      event_label: "Redirect to Buyer Signup",
+    });
   };
 
   const LeftComp = () => (
@@ -44,7 +44,6 @@ const Hero = () => {
             <a href="/products?tab=buyer" className="contents">
               <Button
                 title="See a demo"
-                onClick={handleButtonClick}
                 className="py-4 text-xl !rounded-full !text-buyer-500 !font-bold !bg-transparent border-2 border-buyer-500"
               />
             </a>

@@ -81,7 +81,7 @@ export default function BookDemo({ toggleModal, activeCategory }: IProps) {
       if (res.statusCode === 200) {
         toggleModal();
         toast(res.message, { type: "success" });
-        window.gtag("event", "form_submit", {
+        window.gtag("event", "Form Submission", {
           event_category: "Book Demo",
           event_label: `${activeCategory} Product Demo`,
         });

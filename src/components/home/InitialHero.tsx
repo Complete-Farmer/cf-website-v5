@@ -5,14 +5,14 @@ import HomeHeroRight from "@assets/images/home/hero-right.webp";
 
 const InitialHero = () => {
   const handleButtonClick = () => {
-    // ReactGA.event({
-    //   category: "Button Click",
-    //   action: "See Demo"
-    // });
-    // window.metapixelfunction("demo", "see_demo", {});
-    // window.dataLayer.push({
-    //   event: "see_demo"
-    // });
+    window.fbq("track", "see_demo", {
+      content_category: "See Demo",
+      content_name: "See Demo",
+    });
+    window.gtag("event", "see_demo", {
+      event_category: "See Demo",
+      event_label: "See Demo",
+    });
   };
   return (
     <section className="w-full lg:min-h-[95vh] px-6 sm:px-10 text-white pb-16 sm:pb-40 lg:pb-32 bg-cover bg-hero-grower">
