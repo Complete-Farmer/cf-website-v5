@@ -88,17 +88,6 @@ const Hero = () => {
     setTabs(newTabs);
   };
 
-  const handleButtonClick = () => {
-    // ReactGA.event({
-    //   category: "Button Click",
-    //   action: "See a demo"
-    // });
-    // window.metapixelfunction("demo", "see_a_demo", {});
-    // window.dataLayer.push({
-    //   event: "see_a_demo"
-    // });
-  };
-
   const firstButton = currentTab.data.firstButton as AsObject<string>;
   const secondButton = currentTab.data.secondButton as AsObject<string>;
 
@@ -132,7 +121,6 @@ const Hero = () => {
             >
               <Button
                 title={firstButton.text}
-                onClick={handleButtonClick}
                 className={classNames(
                   `!${firstButton.bgColor}`,
                   "py-4 text-xl !rounded-full sm:!w-1/2 xl:!w-[290px] !font-bold"
@@ -142,7 +130,6 @@ const Hero = () => {
 
             <a href={"/products/?tab=" + currentTab.href} className="contents">
               <Button
-                onClick={handleButtonClick}
                 title={secondButton.text}
                 className="py-4 sm:!w-1/2 xl:!w-[180px] text-xl !rounded-full !bg-white !text-grower-900 !font-bold"
               />

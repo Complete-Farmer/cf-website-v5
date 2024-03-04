@@ -74,17 +74,6 @@ const HowAffiliateWorks = () => {
     setFillingPercentage(0);
   };
 
-  const handleButtonClick = () => {
-    // ReactGA.event({
-    //   category: "Button Click",
-    //   action: "Affiliate Program"
-    // });
-    // window.metapixelfunction("Affiliate", "affiliate_program", {});
-    // window.dataLayer.push({
-    //   event: "affiliate_program"
-    // });
-  };
-
   return (
     <section className="max-w-7xl mx-auto lg:px-8 lg:py-20">
       <div className="mx-auto max-w-4xl">
@@ -142,7 +131,6 @@ const HowAffiliateWorks = () => {
               title="Join the affiliate program"
               onClick={() => {
                 $joinSalesAffiliateModal.set(true);
-                handleButtonClick();
               }}
               className="!rounded-full !bg-buyer-500 py-5 text-xl xl:!w-fit !px-12 xl:ml-4"
             />

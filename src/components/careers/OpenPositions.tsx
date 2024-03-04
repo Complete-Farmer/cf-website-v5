@@ -89,26 +89,12 @@ export default function OpenPositions({ departments, careerApiData }: IProps) {
   };
 
   const handleButtonClick = () => {
-    // ReactGA.event({
-    //   category: "Button Click",
-    //   action: "Load More"
-    // });
-    // window.metapixelfunction("load more", "position_load_more", {});
-    // window.dataLayer.push({
-    //   event: "position_load_more"
-    // });
-  };
-
-  const handleLinkClick = () => {
-    // ReactGA.event({
-    //   category: "Link Click",
-    //   action: "Load More"
-    // });
-    // window.dataLayer = window.dataLayer || [];
-    // window.dataLayer.push({
-    //   event: "PositionLoadMore"
-    // });
-    // ReactPixel.track("Load more", {});
+    window.fbq("track", "click", {
+      content_category: "Load Button Clicked",
+    });
+    window.gtag("event", "position_load_more", {
+      event_category: "Load Button Clicked",
+    });
   };
 
   const isLoadMore = () => {
@@ -153,7 +139,6 @@ export default function OpenPositions({ departments, careerApiData }: IProps) {
           {data?.map((application, i) => (
             <li key={i}>
               <a
-                onClick={handleLinkClick}
                 href={`/careers/${application.uid}`}
                 className={`block hover:bg-gray-50 ${
                   i === 9 ? "border-b-0" : "border-b"

@@ -92,14 +92,12 @@ const RegisterEvent = ({ data }: IProps) => {
   ];
 
   const handleButtonClick = () => {
-    // ReactGA.event({
-    //   category: "Button Click",
-    //   action: "Add Calendar"
-    // });
-    // window.metapixelfunction("calender", "add_calender", {});
-    // window.dataLayer.push({
-    //   event: "add_calender"
-    // });
+    window.fbq("track", "add_calender", {
+      content_category: "Add Calendar",
+    });
+    window.gtag("event", "generate_lead", {
+      event_category: "Add Calendar",
+    });
   };
 
   return (

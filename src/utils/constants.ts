@@ -56,7 +56,7 @@ export const AWS_POOL_ID = import.meta.env.PUBLIC_AWS_POOL_ID;
 export const AUTH_API = import.meta.env.PUBLIC_AUTH_API;
 export const FACEBOOK_PIXEL_ID = import.meta.env.PUBLIC_FACEBOOK_PIXEL_ID;
 export const PRISM_ACCESS_TOKEN = import.meta.env.PUBLIC_PRISM_ACCESS_TOKEN;
-export const GLOBAL_SITE_TAG_ID = import.meta.env.PUBLIC_GLOBAL_SITE_TAG_ID;
+export const GOOGLE_MEASUREMENT_ID = import.meta.env.PUBLIC_GOOGLE_MEASUREMENT_ID;
 export const GOOGLE_TAG_MANAGER_ID = import.meta.env
   .PUBLIC_GOOGLE_TAG_MANAGER_ID;
 export const AWS_DOCUMENT_REPORT_BUCKETS = import.meta.env

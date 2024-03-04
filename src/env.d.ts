@@ -10,7 +10,7 @@ interface ImportMetaEnv {
   readonly PUBLIC_ENV: "DEV" | "PROD";
   readonly PUBLIC_FACEBOOK_PIXEL_ID: string;
   readonly PUBLIC_PRISM_ACCESS_TOKEN: string;
-  readonly PUBLIC_GLOBAL_SITE_TAG_ID: string;
+  readonly PUBLIC_GOOGLE_MEASUREMENT_ID: string;
   readonly PUBLIC_PRISMIC_ACCESS_TOKEN: string;
   readonly AWS_DOCUMENT_REPORT_BUCKETS: string;
   readonly PUBLIC_GOOGLE_TAG_MANAGER_ID: string;

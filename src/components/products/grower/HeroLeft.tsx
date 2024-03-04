@@ -11,14 +11,14 @@ interface IProps {
 
 const HeroLeft = ({ tabs, currentTab }: IProps) => {
   const handleButtonClick = () => {
-    // ReactGA.event({
-    //   category: "Button Click",
-    //   action: "See a demo"
-    // });
-    // window.metapixelfunction("demo", "see_a_demo", {});
-    // window.dataLayer.push({
-    //   event: "see_a_demo"
-    // });
+    window.fbq("track", "click", {
+      content_category: "Auth Button Clicked",
+      content_name: "Redirect to Grower",
+    });
+    window.gtag("event", "generate_lead", {
+      event_category: "Auth Button Clicked",
+      event_label: "Redirect to Grower",
+    });
   };
 
   const firstButtonText = currentTab.data.firstButtonText as string;

@@ -53,6 +53,15 @@ export default function NormalHeader({ pathname }: { pathname: string }) {
       "blur(4px)";
 
     setDrawerOpen(true);
+
+    window.fbq("track", "click", {
+      content_category: "Auth Button Clicked",
+      content_name: "Redirect to " + value,
+    });
+    window.gtag("event", "generate_lead", {
+      event_category: "Auth Button Clicked",
+      event_label: "Redirect to " + value,
+    });
   };
 
   const handleCloseDrawer = () => {
@@ -67,29 +76,6 @@ export default function NormalHeader({ pathname }: { pathname: string }) {
     setMobileMenuOpen(true);
   };
 
-  const handleButtonClick = () => {
-    // ReactGA.event({
-    //   category: "Button Click",
-    //   action: "SignedIn"
-    // });
-    // window.metapixelfunction("profile", "profile_signed", {});
-    // window.dataLayer.push({
-    //   event: "profile_signed"
-    // });
-  };
-
-  const handleLinkClick = () => {
-    // ReactGA.event({
-    //   category: "Link Click",
-    //   action: "Logo Clicked"
-    // });
-    // window.dataLayer = window.dataLayer || [];
-    // window.dataLayer.push({
-    //   event: "LogoClickEvent"
-    // });
-    // ReactPixel.track("Logo Clicked", {});
-  };
-
   return (
     <>
       <div className="sticky top-0 z-50 w-full bg-white lg:border-b lg:border-10 lg:border-gray-200">
@@ -97,7 +83,7 @@ export default function NormalHeader({ pathname }: { pathname: string }) {
           <div className="relative flex flex-row mx-5">
             <div className="font-medium text-gray-900 lg:w-auto lg:items-center lg:justify-center md:mb-0">
               <span className="mx-auto text-xl font-black leading-none text-gray-900 select-none">
-                <a href="/" onClick={handleLinkClick} className="-m-1.5 p-1.5">
+                <a href="/" className="-m-1.5 p-1.5">
                   <img
                     src={CFMainLogo.src}
                     className="h-7 md:h-8"
@@ -148,7 +134,6 @@ export default function NormalHeader({ pathname }: { pathname: string }) {
                                       {item.logo ? (
                                         <a
                                           href={item.href}
-                                          onClick={handleLinkClick}
                                           className="block text-sm font-semibold leading-6"
                                         >
                                           <div className="flex justify-start">
@@ -163,7 +148,6 @@ export default function NormalHeader({ pathname }: { pathname: string }) {
                                         <a
                                           key={item.name}
                                           href={item.href}
-                                          onClick={handleLinkClick}
                                           className="block group/item rounded-lg hover:bg-gray-50 text-md font-normal leading-6 text-custom_black-900 hover:text-grower-500"
                                         >
                                           <div className="flex justify-between">
@@ -189,7 +173,6 @@ export default function NormalHeader({ pathname }: { pathname: string }) {
 
                 <a
                   href="/contact-us"
-                  onClick={handleLinkClick}
                   className={
                     pathname === "/contact-us"
                       ? "rounded-full bg-custom_gray-200 px-3 py-2"
@@ -207,10 +190,7 @@ export default function NormalHeader({ pathname }: { pathname: string }) {
           <div className="inline-flex items-center mx-5 space-x-6 lg:justify-end">
             <div className="hidden sm:flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1 px-4 py-2 rounded-[1900px] bg-white">
               <button
-                onClick={() => {
-                  handleDrawer("Login");
-                  handleButtonClick();
-                }}
+                onClick={() => handleDrawer("Login")}
                 className="flex-grow-0 flex-shrink-0 text-base font-bold text-center text-grower-400"
               >
                 Login
@@ -222,10 +202,7 @@ export default function NormalHeader({ pathname }: { pathname: string }) {
               } justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1 px-3 py-2 rounded-[1900px] bg-grower-500`}
             >
               <button
-                onClick={() => {
-                  handleDrawer("SignUp");
-                  handleButtonClick();
-                }}
+                onClick={() => handleDrawer("SignUp")}
                 className="flex-grow-0 flex-shrink-0 text-base font-bold text-center text-white"
               >
                 Sign up

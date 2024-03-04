@@ -23,14 +23,14 @@ export default function FasterGrowthContent({
   buttonBgColor,
 }: IProps) {
   const handleButtonClick = () => {
-    // ReactGA.event({
-    //   category: "Button Click",
-    //   action: "Faster Growth"
-    // });
-    // window.metapixelfunction("faster grower", "faster_grower", {});
-    // window.dataLayer.push({
-    //   event: "faster_grower"
-    // });
+    window.fbq("track", "click", {
+      content_category: "Auth Button Clicked",
+      content_name: "Redirect to " + title,
+    });
+    window.gtag("event", "generate_lead", {
+      event_category: "Auth Button Clicked",
+      event_label: "Redirect to " + title,
+    });
   };
 
   return (

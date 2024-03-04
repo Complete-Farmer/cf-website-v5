@@ -11,26 +11,14 @@ const Tabs = ({
   activeTab: string;
   changeActiveTab: (tab: string) => void;
 }) => {
-  const handleButtonClick = () => {
-    // ReactGA.event({
-    //   category: "Button Click",
-    //   action: "Customer Stories"
-    // });
-    // window.metapixelfunction("stories", "grower_customer_stories", {});
-    // window.dataLayer.push({
-    //   event: "grower_customer_stories"
-    // });
-  };
+
 
   return (
     <div className="mb-6 sm:mb-12 flex justify-between sm:justify-start gap-4">
       {tabs.map((tab) => (
         <a
           key={tab}
-          onClick={() => {
-            changeActiveTab(tab);
-            handleButtonClick();
-          }}
+          onClick={() => changeActiveTab(tab)}
           className={classNames(
             activeTab === tab
               ? (isBuyer ? "bg-buyer-500" : "bg-grower-500") + " text-white"

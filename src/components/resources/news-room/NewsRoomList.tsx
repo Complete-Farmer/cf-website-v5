@@ -54,16 +54,6 @@ export default function NewsRoomList({ newsApiData }: IProps) {
     pageNo > 1 && fetchData();
   }, [pageNo]);
 
-  const handleButtonClick = () => {
-    // ReactGA.event({
-    //   category: "Button Click",
-    //   action: "Load More"
-    // });
-    // window.metapixelfunction("load", "load_more", {});
-    // window.dataLayer.push({
-    //   event: "load_more"
-    // });
-  };
 
   const isLoadMore = () => {
     const isBool =
@@ -102,10 +92,7 @@ export default function NewsRoomList({ newsApiData }: IProps) {
       {isLoadMore() && (
         <div className="w-full mt-12 sm:mt-7 lg:mt-20 mx-auto">
           <Button
-            onClick={() => {
-              handleButtonClick();
-              setPageNo(pageNo + 1);
-            }}
+            onClick={() => setPageNo(pageNo + 1)}
             title={loading ? "Loading" : "Load more"}
             className="mx-auto sm:!w-60 md:!w-[240px] lg:!text-lg py-4 !rounded-full"
           />
