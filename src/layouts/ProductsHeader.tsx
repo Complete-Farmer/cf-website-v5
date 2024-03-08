@@ -106,19 +106,12 @@ const config = [
   },
 ];
 
-const drawerPropsData = {
-  login: ["Login to CF Grower", "Login to CF Buyer"],
-  signup: ["Create a CF Grower account", "Create a CF Buyer account"],
-};
-
 const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
   const authModal = useStore($authModal);
   const getInTouchModal = useStore($getInTouchModal);
   const fullComparisonDrawer = useStore($fullComparisonDrawer);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [drawerProps, setDrawerProps] = useState<string[]>(
-    drawerPropsData.signup
-  );
+  const [authType, setAuthType] = useState<"login" | "signup">("signup");
 
   const openMobileMenu = () => setMobileMenuOpen(true);
 
@@ -126,8 +119,7 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
 
   const handleDrawer = (value: string) => {
     setMobileMenuOpen(false);
-    if (value === "Login") setDrawerProps(drawerPropsData.login);
-    if (value === "SignUp") setDrawerProps(drawerPropsData.signup);
+    setAuthType(value.toLowerCase() as "login" | "signup");
 
     // Blur the background
     (document.querySelector(".app-body") as HTMLElement).style.filter =
@@ -135,15 +127,6 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
     (document.querySelector(".app-footer") as HTMLElement).style.filter =
       "blur(4px)";
     $authModal.set(true);
-
-    window.fbq("track", "click", {
-      content_category: "Auth Button Clicked",
-      content_name: "Redirect to " + value,
-    });
-    window.gtag("event", "generate_lead", {
-      event_category: "Auth Button Clicked",
-      event_label: "Redirect to " + value,
-    });
   };
 
   const handleCloseDrawer = () => {
@@ -152,7 +135,7 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
     (document.querySelector(".app-body") as HTMLElement).style.filter = "none";
     (document.querySelector(".app-footer") as HTMLElement).style.filter =
       "none";
-    setDrawerProps(drawerPropsData.signup); // Reset the drawer props to signup
+    setAuthType("signup"); // Reset the drawer props to signup
   };
 
   const isBuyer = pathname.includes("buyer");
@@ -378,8 +361,8 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
 
       <Drawer
         isBuyer={isBuyer}
+        authType={authType}
         drawerOpen={authModal}
-        drawerProps={drawerProps}
         handleCloseDrawer={handleCloseDrawer}
       />
 

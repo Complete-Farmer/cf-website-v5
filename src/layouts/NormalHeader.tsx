@@ -1,5 +1,10 @@
 import { Fragment, useState } from "react";
 import { Popover, Transition } from "@headlessui/react";
+import { useStore } from "@nanostores/react";
+
+import {
+  $authModal,
+} from "@utils/stores";
 
 import CFBuyerLogo from "@assets/images/logos/cf/buyer.webp";
 import CFGrowerLogo from "@assets/images/logos/cf/grower.webp";
@@ -30,42 +35,29 @@ const menus = {
   Company: companyLinks,
 };
 
-const drawerPropsData = {
-  login: ["Login to CF Grower", "Login to CF Buyer"],
-  signup: ["Create a CF Grower account", "Create a CF Buyer account"],
-};
-
 export default function NormalHeader({ pathname }: { pathname: string }) {
+  const authModal = useStore($authModal);
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const [drawerProps, setDrawerProps] = useState(drawerPropsData.login);
+  const [authType, setAuthType] = useState<"login" | "signup">("signup");
+  
 
   const isBuyer = pathname.includes("buyer");
 
   const handleDrawer = (value: string) => {
-    if (value === "Login") setDrawerProps(drawerPropsData.login);
-    if (value === "SignUp") setDrawerProps(drawerPropsData.signup);
+    setMobileMenuOpen(false);
+    setAuthType(value.toLowerCase() as "login" | "signup");
 
     // Blur the background
     (document.querySelector(".app-body") as HTMLElement).style.filter =
       "blur(4px)";
     (document.querySelector(".app-footer") as HTMLElement).style.filter =
       "blur(4px)";
-
-    setDrawerOpen(true);
-
-    window.fbq("track", "click", {
-      content_category: "Auth Button Clicked",
-      content_name: "Redirect to " + value,
-    });
-    window.gtag("event", "generate_lead", {
-      event_category: "Auth Button Clicked",
-      event_label: "Redirect to " + value,
-    });
+    $authModal.set(true);
   };
 
   const handleCloseDrawer = () => {
-    setDrawerOpen(false);
+    $authModal.set(false);
     // Unblur the background
     (document.querySelector(".app-body") as HTMLElement).style.filter = "none";
     (document.querySelector(".app-footer") as HTMLElement).style.filter =
@@ -231,8 +223,8 @@ export default function NormalHeader({ pathname }: { pathname: string }) {
 
       <Drawer
         isBuyer={isBuyer}
-        drawerOpen={drawerOpen}
-        drawerProps={drawerProps}
+        authType={authType}
+        drawerOpen={authModal}
         handleCloseDrawer={handleCloseDrawer}
       />
     </>
