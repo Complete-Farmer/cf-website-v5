@@ -1,6 +1,5 @@
-import Fade from "react-reveal/Fade";
 import Leaves from "@assets/images/home/leaves";
-import { Button } from "@components/utils";
+import { Button, Fading } from "@components/utils";
 import { classNames, getAppLink } from "@utils/functions";
 
 interface IProps {
@@ -35,8 +34,8 @@ export default function FasterGrowthContent({
 
   return (
     <div className="mx-auto max-w-7xl flex flex-col-reverse gap-x-4 sm:flex-row p-6 md:py-10 lg:py-16 ">
-      <Fade left duration={1000} delay={500} distance="30px">
-        <div className="sm:flex sm:flex-col relative w-full sm:w-1/2 text-left py-6">
+      <div className="relative sm:flex sm:flex-col w-full sm:w-1/2 text-left py-6">
+        <Fading left>
           <h2
             className={`flex items-center mb-3 sm:mb-4 lg:mb-12 text-[28px] lg:text-5xl font-bold ${text2}`}
           >
@@ -63,11 +62,11 @@ export default function FasterGrowthContent({
               />
             </a>
           </div>
-        </div>
-      </Fade>
+        </Fading>
+      </div>
 
-      <Fade right duration={1000} delay={500} distance="30px">
-        <div className="relative items-center sm:w-1/2 justify-center m-auto sm:rounded-none">
+      <div className="relative sm:w-1/2 m-auto sm:rounded-none">
+        <Fading right>
           <img
             src={img.src}
             alt="farmer"
@@ -79,8 +78,8 @@ export default function FasterGrowthContent({
               className={`${text1} w-[274px] h-[280px] lg:w-auto lg:h-auto`}
             />
           </div>
-        </div>
-      </Fade>
+        </Fading>
+      </div>
     </div>
   );
 }

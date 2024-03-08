@@ -1,7 +1,6 @@
-import Fade from "react-reveal/Fade";
 import PlainTab from "@components/utils/PlainTab";
 import type { ITab } from "types/app";
-import { Button } from "@components/utils";
+import { Button, Fading } from "@components/utils";
 import { classNames, getAppLink } from "@utils/functions";
 
 interface IProps {
@@ -25,7 +24,7 @@ const HeroLeft = ({ tabs, currentTab }: IProps) => {
 
   return (
     <div className="w-full sm:w-1/2 h-full flex flex-col xl:pr-0 lg:pr-5 lg:items-start justify-center space-y-10">
-      <Fade left duration={1000} delay={500} distance="30px">
+      <Fading left>
         <div className="flex flex-col justify-start items-start gap-11">
           <div className="flex justify-start items-start w-full">
             <PlainTab
@@ -71,7 +70,7 @@ const HeroLeft = ({ tabs, currentTab }: IProps) => {
             </a>
           </div>
         </div>
-      </Fade>
+      </Fading>
     </div>
   );
 };

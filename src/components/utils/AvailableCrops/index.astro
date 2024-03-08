@@ -34,6 +34,7 @@ const { data, desc, title, bgColor, cardType, titleTextColor } = Astro.props;
           navigation
           initialSlide={0}
           spaceBetween={20}
+          centeredSlides
           autoplay={{
             delay: 5000,
             disableOnInteraction: false,
@@ -41,13 +42,7 @@ const { data, desc, title, bgColor, cardType, titleTextColor } = Astro.props;
           id="avaialble-crop-swiper"
           breakpoints={{
             0: {
-              slidesPerView: 1.1,
-            },
-            370: {
-              slidesPerView: 1.2,
-            },
-            440: {
-              slidesPerView: 1.3,
+              slidesPerView: 1.5,
             },
             639: {
               slidesPerView: 2.1,

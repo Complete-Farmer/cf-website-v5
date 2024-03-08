@@ -61,14 +61,8 @@ export default function ContactForm({
       const res = await contactForm({ ...data, subject });
       if (res.statusCode === 200) {
         toast(res.message, { type: "success" });
-        window.fbq("track", "Contact", {
-          content_category: "Contact Form",
-          content_name: "Contact Us",
-        });
-        window.gtag("event", "contact_form", {
-          event_category: "Contact Form",
-          event_label: "Contact Us",
-        });
+        window.gtag("event", "contact_form");
+        window.fbq("track", "Contact");
         reset({});
       } else {
         throw new Error(res.message);

@@ -1,6 +1,4 @@
-import Fade from "react-reveal/Fade";
-
-import { HeadingOneLine } from "@components/utils";
+import { Fading, HeadingOneLine } from "@components/utils";
 
 import {
   BooksIcon,
@@ -65,13 +63,7 @@ export default function WhyJoinTeam() {
         <div className="px-4 lg:max-w-none">
           <div className="grid grid-cols-1 sm:grid-cols-2 bordedr sm:px-6 gap-x-8 gap-y-10 sm:gap-x-10 lg:grid-cols-3">
             {incentives.map((incentive) => (
-              <Fade
-                bottom
-                delay={500}
-                duration={1000}
-                distance="30px"
-                key={incentive.name}
-              >
+              <Fading bottom key={incentive.name}>
                 <div className="sm:flex md:block">
                   <div className="sm:flex-shrink-0">
                     <incentive.icon />
@@ -85,7 +77,7 @@ export default function WhyJoinTeam() {
                     </p>
                   </div>
                 </div>
-              </Fade>
+              </Fading>
             ))}
           </div>
         </div>

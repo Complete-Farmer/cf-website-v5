@@ -63,14 +63,8 @@ const FormB = () => {
         reset({});
         setMessage(res.message);
         toast(res.message, { type: "success" });
-        window.fbq("track", "ContactForm", {
-          content_category: "Contact Form",
-          content_name: "Contact Us",
-        });
-        window.gtag("event", "contact_form", {
-          event_category: "Contact Form",
-          event_label: "Contact Us",
-        });
+        window.gtag("event", "contact_form");
+        window.fbq("track", "Contact");
       } else {
         throw new Error(res.message);
       }

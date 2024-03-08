@@ -1,4 +1,4 @@
-import Fade from "react-reveal/Fade";
+import { Fading } from "..";
 
 interface IProps {
   title: string;
@@ -8,7 +8,7 @@ interface IProps {
 const HeroLeft = ({ title, description }: IProps) => {
   return (
     <div className="w-full 2xl:w-1/2 h-full flex flex-col xl:pr-0 lg:pr-5 lg:items-start items-center justify-center space-y-10">
-      <Fade left duration={1000} delay={500} distance="30px">
+      <Fading left>
         <div className="w-full flex flex-col justify-start items-start gap-11">
           <div className="flex flex-col justify-start items-start gap-4 2xl:gap-8">
             <h2 className="text-2xl w-full xl:w-11/12 font-bold text-left md:text-[32px] md:leading-10 lg:text-[40px] lg:leading-[50px]">
@@ -19,7 +19,7 @@ const HeroLeft = ({ title, description }: IProps) => {
             </p>
           </div>
         </div>
-      </Fade>
+      </Fading>
     </div>
   );
 };

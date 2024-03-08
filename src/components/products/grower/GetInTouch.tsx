@@ -90,13 +90,13 @@ const GetInTouchForm = ({ toggleModal }: { toggleModal: () => void }) => {
       if (res.statusCode === 200) {
         toggleModal();
         toast(res.message, { type: "success" });
-        window.gtag("event", "form_submit", {
-          event_category: "Contact Form",
-          event_label: "Get in touch",
+        window.gtag("event", "generate_lead", {
+          event_category: "Get in touch",
+          event_label: "Grower Inquiry",
         });
-        window.fbq("track", "Contact", {
-          content_category: "Contact Form",
-          content_name: "Get in touch",
+        window.fbq("track", "Lead", {
+          content_category: "Get in touch",
+          content_name: "Grower Inquiry",
         });
         reset({});
       } else {

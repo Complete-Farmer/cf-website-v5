@@ -100,3 +100,19 @@ const { offer } = Astro.props;
     </div>
   </div>
 </Layouts>
+<script
+  is:inline
+  type="text/javascript"
+  define:vars={{
+    offerId: offer._id,
+    cropName: offer.crop.name,
+    varietyName: offer.specification.variety.name
+  }}
+>
+  window.fbq("track", "ViewContent", {
+    content_type: "product",
+    content_ids: [offerId],
+    content_category: "Crop Offer Details Page",
+    content_name: cropName + " (" + varietyName + ")",
+  });
+</script>

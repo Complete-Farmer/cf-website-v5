@@ -1,15 +1,13 @@
-import Fade from "react-reveal/Fade";
-
 import SmallFarmer from "@assets/images/products/grower/smallholder-farmer.webp";
 import Leaves from "@assets/images/products/grower/smallholder-leaves.webp";
 
-import { Button } from "@components/utils";
+import { Button, Fading } from "@components/utils";
 
 const SmallFarmerImpact = () => {
   return (
-    <div className="mx-auto max-w-7xl flex flex-col-reverse gap-x-8 sm:flex-row p-6 py-16 overflow-hidden">
-      <Fade left duration={1000} delay={500} distance="30px">
-        <div className="sm:flex sm:flex-col relative w-full sm:w-1/2 text-left pt-16 lg:pb-16">
+    <div className="mx-auto max-w-7xl flex flex-col-reverse gap-x-8 sm:flex-row p-6 py-16">
+      <div className="sm:flex sm:flex-col relative w-full sm:w-1/2 text-left pt-16 lg:pb-16">
+        <Fading left>
           <h2 className="flex items-center mb-3 sm:mb-4 lg:mb-12 text-[28px] lg:text-5xl font-bold text-grower-400">
             Smallholder farmer impact
           </h2>
@@ -28,17 +26,17 @@ const SmallFarmerImpact = () => {
               className="md:!w-fit px-8 py-4 !rounded-full"
             />
           </a>
-        </div>
-      </Fade>
+        </Fading>
+      </div>
 
-      <Fade right duration={1000} delay={500} distance="30px">
-        <div className="relative items-center  justify-center m-auto w-full sm:w-1/2 sm:rounded-none">
-          <img src={SmallFarmer.src} alt="farmer" className="m-auto" />
-          <div className="-z-10 absolute top-[60%] -right-1/4 -translate-y-1/2 w-[70vw] sm:w-[40vw] lg:w-[85%]">
-            <img src={Leaves.src} alt="farmer" className="m-auto" />
+      <div className="relative m-auto w-full sm:w-1/2 sm:rounded-none">
+        <Fading right>
+          <img src={SmallFarmer.src} alt="Small Farmer Impact" className="m-auto" />
+          <div className="-z-10 absolute top-10 -right-1/3 lg:top-2 lg:-right-1/4 w-[70vw] sm:w-[40vw] lg:w-[85%]">
+            <img src={Leaves.src} alt="Small Farmer Impact" className="m-auto" />
           </div>
-        </div>
-      </Fade>
+        </Fading>
+      </div>
     </div>
   );
 };

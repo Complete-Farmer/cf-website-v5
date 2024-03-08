@@ -1,7 +1,7 @@
-import Fade from "react-reveal/Fade";
 import { ArrowIcon } from "@assets/icons";
 import { classNames } from "@utils/functions";
 import type { IClickEvent } from "types/app";
+import { Fading } from ".";
 
 interface IProps {
   incentives: {
@@ -24,12 +24,11 @@ export default function SectionList({
     <div className="mx-auto max-w-7xl px-8 py-4 md:py-5 sm:px-2 xl:py-16 xl:px-4">
       <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 gap-y-10 gap-x-8 xl:grid-cols-3 mb-20">
         {incentives.map((i, idx) => (
-          <Fade
+          <Fading
             bottom
-            delay={300 + idx * 150}
             key={i.name}
+            delay={300 + idx * 150}
             duration={1000 + idx * 150}
-            distance="30px"
           >
             <div className="flex flex-col justify-between">
               <div className="flex flex-col justify-start">
@@ -64,7 +63,7 @@ export default function SectionList({
                 <ArrowIcon />
               </div>
             </div>
-          </Fade>
+          </Fading>
         ))}
       </div>
     </div>

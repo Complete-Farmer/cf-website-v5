@@ -60,7 +60,19 @@ const { crop } = Astro.props;
       <CropDetails {crop} />
     </div>
     <div>
-      <TabView {crop} /> 
+      <TabView {crop} />
     </div>
   </div>
 </Layouts>
+<script
+  is:inline
+  type="text/javascript"
+  define:vars={{ cropName: crop.name, cropId: crop._id }}
+>
+  window.fbq("track", "ViewContent", {
+    content_type: "product",
+    content_ids: [cropId],
+    content_name: cropName,
+    content_category: "Crop Details Page",
+  });
+</script>

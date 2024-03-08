@@ -1,11 +1,11 @@
 import { useMemo } from "react";
-import Fade from "react-reveal/Fade";
 
 import type { IPrismicData } from "types/app";
 
 import { NewsCard } from "@components/resources/news-room";
 
 import { formatDateWithCommas } from "@utils/functions";
+import { Fading } from ".";
 
 interface IProps {
   data?: IPrismicData;
@@ -34,7 +34,7 @@ function PressHighlights({ data }: IProps) {
             </h2>
           </div>
 
-          <Fade bottom duration={1000} delay={300} distance="30px">
+          <Fading bottom>
             <>
               <div className="flex flex-col sm:grid sm:grid-cols-2 sm:gap-x-10[x] lg:gap-x-0[x] items-center justify-center mx-auto xl:flex-row">
                 {news?.map((item, index) => (
@@ -55,7 +55,7 @@ function PressHighlights({ data }: IProps) {
                 </a>
               </div>
             </>
-          </Fade>
+          </Fading>
 
           {news?.length === 0 && (
             <div className="flex justify-center items-center h-full">
