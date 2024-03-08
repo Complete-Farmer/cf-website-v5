@@ -1,25 +1,25 @@
 ---
 import Layouts from "@layouts/Layouts.astro";
 
-import FAQContent from "@components/contact-us/FAQContent";
+// import FAQContent from "@components/contact-us/FAQContent";
 
 import { ChevronIcon } from "@assets/icons";
-import { getContactUsFaqs } from "@utils/prismic";
-import { maxRecordsPerPage } from "@utils/constants";
-import { formatDateWithCommas } from "@utils/functions";
+// import { getContactUsFaqs } from "@utils/prismic";
+// import { maxRecordsPerPage } from "@utils/constants";
+// import { formatDateWithCommas } from "@utils/functions";
 
-const faqsApiData = await getContactUsFaqs({
-  page: 1,
-  pageSize: maxRecordsPerPage,
-});
+// const faqsApiData = await getContactUsFaqs({
+//   page: 1,
+//   pageSize: maxRecordsPerPage,
+// });
 
-const faqs = faqsApiData.results.map((item) => ({
-  ...item,
-  date: formatDateWithCommas(item.last_publication_date),
-  question: item.data.question[0].text,
-  answer: item.data.answer[0].text,
-  uid: item.uid,
-}));
+// const faqs = faqsApiData.results.map((item) => ({
+//   ...item,
+//   date: formatDateWithCommas(item.last_publication_date),
+//   question: item.data.question[0].text,
+//   answer: item.data.answer[0].text,
+//   uid: item.uid,
+// }));
 ---
 
 <Layouts
@@ -38,5 +38,5 @@ const faqs = faqsApiData.results.map((item) => ({
     </div>
   </div>
 
-  <FAQContent {faqs} client:visible/>
+  <!-- <FAQContent {faqs} client:visible/> -->
 </Layouts>

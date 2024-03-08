@@ -1,3 +1,5 @@
+import { Disclosure, Transition } from "@headlessui/react";
+
 import { ChevronIcon } from "@assets/icons";
 
 import ContactForm from "./ContactForm";
@@ -29,7 +31,7 @@ export default function Content({
         </p>
       </div>
       <div className="mt-4 flex flex-col justify-start items-start relative gap-4">
-        {faqs.map((item) => {
+        {/* {faqs.map((item) => {
           return (
             <a
               key={item.id}
@@ -39,7 +41,45 @@ export default function Content({
               {item.question}
             </a>
           );
-        })}
+        })} */}
+        <dl className="divide-y divide-gray-900/10">
+          {faqs?.map((faq) => (
+            <Disclosure as="div" key={faq.id} className="py-5 hover:bg-slate-50">
+              {({ open }) => (
+                <>
+                  <dt>
+                    <Disclosure.Button className="flex w-full items-start justify-between text-left text-gray-900">
+                      <span className="text-sm sm:text-base text-left text-grower-500 font-bold">{faq.question}</span>
+                      <span className="ml-6 flex h-7 items-center text-2xl text-[#31BC2E]">
+                        {open ? (
+                          <span className="text-4xl" aria-hidden="true">
+                              -
+                          </span>
+                        ) : (
+                          <span aria-hidden="true">
+                              +
+                          </span>
+                        )}
+                      </span>
+                    </Disclosure.Button>
+                  </dt>
+                  <Transition
+                    enter="transition duration-500 ease-out"
+                    enterFrom="transform scale-95 opacity-0"
+                    enterTo="transform scale-100 opacity-100"
+                    leave="transition duration-400 ease-out"
+                    leaveFrom="transform scale-100 opacity-100"
+                    leaveTo="transform scale-95 opacity-0"
+                  >
+                    <Disclosure.Panel as="dd" className="mt-2 pr-12">
+                      <p className="text-left text-base leading-7 text-gray-600">{faq.answer}</p>
+                    </Disclosure.Panel>
+                  </Transition>
+                </>
+              )}
+            </Disclosure>
+          ))}
+        </dl>
 
         {isLoadMore() && (
           <div className="flex justify-end w-full mt-4">
