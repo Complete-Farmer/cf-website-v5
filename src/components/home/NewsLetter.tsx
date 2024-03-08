@@ -63,7 +63,7 @@ export default function NewsLetter() {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     onMailChimpSubmit({ email: data.email, tags: mailChimpTags["Home"] });
     toast("Please check your inbox for comfirmation", { type: "success", position: "bottom-center" });
-    window.gtag("event", "form_submit", {
+    window.gtag("event", "generate_lead", {
       event_category: "Newsletter Subscription",
       event_label: "List: Complete Farmer Signup",
     });

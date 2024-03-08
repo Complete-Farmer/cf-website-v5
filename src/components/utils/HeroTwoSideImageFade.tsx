@@ -1,6 +1,4 @@
-import Fade from "react-reveal/Fade";
-
-import { Button } from "@components/utils";
+import { Button, Fading } from "@components/utils";
 import { TwoLeavesIcon } from "@assets/icons";
 import { $applicationFormModal, $joinSalesAffiliateModal } from "@utils/stores";
 import { classNames } from "@utils/functions";
@@ -48,11 +46,11 @@ const Hero = ({
       )}
     >
       <div className="flex justify-between items-center h-full">
-        <Fade left duration={1000} delay={500} distance="30px">
+        <Fading left>
           <div className="hidden xl:block ">
             <img className="" src={leftImage} />
           </div>
-        </Fade>
+        </Fading>
 
         <div
           className={classNames(
@@ -110,11 +108,11 @@ const Hero = ({
           )}
         </div>
 
-        <Fade right duration={1000} delay={500} distance="30px">
+        <Fading right>
           <div className="hidden sm:block py-10">
             <img className="h-auto w-auto" src={rightImage} />
           </div>
-        </Fade>
+        </Fading>
       </div>
     </section>
   );

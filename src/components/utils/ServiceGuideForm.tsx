@@ -52,18 +52,23 @@ function ServiceGuideForm({ onClose, product, buttonBg }: IProps) {
     onMailChimpSubmit({
       email: data.email,
       firstname: data.firstName,
-      id:  isBuyer ? "3e78dce99f" : "95c59f4d99",
-      tags:  mailChimpTags[isBuyer ? "BuyerServiceGuide": "GrowerServiceGuide"],
+      id: isBuyer ? "3e78dce99f" : "95c59f4d99",
+      tags: mailChimpTags[isBuyer ? "BuyerServiceGuide" : "GrowerServiceGuide"],
     });
     onClose();
     reset({ email: "", firstName: "" });
-    toast("Thank you for subscribing", { type: "success", position: "bottom-center" });
-    window.gtag("event", "service_guide_button_click", {
-      event_category: "UI interactions",
-      event_label: isBuyer ? "Buyer ": "Grower " + "Service Guide"
+    toast("Thank you for subscribing", {
+      type: "success",
+      position: "bottom-center",
     });
-    // window.metapixelfunction("news", "service_guide", {});
-    window.dataLayer.push({ event: "service_guide" });
+    window.gtag("event", "generate_lead", {
+      event_category: "Service Guide",
+      event_label: isBuyer ? "Buyer " : "Grower " + "Service Guide",
+    });
+    window.fbq("track", "CompleteRegistration", {
+      content_category: "Service Guide",
+      content_name: isBuyer ? "Buyer " : "Grower " + "Service Guide",
+    });
   };
 
   return (

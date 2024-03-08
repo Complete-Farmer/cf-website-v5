@@ -21,18 +21,6 @@ export default function Content({
   isLoadMore,
   changeToggle,
 }: IProps) {
-  const handleLinkClick = () => {
-    // ReactGA.event({
-    //   category: "Link Click",
-    //   action: "Question"
-    // });
-    // window.dataLayer = window.dataLayer || [];
-    // window.dataLayer.push({
-    //   event: "QuestionLink"
-    // });
-    // ReactPixel.track("Questions", {});
-  };
-
   return (
     <div>
       <div>
@@ -45,7 +33,6 @@ export default function Content({
           return (
             <a
               key={item.id}
-              onClick={handleLinkClick}
               href="/contact-us/get-started"
               className="underline text-sm sm:text-base text-left text-grower-500 hover:font-bold"
             >

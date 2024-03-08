@@ -1,6 +1,4 @@
-import Fade from "react-reveal/Fade";
-
-import { Button, HeroRight } from "@components/utils";
+import { Button, Fading, HeroRight } from "@components/utils";
 
 import BuyerHeroRight1 from "@assets/images/products/buyer/hero-right.webp";
 import BuyerHeroRight2 from "@assets/images/products/buyer/hero-right-tablet.webp";
@@ -20,7 +18,7 @@ const Hero = () => {
 
   const LeftComp = () => (
     <div className="w-full md:w-1/2 h-full flex flex-col xl:pr-0 lg:pr-5 items-center md:items-start justify-center space-y-10">
-      <Fade left duration={1000} delay={500} distance="30px">
+      <Fading left>
         <div className="flex flex-col justify-start items-start gap-11">
           <div className="flex flex-col justify-start items-start gap-2">
             <p className="px-5 md:px-0 md:py-3 text-[28px] md:text-[32px] lg:text-[48px] leading-[34px] md:leading-10 lg:leading-[50px] text-center md:text-left font-bold xl:text-left">
@@ -49,7 +47,7 @@ const Hero = () => {
             </a>
           </div>
         </div>
-      </Fade>
+      </Fading>
     </div>
   );
 

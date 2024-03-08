@@ -1,7 +1,7 @@
 import ReactPlayer from "react-player";
 import { useState } from "react";
-import Fade from "react-reveal/Fade";
-import { Wrapper } from "..";
+
+import { Fading, Wrapper } from "..";
 import { classNames } from "@utils/functions";
 import { PlayIcon } from "@assets/icons";
 
@@ -16,7 +16,7 @@ const HeroRight = ({ url, isBuyer, thumbnail }: IProps) => {
 
   return (
     <div className="flex w-full justify-center items-center 2xl:w-1/2 h-full lg:pt-0 overflow-hidden">
-      <Fade right duration={1000} delay={500} distance="30px">
+      <Fading right>
         <div className="relative h-full w-full flex justify-center items-center">
           <div className="w-full h-[272px] md:h-[550px] 2xl:w-[550px] 2xl:h-[450px]">
             <div className="relative overflow-hidden w-full h-full">
@@ -50,7 +50,7 @@ const HeroRight = ({ url, isBuyer, thumbnail }: IProps) => {
         >
           <ReactPlayer url={url} playing width="100%" height="100%" />
         </Wrapper>
-      </Fade>
+      </Fading>
     </div>
   );
 };

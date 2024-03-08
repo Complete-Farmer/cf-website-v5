@@ -52,7 +52,7 @@ const FormA = () => {
       position: "bottom-center",
       theme: "colored",
     });
-    window.gtag("event", "form_submit", {
+    window.gtag("event", "generate_lead", {
       event_category: "Newsletter Subscription",
       event_label: "List: Investors",
     });

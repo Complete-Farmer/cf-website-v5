@@ -115,8 +115,8 @@ const ApplicationForm = ({ title }: Props) => {
         onClose();
         toast(res.message, { type: "success" });
         window.gtag("event", "form_submit", {
-          event_category: "Job Application Form",
           event_label: subject,
+          event_category: "Job Application Form",
         });
 
         window.fbq("track", "SubmitApplication", {

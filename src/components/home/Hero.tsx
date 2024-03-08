@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import Fade from "react-reveal/Fade";
 
-import { Button, HeroRight, PlainTab } from "@components/utils";
+import { Button, Fading, HeroRight, PlainTab } from "@components/utils";
 import InitialHero from "./InitialHero";
 
 import GrowerImage from "@assets/images/products/grower/hero-right.webp";
@@ -93,7 +92,7 @@ const Hero = () => {
 
   const LeftComp = () => (
     <div className="w-full xl:w-1/2 h-full flex flex-col xl:pr-0 lg:pr-5 lg:items-start sm:items-center justify-center space-y-10">
-      <Fade left duration={1000} delay={500} distance="30px">
+      <Fading left>
         <div className="flex flex-col justify-start items-start gap-11">
           <div className="flex justify-start items-start w-full">
             <PlainTab
@@ -136,7 +135,7 @@ const Hero = () => {
             </a>
           </div>
         </div>
-      </Fade>
+      </Fading>
     </div>
   );
 

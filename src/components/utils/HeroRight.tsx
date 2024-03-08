@@ -1,6 +1,6 @@
 import { classNames } from "@utils/functions";
 import { Fragment } from "react";
-import Fade from "react-reveal/Fade";
+import { Fading } from ".";
 
 interface IProps {
   images: {
@@ -18,7 +18,7 @@ const HeroRight = ({ images, className }: IProps) => {
         "xl:flex lg:w-1/2 h-full lg:pt-0 pt-24 overflow-hidden"
       )}
     >
-      <Fade right duration={1000} delay={500} distance="30px">
+      <Fading right>
         <Fragment>
           {images.tablet && (
             <div className="lg:hidden relative h-full w-full">
@@ -29,7 +29,7 @@ const HeroRight = ({ images, className }: IProps) => {
             <img src={images.desktop} />
           </div>
         </Fragment>
-      </Fade>
+      </Fading>
     </div>
   );
 };
