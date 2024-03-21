@@ -136,7 +136,7 @@ const RegistrationForm = () => {
             className="absolute top-4 right-3 sm:top-5 sm:right-6 text-custom_gray-300 hover:cursor-pointer"
             onClick={onClose}
           >
-            <MenuCloseIcon className="sm:h-7 sm:w-7" aria-hidden="true" />
+            <MenuCloseIcon className="sm:h-7 sm:w-7" />
           </div>
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-xl leading-6 md:text-2xl md:leading-[30px] font-bold sm:tracking-tight text-grower-400">

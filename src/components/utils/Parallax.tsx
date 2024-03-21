@@ -1,4 +1,6 @@
-import { Parallax } from "react-parallax";
+// import { Parallax } from "react-parallax";
+import * as pkg from "react-parallax";
+const {Parallax} = pkg;
 
 export default function ParallaxImage({ imgSrc }: { imgSrc: string }) {
   return (

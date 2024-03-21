@@ -38,9 +38,8 @@ const View = ({
     </div>
     <div className="flex items-end justify-end cursor-pointer">
       <MenuCloseIcon
-        className={isBuyer ? "text-buyer-500" : "text-grower-500"}
-        aria-hidden="true"
         onClick={onRemove}
+        className={isBuyer ? "text-buyer-500" : "text-grower-500"}
       />
     </div>
   </div>

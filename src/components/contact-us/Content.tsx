@@ -52,11 +52,11 @@ export default function Content({
                       <span className="text-sm sm:text-base text-left text-grower-500 font-bold">{faq.question}</span>
                       <span className="ml-6 flex h-7 items-center text-2xl text-[#31BC2E]">
                         {open ? (
-                          <span className="text-4xl" aria-hidden="true">
+                          <span className="text-4xl">
                               -
                           </span>
                         ) : (
-                          <span aria-hidden="true">
+                          <span>
                               +
                           </span>
                         )}

@@ -69,7 +69,7 @@ function NewsletterForm({ tag, onClose, buttonBg }: IProps) {
           className="absolute text-custom_gray-300 hover:cursor-pointer"
           onClick={onClose}
         >
-          <MenuCloseIcon className="h-6 w-6" aria-hidden="true" />
+          <MenuCloseIcon className="h-6 w-6" />
         </div>
         <div className="mx-auto w-full text-center">
           <h2 className="text-xl leading-6 md:text-2xl md:leading-[30px] font-bold sm:tracking-tight text-grower-400">

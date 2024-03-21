@@ -145,7 +145,7 @@ const ApplicationForm = ({ title }: Props) => {
               className="text-custom_gray-300 hover:cursor-pointer"
               onClick={onClose}
             >
-              <MenuCloseIcon className="h-8 w-8" aria-hidden="true" />
+              <MenuCloseIcon className="h-8 w-8" />
             </div>
           </div>
           <div className="mx-auto max-w-2xl text-center">
