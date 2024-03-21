@@ -78,7 +78,7 @@ function ServiceGuideForm({ onClose, product, buttonBg }: IProps) {
           className="absolute text-custom_gray-300 hover:cursor-pointer"
           onClick={onClose}
         >
-          <MenuCloseIcon className="h-6 w-6" aria-hidden="true" />
+          <MenuCloseIcon className="h-6 w-6" />
         </div>
         <div className="mx-auto w-full text-center space-y-3">
           <h2 className="capitalize text-xl leading-6 md:text-2xl md:leading-[30px] font-bold sm:tracking-tight">

@@ -334,7 +334,7 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
                 onClick={openMobileMenu}
               >
                 <span className="sr-only">Open main menu</span>
-                <MenuOpenIcon className="h-6 w-6" aria-hidden="true" />
+                <MenuOpenIcon className="h-6 w-6"/>
               </button>
               <button
                 type="button"
@@ -344,7 +344,7 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
                 onClick={openMobileMenu}
               >
                 <span className="sr-only">Close menu</span>
-                <MenuCloseIcon className="h-6 w-6" aria-hidden="true" />
+                <MenuCloseIcon className="h-6 w-6" />
               </button>
             </div>
           </div>

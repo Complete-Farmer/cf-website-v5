@@ -110,7 +110,7 @@ export default function BookDemo({ toggleModal, activeCategory }: IProps) {
           className="absolute top-4 right-3 sm:top-5 sm:right-6 text-custom_gray-300 hover:cursor-pointer"
           onClick={toggleModal}
         >
-          <MenuCloseIcon className="h-8 w-8" aria-hidden="true" />
+          <MenuCloseIcon className="h-8 w-8" />
         </div>
       </div>
 

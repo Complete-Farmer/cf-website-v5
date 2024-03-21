@@ -68,7 +68,7 @@ const Drawer: React.FC<{
             )}
           >
             <span className="sr-only">Close panel</span>
-            <MenuCloseIcon className="h-8 w-8" aria-hidden="true" />
+            <MenuCloseIcon className="h-8 w-8" />
           </button>
         </div>
 

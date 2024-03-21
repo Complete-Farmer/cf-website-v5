@@ -23,11 +23,11 @@ const FAQContent = ({ faqs }: IProps) => {
                         <span className="text-base font-bold leading-7">{faq.question}</span>
                         <span className="ml-6 flex h-7 items-center text-2xl text-[#31BC2E]">
                           {open ? (
-                            <span className="text-4xl" aria-hidden="true">
+                            <span className="text-4xl">
                               -
                             </span>
                           ) : (
-                            <span aria-hidden="true">
+                            <span>
                               +
                             </span>
                           )}

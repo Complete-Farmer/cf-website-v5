@@ -8,7 +8,7 @@ interface IProps {
 const BlogCard = ({ blog, isTags = false }: IProps) => {
   return (
     <a href={`/resources/blogs/${blog.uid}`}>
-      <div aria-hidden="true" className="aspect-h-3 aspect-w-3 sm:aspect-h-2 sm:aspect-w-3 overflow-hidden rounded-lg md:aspect-h-6 md:aspect-w-5">
+      <div className="aspect-h-3 aspect-w-3 sm:aspect-h-2 sm:aspect-w-3 overflow-hidden rounded-lg md:aspect-h-6 md:aspect-w-5">
         <img
           alt={blog.title}
           src={blog.data.image.url}
