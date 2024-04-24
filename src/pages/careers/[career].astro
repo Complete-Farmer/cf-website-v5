@@ -8,16 +8,16 @@ import { getJobVacancies } from "@utils/prismic";
 
 export async function getStaticPaths() {
   const careerApiData = await getJobVacancies({
-  page: 1,
-  fetchLinks: ["categories.name"],
-});
+    page: 1,
+    fetchLinks: ["categories.name"],
+  });
 
   return careerApiData.results.map((career) => {
     const data = {
       uid: career.uid,
       role: career?.data?.title[0]?.text,
       type: career?.data?.type?.[0]?.text,
-      description: career?.data?.description, 
+      description: career?.data?.description,
       department: career?.data?.department?.data?.name,
       requirements: career?.data?.requirements, //.map((i: { text: string; }) => i.text),
       preferred_skills: career?.data?.preferred_skills, //.map((i: { text: string; }) => i.text),
@@ -43,6 +43,6 @@ const { career } = Astro.props;
     textColor="text-grower-500"
     title="Browse Careers"
   />
-  <JobDetails {career} client:idle />
+  <JobDetails {career} client:only="react" />
   <ApplicationForm role={career.role} client:idle />
 </Layouts>
