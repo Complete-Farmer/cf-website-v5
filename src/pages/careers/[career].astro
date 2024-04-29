@@ -9,6 +9,7 @@ import { getJobVacancies } from "@utils/prismic";
 export async function getStaticPaths() {
   const careerApiData = await getJobVacancies({
     page: 1,
+    pageSize: 100,
     fetchLinks: ["categories.name"],
   });
 
