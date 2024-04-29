@@ -9,7 +9,9 @@ import { getNews } from "@utils/prismic";
 import { formatDateWithCommas } from "@utils/functions";
 
 export async function getStaticPaths() {
-  const newsApiData = await getNews({});
+  const newsApiData = await getNews({
+    pageSize: 100
+  });
 
   return newsApiData.results.map((news) => {
     return {

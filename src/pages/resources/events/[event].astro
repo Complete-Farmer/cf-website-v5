@@ -8,7 +8,9 @@ import { isDatePast, formatDateWithCommas } from "@utils/functions";
 import { PrismicText } from "@components/utils";
 
 export async function getStaticPaths() {
-  const eventsApiData = await getEvents({});
+  const eventsApiData = await getEvents({
+    pageSize: 100
+  });
 
   return eventsApiData.results.map((event) => {
     return {
