@@ -36,7 +36,7 @@ export const mailChimpTags = {
 export const maxRecordsPerPage = 10;
 
 export const eventsConfig = {
-  maxRecordsPerPage: 9,
+  maxRecordsPerPage: 12,
 };
 
 export const blogsConfig = {

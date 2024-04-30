@@ -103,14 +103,7 @@ const JobDetails = ({ career }: IProps) => {
           />
           <div className="flex justify-start items-start gap-2 gap-x-4">
             {icons?.map(({ name, Component }) => {
-              return (
-                <div
-                  key={name}
-                  className="flex justify-start items-start gap-2.5 p-3 rounded-[38px] bg-[#efefef] text-grower-400 hover:text-white hover:bg-grower-500 hover:cursor-pointer"
-                >
-                  <Component key={name} link={link} />
-                </div>
-              );
+              return <Component key={name} link={link} />;
             })}
           </div>
         </div>

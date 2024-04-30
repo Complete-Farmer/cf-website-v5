@@ -5,7 +5,7 @@ import { Tab, Button, SpinnerLoader } from "@components/utils";
 
 import { getEvents } from "@utils/prismic";
 import { eventsConfig } from "@utils/constants";
-import { formatDateWithCommas, isDatePast } from "@utils/functions";
+import { formatDate, isDatePast } from "@utils/functions";
 
 import type { IPrismicData, IPrismicDoc } from "types/app";
 
@@ -17,15 +17,25 @@ const _cateogries = [
 
 const transformApiData = (doc: IPrismicDoc) => {
   return doc.map((item) => ({
-    ...item,
-    entry: "Free",
-    status: "Online",
-    platform: "Twitter",
-    time: "12:00PM - 2:00PM",
-    title: item.data.webinar_title[0].text,
-    isPast: isDatePast(item.data.webinar_date),
-    tags: item.tags.length === 0 ? [] : item.tags,
-    date: formatDateWithCommas(item.data.webinar_date),
+    id: item.id,
+    uid: item.uid,
+    type: item?.data?.type,
+    platform: item?.data?.platform,
+    image: item?.data?.webinar_image,
+    speakers: item?.data?.speakers || [],
+    video: item?.data?.webinar_video?.url,
+    title: item?.data?.webinar_title?.[0].text,
+    isPast: isDatePast(item?.data?.start_date_time),
+    endDate: formatDate("DD MMMM, YYYY", item?.data?.end_date_time),
+    startDate: formatDate("DD MMMM, YYYY", item?.data?.start_date_time),
+    startTime: formatDate(
+      "h:mm A",
+      new Date(item?.data?.start_date_time).getTime()
+    ),
+    endTime: formatDate(
+      "h:mm A",
+      new Date(item?.data?.end_date_time).getTime()
+    ),
   }));
 };
 
@@ -120,7 +130,9 @@ const EventsList = ({ eventsApiData }: IProps) => {
               {loading ? (
                 <SpinnerLoader loading={loading} color="#36d7b7" />
               ) : (
-                <span className="">There are currently no {activeTab.toLowerCase()} events.</span>
+                <span className="">
+                  There are currently no {activeTab.toLowerCase()} events.
+                </span>
               )}
             </div>
           </div>
