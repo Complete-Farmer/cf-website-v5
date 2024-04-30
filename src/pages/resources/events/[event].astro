@@ -22,6 +22,7 @@ export async function getStaticPaths() {
           type: event?.data?.type,
           platform: event?.data?.platform,
           image: event?.data?.webinar_image,
+          description: event.data?.description,
           speakers: event?.data?.speakers || [],
           video: event?.data?.webinar_video?.url,
           title: event?.data?.webinar_title?.[0].text,
@@ -29,7 +30,6 @@ export async function getStaticPaths() {
           isPast: isDatePast(event?.data?.start_date_time),
           endDate: formatDate("DD MMMM, YYYY", event?.data?.end_date_time),
           startDate: formatDate("DD MMMM, YYYY", event?.data?.start_date_time),
-          description: event.data?.description,
           startTime: formatDate(
             "h:mm A",
             new Date(event?.data?.start_date_time).getTime()
