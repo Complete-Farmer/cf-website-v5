@@ -49,13 +49,19 @@ export const onMailChimpSubmit = (fields: IFields) => {
   jsonp(_d, { param: "c" });
 };
 
-export const formatDateWithCommas = (dateString: string) => {
-  const formattedDate = new Date(dateString).toLocaleDateString(undefined, {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
-  return formattedDate;
+/**
+ * @deprecated use formatDate
+ * @param dateString 
+ * @returns 
+ */
+export const formatDateWithCommas = (dateString?: string) => {
+  if(!dateString) return "";
+  return dayjs(new Date(dateString)).format("DD MMMM, YYYY");
+};
+
+export const formatDate = (format: string, dateString?: string | number) => {
+  if(!dateString) return "";
+  return dayjs(new Date(dateString)).format(format);
 };
 
 export function getYouTubeThumbnailUrl(url: string) {

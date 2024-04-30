@@ -16,5 +16,5 @@ const eventsApiData = await getEvents({ page: 1, pageSize: eventsConfig.maxRecor
   description="We are providing cutting-edge technological farming protocols and innovations with a unique business model and logistics that are revolutionizing..."
 >
   <Hero image={HeroImage} title="Events" />
-  <EventsList {eventsApiData} client:visible />
+  <EventsList {eventsApiData} client:idle />
 </Layouts>

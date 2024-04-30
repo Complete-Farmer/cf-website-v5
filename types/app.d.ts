@@ -4,7 +4,7 @@ declare global {
   interface Window {
     dataLayer: {
       event: string;
-      [x: string]: string
+      [x: string]: string;
     }[];
   }
 }
@@ -163,15 +163,29 @@ export interface IBlog extends IPrismicSingleDoc {
   tags?: string[];
 }
 
-export interface IEvent extends IPrismicSingleDoc {
-  time: string;
-  date: string;
-  entry: string;
+export interface IEvent extends Partial<IPrismicSingleDoc> {
+  type: string;
+  image: {
+    dimensions: {
+      width: number;
+      height: number;
+    },
+    alt: string | null,
+    url: string
+  };
+  video: string;
   title: string;
-  status: string;
   isPast: boolean;
-  tags?: string[];
+  endTime: string;
+  endDate: string;
   platform: string;
+  startDate: string;
+  startTime: string;
+  speakers: string[];
+  register_link: string;
+  description: {
+    text: string;
+  }[]
 }
 
 export interface IFaQ extends IPrismicSingleDoc {

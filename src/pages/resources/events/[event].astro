@@ -4,12 +4,12 @@ import Layouts from "@layouts/Layouts.astro";
 import { RegisterEvent, RelatedStories } from "@components/resources";
 
 import { getEvents } from "@utils/prismic";
-import { isDatePast, formatDateWithCommas } from "@utils/functions";
+import { isDatePast, formatDate } from "@utils/functions";
 import { PrismicText } from "@components/utils";
 
 export async function getStaticPaths() {
   const eventsApiData = await getEvents({
-    pageSize: 100
+    pageSize: 100,
   });
 
   return eventsApiData.results.map((event) => {
@@ -17,37 +17,53 @@ export async function getStaticPaths() {
       params: { event: event?.uid },
       props: {
         event: {
-          ...event,
+          id: event.id,
+          uid: event.uid,
+          type: event?.data?.type,
+          platform: event?.data?.platform,
           image: event?.data?.webinar_image,
-          fullDate: event?.data?.webinar_date,
           speakers: event?.data?.speakers || [],
+          video: event?.data?.webinar_video?.url,
           title: event?.data?.webinar_title?.[0].text,
-          entry: event?.data?.entry?.[0].text ?? "Free",
-          isPast: isDatePast(event?.data?.webinar_date),
-          heading: event?.data?.webinar_title?.[0]?.text,
-          tags: event.tags.length === 0 ? [] : event.tags,
-          status: event?.data?.status?.[0].text ?? "Online",
-          platform: event?.data?.platform?.[0].text ?? "Twitter",
-          time: event?.data?.time?.[0].text ?? "12:00PM - 2:00PM",
-          date: formatDateWithCommas(event?.data?.webinar_date),
+          register_link: event?.data?.register_link?.url,
+          isPast: isDatePast(event?.data?.start_date_time),
+          endDate: formatDate("DD MMMM, YYYY", event?.data?.end_date_time),
+          startDate: formatDate("DD MMMM, YYYY", event?.data?.start_date_time),
+          description: event.data?.description,
+          startTime: formatDate(
+            "h:mm A",
+            new Date(event?.data?.start_date_time).getTime()
+          ),
+          endTime: formatDate(
+            "h:mm A",
+            new Date(event?.data?.end_date_time).getTime()
+          ),
         },
         relatedEvents: eventsApiData.results
           .filter((e) => e.uid !== event.uid)
           .slice(0, 3)
           .map((e) => ({
-            ...e,
+            id: e.id,
+            uid: e.uid,
+            type: e?.data?.type,
+            platform: e?.data?.platform,
             image: e?.data?.webinar_image,
-            fullDate: e?.data?.webinar_date,
             speakers: e?.data?.speakers || [],
-            title: e?.data?.webinar_title?.[0]?.text,
-            entry: e?.data?.entry?.[0]?.text ?? "Free",
-            isPast: isDatePast(e?.data?.webinar_date),
-            tags: e.tags.length === 0 ? [] : e.tags,
-            heading: e?.data?.webinar_title?.[0]?.text,
-            status: e?.data?.status?.[0]?.text ?? "Online",
-            platform: e?.data?.platform?.[0]?.text ?? "Twitter",
-            time: e?.data?.time?.[0]?.text ?? "12:00PM - 2:00PM",
-            date: formatDateWithCommas(e.data.webinar_date),
+            video: e?.data?.webinar_video?.url,
+            title: e?.data?.webinar_title?.[0].text,
+            register_link: e?.data?.register_link?.url,
+            description: event.data?.description,
+            isPast: isDatePast(e?.data?.start_date_time),
+            endDate: formatDate("DD MMMM, YYYY", e?.data?.end_date_time),
+            startDate: formatDate("DD MMMM, YYYY", e?.data?.start_date_time),
+            startTime: formatDate(
+              "h:mm A",
+              new Date(e?.data?.start_date_time).getTime()
+            ),
+            endTime: formatDate(
+              "h:mm A",
+              new Date(e?.data?.end_date_time).getTime()
+            ),
           })),
       },
     };
@@ -80,7 +96,7 @@ const { event, relatedEvents } = Astro.props;
       <h3
         class="w-full text-xl sm:leading-6 md:text-2xl md:leading-[30px] lg:text-2xl lg:leading-[30px] font-bold text-left text-custom_black-900"
       >
-        {event.heading}
+        {event.title}
       </h3>
     </div>
 
@@ -94,11 +110,11 @@ const { event, relatedEvents } = Astro.props;
           <h3
             class="hidden lg:block w-full text-xl sm:text-xl sm:leading-6 md:text-2xl md:leading-[30px] lg:text-2xl lg:leading-[30px] font-bold text-left text-custom_black-900"
           >
-            {event.heading}
+            {event.title}
           </h3>
           {
-            event.data?.description?.length > 0 && (
-              <PrismicText render={event.data.description} client:only="react" />
+            event.description?.length > 0 && (
+              <PrismicText render={event.description} client:only="react" />
             )
           }
 
@@ -132,7 +148,7 @@ const { event, relatedEvents } = Astro.props;
       >
         <RegisterEvent data={event} client:only="react" />
       </div>
-    </div> 
+    </div>
   </div>
 
   <RelatedStories type="events" title="Related Events" data={relatedEvents} />
