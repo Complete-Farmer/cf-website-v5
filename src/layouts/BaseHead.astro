@@ -109,3 +109,41 @@ const {
   fbq("track", "PageView");
 </script>
 <!-- End Meta Pixel -->
+
+<script is:inline define:vars={{ GOOGLE_MEASUREMENT_ID }} type="text/partytown">
+  function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(";");
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) === " ") {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) === 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
+  window.addEventListener("load", function () {
+    var isCookieConsentTrue = getCookie("CookieConsent") === "true";
+    if (!isCookieConsentTrue) {
+      // User has not given consent, disable Google Analytics
+      window["ga-disable-" + GOOGLE_MEASUREMENT_ID] = true;
+      console.log("Cookie Consent NOT given!");
+
+      window.gtag("consent", "default", {
+        ad_storage: "denied",
+        analytics_storage: "denied",
+      });
+      fbq("consent", "revoke");
+    } else {
+      window.gtag("consent", "update", {
+        ad_storage: "granted",
+        analytics_storage: "granted",
+      });
+      fbq("consent", "grant");
+    }
+  });
+</script>
