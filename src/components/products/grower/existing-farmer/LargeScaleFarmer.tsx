@@ -1,6 +1,7 @@
 import { Fading } from "@components/utils";
 
-import Image from "@assets/images/products/grower/large-scale-farmer.webp";
+// import Image from "@assets/images/products/grower/large-scale-farmer.webp";
+import Image from "@assets/images/products/grower/large-scale-farmer.jpg";
 import Leaves from "@assets/images/products/grower/exisiting-leaves.webp";
 
 const LargeScaleFarmer = () => {

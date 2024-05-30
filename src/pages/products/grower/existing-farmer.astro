@@ -62,24 +62,24 @@ const cfBenefits = [
 
 const availableDemands: IAvailableDemands[] = [];
 
-const { statusCode, data } = await getAvaiableCrops();
+// const { statusCode, data } = await getAvaiableCrops();
 
-if (statusCode == 200) {
-  for (const c of data) {
-    const response = await getCropVarieties(c._id);
-    if (response.statusCode == 200 && response.data.length > 0) {
-      availableDemands.push({
-        ...c,
-        link: `/products/grower/crops/${convertToKebabCase(c.name)}`,
-        varieties: response.data.map((v) => ({
-          _id: v._id,
-          name: v.name,
-          imageUrl: v.imageUrl,
-        })),
-      });
-    }
-  }
-}
+// if (statusCode == 200) {
+//   for (const c of data) {
+//     const response = await getCropVarieties(c._id);
+//     if (response.statusCode == 200 && response.data.length > 0) {
+//       availableDemands.push({
+//         ...c,
+//         link: `/products/grower/crops/${convertToKebabCase(c.name)}`,
+//         varieties: response.data.map((v) => ({
+//           _id: v._id,
+//           name: v.name,
+//           imageUrl: v.imageUrl,
+//         })),
+//       });
+//     }
+//   }
+// }
 ---
 
 <GrowerIndexLayout
