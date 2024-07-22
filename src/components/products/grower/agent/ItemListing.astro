@@ -37,5 +37,17 @@ const { data, title, description } = Astro.props;
     }
   </ul>
 
-  <Button id="get-agent-form" title="Become a Grower Agent" className="h-14 !w-[343px] !xl:w-96 text-base md:text-lg xl:text-xl !rounded-full" />
+  <Button client:load id="get-agent-app" title="Become a Grower Agent" className="h-14 !w-[343px] !xl:w-96 text-base md:text-lg xl:text-xl !rounded-full"/>
 </div>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+      const buttons = document.querySelectorAll("#get-agent-app");
+      buttons.forEach(button => {
+        button.addEventListener("click", () => {
+          const agentRecruitmentUrl = import.meta.env.PUBLIC_AGENT_RECRUITMENT_URL;
+          console.log("Button clicked");
+          window.open(agentRecruitmentUrl, "_blank");
+        });
+      });
+    });
+</script>

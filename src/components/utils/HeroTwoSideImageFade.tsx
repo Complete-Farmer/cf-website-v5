@@ -3,6 +3,7 @@ import { TwoLeavesIcon } from "@assets/icons";
 import { $applicationFormModal, $joinSalesAffiliateModal } from "@utils/stores";
 import { classNames } from "@utils/functions";
 import useWindow from "@hooks/useWindow";
+import {AGENT_RECRUITMENT_URL} from "@utils/constants";
 
 interface IProps {
   text?: string;
@@ -92,8 +93,11 @@ const Hero = ({
                   if (buttonTitle.includes("affiliate") || buttonTitle.includes("Join now")) {
                     $joinSalesAffiliateModal.set(true);
                   } 
-                  if (buttonTitle.includes("academy") || buttonTitle.includes("Agent")) {
+                  if (buttonTitle.includes("academy")) {
                     $applicationFormModal.set(true);
+                  }
+                  if (buttonTitle.includes("Agent")) {
+                    window.open(AGENT_RECRUITMENT_URL, "_blank");
                   }
                   if (buttonTitle.includes("vacancies")) {
                     window.location.hash= "vacancies";
