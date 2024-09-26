@@ -9,14 +9,7 @@ export default function CookieScreen() {
   };
 
   const handleDecline = () => {
-    // Set the consent cookie to false
     Cookies.set("cookie_consent", "false", { expires: 365 });
-
-    // Ensure tracking or analytics cookies are disabled here
-    // Example: Disable any scripts you don't want without consent
-    // disableAnalytics();
-
-    // Optionally reload the page if required
     window.location.reload();
   };
 
