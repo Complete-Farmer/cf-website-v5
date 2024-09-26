@@ -15,6 +15,7 @@ interface ImportMetaEnv {
   readonly AWS_DOCUMENT_REPORT_BUCKETS: string;
   readonly PUBLIC_GOOGLE_TAG_MANAGER_ID: string;
   readonly PUBLIC_AGENT_RECRUITMENT_URL: string;
+  readonly PUBLIC_STORE_FRONT_URL: string;
   // more env variables...
 }
 
