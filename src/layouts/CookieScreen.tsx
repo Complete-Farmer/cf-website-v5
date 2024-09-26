@@ -1,6 +1,25 @@
 import CookieConsent, { getCookieConsentValue } from "react-cookie-consent";
+import Cookies from "js-cookie";
+
 
 export default function CookieScreen() {
+  const handleAccept = () => {
+    Cookies.set("cookie_consent", "true", { expires: 365 }); // Expires in 1 year
+    window.location.reload();
+  };
+
+  const handleDecline = () => {
+    // Set the consent cookie to false
+    Cookies.set("cookie_consent", "false", { expires: 365 });
+
+    // Ensure tracking or analytics cookies are disabled here
+    // Example: Disable any scripts you don't want without consent
+    // disableAnalytics();
+
+    // Optionally reload the page if required
+    window.location.reload();
+  };
+
   return (
     <CookieConsent
       flipButtons
@@ -8,7 +27,7 @@ export default function CookieScreen() {
       enableDeclineButton
       visible={!JSON.parse(getCookieConsentValue() || "false") ? "show" : "byCookieValue"}
       buttonText="Accept Cookies"
-      declineButtonText="Learn More"
+      declineButtonText="Decline"
       contentStyle={{ padding: "1%" }}
       buttonWrapperClasses="flex lg:flex-none"
       style={{ background: "white", borderTop: "0.5vh solid #31bc2e" }}
@@ -24,22 +43,20 @@ export default function CookieScreen() {
         border: "1px solid #31bc2e",
       }}
       hideOnDecline={false}
-      onAccept={() => window.location.reload()}
-      onDecline={() => window.open("/legal/privacy-policy", "_blank")}
+      onAccept={handleAccept}
+      onDecline={handleDecline}
       declineButtonClasses="w-40 sm:w-48 xs:w-30 xl:w-48 h-12 gap-2 px-8 py-2"
       buttonClasses="w-40 sm:w-48 xs:w-10 xl:w-48 h-12 gap-2 px-8 py-2 bg-grower-500"
     >
       <p className="w-full max-w-5xl text-xs text-left text-custom_black-900">
         <span>
           By clicking “Accept Cookies,” I agree to provide cookies for
-          statistical and personalized preference purposes. To learn more about
-          our cookies,
-          <br className="hidden xl:block" />
-          please read our{" "}
+          statistical and personalized preference purposes.<br />To learn more about
+          our cookies, please read our{" "}
           <a
             target="_blank"
             href="/legal/privacy-policy"
-            className="hover:cursor-pointer hover:underline"
+            className="hover:cursor-pointer hover:underline text-[#31bc2e] font-semibold"
           >
             Privacy Policy.
           </a>
