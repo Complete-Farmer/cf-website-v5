@@ -61,3 +61,4 @@ export const GOOGLE_TAG_MANAGER_ID = import.meta.env
   .PUBLIC_GOOGLE_TAG_MANAGER_ID;
 export const AWS_DOCUMENT_REPORT_BUCKETS = import.meta.env.AWS_DOCUMENT_REPORT_BUCKETS;
 export const AGENT_RECRUITMENT_URL = import.meta.env.PUBLIC_AGENT_RECRUITMENT_URL;
+export const STORE_FRONT_URL = import.meta.env.PUBLIC_STORE_FRONT_URL;

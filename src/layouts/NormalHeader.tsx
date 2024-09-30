@@ -1,6 +1,6 @@
-import { Fragment, useState } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { useStore } from "@nanostores/react";
+import { Fragment, useState } from "react";
 
 import {
   $authModal,
@@ -9,24 +9,33 @@ import {
 import CFBuyerLogo from "@assets/images/logos/cf/buyer.webp";
 import CFGrowerLogo from "@assets/images/logos/cf/grower.webp";
 import CFMainLogo from "@assets/images/logos/cf/main.webp";
+import CFStorefrontLogo from "@assets/images/logos/cf/storefront.webp";
 
 import { ArrowIcon, ChevronIcon, MenuOpenIcon } from "@assets/icons";
 
 import Drawer from "./Drawer";
 import MobileMenu from "./MobileMenu";
 
-import { companyLinks } from "@utils/constants";
+import { companyLinks, STORE_FRONT_URL } from "@utils/constants";
 
 const products = [
   {
     name: "CF Grower",
     href: "/products/grower/new-farmer",
     logo: CFGrowerLogo,
+    hoverColor: "grower-500",
   },
   {
     name: "CF Buyer",
     href: "/products/buyer",
     logo: CFBuyerLogo,
+    hoverColor: "buyer-500",
+  },
+  {
+    name: "CF Storefront",
+    href: STORE_FRONT_URL,
+    logo: CFStorefrontLogo,
+    hoverColor: "storefront-500",
   },
 ];
 
@@ -126,7 +135,7 @@ export default function NormalHeader({ pathname }: { pathname: string }) {
                                       {item.logo ? (
                                         <a
                                           href={item.href}
-                                          className="block text-sm font-semibold leading-6"
+                                          className={`block text-sm font-semibold leading-6 group-hover:text-${item.hoverColor}`}
                                         >
                                           <div className="flex justify-start">
                                             <img
