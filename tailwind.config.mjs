@@ -30,6 +30,9 @@ export default {
           800: "#00524B",
           900: "#022D2B",
         },
+        storefront: {
+          500: "#E58C00",
+        },
         custom_gray: {
           200: "#EFEFEF",
           300: "#6C6C6C",
