@@ -1,24 +1,30 @@
+import React, { useState } from "react";
 import CookieConsent, { getCookieConsentValue } from "react-cookie-consent";
 import Cookies from "js-cookie";
 
-
 export default function CookieScreen() {
+  const [visible, setVisible] = useState(
+    !JSON.parse(getCookieConsentValue() || "false"),
+  );
+
   const handleAccept = () => {
     Cookies.set("cookie_consent", "true", { expires: 365 }); // Expires in 1 year
-    window.location.reload();
+    setVisible(false);
   };
 
   const handleDecline = () => {
     Cookies.set("cookie_consent", "false", { expires: 365 });
-    window.location.reload();
+    setVisible(false);
   };
+
+  if (!visible) return null;
 
   return (
     <CookieConsent
       flipButtons
       location="bottom"
       enableDeclineButton
-      visible={!JSON.parse(getCookieConsentValue() || "false") ? "show" : "byCookieValue"}
+      visible="show"
       buttonText="Accept Cookies"
       declineButtonText="Decline"
       contentStyle={{ padding: "1%" }}
@@ -35,7 +41,6 @@ export default function CookieScreen() {
         borderRadius: "100px",
         border: "1px solid #31bc2e",
       }}
-      hideOnDecline={false}
       onAccept={handleAccept}
       onDecline={handleDecline}
       declineButtonClasses="w-40 sm:w-48 xs:w-30 xl:w-48 h-12 gap-2 px-8 py-2"
@@ -43,9 +48,10 @@ export default function CookieScreen() {
     >
       <p className="w-full max-w-5xl text-xs text-left text-custom_black-900">
         <span>
-          By clicking “Accept Cookies,” I agree to provide cookies for
-          statistical and personalized preference purposes.<br />To learn more about
-          our cookies, please read our{" "}
+          By clicking &quot;Accept Cookies,&quot; I agree to provide cookies for
+          statistical and personalized preference purposes.
+          <br />
+          To learn more about our cookies, please read our{" "}
           <a
             target="_blank"
             href="/legal/privacy-policy"
