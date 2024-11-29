@@ -2,16 +2,7 @@
 import Layouts from "@layouts/Layouts.astro";
 import Header from "@components/legal/Header.astro";
 import {
-  Intro,
-  SocialSharing,
-  UpdatesToPrivacy,
-  InformationWeCollect,
-  InformationWithOthers,
-  InformationYouProvide,
-  CollectionPrivacyInfo,
-  ProtectionOfPersonalInfo,
-  DisclosureOfPersonalInfo,
-  InformationAboutTransaction,
+  Intro
 } from "@components/legal/privacy-policy";
 ---
 
@@ -21,20 +12,11 @@ import {
 >
   <Header
     title="Privacy Policy"
-    modifiedTime="Last modified: 28 January 2022"
+    modifiedTime="Last modified: November 29, 2024"
   />
   <div class="bg-white py-8 sm:py-14 sm:px-6">
     <div class="mx-auto max-w-7xl px-6 lg:px-8 text-justify">
       <Intro />
-      <CollectionPrivacyInfo />
-      <InformationYouProvide />
-      <InformationAboutTransaction />
-      <InformationWithOthers />
-      <SocialSharing />
-      <InformationWeCollect />
-      <ProtectionOfPersonalInfo />
-      <DisclosureOfPersonalInfo />
-      <UpdatesToPrivacy />
     </div>
   </div>
 </Layouts>
