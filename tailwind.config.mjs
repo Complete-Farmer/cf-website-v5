@@ -19,7 +19,7 @@ export default {
           600: "#18274C",
           700: "#253A66",
           800: "#102352",
-          900: "#00194C"
+          900: "#00194C",
         },
         grower: {
           100: "#D8F5D7",
@@ -47,27 +47,45 @@ export default {
         heightscale: "100% cover",
       },
       backgroundImage: {
-        "products": "url('/src/assets/images/products/products-bg.webp')",
-        "about-us-ceo": "url('/src/assets/images/about-us/ceo-bg-pattern.webp')",
-        "about-us-hero": "url('/src/assets/images/about-us/hero-background.png')",
-        "investor-relations": "url('/src/assets/images/investor-relations/hero-bg.webp')",
-        "footer-pattern": "url('/src/assets/images/home/footer-bg-patterns.webp')",
-        "hero-buyer": "url('/src/assets/images/products/buyer/hero-background.webp')",
-        "contact-us-bg": "url('/src/assets/images/contact-us/background-pattern.webp')",
-        "hero-grower": "url('/src/assets/images/products/grower/hero-background.webp')",
-        "interested-in-agent": "url('/src/assets/images/products/grower/interested-in-agent.webp')",
-        "interested-in-agent-1": "url('/src/assets/images/products/grower/interested-in-agent-1.webp')",
-        "operational-locations": "url('/src/assets/images/products/grower/agent/operational-locations.webp')",
-        "farm-manager-academy": "url('/src/assets/images/products/grower/farm-manager-academy-desktop.webp')",
-        "interested-in-agent-mobile": "url('/src/assets/images/products/grower/interested-in-agent-mobile.webp')",
-        "interested-in-agent-tablet": "url('/src/assets/images/products/grower/interested-in-agent-tablet.webp')",
-        "farm-manager-academy-tablet": "url('/src/assets/images/products/grower/farm-manager-academy-tablet.webp')",
-        "farm-manager-academy-mobile": "url('/src/assets/images/products/grower/farm-manager-academy-mobile.webp')",
-        "customer-stories-buyer-bg-pattern": "url('/src/assets/images/products/buyer/customer-stories-bg-pattern.webp')",
-        "customer-stories-grower-bg-pattern": "url('/src/assets/images/products/grower/customer-stories-bg-pattern.webp')",
+        products: "url('/src/assets/images/products/products-bg.webp')",
+        "about-us-ceo":
+          "url('/src/assets/images/about-us/ceo-bg-pattern.webp')",
+        "about-us-hero":
+          "url('/src/assets/images/about-us/hero-background.png')",
+        "investor-relations":
+          "url('/src/assets/images/investor-relations/hero-bg.webp')",
+        "footer-pattern":
+          "url('/src/assets/images/home/footer-bg-patterns.webp')",
+        "hero-buyer":
+          "url('/src/assets/images/products/buyer/hero-background.webp')",
+        "contact-us-bg":
+          "url('/src/assets/images/contact-us/background-pattern.webp')",
+        "hero-grower":
+          "url('/src/assets/images/products/grower/hero-background.webp')",
+        "interested-in-agent":
+          "url('/src/assets/images/products/grower/interested-in-agent.webp')",
+        "interested-in-agent-1":
+          "url('/src/assets/images/products/grower/interested-in-agent-1.webp')",
+        "operational-locations":
+          "url('/src/assets/images/products/grower/agent/operational-locations.webp')",
+        "farm-manager-academy":
+          "url('/src/assets/images/products/grower/farm-manager-academy-desktop.webp')",
+        "interested-in-agent-mobile":
+          "url('/src/assets/images/products/grower/interested-in-agent-mobile.webp')",
+        "interested-in-agent-tablet":
+          "url('/src/assets/images/products/grower/interested-in-agent-tablet.webp')",
+        "farm-manager-academy-tablet":
+          "url('/src/assets/images/products/grower/farm-manager-academy-tablet.webp')",
+        "farm-manager-academy-mobile":
+          "url('/src/assets/images/products/grower/farm-manager-academy-mobile.webp')",
+        "customer-stories-buyer-bg-pattern":
+          "url('/src/assets/images/products/buyer/customer-stories-bg-pattern.webp')",
+        "customer-stories-grower-bg-pattern":
+          "url('/src/assets/images/products/grower/customer-stories-bg-pattern.webp')",
       },
     },
     fontFamily: { cera: ["Cera Pro", "sans-serif"] },
   },
-  plugins: [tailwindForm, tailwindAR],
+  // eslint-disable-next-line no-undef
+  plugins: [tailwindForm, tailwindAR, require("@tailwindcss/typography")],
 };
