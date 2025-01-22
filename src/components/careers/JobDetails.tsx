@@ -15,6 +15,7 @@ interface IProps {
   career: {
     uid: string;
     role: string;
+    type: string;
     department: string;
     requirements: RichTextBlock[];
     description: RichTextBlock[];
@@ -93,7 +94,7 @@ const JobDetails = ({ career }: IProps) => {
         <div className="flex justify-start items-center text-md font-bold text-left text-custom_black-900 space-x-4">
           <p>{career.department}</p>
           <span>•</span>
-          <p>Full-time</p>
+          <p>{career.type ?? "Full-time"}</p>
         </div>
         <div className="flex flex-col-reverse sm:flex-row justify-between">
           <Button
