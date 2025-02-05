@@ -1,6 +1,6 @@
 import { Dialog } from "@headlessui/react";
 
-import { companyLinks } from "@utils/constants";
+import { companyLinks, STORE_FRONT_URL } from "@utils/constants";
 import { classNames } from "@utils/functions";
 
 import { MenuCloseIcon } from "@assets/icons";
@@ -8,6 +8,7 @@ import { MenuCloseIcon } from "@assets/icons";
 import BuyerLogo from "@assets/images/logos/cf/buyer.webp";
 import GrowerLogo from "@assets/images/logos/cf/grower.webp";
 import MainLogo from "@assets/images/logos/cf/main.webp";
+import CFStorefrontLogo from "@assets/images/logos/cf/storefront.webp";
 
 const products = [
   {
@@ -19,6 +20,11 @@ const products = [
     name: "CF Buyer",
     href: "/products/buyer",
     logo: BuyerLogo,
+  },
+  {
+    name: "CF Storefront",
+    href: STORE_FRONT_URL,
+    logo: CFStorefrontLogo,
   },
 ];
 
@@ -81,7 +87,7 @@ const MobileMenu = ({
                           className={classNames(
                             item.logo &&
                               "text-base font-normal leading-7 text-gray-900",
-                            "block py-2"
+                            "block py-2",
                           )}
                         >
                           {item.logo ? (
@@ -94,7 +100,7 @@ const MobileMenu = ({
                             item.name
                           )}
                         </a>
-                      )
+                      ),
                     )}
                   </div>
                 </div>
@@ -127,7 +133,7 @@ const MobileMenu = ({
               !isBuyer
                 ? "text-grower-500 border-grower-500"
                 : "text-buyer-500 border-buyer-500",
-              "block w-full order-2 sm:order-1 mx-auto rounded-md border px-3.5 py-3.5 sm:py-5 text-center text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+              "block w-full order-2 sm:order-1 mx-auto rounded-md border px-3.5 py-3.5 sm:py-5 text-center text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
             )}
           >
             Login
@@ -136,7 +142,7 @@ const MobileMenu = ({
             onClick={() => handleDrawer("SignUp")}
             className={classNames(
               !isBuyer ? "bg-grower-500" : "bg-buyer-500",
-              "block w-full mx-auto order-1 sm:order-2 rounded-md px-3.5 py-3.5 sm:py-5 text-center text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+              "block w-full mx-auto order-1 sm:order-2 rounded-md px-3.5 py-3.5 sm:py-5 text-center text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
             )}
           >
             Sign up

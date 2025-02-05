@@ -16,10 +16,6 @@ export const getAppLink = (text: string, query?: string) => {
     product = "buyer";
   }
 
-  if (text.includes("Vendor")) {
-    product = "vendor";
-  }
-
   const url = `https://${
     product + (ENV === "DEV" ? "-test" : "")
   }.completefarmer.com/`;
@@ -34,9 +30,12 @@ interface IFields {
   tags?: string | number;
 }
 export const onMailChimpSubmit = (fields: IFields) => {
-  const { id= "062b1734e2", email, firstname, tags } = fields;
+  const { id = "062b1734e2", email, firstname, tags } = fields;
 
-  const url = "https://completefarmer.us4.list-manage.com/subscribe/post?u=d9d1e9683abc0d8614a94ae3b&amp;id=" + id + "&amp;v_id=6858&amp;f_id=00f903ebf0";
+  const url =
+    "https://completefarmer.us4.list-manage.com/subscribe/post?u=d9d1e9683abc0d8614a94ae3b&amp;id=" +
+    id +
+    "&amp;v_id=6858&amp;f_id=00f903ebf0";
 
   let _d = `${url}&EMAIL=${email}`;
   if (tags) {
@@ -51,16 +50,16 @@ export const onMailChimpSubmit = (fields: IFields) => {
 
 /**
  * @deprecated use formatDate
- * @param dateString 
- * @returns 
+ * @param dateString
+ * @returns
  */
 export const formatDateWithCommas = (dateString?: string) => {
-  if(!dateString) return "";
+  if (!dateString) return "";
   return dayjs(new Date(dateString)).format("DD MMMM, YYYY");
 };
 
 export const formatDate = (format: string, dateString?: string | number) => {
-  if(!dateString) return "";
+  if (!dateString) return "";
   return dayjs(new Date(dateString)).format(format);
 };
 
@@ -68,7 +67,7 @@ export function getYouTubeThumbnailUrl(url: string) {
   if (url) {
     // Extract video ID from YouTube URL
     const videoId = url.match(
-      /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+      /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/,
     );
 
     if (videoId && videoId[1]) {
@@ -90,7 +89,7 @@ export function convertToKebabCase(inputString: string) {
 function convertToPascalCaseWithSpaces(inputString: string) {
   const words = inputString.split("_");
   const capitalizedWords = words.map(
-    (word: string) => word.charAt(0).toUpperCase() + word.slice(1)
+    (word: string) => word.charAt(0).toUpperCase() + word.slice(1),
   );
   return capitalizedWords.join(" ");
 }
@@ -146,7 +145,7 @@ export function generateAvailabilityString(
   availabilityData: {
     name: string;
     availability: boolean;
-  }[]
+  }[],
 ) {
   let startMonth = "";
   let endMonth = "";
@@ -188,7 +187,8 @@ const getInitials = (name) => {
   const nameSplit = name.split(" ");
   const nameLength = nameSplit.length;
   if (nameLength > 1) {
-    initials = nameSplit[0].substring(0, 1) + nameSplit[nameLength - 1].substring(0, 1);
+    initials =
+      nameSplit[0].substring(0, 1) + nameSplit[nameLength - 1].substring(0, 1);
   } else if (nameLength === 1) {
     initials = nameSplit[0].substring(0, 1);
   } else return;
