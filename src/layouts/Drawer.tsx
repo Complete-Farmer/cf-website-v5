@@ -38,7 +38,6 @@ const Drawer: React.FC<{
       content_category: "Accessing product app",
       content_name: item,
     });
-    
   };
 
   return (
@@ -64,7 +63,7 @@ const Drawer: React.FC<{
             onClick={() => handleCloseDrawer()}
             className={classNames(
               isBuyer ? "text-buyer-500" : "text-grower-500",
-              "flex place-content-center items-center lg:bg-[#EFEFEF] lg:w-[52px] lg:h-[52px] rounded-full"
+              "flex place-content-center items-center lg:bg-[#EFEFEF] lg:w-[52px] lg:h-[52px] rounded-full",
             )}
           >
             <span className="sr-only">Close panel</span>
@@ -72,7 +71,7 @@ const Drawer: React.FC<{
           </button>
         </div>
 
-        <div className="flex flex-col lg:flex-row justify-center lg:space-x-80 w-full px-2 sm:px-6">
+        <div className="flex flex-col lg:flex-row justify-center lg:space-x-24 w-full px-2 sm:px-6">
           {drawerProps[authType].map((item) => (
             <div
               key={item}
@@ -92,12 +91,39 @@ const Drawer: React.FC<{
                   className={`${
                     item.includes("Buyer")
                       ? "text-buyer-500"
-                      : "text-grower-500"
+                      : item.includes("Grower")
+                        ? "text-grower-500"
+                        : "text-storefront-500"
                   } w-10 h-10`}
                 />
               </a>
             </div>
           ))}
+
+          <div className="pb-7 mt-7 border-b-2 border-gray-200 2xl:border-none">
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href={
+                authType === "login"
+                  ? "https://vendor.completefarmer.com/login"
+                  : "https://vendor.completefarmer.com/register"
+              }
+              onClick={
+                authType === "login"
+                  ? () => registerAnalytics("Login to CF Storefront")
+                  : () => registerAnalytics("Create a CF Storefront account")
+              }
+              className="flex justify-between lg:justify-start items-center relative gap-4  w-full"
+            >
+              <p className="text-2xl font-bold py-0 lg:py-12 w-full 2xl:w-72">
+                {authType === "login"
+                  ? "Login to CF Storefront"
+                  : "Create a CF Storefront account"}
+              </p>
+              <ArrowIcon className="text-storefront-500 w-10 h-10" />
+            </a>
+          </div>
         </div>
       </div>
     </ReactDrawer>
