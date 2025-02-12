@@ -89,7 +89,7 @@ export default function Footer({
         }
       });
     },
-    [refs]
+    [refs],
   );
 
   const config = {
@@ -246,7 +246,8 @@ export default function Footer({
 
         <div className="flex flex-col items-start justify-between pt-10 mt-10 border-t border-gray-900/10 md:flex-row md:items-center">
           <p className="text-base leading-5 text-white mx-auto lg:mx-0">
-            &copy; 2023 Complete Farmer Limited. All rights reserved
+            &copy; {new Date().getUTCFullYear()} Complete Farmer Limited. All
+            rights reserved
           </p>
           <div className="flex sm:hidden lg:flex items-start text-base justify-start space-x-6 md:items-center md:justify-center">
             <a
