@@ -1,13 +1,39 @@
-import { PRISMIC_WEBHOOK_SECRET } from '@utils/constants';
+import { PRISMIC_WEBHOOK_SECRET, GITHUB_TOKEN, GITHUB_REPOSITORY } from '@utils/constants';
 import type { APIRoute } from 'astro';
 
+// Add a GET handler for testing
+export const GET: APIRoute = async () => {
+  console.log('GET request received at:', new Date().toISOString());
+  
+  return new Response(
+    JSON.stringify({
+      message: 'Webhook endpoint is working',
+      timestamp: new Date().toISOString()
+    }),
+    {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+  );
+};
+
 export const POST: APIRoute = async ({ request }) => {
+  console.log('Prismic webhook received at:', new Date().toISOString());
+  
   try {
     // Verify the request is from Prismic
     const body = await request.json();
+    console.log('Webhook payload:', JSON.stringify(body));
     const secret = body.secret || request.headers.get('x-prismic-secret');
+    console.log('Secret received:', secret);
 
     if (secret !== PRISMIC_WEBHOOK_SECRET) {
+      console.log('Unauthorized: Secret mismatch', { 
+        received: secret, 
+        expected: PRISMIC_WEBHOOK_SECRET 
+      });
       return new Response(
         JSON.stringify({ message: 'Unauthorized' }),
         { status: 401, headers: { 'Content-Type': 'application/json' } }
@@ -15,13 +41,15 @@ export const POST: APIRoute = async ({ request }) => {
     }
     
     // Trigger GitHub Actions workflow using workflow_dispatch
+    console.log('Triggering GitHub workflow for repo:', GITHUB_REPOSITORY);
+    
     const response = await fetch(
-      `https://api.github.com/repos/${process.env.GITHUB_REPOSITORY || 'completefarmer/cf-website-v5'}/dispatches`,
+      `https://api.github.com/repos/${GITHUB_REPOSITORY}/dispatches`,
       {
         method: 'POST',
         headers: {
           'Accept': 'application/vnd.github.v3+json',
-          'Authorization': `token ${process.env.GITHUB_TOKEN}`,
+          'Authorization': `token ${GITHUB_TOKEN}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
@@ -35,6 +63,7 @@ export const POST: APIRoute = async ({ request }) => {
     );
 
     if (!response.ok) {
+      console.error('GitHub API response:', await response.text());
       throw new Error(`Failed to trigger workflow: ${response.statusText}`);
     }
     
