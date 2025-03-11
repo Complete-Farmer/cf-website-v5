@@ -42,8 +42,8 @@ env:
   PUBLIC_STORE_FRONT_URL: ${{ secrets.PUBLIC_STORE_FRONT_URL }}
   PRISMIC_WEBHOOK_SECRET: ${{ secrets.PRISMIC_WEBHOOK_SECRET }}
   AMPLIFY_WEBHOOK_URL: ${{ secrets.AMPLIFY_WEBHOOK_URL }}
-  GITHUB_TOKEN: ${{ secrets.GH_PAT }}
-  GITHUB_REPOSITORY: ${{ github.repository }}
+  GH_PAT: ${{ secrets.GH_PAT }}
+  REPOSITORY: ${{ github.repository }}
 
 jobs:
   build:
