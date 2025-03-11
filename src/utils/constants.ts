@@ -63,3 +63,4 @@ export const AWS_DOCUMENT_REPORT_BUCKETS = import.meta.env.AWS_DOCUMENT_REPORT_B
 export const AGENT_RECRUITMENT_URL = import.meta.env.PUBLIC_AGENT_RECRUITMENT_URL;
 export const STORE_FRONT_URL = import.meta.env.PUBLIC_STORE_FRONT_URL;
 export const PRISMIC_WEBHOOK_SECRET = import.meta.env.PRISMIC_WEBHOOK_SECRET;
+export const GH_PAT = import.meta.env.GH_PAT;
