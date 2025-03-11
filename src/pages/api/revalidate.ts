@@ -1,4 +1,4 @@
-import { PRISMIC_WEBHOOK_SECRET, GITHUB_TOKEN, GITHUB_REPOSITORY } from '@utils/constants';
+import { PRISMIC_WEBHOOK_SECRET, GH_PAT } from '@utils/constants';
 import type { APIRoute } from 'astro';
 
 // Add a GET handler for testing
@@ -40,16 +40,17 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
     
-    // Trigger GitHub Actions workflow using workflow_dispatch
-    console.log('Triggering GitHub workflow for repo:', GITHUB_REPOSITORY);
+    // Get repository from environment or use default
+    const repository = import.meta.env.REPOSITORY || 'Complete-Farmer/cf-website-v5';
+    console.log('Triggering GitHub workflow for repo:', repository);
     
     const response = await fetch(
-      `https://api.github.com/repos/${GITHUB_REPOSITORY}/dispatches`,
+      `https://api.github.com/repos/${repository}/dispatches`,
       {
         method: 'POST',
         headers: {
           'Accept': 'application/vnd.github.v3+json',
-          'Authorization': `token ${GITHUB_TOKEN}`,
+          'Authorization': `token ${GH_PAT}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
