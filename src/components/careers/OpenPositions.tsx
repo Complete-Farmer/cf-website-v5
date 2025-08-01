@@ -35,7 +35,7 @@ export default function OpenPositions({ departments, careerApiData }: IProps) {
   );
   const [selectedDepartment, setSelectedDepartment] = useState<
     (typeof departments)[0]
-      >(departments[0]);
+  >(departments[0]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -140,9 +140,8 @@ export default function OpenPositions({ departments, careerApiData }: IProps) {
             <li key={i}>
               <a
                 href={`/careers/${application.uid}`}
-                className={`block hover:bg-gray-50 ${
-                  i === 9 ? "border-b-0" : "border-b"
-                } ${i === 29 ? "border-b-0" : "border-b"}`}
+                className={`block hover:bg-gray-50 ${i === 9 ? "border-b-0" : "border-b"
+                  } ${i === 29 ? "border-b-0" : "border-b"}`}
               >
                 <div className="flex items-center px-0 py-4">
                   <div className="flex min-w-0 flex-1 items-center">

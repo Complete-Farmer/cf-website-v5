@@ -42,6 +42,16 @@ const departments = [{ id: "", name: "All roles" }, ...departmenData];
 
   <WhyJoinTeam client:visible />
   <ParallaxImage imgSrc={StaffMeeting.src} client:only="react" />
+  <section
+    class="pt-16 pb-12 sm:pb-0 lg:pb-0 lg:pt-32 mx-6 sm:mx-12 bg-white"
+  >
+  <div class= "max-w-7xl px-0 md:px-0 mx-auto xl:px-5 border-b">
+    <div
+      id="BambooHR"
+      data-domain="completefarmer.bamboohr.com"
+      data-version="1.0.0" data-departmentId=""></div><script src="https://completefarmer.bamboohr.com/js/embed.js" type="text/javascript" async defer></script>
+  </div>
+  </section>
   <OpenPositions {departments} {careerApiData} client:visible />
   <Section client:visible />
   <NewsLetter client:visible />

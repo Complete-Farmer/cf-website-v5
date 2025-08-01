@@ -97,3 +97,178 @@ body {
     }
   }
 }
+
+/* Hide the BambooHR footer */
+#BambooHR div[style*="font-family: Lato"] {
+  display: none !important;
+}
+
+/* Override BambooHR default styles and apply your design */
+.BambooHR-ATS-board {
+  font-family: inherit !important;
+  text-align: left !important;
+}
+
+/* Header section styling */
+.BambooHR-ATS-board h2 {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.025em;
+  color: #1f4d3b !important; /* custom_green-900 equivalent */
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+}
+
+@media (min-width: 640px) {
+  .BambooHR-ATS-board h2 {
+    flex-direction: row;
+    margin-bottom: 2.5rem;
+    font-size: 2.25rem !important;
+  }
+}
+
+/* Department list styling */
+.BambooHR-ATS-Department-List {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Department items */
+.BambooHR-ATS-Department-Item {
+  list-style: none !important;
+  margin: 0 !important;
+  clear: both !important;
+}
+
+/* Department headers styling - now visible and styled like your design */
+.BambooHR-ATS-Department-Header {
+  display: block !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  font-size: 0.75rem !important; /* text-xs */
+  font-weight: 400 !important; /* font-normal */
+  color: #059669 !important; /* text-green-600 */
+  margin-bottom: 0.5rem !important;
+  padding: 1rem 0.25rem 0 0.25rem !important;
+}
+
+@media (min-width: 640px) {
+  .BambooHR-ATS-Department-Header {
+    font-size: 0.875rem !important; /* sm:text-sm */
+    padding: 1rem 1rem 0 1rem !important;
+  }
+}
+
+/* Jobs list styling */
+.BambooHR-ATS-Jobs-List {
+  padding: 0 !important;
+  border-bottom: none !important;
+  margin-bottom: 0 !important;
+}
+
+/* Job items styling */
+.BambooHR-ATS-Jobs-Item {
+  list-style: none !important;
+  margin: 0 !important;
+  clear: both !important;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.BambooHR-ATS-Jobs-Item:last-child {
+  border-bottom: none;
+}
+
+.BambooHR-ATS-Jobs-Item a {
+  display: block !important;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+}
+
+.BambooHR-ATS-Jobs-Item a:hover {
+  background-color: #f9fafb;
+}
+
+/* Job item content layout */
+.BambooHR-ATS-Jobs-Item a {
+  display: flex !important;
+  align-items: center;
+  padding: 1rem 0.25rem;
+  position: relative;
+}
+
+@media (min-width: 640px) {
+  .BambooHR-ATS-Jobs-Item a {
+    padding: 1rem;
+  }
+}
+
+/* Job title styling */
+.BambooHR-ATS-Jobs-Item a {
+  color: #1f4d3b !important; /* custom_green-900 */
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+}
+
+@media (min-width: 640px) {
+  .BambooHR-ATS-Jobs-Item a {
+    font-size: 1.25rem !important;
+  }
+}
+
+/* Location styling */
+.BambooHR-ATS-Location {
+  float: none !important;
+  padding-top: 0 !important;
+  position: absolute !important;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.75rem !important;
+  color: #059669 !important; /* green-600 */
+  font-weight: 400 !important;
+}
+
+@media (min-width: 640px) {
+  .BambooHR-ATS-Location {
+    font-size: 0.875rem !important;
+  }
+}
+
+/* Add arrow icon using CSS */
+.BambooHR-ATS-Jobs-Item a::after {
+  content: "→";
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #059669; /* green-600 */
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 639px) {
+  .BambooHR-ATS-Location {
+    position: static !important;
+    transform: none !important;
+    display: block !important;
+    margin-top: 0.5rem;
+    float: none !important;
+  }
+  
+  .BambooHR-ATS-Jobs-Item a {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding-right: 2rem;
+  }
+}
