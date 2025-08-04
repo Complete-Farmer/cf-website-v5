@@ -3,28 +3,13 @@ import Layouts from "@layouts/Layouts.astro";
 
 import { NewsLetter } from "@components/home";
 import { Section } from "@components/investor-relations";
-import { WhyJoinTeam, OpenPositions } from "@components/careers";
+import { WhyJoinTeam } from "@components/careers";
 import { HeroTwoSideImageFade, ParallaxImage } from "@components/utils";
 
 import ImageLeft from "@assets/images/careers/hero-1.webp";
 import ImageRight from "@assets/images/careers/hero-2.webp";
 import StaffMeeting from "@assets/images/careers/team-meeting-in-session.webp";
-import { getDepartment, getJobVacancies } from "@utils/prismic";
-import { maxRecordsPerPage } from "@utils/constants";
 
-const departmentApiData = await getDepartment();
-const careerApiData = await getJobVacancies({
-  page: 1,
-  pageSize: maxRecordsPerPage,
-  fetchLinks: ["categories.name"],
-});
-
-const departmenData = departmentApiData.results.map((item) => ({
-  id: item.id,
-  name: item.data.name,
-}));
-
-const departments = [{ id: "", name: "All roles" }, ...departmenData];
 ---
 
 <Layouts
