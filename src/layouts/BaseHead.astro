@@ -49,11 +49,10 @@ const {
 <script
   async
   is:inline
-  type="text/partytown"
   define:vars={{ GOOGLE_MEASUREMENT_ID }}
   src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_MEASUREMENT_ID}`}
 ></script>
-<script is:inline define:vars={{ GOOGLE_MEASUREMENT_ID }} type="text/partytown">
+<script is:inline define:vars={{ GOOGLE_MEASUREMENT_ID }}>
   window.dataLayer = window.dataLayer || [];
   window.gtag = function () {
     dataLayer.push(arguments);
@@ -68,7 +67,7 @@ const {
 <!-- End Google tag -->
 
 <!-- Google Tag Manager -->
-<script is:inline define:vars={{ GOOGLE_TAG_MANAGER_ID }} type="text/partytown">
+<script is:inline define:vars={{ GOOGLE_TAG_MANAGER_ID }}>
   (function (w, d, s, l, i) {
     w[l] = w[l] || [];
     w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
@@ -110,7 +109,7 @@ const {
 </script>
 <!-- End Meta Pixel -->
 
-<script is:inline define:vars={{ GOOGLE_MEASUREMENT_ID }} type="text/partytown">
+<script is:inline define:vars={{ GOOGLE_MEASUREMENT_ID }}>
   function getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(";");
