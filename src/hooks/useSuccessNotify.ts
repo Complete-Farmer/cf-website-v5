@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useSuccessNotify = (isSubmitSuccessful) => {
+const useSuccessNotify = (isSubmitSuccessful: boolean) => {
   const [isSuccess, setSuccessful] = useState(false);
 
   useEffect(() => {

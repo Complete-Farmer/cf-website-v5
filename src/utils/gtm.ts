@@ -1,16 +1,6 @@
 interface GTMProps {
   event: string;
-  page: {
-    title: string;
-    url: string;
-  };
-  user?: {
-    isLoggedIn: boolean;
-  };
-  ecommerce?: {
-    currencyCode: string;
-    products: any[];
-  };
+  [key: string]: any;
 }
 
 export const gtmVirtualPageView = (props: GTMProps) => {
