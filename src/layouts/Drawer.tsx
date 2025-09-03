@@ -6,6 +6,7 @@ import CFMainLogo from "@assets/images/logos/cf/main.webp";
 import { ArrowIcon, MenuCloseIcon } from "@assets/icons";
 import useResolution from "@hooks/useResolution";
 import { classNames, getAppLink } from "@utils/functions";
+import { gtmVirtualPageView } from "@utils/gtm";
 
 const drawerProps = {
   login: ["Login to CF Grower", "Login to CF Buyer"],
@@ -37,6 +38,21 @@ const Drawer: React.FC<{
     window.fbq("track", "Lead", {
       content_category: "Accessing product app",
       content_name: item,
+    });
+
+    gtmVirtualPageView({
+      event: "gtm.click",
+      page: {
+        title: item,
+        url: window.location.pathname,
+      },
+      user: {
+        isLoggedIn: false,
+      },
+      ecommerce: {
+        currencyCode: "USD",
+        products: [],
+      },
     });
   };
 
@@ -88,13 +104,12 @@ const Drawer: React.FC<{
                   {item}
                 </p>
                 <ArrowIcon
-                  className={`${
-                    item.includes("Buyer")
+                  className={`${item.includes("Buyer")
                       ? "text-buyer-500"
                       : item.includes("Grower")
                         ? "text-grower-500"
                         : "text-storefront-500"
-                  } w-10 h-10`}
+                    } w-10 h-10`}
                 />
               </a>
             </div>

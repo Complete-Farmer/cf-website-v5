@@ -12,6 +12,7 @@ import {
   $getInTouchModal,
   $fullComparisonDrawer,
 } from "@utils/stores";
+import { gtmVirtualPageView } from "@utils/gtm";
 
 import {
   ArrowIcon,
@@ -115,7 +116,23 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
 
   const openMobileMenu = () => setMobileMenuOpen(true);
 
-  const toggleModal = () => $getInTouchModal.set(!getInTouchModal);
+  const toggleModal = () => {
+    gtmVirtualPageView({
+      event: "gtm.click",
+      page: {
+        title: "Get in touch",
+        url: pathname,
+      },
+      user: {
+        isLoggedIn: false,
+      },
+      ecommerce: {
+        currencyCode: "USD",
+        products: [],
+      },
+    });
+    $getInTouchModal.set(!getInTouchModal);
+  };
 
   const handleDrawer = (value: string) => {
     setMobileMenuOpen(false);
@@ -292,7 +309,7 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
             <Wrapper
               isOpen={getInTouchModal}
               onClose={() => $getInTouchModal.set(false)}
-              className={isBuyer ? "md:!max-w-2xl lg:!max-w-3xl": ""}
+              className={isBuyer ? "md:!max-w-2xl lg:!max-w-3xl" : ""}
             >
               {isBuyer ? (
                 <BuyerGetInTouch toggleModal={toggleModal} />
@@ -312,11 +329,9 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
               </button>
             </div>
             <div
-              className={`${
-                mobileMenuOpen ? "hidden" : "flex"
-              } justify-start items-center relative gap-1 px-3 py-2 rounded-full ${
-                data.activeBgColor
-              }`}
+              className={`${mobileMenuOpen ? "hidden" : "flex"
+                } justify-start items-center relative gap-1 px-3 py-2 rounded-full ${data.activeBgColor
+                }`}
             >
               <button
                 onClick={() => handleDrawer("SignUp")}
@@ -328,19 +343,17 @@ const ProductsHeader: React.FC<{ pathname: string }> = ({ pathname }) => {
             <div className="flex lg:hidden pl-2">
               <button
                 type="button"
-                className={`-m-2.5 ${
-                  mobileMenuOpen ? "hidden" : "inline-flex"
-                } items-center justify-center rounded-md p-2.5 text-gray-700`}
+                className={`-m-2.5 ${mobileMenuOpen ? "hidden" : "inline-flex"
+                  } items-center justify-center rounded-md p-2.5 text-gray-700`}
                 onClick={openMobileMenu}
               >
                 <span className="sr-only">Open main menu</span>
-                <MenuOpenIcon className="h-6 w-6"/>
+                <MenuOpenIcon className="h-6 w-6" />
               </button>
               <button
                 type="button"
-                className={`-m-2.5 ${
-                  mobileMenuOpen ? "inline-flex" : "hidden"
-                } items-center justify-center rounded-md p-2.5 text-gray-700`}
+                className={`-m-2.5 ${mobileMenuOpen ? "inline-flex" : "hidden"
+                  } items-center justify-center rounded-md p-2.5 text-gray-700`}
                 onClick={openMobileMenu}
               >
                 <span className="sr-only">Close menu</span>

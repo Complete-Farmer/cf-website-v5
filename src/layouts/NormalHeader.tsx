@@ -17,6 +17,7 @@ import Drawer from "./Drawer";
 import MobileMenu from "./MobileMenu";
 
 import { companyLinks, STORE_FRONT_URL } from "@utils/constants";
+import { gtmVirtualPageView } from "@utils/gtm";
 
 const products = [
   {
@@ -49,13 +50,28 @@ export default function NormalHeader({ pathname }: { pathname: string }) {
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [authType, setAuthType] = useState<"login" | "signup">("signup");
-  
+
 
   const isBuyer = pathname.includes("buyer");
 
   const handleDrawer = (value: string) => {
     setMobileMenuOpen(false);
     setAuthType(value.toLowerCase() as "login" | "signup");
+
+    gtmVirtualPageView({
+      event: "gtm.click",
+      page: {
+        title: `${value} Drawer`,
+        url: pathname,
+      },
+      user: {
+        isLoggedIn: false,
+      },
+      ecommerce: {
+        currencyCode: "USD",
+        products: [],
+      },
+    });
 
     // Blur the background
     (document.querySelector(".app-body") as HTMLElement).style.filter =
@@ -174,6 +190,22 @@ export default function NormalHeader({ pathname }: { pathname: string }) {
 
                 <a
                   href="/contact-us"
+                  onClick={() =>
+                    gtmVirtualPageView({
+                      event: "gtm.click",
+                      page: {
+                        title: "Contact Us",
+                        url: pathname,
+                      },
+                      user: {
+                        isLoggedIn: false,
+                      },
+                      ecommerce: {
+                        currencyCode: "USD",
+                        products: [],
+                      },
+                    })
+                  }
                   className={
                     pathname === "/contact-us"
                       ? "rounded-full bg-custom_gray-200 px-3 py-2"
@@ -198,9 +230,8 @@ export default function NormalHeader({ pathname }: { pathname: string }) {
               </button>
             </div>
             <div
-              className={`${
-                mobileMenuOpen ? "hidden" : "flex"
-              } justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1 px-3 py-2 rounded-[1900px] bg-grower-500`}
+              className={`${mobileMenuOpen ? "hidden" : "flex"
+                } justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1 px-3 py-2 rounded-[1900px] bg-grower-500`}
             >
               <button
                 onClick={() => handleDrawer("SignUp")}

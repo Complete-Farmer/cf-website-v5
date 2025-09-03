@@ -57,9 +57,10 @@ export const AUTH_API = import.meta.env.PUBLIC_AUTH_API;
 export const FACEBOOK_PIXEL_ID = import.meta.env.PUBLIC_FACEBOOK_PIXEL_ID;
 export const PRISM_ACCESS_TOKEN = import.meta.env.PUBLIC_PRISM_ACCESS_TOKEN;
 export const GOOGLE_MEASUREMENT_ID = import.meta.env.PUBLIC_GOOGLE_MEASUREMENT_ID;
-export const GOOGLE_TAG_MANAGER_ID = import.meta.env
-  .PUBLIC_GOOGLE_TAG_MANAGER_ID;
-export const AWS_DOCUMENT_REPORT_BUCKETS = import.meta.env.AWS_DOCUMENT_REPORT_BUCKETS;
+export const GOOGLE_TAG_MANAGER_ID =
+  import.meta.env.PUBLIC_GOOGLE_TAG_MANAGER_ID;
+export const AWS_DOCUMENT_REPORT_BUCKETS =
+  import.meta.env.AWS_DOCUMENT_REPORT_BUCKETS;
 export const AGENT_RECRUITMENT_URL = import.meta.env.PUBLIC_AGENT_RECRUITMENT_URL;
 export const STORE_FRONT_URL = import.meta.env.PUBLIC_STORE_FRONT_URL;
 export const PRISMIC_WEBHOOK_SECRET = import.meta.env.PRISMIC_WEBHOOK_SECRET;
