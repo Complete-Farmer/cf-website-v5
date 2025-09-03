@@ -2,7 +2,7 @@ import type { ICrop, ICropOffer, ICropVariety } from "types/app";
 import { FMS_API, AUTH_API, BOT_EMAIL, BOT_PASS } from "./constants";
 
 const getAuthorization = () => {
-  if(typeof window === "undefined"){
+  if (typeof window === "undefined") {
     const buff = Buffer.from(BOT_EMAIL + ":" + BOT_PASS);
     return "x-bot-auth " + buff.toString("base64");
   }
@@ -44,8 +44,13 @@ export const getCropOffers = async (): Promise<{
   statusCode: number;
   data?: ICropOffer[];
 }> => {
-  const response = await fetch(`${FMS_API}/crop-offers?status=ACTIVE`, options);
-  return response.json();
+  try {
+    const response = await fetch(`${FMS_API}/crop-offers?status=ACTIVE`, options);
+    return response.json();
+  } catch (error) {
+    console.error("Failed to fetch crop offers:", error);
+    return { statusCode: 500, data: [] };
+  }
 };
 
 export const contactForm = async (payload): Promise<{

@@ -37,21 +37,49 @@ const StoryList = ({
   const [totalResults, setTotalResults] = useState(_totalResults);
   const customerStoriesActiveTab = useStore($customerStoriesActiveTab);
 
+  // Early return if data is undefined or null
+  if (!data || !data.results) {
+    return (
+      <div className="bg-white">
+        <div className="px-6 py-8 mx-auto lg:max-w-screen-xl sm:max-w-xl md:max-w-full sm:px-12 lg:px-4 sm:py-12">
+          <div className="mx-auto flex max-w-7xl flex-col items-center py-10 pb-16 px-auto">
+            <img
+              src={EmptyImage.src}
+              alt="Loading"
+              className="py-6 md:py-5 lg:py-2 w-[100px]"
+            />
+            <div className="flex-col justify-start items-center gap-10 inline-flex">
+              <div className="hidden sm:block " />
+              <div className="text-center px-5 text-zinc-900 text-base md:text-xl md:leading-6 font-normal">
+                Loading customer stories...
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   const transformData = (data: IPrismicData) => {
+    if (!data || !data.results || !Array.isArray(data.results)) {
+      return [];
+    }
+
     const buildData = (item) => ({
       id: item.uid,
-      duration: item.data.duration,
-      video: item.data.video_uri.url,
-      name: item?.data?.name[0]?.text,
-      type: item.data.type === "Videos" ? "video" : "article",
-      imageSrc: getYouTubeThumbnailUrl(item.data.video_uri.url),
+      duration: item.data?.duration,
+      video: item.data?.video_uri?.url,
+      name: item?.data?.name?.[0]?.text,
+      type: item.data?.type === "Videos" ? "video" : "article",
+      imageSrc: item.data?.video_uri?.url ? getYouTubeThumbnailUrl(item.data.video_uri.url) : "",
     });
+
     if (customerStoriesActiveTab === "All") {
       return data.results.map((item) => buildData(item));
     } else {
       return data.results
         .filter(
-          (item) => item.data.category?.data.name === customerStoriesActiveTab
+          (item) => item.data?.category?.data?.name === customerStoriesActiveTab
         )
         .map((item) => buildData(item));
     }
@@ -89,11 +117,14 @@ const StoryList = ({
         });
         setLoading(false);
 
-        const data = transformData(customerStories);
-        setStories((prevData) => [...prevData, ...data]);
-        setTotalResults(customerStories.total_results_size);
+        if (customerStories && customerStories.results) {
+          const data = transformData(customerStories);
+          setStories((prevData) => [...prevData, ...data]);
+          setTotalResults(customerStories.total_results_size || 0);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
+        setLoading(false);
       }
     };
 
@@ -105,9 +136,11 @@ const StoryList = ({
   const changeActiveTab = (value: string) => setActiveTab(value);
 
   const toggleModal = (id: string) => {
-    const selectedId = stories.find((item) => item.id === id).video;
-    setVideoUrl(selectedId);
-    setOpen(!open);
+    const selectedStory = stories.find((item) => item.id === id);
+    if (selectedStory && selectedStory.video) {
+      setVideoUrl(selectedStory.video);
+      setOpen(!open);
+    }
   };
 
   const isLoadMore = () => {
@@ -168,7 +201,15 @@ const StoryList = ({
             onClose={() => setOpen(false)}
             className="flex overflow-hidden rounded-md transition mx-auto lg:max-w-7xl w-[426px] h-[240px] md:w-[640px] md:h-[360px] xl:w-[1280px] xl:h-[720px]"
           >
-            <ReactPlayer url={videoUrl} playing width="100%" height="100%" />
+            {videoUrl ? (
+              <ReactPlayer url={videoUrl} playing width="100%" height="100%" />
+            ) : (
+              <div className="flex items-center justify-center w-full h-full bg-gray-100">
+                <div className="text-center">
+                  <div className="text-gray-500 text-lg">Loading video...</div>
+                </div>
+              </div>
+            )}
           </Wrapper>
         </div>
 

@@ -66,18 +66,22 @@ const isHiring = careerApiData.results.length > 0;
       }
     </style>
 
-    <script type="text/javascript">
-      const page_path =
-        window.location.pathname + window.location.search + location.hash;
-      window.gtag("event", "page_view", {
-        page_path: page_path,
-        page_title: window.document.title,
+    <script define:vars={{ title, pathname }}>
+      // GTM
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "page_view",
+        page_title: title,
+        page_path: pathname,
       });
 
-      window.fbq("track", "PageView", {
-        content_category: "Pages",
-        content_name: window.document.title,
-      });
+      // Facebook Pixel
+      if (typeof window.fbq === "function") {
+        window.fbq("track", "PageView", {
+          content_category: "Pages",
+          content_name: title,
+        });
+      }
     </script>
   </body>
 </html>
